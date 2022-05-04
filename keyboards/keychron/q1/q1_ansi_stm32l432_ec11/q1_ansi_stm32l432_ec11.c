@@ -174,7 +174,7 @@ bool encoder_update_kb(uint8_t index, bool clockwise) {
 void encoder0_pad_cb(void *param) {
     (void)param;
 
-    insert_encoder_state(0);
+    encoder_insert_state(0);
 }
 
 void keyboard_post_init_kb(void) {
