@@ -21,23 +21,11 @@
 #define MANUFACTURER    Keychron
 #define PRODUCT         Keychron Q1
 
-/* key matrix size */
-#define MATRIX_ROWS 6
-#define MATRIX_COLS 15
-
 /* COL2ROW or ROW2COL */
 #define DIODE_DIRECTION ROW2COL
 
 /* Set 0 if debouncing isn't needed */
 #define DEBOUNCE 5
-
-/* RGB Matrix Driver Configuration */
-#define DRIVER_COUNT 2
-#define DRIVER_ADDR_1 0b1010000
-#define DRIVER_ADDR_2 0b1011111
-
-/* DIP switch */
-#define DIP_SWITCH_MATRIX_GRID  { {0,1} }
 
 /* Disable DIP switch in matrix data */
 #define MATRIX_MASKED
@@ -47,11 +35,6 @@
 
 /* Disable RGB lighting when PC is in suspend */
 #define RGB_DISABLE_WHEN_USB_SUSPENDED
-
-/* Allow VIA to edit lighting */
-#ifdef VIA_ENABLE
-#define VIA_QMK_RGBLIGHT_ENABLE
-#endif
 
 // RGB Matrix Animation modes. Explicitly enabled
 // For full list of effects, see:
@@ -101,8 +84,7 @@
 #define ENABLE_RGB_MATRIX_MULTISPLASH
 #define ENABLE_RGB_MATRIX_SOLID_SPLASH
 #define ENABLE_RGB_MATRIX_SOLID_MULTISPLASH
+// #define RGB_MATRIX_KEYPRESSES
 
-/* Allow VIA to edit lighting */
-#ifdef VIA_ENABLE
-#define VIA_QMK_RGBLIGHT_ENABLE
-#endif
+/* Enable receive custom command from host */
+#define RAW_HID_CMD 0xAB

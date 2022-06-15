@@ -116,6 +116,7 @@
 #    else
 /* Default to half of allocated space used for emulated eeprom, half for write log */
 #       define FEE_DENSITY_BYTES (FEE_PAGE_COUNT * FEE_PAGE_SIZE / 2)
+#    endif
 #endif
 
 /* Size of write log */
