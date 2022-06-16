@@ -39,8 +39,11 @@
 #define DRIVER_COUNT 1
 #define DRIVER_ADDR_1 0b1110100
 
-#define CONSTANT_CURRENT_STEP \
-    { 0xFF, 0xFF, 0x70, 0xFF, 0xFF, 0x70, 0xFF, 0xFF, 0x70, 0xFF, 0xFF, 0x70 }
+#define HUE_ADJUST
+#ifdef HUE_ADJUST
+#   define CONSTANT_CURRENT_STEP \
+        { 0xFF, 0xFF, 0x70, 0xFF, 0xFF, 0x70, 0xFF, 0xFF, 0x70, 0xFF, 0xFF, 0x70 }
+#endif
 
 /* NKRO */
 #define FORCE_NKRO
@@ -100,8 +103,6 @@
 #define ENABLE_RGB_MATRIX_SOLID_SPLASH
 #define ENABLE_RGB_MATRIX_SOLID_MULTISPLASH
 // #define RGB_MATRIX_KEYPRESSES
-
-#define RGB_MATRIX_CENTER { 56, 32 }
 
 /* Enable receive custom command from host */
 #define RAW_HID_CMD 0xAB

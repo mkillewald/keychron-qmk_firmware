@@ -72,23 +72,27 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
                 key_press_status |= KEY_PRESS_J;
                 if (key_press_status == KEY_PRESS_FACTORY_RESET) {
                     timer_3s_buffer = sync_timer_read32();
+                } else {
+                    rgb_matrix_decrease_sat_noeeprom();
                 }
             } else {
                 key_press_status &= ~KEY_PRESS_J;
                 timer_3s_buffer = 0;
             }
-            return true;
+            return false; // Skip all further processing of this key
         case RGB_HUD:
             if (record->event.pressed) {
                 key_press_status |= KEY_PRESS_Z;
                 if (key_press_status == KEY_PRESS_FACTORY_RESET) {
                     timer_3s_buffer = sync_timer_read32();
+                } else {
+                    rgb_matrix_decrease_hue_noeeprom();
                 }
             } else {
                 key_press_status &= ~KEY_PRESS_Z;
                 timer_3s_buffer = 0;
             }
-            return true;
+            return false; // Skip all further processing of this key
         case KC_MPLY:
             if (record->event.pressed) {
                 key_press_status |= KEY_PRESS_RIGHT;
