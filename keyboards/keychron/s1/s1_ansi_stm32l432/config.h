@@ -21,9 +21,9 @@
 #define DEVICE_VER 0x0100
 
 /* RGB Matrix Configuration */
-#define DRIVER_1_LED_TOTAL 45
-#define DRIVER_2_LED_TOTAL 37
+#define DRIVER_1_LED_TOTAL 46
+#define DRIVER_2_LED_TOTAL 38
 #define DRIVER_LED_TOTAL (DRIVER_1_LED_TOTAL + DRIVER_2_LED_TOTAL)
 
 /* Enable caps-lock LED */
-#define CAPS_LOCK_LED_INDEX 45
+#define CAPS_LOCK_LED_INDEX 46
