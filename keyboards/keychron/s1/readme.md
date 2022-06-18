@@ -1,20 +1,18 @@
-# Keychron Q1
-
-![Keychron Q1](https://cdn.shopify.com/s/files/1/0059/0630/1017/t/5/assets/keychronq175custommechanicalkeyboardmintgreen-1643101682954.jpg?v=1643101685)
+# Keychron S1
 
 A customizable 75% keyboard.
 
 * Keyboard Maintainer: [Keychron](https://github.com/keychron)
-* Hardware Supported: Keychron Q1
+* Hardware Supported: Keychron S1
 * Hardware Availability: [Keychron](https://www.keychron.com)
 
 Make example for this keyboard (after setting up your build environment):
 
-    make keychron/q1/q1_ansi_atmega32u4:default
+    make keychron/s1/s1_ansi_stm32l432:default
 
 Flashing example for this keyboard:
 
-    make keychron/q1/q1_ansi_atmega32u4:default:flash
+    make keychron/s1/s1_ansi_stm32l432:default:flash
 
 **Reset Key**: Hold down the key located at *K00*, commonly programmed as *Esc* while plugging in the keyboard.
 

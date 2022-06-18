@@ -17,8 +17,6 @@
 #pragma once
 
 #define HAL_USE_I2C TRUE
-#ifdef ENCODER_ENABLE
-#    define PAL_USE_CALLBACKS TRUE
-#endif
+#define PAL_USE_CALLBACKS TRUE
 
 #include_next <halconf.h>

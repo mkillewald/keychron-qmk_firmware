@@ -1,1 +1,1 @@
-# The ANSI variant of the Keychron Q1
+# The ANSI variant of the Keychron S1
