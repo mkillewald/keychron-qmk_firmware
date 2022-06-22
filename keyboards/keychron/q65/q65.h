@@ -22,8 +22,4 @@
 #    include "q65_ansi_stm32l432.h"
 #elif defined(KEYBOARD_keychron_q65_q65_ansi_stm32l432_ec11)
 #    include "q65_ansi_stm32l432_ec11.h"
-#elif defined(KEYBOARD_keychron_q65_q65_iso_stm32l432)
-#    include "q65_iso_stm32l432.h"
-#elif defined(KEYBOARD_keychron_q65_q65_iso_stm32l432_ec11)
-#    include "q65_iso_stm32l432_ec11.h"
 #endif

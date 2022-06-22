@@ -1,4 +1,4 @@
-/* Copyright 2021 @ Keychron (https://www.keychron.com)
+/* Copyright 2022 @ Keychron (https://www.keychron.com)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,14 +14,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "q2.h"
+#include "q65.h"
 
 const matrix_row_t matrix_mask[] = {
-    0b0111111111111111,
-    0b0111111111111111,
-    0b0111111111111111,
-    0b0111111111111111,
-    0b0111111111101111,
+    0b1111111111111111,
+    0b1111111111111111,
+    0b1111111111111111,
+    0b1111111111111111,
+    0b1111111111101111,
 };
 
 #ifdef DIP_SWITCH_ENABLE

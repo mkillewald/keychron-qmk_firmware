@@ -1,4 +1,4 @@
-/* Copyright 2021 @ Keychron (https://www.keychron.com)
+/* Copyright 2022 @ Keychron (https://www.keychron.com)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -45,7 +45,7 @@
 /* Scan phase of led driver set as MSKPHASE_9CHANNEL(defined as 0x03 in CKLED2001.h) */
 #define PHASE_CHANNEL MSKPHASE_9CHANNEL
 #define CONSTANT_CURRENT_STEP \
-    { 0xC0, 0xC0, 0x60, 0xC0, 0xC0, 0x60, 0xC0, 0xC0, 0x60, 0xC0, 0xC0, 0x60 }
+    { 0xB8, 0xB8, 0x58, 0xB8, 0xB8, 0x58, 0xB8, 0xB8, 0x58, 0xB8, 0xB8, 0x58 }
 
 /* Disable DIP switch in matrix data */
 #define MATRIX_MASKED
