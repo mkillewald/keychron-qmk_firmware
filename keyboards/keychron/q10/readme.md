@@ -1,6 +1,6 @@
 # Keychron Q10
 
-A customizable 65% and ergonomic keyboard.
+A customizable 75% ergonomic keyboard.
 
 * Keyboard Maintainer: [Keychron](https://github.com/keychron)
 * Hardware Supported: Keychron Q10
@@ -8,11 +8,11 @@ A customizable 65% and ergonomic keyboard.
 
 Make example for this keyboard (after setting up your build environment):
 
-    make keychron/q10/q10_ansi_atmega32u4:default
+    make keychron/q10/q10_ansi_stm32l432:default
 
 Flashing example for this keyboard:
 
-    make keychron/q10/q10_ansi_atmega32u4:default:flash
+    make keychron/q10/q10_ansi_stm32l432:default:flash
 
 **Reset Key**: Hold down the key located at *K00*, commonly programmed as *Esc* while plugging in the keyboard.
 

@@ -1,6 +1,6 @@
 # Keychron Q65
 
-A customizable70% keyboard.
+A customizable 65% keyboard.
 
 * Keyboard Maintainer: [Keychron](https://github.com/keychron)
 * Hardware Supported: Keychron Q65
