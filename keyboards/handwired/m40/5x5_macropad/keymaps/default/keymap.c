@@ -13,7 +13,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     /* Base */
     [_BASE] = LAYOUT_ortho_5x5(
 		//┌────────┬────────┬────────┬────────┬────────┐
+<<<<<<< HEAD
 		   KC_ESC,   KC_1,     KC_2,    KC_3,   RESET, 
+=======
+		   KC_ESC,   KC_1,     KC_2,    KC_3,   QK_BOOT, 
+>>>>>>> playground_new
 		//├────────┼────────┼────────┼────────┬────────┤
 		    KC_1,    KC_2,     KC_3,    KC_4,   KC_5, 
 		//├────────┼────────┼────────┼────────┼────────┤

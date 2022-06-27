@@ -18,6 +18,12 @@
 
 #define MAC_FN 1
 #define WIN_FN 3
+<<<<<<< HEAD
+=======
+#ifndef RAW_EPSIZE
+#    define RAW_EPSIZE 32
+#endif
+>>>>>>> playground_new
 
 static void timer_3s_task(void);
 static void timer_300ms_task(void);
@@ -65,7 +71,11 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
                 key_press_status &= ~KEY_PRESS_FN;
                 timer_3s_buffer = 0;
             }
+<<<<<<< HEAD
             return false;  // Skip all further processing of this key
+=======
+            return true;
+>>>>>>> playground_new
         case KC_J:
             if (record->event.pressed) {
                 key_press_status |= KEY_PRESS_J;
@@ -76,7 +86,11 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
                 key_press_status &= ~KEY_PRESS_J;
                 timer_3s_buffer = 0;
             }
+<<<<<<< HEAD
             return false;  // Skip all further processing of this key
+=======
+            return true;
+>>>>>>> playground_new
         case KC_Z:
             if (record->event.pressed) {
                 key_press_status |= KEY_PRESS_Z;
@@ -87,7 +101,11 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
                 key_press_status &= ~KEY_PRESS_Z;
                 timer_3s_buffer = 0;
             }
+<<<<<<< HEAD
             return false;  // Skip all further processing of this key
+=======
+            return true;
+>>>>>>> playground_new
         case KC_RGHT:
             if (record->event.pressed) {
                 key_press_status |= KEY_PRESS_RIGHT;
@@ -102,7 +120,11 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
                 key_press_status &= ~KEY_PRESS_RIGHT;
                 timer_3s_buffer = 0;
             }
+<<<<<<< HEAD
             return false;  // Skip all further processing of this key
+=======
+            return true;
+>>>>>>> playground_new
         case KC_HOME:
             if (record->event.pressed) {
                 key_press_status |= KEY_PRESS_HOME;
@@ -115,7 +137,11 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
                 key_press_status &= ~KEY_PRESS_HOME;
                 timer_3s_buffer = 0;
             }
+<<<<<<< HEAD
             return false;  // Skip all further processing of this key
+=======
+            return true;
+>>>>>>> playground_new
         default:
             return process_record_user(keycode, record);
     }
@@ -241,9 +267,15 @@ void raw_hid_receive_kb(uint8_t *data, uint8_t length) {
                 break;
             case FACTORY_TEST_CMD_OS_SWITCH:
                 report_os_sw_state = data[2];
+<<<<<<< HEAD
                 if (report_os_sw_state) {
                     dip_switch_read(true);
                 }
+=======
+                // if (report_os_sw_state) {
+                //     dip_switch_read(true);
+                // }
+>>>>>>> playground_new
                 break;
             case FACTORY_TEST_CMD_JUMP_TO_BL:
                 if (memcmp(&data[2], "JumpToBootloader", strlen("JumpToBootloader")) == 0)
@@ -261,7 +293,15 @@ void system_switch_state_report(uint8_t index, bool active) {
     if (report_os_sw_state) {
         payload[0] = FACTORY_TEST_CMD_OS_SWITCH;
         payload[1] = OS_SWITCH;
+<<<<<<< HEAD
         payload[2] = active;
+=======
+#if defined(OS_SWITCH_REVERT)
+        payload[2] = !active;
+#else
+        payload[2] = active;
+#endif
+>>>>>>> playground_new
         data[0] = 0xAB;
         memcpy(&data[1], payload, 3);
         for (uint8_t i=1; i<RAW_EPSIZE-3; i++ ) {

@@ -17,6 +17,10 @@
 #include "bootloader.h"
 
 #include <avr/interrupt.h>
+<<<<<<< HEAD
+=======
+#include <avr/wdt.h>
+>>>>>>> playground_new
 #include <util/delay.h>
 
 __attribute__((weak)) void bootloader_jump(void) {
@@ -126,3 +130,15 @@ __attribute__((weak)) void bootloader_jump(void) {
     asm volatile("jmp 0x1FC00");
 #endif
 }
+<<<<<<< HEAD
+=======
+
+__attribute__((weak)) void mcu_reset(void) {
+    // setup watchdog timeout
+    wdt_enable(WDTO_60MS);
+
+    // wait for watchdog timer to trigger
+    while (1) {
+    }
+}
+>>>>>>> playground_new

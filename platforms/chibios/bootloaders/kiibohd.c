@@ -30,3 +30,7 @@ __attribute__((weak)) void bootloader_jump(void) {
     // request reset
     SCB->AIRCR = SCB_AIRCR_VECTKEY_WRITEMAGIC | SCB_AIRCR_SYSRESETREQ_Msk;
 }
+<<<<<<< HEAD
+=======
+__attribute__((weak)) void mcu_reset(void) {}
+>>>>>>> playground_new

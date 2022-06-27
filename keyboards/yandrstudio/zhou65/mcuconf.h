@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /* Copyright 2020 QMK
+=======
+/* Copyright 2021 JasonRen(biu)
+>>>>>>> playground_new
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,6 +22,7 @@
 
 #include_next <mcuconf.h>
 
+<<<<<<< HEAD
 #undef STM32_NO_INIT
 #undef STM32_HSI_ENABLED
 #undef STM32_LSI_ENABLED
@@ -26,10 +31,13 @@
 #undef STM32_CLOCK48_REQUIRED
 #undef STM32_SW
 #undef STM32_PLLSRC
+=======
+>>>>>>> playground_new
 #undef STM32_PLLM_VALUE
 #undef STM32_PLLN_VALUE
 #undef STM32_PLLP_VALUE
 #undef STM32_PLLQ_VALUE
+<<<<<<< HEAD
 #undef STM32_HPRE
 #undef STM32_PPRE1
 #undef STM32_PPRE2
@@ -76,3 +84,10 @@
 #define STM32_PVD_ENABLE                    FALSE
 #define STM32_PLS                           STM32_PLS_LEV0
 #define STM32_BKPRAM_ENABLE                 FALSE
+=======
+
+#define STM32_PLLM_VALUE    (STM32_HSECLK/1000000)
+#define STM32_PLLN_VALUE    192
+#define STM32_PLLP_VALUE    4
+#define STM32_PLLQ_VALUE    4
+>>>>>>> playground_new

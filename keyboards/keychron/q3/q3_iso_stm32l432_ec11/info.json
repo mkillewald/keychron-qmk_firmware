@@ -3,7 +3,11 @@
     "url": "https://github.com/Keychron",
     "maintainer": "lalalademaxiya1",
     "layouts": {
+<<<<<<< HEAD
         "LAYOUT_iso_88": {
+=======
+        "LAYOUT_iso_89": {
+>>>>>>> playground_new
             "layout": [
                 {"label":"Esc", "x":0, "y":0},
                 {"label":"F1", "x":1.25, "y":0},
@@ -116,9 +120,15 @@
                 {"label":"F10", "x":10.75, "y":0.5},
                 {"label":"F11", "x":11.75, "y":0.5},
                 {"label":"F12", "x":12.75, "y":0.5},
+<<<<<<< HEAD
                 {"label":"CCW", "x":13.9, "y":0, "w":0.6, "h":0.5},
                 {"label":"Mute", "x":14, "y":0.5},
                 {"label":"CW", "x":14.5, "y":0, "w":0.6, "h":0.5},
+=======
+                {"label":"CCW", "x":13.85, "y":0, "w":0.65, "h":0.5},
+                {"label":"Mute", "x":14, "y":0.5},
+                {"label":"CW", "x":14.5, "y":0, "w":0.65, "h":0.5},
+>>>>>>> playground_new
                 {"label":"Print", "x":15.75, "y":0.5},
                 {"label":"Cortana", "x":16.75, "y":0.5},
                 {"label":"Light", "x":17.75, "y":0.5},

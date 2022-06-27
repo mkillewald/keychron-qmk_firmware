@@ -63,3 +63,10 @@ void bootloader_jump(void) {
     while (1)
         ; // Wait on timeout
 }
+<<<<<<< HEAD
+=======
+
+__attribute__((weak)) void mcu_reset(void) {
+    NVIC_SystemReset();
+}
+>>>>>>> playground_new

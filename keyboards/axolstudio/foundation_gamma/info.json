@@ -2,8 +2,17 @@
     "keyboard_name": "Foundation Gamma", 
     "url": "https://axolstudio.ca/foundation-gamma", 
     "maintainer": "kb-elmo", 
+<<<<<<< HEAD
     "layouts": {
         "LAYOUT_ansi_tsangan": {
+=======
+    "layout_aliases": {
+        "LAYOUT_ansi_tsangan": "LAYOUT_tkl_f13_ansi_tsangan",
+        "LAYOUT_all": "LAYOUT_tkl_f13_ansi_tsangan_split_bs_rshift"
+    },
+    "layouts": {
+        "LAYOUT_tkl_f13_ansi_tsangan": {
+>>>>>>> playground_new
             "layout": [
                 {"x":0, "y":0},
                 {"x":1.25, "y":0},
@@ -94,7 +103,11 @@
                 {"x":17.25, "y":5.5}
             ]
         },
+<<<<<<< HEAD
         "LAYOUT_all": {
+=======
+        "LAYOUT_tkl_f13_ansi_tsangan_split_bs_rshift": {
+>>>>>>> playground_new
             "layout": [
                 {"x":0, "y":0},
                 {"x":1.25, "y":0},
@@ -188,4 +201,8 @@
             ]
         }
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> playground_new

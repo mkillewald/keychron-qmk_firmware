@@ -4,6 +4,11 @@ endif
 
 .DEFAULT_GOAL := all
 
+<<<<<<< HEAD
+=======
+OPT = g
+
+>>>>>>> playground_new
 include paths.mk
 include $(BUILDDEFS_PATH)/message.mk
 
@@ -40,7 +45,11 @@ VPATH += \
 
 all: elf
 
+<<<<<<< HEAD
 VPATH += $(COMMON_VPATH)
+=======
+VPATH += $(TEST_PATH) $(COMMON_VPATH)
+>>>>>>> playground_new
 PLATFORM:=TEST
 PLATFORM_KEY:=test
 BOOTLOADER_TYPE:=none

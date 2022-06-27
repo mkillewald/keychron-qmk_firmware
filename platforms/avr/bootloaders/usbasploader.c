@@ -54,3 +54,15 @@ __attribute__((weak)) void bootloader_jump(void) {
 #endif
                    [bootaddrme] "M"((((FLASH_SIZE - BOOTLOADER_SIZE) >> 1) >> 8) & 0xff), [bootaddrlo] "M"((((FLASH_SIZE - BOOTLOADER_SIZE) >> 1) >> 0) & 0xff));
 }
+<<<<<<< HEAD
+=======
+
+__attribute__((weak)) void mcu_reset(void) {
+    // setup watchdog timeout
+    wdt_enable(WDTO_15MS);
+
+    // wait for watchdog timer to trigger
+    while (1) {
+    }
+}
+>>>>>>> playground_new

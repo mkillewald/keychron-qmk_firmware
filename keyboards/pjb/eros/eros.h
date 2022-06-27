@@ -21,7 +21,11 @@
 // The first section contains all of the arguments
 // The second converts the arguments into a two-dimensional array
 
+<<<<<<< HEAD
 #define LAYOUT_all_f13( \
+=======
+#define LAYOUT_tkl_f13_ansi_split_bs_rshift( \
+>>>>>>> playground_new
     K000, K001, K002, K003, K004, K005, K006, K007, K008, K009, K010, K011, K012, K013, K014, K015, K016, \
 	K100, K101, K102, K103, K104, K105, K106, K107, K108, K109, K110, K111, K112, K113, K114, K115, K116, \
 	K200, K201, K202, K203, K204, K205, K206, K207, K208, K209, K210, K211, K212, K213, K214, K215, K216, \
@@ -37,7 +41,11 @@
 	{ K500, K501, K502, KC_NO, KC_NO, K505, KC_NO, KC_NO, KC_NO, K509, K510,  K511, KC_NO,  K513, K514,  K515,  K516 }, \
 }
 
+<<<<<<< HEAD
 #define LAYOUT_tkl_ansi_f13( \
+=======
+#define LAYOUT_tkl_f13_ansi( \
+>>>>>>> playground_new
     K000, K001, K002, K003, K004, K005, K006, K007, K008, K009, K010, K011, K012, K013, K014, K015, K016, \
 	K100, K101, K102, K103, K104, K105, K106, K107, K108, K109, K110, K111, K112, K113, K114, K115, K116, \
 	K200, K201, K202, K203, K204, K205, K206, K207, K208, K209, K210, K211, K212, K213, K214, K215, K216, \
@@ -53,7 +61,11 @@
 	{ K500, K501, K502, KC_NO, KC_NO, K505, KC_NO, KC_NO, KC_NO, K509, K510,  K511, KC_NO,  K513, K514,  K515,  K516 }, \
 }
 
+<<<<<<< HEAD
 #define LAYOUT_tkl_ansi_f13_split_shift( \
+=======
+#define LAYOUT_tkl_f13_ansi_split_rshift( \
+>>>>>>> playground_new
     K000, K001, K002, K003, K004, K005, K006, K007, K008, K009, K010, K011, K012, K013, K014, K015, K016, \
 	K100, K101, K102, K103, K104, K105, K106, K107, K108, K109, K110, K111, K112, K113, K114, K115, K116, \
 	K200, K201, K202, K203, K204, K205, K206, K207, K208, K209, K210, K211, K212, K213, K214, K215, K216, \
@@ -69,7 +81,11 @@
 	{ K500, K501, K502, KC_NO, KC_NO, K505, KC_NO, KC_NO, KC_NO, K509, K510,  K511, KC_NO,  K513, K514,  K515,  K516 }, \
 }
 
+<<<<<<< HEAD
 #define LAYOUT_tkl_ansi_f13_split_back( \
+=======
+#define LAYOUT_tkl_f13_ansi_split_bs( \
+>>>>>>> playground_new
     K000, K001, K002, K003, K004, K005, K006, K007, K008, K009, K010, K011, K012, K013, K014, K015, K016, \
 	K100, K101, K102, K103, K104, K105, K106, K107, K108, K109, K110, K111, K112, K113, K114, K115, K116, \
 	K200, K201, K202, K203, K204, K205, K206, K207, K208, K209, K210, K211, K212, K213, K214, K215, K216, \
@@ -85,7 +101,11 @@
 	{ K500, K501, K502, KC_NO, KC_NO, K505, KC_NO, KC_NO, KC_NO, K509, K510,  K511, KC_NO,  K513, K514,  K515,  K516 }, \
 }
 
+<<<<<<< HEAD
 #define LAYOUT_tkl_ansi_tsangan_f13( \
+=======
+#define LAYOUT_tkl_f13_ansi_tsangan( \
+>>>>>>> playground_new
     K000, K001, K002, K003, K004, K005, K006, K007, K008, K009, K010, K011, K012, K013, K014, K015, K016, \
 	K100, K101, K102, K103, K104, K105, K106, K107, K108, K109, K110, K111, K112, K113, K114, K115, K116, \
 	K200, K201, K202, K203, K204, K205, K206, K207, K208, K209, K210, K211, K212, K213, K214, K215, K216, \
@@ -101,7 +121,11 @@
 	{ K500, K501, K502, KC_NO, KC_NO, K505, KC_NO, KC_NO, KC_NO, KC_NO, K510,  K511, KC_NO,  K513, K514,  K515,  K516 }, \
 }
 
+<<<<<<< HEAD
 #define LAYOUT_tkl_ansi_tsangan_f13_split_shift( \
+=======
+#define LAYOUT_tkl_f13_ansi_tsangan_split_rshift( \
+>>>>>>> playground_new
     K000, K001, K002, K003, K004, K005, K006, K007, K008, K009, K010, K011, K012, K013, K014, K015, K016, \
 	K100, K101, K102, K103, K104, K105, K106, K107, K108, K109, K110, K111, K112, K113, K114, K115, K116, \
 	K200, K201, K202, K203, K204, K205, K206, K207, K208, K209, K210, K211, K212, K213, K214, K215, K216, \
@@ -117,7 +141,11 @@
 	{ K500, K501, K502, KC_NO, KC_NO, K505, KC_NO, KC_NO, KC_NO, KC_NO, K510,  K511, KC_NO,  K513, K514,  K515,  K516 }, \
 }
 
+<<<<<<< HEAD
 #define LAYOUT_tkl_ansi_tsangan_f13_split_back( \
+=======
+#define LAYOUT_tkl_f13_ansi_tsangan_split_bs( \
+>>>>>>> playground_new
     K000, K001, K002, K003, K004, K005, K006, K007, K008, K009, K010, K011, K012, K013, K014, K015, K016, \
 	K100, K101, K102, K103, K104, K105, K106, K107, K108, K109, K110, K111, K112, K113, K114, K115, K116, \
 	K200, K201, K202, K203, K204, K205, K206, K207, K208, K209, K210, K211, K212, K213, K214, K215, K216, \

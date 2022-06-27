@@ -1,18 +1,12 @@
+// Copyright 2022 QMK
+// SPDX-License-Identifier: GPL-2.0-or-later
+
 #pragma once
 
-#include "config_common.h"
-
-/* USB Device descriptor parameter */
-#define VENDOR_ID       0x1209  
-#define PRODUCT_ID      0x2328  
-// The official ErgoDone VID and PID are documented at http://pid.codes/1209/2328/.
-#define DEVICE_VER      0x0001
-#define MANUFACTURER    K.T.E.C.
-#define PRODUCT         ErgoDone
-
-/* key matrix size */
+// TODO: handle matrix_size.cols and matrix_size.rows for custom matrix
 #define MATRIX_ROWS 6
 #define MATRIX_COLS 14
+<<<<<<< HEAD
 
 #define MOUSEKEY_INTERVAL       20
 #define MOUSEKEY_DELAY          0
@@ -75,3 +69,5 @@
 //#define NO_ACTION_ONESHOT
 
 //#define DEBUG_MATRIX_SCAN_RATE
+=======
+>>>>>>> playground_new

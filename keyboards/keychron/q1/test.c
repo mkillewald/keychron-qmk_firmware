@@ -18,10 +18,19 @@
 
 #define MAC_FN 1
 #define WIN_FN 3
+<<<<<<< HEAD
 
 static void timer_3000ms_task(void);
 static void timer_250ms_task(void);
 static void factory_test_send(uint8_t *payload, uint8_t length);
+=======
+#ifndef RAW_EPSIZE
+#    define RAW_EPSIZE 32
+#endif
+
+static void timer_3s_task(void);
+static void timer_300ms_task(void);
+>>>>>>> playground_new
 
 #define KEY_PRESS_FN    (0x1<<0)
 #define KEY_PRESS_J     (0x1<<1)
@@ -51,12 +60,21 @@ enum {
 };
 
 uint16_t key_press_status = 0;
+<<<<<<< HEAD
 uint32_t timer_3000ms_buffer = 0;
 uint32_t timer_250ms_buffer = 0;
 uint8_t factory_reset_count = 0;
 bool report_os_sw_state = false;
 
 void process_other_record(uint16_t keycode, keyrecord_t *record) {
+=======
+uint32_t timer_3s_buffer = 0;
+uint32_t timer_300ms_buffer = 0;
+uint8_t factory_reset_count = 0;
+bool report_os_sw_state = false;
+
+bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
+>>>>>>> playground_new
     switch (keycode) {
         case MO(MAC_FN):
         case MO(WIN_FN):
@@ -64,13 +82,20 @@ void process_other_record(uint16_t keycode, keyrecord_t *record) {
                 key_press_status |= KEY_PRESS_FN;
             } else {
                 key_press_status &= ~KEY_PRESS_FN;
+<<<<<<< HEAD
                 timer_3000ms_buffer = 0;
             }
             break;
+=======
+                timer_3s_buffer = 0;
+            }
+            return true;
+>>>>>>> playground_new
         case KC_J:
             if (record->event.pressed) {
                 key_press_status |= KEY_PRESS_J;
                 if (key_press_status == KEY_PRESS_FACTORY_RESET) {
+<<<<<<< HEAD
                     timer_3000ms_buffer = sync_timer_read32() | 1;
                 }
             } else {
@@ -78,10 +103,20 @@ void process_other_record(uint16_t keycode, keyrecord_t *record) {
                 timer_3000ms_buffer = 0;
             }
             break;
+=======
+                    timer_3s_buffer = sync_timer_read32() | 1;
+                }
+            } else {
+                key_press_status &= ~KEY_PRESS_J;
+                timer_3s_buffer = 0;
+            }
+            return true;
+>>>>>>> playground_new
         case KC_Z:
             if (record->event.pressed) {
                 key_press_status |= KEY_PRESS_Z;
                 if (key_press_status == KEY_PRESS_FACTORY_RESET) {
+<<<<<<< HEAD
                     timer_3000ms_buffer = sync_timer_read32() | 1;
                 }
             } else {
@@ -89,6 +124,15 @@ void process_other_record(uint16_t keycode, keyrecord_t *record) {
                 timer_3000ms_buffer = 0;
             }
             break;
+=======
+                    timer_3s_buffer = sync_timer_read32() | 1;
+                }
+            } else {
+                key_press_status &= ~KEY_PRESS_Z;
+                timer_3s_buffer = 0;
+            }
+            return true;
+>>>>>>> playground_new
         case KC_RGHT:
             if (record->event.pressed) {
                 key_press_status |= KEY_PRESS_RIGHT;
@@ -97,6 +141,7 @@ void process_other_record(uint16_t keycode, keyrecord_t *record) {
                         led_test_mode = LED_TEST_MODE_WHITE;
                     }
                 } else if (key_press_status == KEY_PRESS_LED_TEST) {
+<<<<<<< HEAD
                     timer_3000ms_buffer = sync_timer_read32() | 1;
                 }
             } else {
@@ -104,12 +149,22 @@ void process_other_record(uint16_t keycode, keyrecord_t *record) {
                 timer_3000ms_buffer = 0;
             }
             break;
+=======
+                    timer_3s_buffer = sync_timer_read32() | 1;
+                }
+            } else {
+                key_press_status &= ~KEY_PRESS_RIGHT;
+                timer_3s_buffer = 0;
+            }
+            return true;
+>>>>>>> playground_new
         case KC_HOME:
             if (record->event.pressed) {
                 key_press_status |= KEY_PRESS_HOME;
                 if (led_test_mode) {
                     led_test_mode = LED_TEST_MODE_OFF;
                 } else if (key_press_status == KEY_PRESS_LED_TEST) {
+<<<<<<< HEAD
                     timer_3000ms_buffer = sync_timer_read32() | 1;
                 }
             } else {
@@ -133,13 +188,47 @@ static void timer_3000ms_task(void) {
         timer_3000ms_buffer = 0;
         if (key_press_status == KEY_PRESS_FACTORY_RESET) {
             timer_250ms_buffer = sync_timer_read32() | 1;
+=======
+                    timer_3s_buffer = sync_timer_read32() | 1;
+                }
+            } else {
+                key_press_status &= ~KEY_PRESS_HOME;
+                timer_3s_buffer = 0;
+            }
+            return true;
+        default:
+            return process_record_user(keycode, record);
+    }
+}
+
+void matrix_scan_kb(void) {
+    if (timer_3s_buffer) {
+        timer_3s_task();
+    }
+    if (timer_300ms_buffer) {
+        timer_300ms_task();
+    }
+
+    matrix_scan_user();
+}
+
+static void timer_3s_task(void) {
+    if (sync_timer_elapsed32(timer_3s_buffer) > 3000) {
+        timer_3s_buffer = 0;
+        if (key_press_status == KEY_PRESS_FACTORY_RESET) {
+            timer_300ms_buffer = sync_timer_read32() | 1;
+>>>>>>> playground_new
             factory_reset_count++;
             layer_state_t default_layer_tmp = default_layer_state;
             eeconfig_init();
             default_layer_set(default_layer_tmp);
             led_test_mode = LED_TEST_MODE_OFF;
 #ifdef LED_MATRIX_ENABLE
+<<<<<<< HEAD
                 if (!led_matrix_is_enabled()) led_matrix_enable();
+=======
+            if (!led_matrix_is_enabled()) led_matrix_enable();
+>>>>>>> playground_new
             led_matrix_init();
 #endif
 #ifdef RGB_MATRIX_ENABLE
@@ -160,6 +249,7 @@ static void timer_3000ms_task(void) {
     }
 }
 
+<<<<<<< HEAD
 static void timer_250ms_task(void) {
     if (timer_250ms_buffer && sync_timer_elapsed32(timer_250ms_buffer) > 250) {
         if (factory_reset_count++ > 6) {
@@ -167,6 +257,15 @@ static void timer_250ms_task(void) {
             factory_reset_count = 0;
         } else {
             timer_250ms_buffer = sync_timer_read32() | 1;
+=======
+static void timer_300ms_task(void) {
+    if (timer_300ms_buffer && sync_timer_elapsed32(timer_300ms_buffer) > 300) {
+        if (factory_reset_count++ > 6) {
+            timer_300ms_buffer = 0;
+            factory_reset_count = 0;
+        } else {
+            timer_300ms_buffer = sync_timer_read32() | 1;
+>>>>>>> playground_new
         }
     }
 }
@@ -233,7 +332,11 @@ void raw_hid_receive_kb(uint8_t *data, uint8_t length) {
         switch (data[1]) {
             case FACTORY_TEST_CMD_BACKLIGHT:
                 led_test_mode = data[2];
+<<<<<<< HEAD
                 timer_3000ms_buffer = 0;
+=======
+                timer_3s_buffer = 0;
+>>>>>>> playground_new
                 break;
             case FACTORY_TEST_CMD_OS_SWITCH:
                 report_os_sw_state = data[2];
@@ -246,6 +349,7 @@ void raw_hid_receive_kb(uint8_t *data, uint8_t length) {
                     bootloader_jump();
                 break;
         }
+<<<<<<< HEAD
     }
 }
 
@@ -271,6 +375,35 @@ void system_switch_state_report(uint8_t index, bool active) {
     }
 }
 
+=======
+   }
+}
+
+void system_switch_state_report(uint8_t index, bool active) {
+    uint16_t checksum = 0;
+    uint8_t data[RAW_EPSIZE] = {0};
+    uint8_t payload[3] = { 0 };
+
+    if (report_os_sw_state) {
+        payload[0] = FACTORY_TEST_CMD_OS_SWITCH;
+        payload[1] = OS_SWITCH;
+        payload[2] = active;
+        data[0] = 0xAB;
+        // memcpy(&data[1], payload, 3);
+        data[1] = payload[0];
+        data[2] = payload[1];
+        data[3] = payload[2];
+        for (uint8_t i=1; i<RAW_EPSIZE-3; i++ ) {
+            checksum += data[i];
+        }
+        data[RAW_EPSIZE-2] = checksum & 0xFF;
+        data[RAW_EPSIZE-1] = (checksum >> 8) & 0xFF;
+        raw_hid_send(data, RAW_EPSIZE);
+    }
+}
+
+/* To solve the problem that keyboard can not wakeup the host */
+>>>>>>> playground_new
 #if defined(KEYBOARD_keychron_q1_q1_ansi_atmega32u4)
 #elif defined(KEYBOARD_keychron_q1_q1_ansi_atmega32u4_ec11)
 #elif defined(KEYBOARD_keychron_q1_q1_iso_atmega32u4)

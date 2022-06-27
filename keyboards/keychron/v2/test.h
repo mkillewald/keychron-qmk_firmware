@@ -20,8 +20,11 @@
 #include "quantum.h"
 #include "raw_hid.h"
 
+<<<<<<< HEAD
 void process_other_record(uint16_t keycode, keyrecord_t *record);
 void timer_task_start(void);
+=======
+>>>>>>> playground_new
 void system_switch_state_report(uint8_t index, bool active);
 
 #endif /* _TEST_H_ */

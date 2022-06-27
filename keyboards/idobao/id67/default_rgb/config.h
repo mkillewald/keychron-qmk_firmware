@@ -1,4 +1,4 @@
-/* Copyright 2021 Tybera
+/* Copyright 2022 QMK / James Young (@noroadsleft)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,15 +19,15 @@
 #include "config_common.h"
 
 /* USB Device descriptor parameter */
-#define VENDOR_ID       0x6964 /* "id" */
-#define PRODUCT_ID      0x0067
+#define VENDOR_ID       0x45D4
+#define PRODUCT_ID      0x0110
 #define DEVICE_VER      0x0001
-#define MANUFACTURER    IDOBAO
-#define PRODUCT         ID67
+#define MANUFACTURER    YMDK
+#define PRODUCT         YMD21 v2
 
 /* key matrix size */
-#define MATRIX_ROWS 5
-#define MATRIX_COLS 15
+#define MATRIX_ROWS 6
+#define MATRIX_COLS 4
 
 /*
  * Keyboard Matrix Assignments
@@ -39,18 +39,22 @@
  *                  ROW2COL = ROW = Anode (+), COL = Cathode (-, marked on diode)
  *
  */
-#define MATRIX_ROW_PINS { B0, B1, B2, B3, F7 }
-#define MATRIX_COL_PINS { C7, F6, F5, F4, F1, B7, D5, D1, D2, D3, D4, D0, D6, D7, B4 }
+#define MATRIX_ROW_PINS { B3, B6, B2, B1, D7, B4 }
+#define MATRIX_COL_PINS { F5, F4, D3, D2 }
 
-#define DIODE_DIRECTION COL2ROW
+#define DIODE_DIRECTION ROW2COL
 
-#define RGB_DI_PIN F0
-#ifdef RGB_DI_PIN
-    #define RGBLED_NUM 77
+#define BACKLIGHT_PIN B7
+#define BACKLIGHT_BREATHING
+#define BACKLIGHT_LEVELS 3
+
+#define RGB_DI_PIN E2
+#if defined(RGBLIGHT_ENABLE)
+    #define RGBLED_NUM 8
     #define RGBLIGHT_HUE_STEP 8
     #define RGBLIGHT_SAT_STEP 8
     #define RGBLIGHT_VAL_STEP 8
-    #define RGBLIGHT_LIMIT_VAL 150 /* The maximum brightness level */
+    #define RGBLIGHT_LIMIT_VAL 180 /* The maximum brightness level */
     #define RGBLIGHT_SLEEP  /* If defined, the RGB lighting will be switched off when the host goes to sleep */
 /*== all animations enable ==*/
     #define RGBLIGHT_ANIMATIONS

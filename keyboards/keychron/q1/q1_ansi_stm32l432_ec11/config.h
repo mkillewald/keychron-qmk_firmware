@@ -36,17 +36,28 @@
 #define DRIVER_ADDR_1 0b1110111
 #define DRIVER_ADDR_2 0b1110100
 
+<<<<<<< HEAD
+=======
+/* Scan phase of led driver set as MSKPHASE_9CHANNEL(defined as 0x03 in CKLED2001.h) */
+#define PHASE_CHANNEL MSKPHASE_9CHANNEL
+#define CONSTANT_CURRENT_STEP \
+    { 0x74, 0x74, 0x29, 0x74, 0x74, 0x29, 0x74, 0x74, 0x29, 0x74, 0x74, 0x29 }
+
+>>>>>>> playground_new
 /* RGB Matrix Configuration */
 #define DRIVER_1_LED_TOTAL 45
 #define DRIVER_2_LED_TOTAL 37
 #define DRIVER_LED_TOTAL (DRIVER_1_LED_TOTAL + DRIVER_2_LED_TOTAL)
 
+<<<<<<< HEAD
 /* Scan phase of led driver set as MSKPHASE_9CHANNEL(defined as 0x03 in CKLED2001.h) */
 #define PHASE_CHANNEL MSKPHASE_9CHANNEL
 
 /* Set the maxium brightness as 192 in order to limit the current to 450mA */
 #define RGB_MATRIX_MAXIMUM_BRIGHTNESS (28 * 8)  // 8 = RGB_MATRIX_VAL_STEP
 
+=======
+>>>>>>> playground_new
 /* We have 2KB EEPROM size on STM32L432 */
 #define DYNAMIC_KEYMAP_EEPROM_MAX_ADDR 2047
 

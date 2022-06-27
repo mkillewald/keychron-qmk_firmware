@@ -86,7 +86,11 @@
                 {"label":"Right Shift", "x":12.25, "y":4.25, "w":2.75},
                 {"label":"Up", "x":16.25, "y":4.25},
 
+<<<<<<< HEAD
                 {"label":"Left Ctrl", "x":0, "y":5.25, "w":1.25}
+=======
+                {"label":"Left Ctrl", "x":0, "y":5.25, "w":1.25},
+>>>>>>> playground_new
                 {"label":"Left Win", "x":1.25, "y":5.25, "w":1.25},
                 {"label":"Left Alt", "x":2.5, "y":5.25, "w":1.25},
                 {"label":"Space", "x":3.75, "y":5.25, "w":6.25},

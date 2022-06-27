@@ -172,6 +172,7 @@ generated-files: $(KEYMAP_OUTPUT)/src/config.h $(KEYMAP_OUTPUT)/src/keymap.c
 
 endif
 
+<<<<<<< HEAD
 ifeq ($(strip $(CTPC)), yes)
     CONVERT_TO_PROTON_C=yes
 endif
@@ -179,6 +180,9 @@ endif
 ifeq ($(strip $(CONVERT_TO_PROTON_C)), yes)
     include platforms/chibios/boards/QMK_PROTON_C/convert_to_proton_c.mk
 endif
+=======
+include $(BUILDDEFS_PATH)/converters.mk
+>>>>>>> playground_new
 
 include $(BUILDDEFS_PATH)/mcu_selection.mk
 
@@ -328,12 +332,24 @@ ifneq ("$(wildcard $(KEYBOARD_PATH_5)/info.json)","")
 endif
 
 CONFIG_H += $(KEYBOARD_OUTPUT)/src/info_config.h $(KEYBOARD_OUTPUT)/src/layouts.h
+<<<<<<< HEAD
+=======
+KEYBOARD_SRC += $(KEYBOARD_OUTPUT)/src/default_keyboard.c
+>>>>>>> playground_new
 
 $(KEYBOARD_OUTPUT)/src/info_config.h: $(INFO_JSON_FILES)
 	@$(SILENT) || printf "$(MSG_GENERATING) $@" | $(AWK_CMD)
 	$(eval CMD=$(QMK_BIN) generate-config-h --quiet --keyboard $(KEYBOARD) --output $(KEYBOARD_OUTPUT)/src/info_config.h)
 	@$(BUILD_CMD)
 
+<<<<<<< HEAD
+=======
+$(KEYBOARD_OUTPUT)/src/default_keyboard.c: $(INFO_JSON_FILES)
+	@$(SILENT) || printf "$(MSG_GENERATING) $@" | $(AWK_CMD)
+	$(eval CMD=$(QMK_BIN) generate-keyboard-c --quiet --keyboard $(KEYBOARD) --output $(KEYBOARD_OUTPUT)/src/default_keyboard.c)
+	@$(BUILD_CMD)
+
+>>>>>>> playground_new
 $(KEYBOARD_OUTPUT)/src/default_keyboard.h: $(INFO_JSON_FILES)
 	@$(SILENT) || printf "$(MSG_GENERATING) $@" | $(AWK_CMD)
 	$(eval CMD=$(QMK_BIN) generate-keyboard-h --quiet --keyboard $(KEYBOARD) --output $(KEYBOARD_OUTPUT)/src/default_keyboard.h)
@@ -344,7 +360,11 @@ $(KEYBOARD_OUTPUT)/src/layouts.h: $(INFO_JSON_FILES)
 	$(eval CMD=$(QMK_BIN) generate-layouts --quiet --keyboard $(KEYBOARD) --output $(KEYBOARD_OUTPUT)/src/layouts.h)
 	@$(BUILD_CMD)
 
+<<<<<<< HEAD
 generated-files: $(KEYBOARD_OUTPUT)/src/info_config.h $(KEYBOARD_OUTPUT)/src/default_keyboard.h $(KEYBOARD_OUTPUT)/src/layouts.h
+=======
+generated-files: $(KEYBOARD_OUTPUT)/src/info_config.h $(KEYBOARD_OUTPUT)/src/default_keyboard.c $(KEYBOARD_OUTPUT)/src/default_keyboard.h $(KEYBOARD_OUTPUT)/src/layouts.h
+>>>>>>> playground_new
 
 .INTERMEDIATE : generated-files
 
@@ -390,10 +410,19 @@ ifneq ("$(KEYMAP_H)","")
     CONFIG_H += $(KEYMAP_H)
 endif
 
+<<<<<<< HEAD
 # project specific files
 SRC += \
     $(KEYBOARD_SRC) \
     $(KEYMAP_C) \
+=======
+OPT_DEFS += -DKEYMAP_C=\"$(KEYMAP_C)\"
+
+# project specific files
+SRC += \
+    $(KEYBOARD_SRC) \
+    $(QUANTUM_DIR)/keymap_introspection.c \
+>>>>>>> playground_new
     $(QUANTUM_SRC) \
     $(QUANTUM_DIR)/main.c \
 

@@ -41,5 +41,11 @@
 #define DRIVER_2_LED_TOTAL 23
 #define DRIVER_LED_TOTAL (DRIVER_1_LED_TOTAL + DRIVER_2_LED_TOTAL)
 
+<<<<<<< HEAD
+=======
+/* Set the maxium brightness as 192 in order to limit the current to 450mA */
+// #define RGB_MATRIX_MAXIMUM_BRIGHTNESS (24 * 8 - 1)  // 8 = RGB_MATRIX_VAL_STEP
+
+>>>>>>> playground_new
 /* Enable caps-lock LED */
 #define CAPS_LOCK_LED_INDEX 45
