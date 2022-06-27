@@ -17,8 +17,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
+<<<<<<< HEAD
 #define DEVICE_VER 0x0004
 #define PRODUCT_ID 0x6060
+=======
+#define DEVICE_VER 0x0002
+#define PRODUCT_ID 0x6062
+>>>>>>> playground_new
 
 #define LED_NUM_LOCK_PIN B12
 #define LED_SCROLL_LOCK_PIN B13
@@ -31,10 +36,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define MATRIX_COL_PINS \
     { B14, A8, A10, A15, B3, B4, B5, B7, A1, A2, A3, A4, B1 }
 
+<<<<<<< HEAD
+=======
+#ifdef ENCODER_ENABLE
+>>>>>>> playground_new
 #define ENCODERS_PAD_A \
     { A0 }
 #define ENCODERS_PAD_B \
     { B6 }
+<<<<<<< HEAD
 
 #define RGB_DI_PIN B15
 
@@ -43,6 +53,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define ENCODER_RESOLUTION 4
 
+=======
+#define ENCODER_RESOLUTION 4
+#endif
+
+#ifdef RGBLIGHT_ENABLE
+
+#define RGB_DI_PIN B15
+#define RGBLIGHT_LAYERS
+>>>>>>> playground_new
 #undef RGBLED_NUM
 #define RGBLED_NUM 20
 #define RGBLIGHT_EFFECT_BREATHING
@@ -58,6 +77,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define RGBLIGHT_HUE_STEP 8
 #define RGBLIGHT_SAT_STEP 8
 
+<<<<<<< HEAD
+=======
+#endif
+
+>>>>>>> playground_new
 #ifdef OLED_ENABLE
 #    define OLED_DISPLAY_128X32
 #define I2C1_SCL_PIN        B9
@@ -65,3 +89,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define OLED_BRIGHTNESS 128
 #define OLED_FONT_H "keyboards/mlego/m65/lib/glcdfont.c"
 #endif
+<<<<<<< HEAD
+=======
+
+#define UNUSED_PINS
+// you want to comment this if using stm32-dfu as bootloader
+#define FEE_PAGE_BASE_ADDRESS 0x08008000
+>>>>>>> playground_new

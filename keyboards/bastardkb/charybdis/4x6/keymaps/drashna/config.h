@@ -59,6 +59,10 @@
 // // line, this can result in dropped communications so lower the speed if there
 // // are many timeouts.
 // // #define SERIAL_USART_SPEED (STM32_PCLK2 >> 4)
+<<<<<<< HEAD
+=======
+#define SERIAL_USART_SPEED       921600
+>>>>>>> playground_new
 
 #define CRC8_USE_TABLE
 #define CRC8_OPTIMIZE_SPEED

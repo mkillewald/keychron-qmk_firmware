@@ -45,7 +45,11 @@ qk_tap_dance_action_t tap_dance_actions[] = {
     [TD_LSFT_CAPSLOCK] = ACTION_TAP_DANCE_DOUBLE(KC_LSFT, KC_CAPS),
     [TD_LSFT_CAPS_WIN] = ACTION_TAP_DANCE_FN_ADVANCED(dance_LSFT_each_tap, NULL, dance_LSFT_reset),
     // Tap once for Escape, twice to reset to base layer
+<<<<<<< HEAD
     [TD_ESC_BASELYR] = ACTION_TAP_DANCE_DUAL_ROLE(KC_ESC, _BASE),
+=======
+    [TD_ESC_BASELYR] = ACTION_TAP_DANCE_LAYER_MOVE(KC_ESC, _BASE),
+>>>>>>> playground_new
 };
 #endif // TD_LSFT_CAPSLOCK_ENABLE
 

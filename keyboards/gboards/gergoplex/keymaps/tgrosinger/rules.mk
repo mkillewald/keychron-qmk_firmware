@@ -10,6 +10,10 @@ DEBUG_MATRIX           = no
 CONSOLE_ENABLE         = no
 
 #Combos!
+<<<<<<< HEAD
+=======
+COMBO_ENABLE = yes
+>>>>>>> playground_new
 VPATH                  +=  keyboards/gboards/
 
 ifeq ($(strip $(DEBUG_MATRIX)), yes)

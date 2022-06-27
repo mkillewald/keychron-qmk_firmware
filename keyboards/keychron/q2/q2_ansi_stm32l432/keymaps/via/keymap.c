@@ -28,10 +28,17 @@ enum layers{
 enum custom_keycodes {
     KC_MISSION_CONTROL = USER00,
     KC_LAUNCHPAD,
+<<<<<<< HEAD
     KC_LOPTN,
     KC_ROPTN,
     KC_LCMMD,
     KC_RCMMD,
+=======
+//    KC_LOPTN,
+//    KC_ROPTN,
+//    KC_LCMMD,
+//    KC_RCMMD,
+>>>>>>> playground_new
     KC_TASK_VIEW,
     KC_FILE_EXPLORER
 };
@@ -40,6 +47,13 @@ enum custom_keycodes {
 #define KC_LPAD KC_LAUNCHPAD
 #define KC_TASK KC_TASK_VIEW
 #define KC_FLXP KC_FILE_EXPLORER
+<<<<<<< HEAD
+=======
+#define KC_LOPTN KC_LOPT
+#define KC_ROPTN KC_ROPT
+#define KC_LCMMD KC_LCMD
+#define KC_RCMMD KC_RCMD
+>>>>>>> playground_new
 
 typedef struct PACKED {
     uint8_t len;
@@ -51,7 +65,11 @@ key_combination_t key_comb_list[2] = {
     {2, {KC_LWIN, KC_E}}
 };
 
+<<<<<<< HEAD
 static uint8_t mac_keycode[4] = { KC_LOPT, KC_ROPT, KC_LCMD, KC_RCMD };
+=======
+//    static uint8_t mac_keycode[4] = { KC_LOPT, KC_ROPT, KC_LCMD, KC_RCMD };
+>>>>>>> playground_new
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [MAC_BASE] = LAYOUT_ansi_67(
@@ -112,6 +130,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 host_consumer_send(0);
             }
             return false;  // Skip all further processing of this key
+<<<<<<< HEAD
         case KC_LOPTN:
         case KC_ROPTN:
         case KC_LCMMD:
@@ -122,6 +141,18 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 unregister_code(mac_keycode[keycode - KC_LOPTN]);
             }
             return false;  // Skip all further processing of this key
+=======
+//        case KC_LOPTN:
+//        case KC_ROPTN:
+//        case KC_LCMMD:
+//        case KC_RCMMD:
+//            if (record->event.pressed) {
+//                register_code(mac_keycode[keycode - KC_LOPTN]);
+//            } else {
+//                unregister_code(mac_keycode[keycode - KC_LOPTN]);
+//            }
+//            return false;  // Skip all further processing of this key
+>>>>>>> playground_new
         case KC_TASK:
         case KC_FLXP:
             if (record->event.pressed) {

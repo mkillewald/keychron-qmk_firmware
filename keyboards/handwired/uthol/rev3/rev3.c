@@ -16,5 +16,8 @@
  */
 
 #include QMK_KEYBOARD_H
+<<<<<<< HEAD
 
 void board_init(void) { setPinInputHigh(B9); }
+=======
+>>>>>>> playground_new

@@ -6,7 +6,11 @@
         "vid": "0xFEED",
         "pid": "0x4B4E"
     },
+<<<<<<< HEAD
     "manufacturer": "Quartz64"
+=======
+    "manufacturer": "Quartz64",
+>>>>>>> playground_new
     "diode_direction": "COL2ROW",
     "layouts": {
         "LAYOUT": {

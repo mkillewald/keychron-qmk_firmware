@@ -149,33 +149,59 @@ ifeq ($(strip $(POINTING_DEVICE_ENABLE)), yes)
     endif
 endif
 
+<<<<<<< HEAD
+=======
+QUANTUM_PAINTER_ENABLE ?= no
+ifeq ($(strip $(QUANTUM_PAINTER_ENABLE)), yes)
+    include $(QUANTUM_DIR)/painter/rules.mk
+endif
+
+>>>>>>> playground_new
 VALID_EEPROM_DRIVER_TYPES := vendor custom transient i2c spi
 EEPROM_DRIVER ?= vendor
 ifeq ($(filter $(EEPROM_DRIVER),$(VALID_EEPROM_DRIVER_TYPES)),)
   $(call CATASTROPHIC_ERROR,Invalid EEPROM_DRIVER,EEPROM_DRIVER="$(EEPROM_DRIVER)" is not a valid EEPROM driver)
 else
   OPT_DEFS += -DEEPROM_ENABLE
+<<<<<<< HEAD
   ifeq ($(strip $(EEPROM_DRIVER)), custom)
     # Custom EEPROM implementation -- only needs to implement init/erase/read_block/write_block
     OPT_DEFS += -DEEPROM_DRIVER -DEEPROM_CUSTOM
     COMMON_VPATH += $(DRIVER_PATH)/eeprom
+=======
+  COMMON_VPATH += $(PLATFORM_PATH)/$(PLATFORM_KEY)/$(DRIVER_DIR)/eeprom
+  COMMON_VPATH += $(DRIVER_PATH)/eeprom
+  COMMON_VPATH += $(PLATFORM_COMMON_DIR)
+  ifeq ($(strip $(EEPROM_DRIVER)), custom)
+    # Custom EEPROM implementation -- only needs to implement init/erase/read_block/write_block
+    OPT_DEFS += -DEEPROM_DRIVER -DEEPROM_CUSTOM
+>>>>>>> playground_new
     SRC += eeprom_driver.c
   else ifeq ($(strip $(EEPROM_DRIVER)), i2c)
     # External I2C EEPROM implementation
     OPT_DEFS += -DEEPROM_DRIVER -DEEPROM_I2C
+<<<<<<< HEAD
     COMMON_VPATH += $(DRIVER_PATH)/eeprom
+=======
+>>>>>>> playground_new
     QUANTUM_LIB_SRC += i2c_master.c
     SRC += eeprom_driver.c eeprom_i2c.c
   else ifeq ($(strip $(EEPROM_DRIVER)), spi)
     # External SPI EEPROM implementation
     OPT_DEFS += -DEEPROM_DRIVER -DEEPROM_SPI
+<<<<<<< HEAD
     COMMON_VPATH += $(DRIVER_PATH)/eeprom
+=======
+>>>>>>> playground_new
     QUANTUM_LIB_SRC += spi_master.c
     SRC += eeprom_driver.c eeprom_spi.c
   else ifeq ($(strip $(EEPROM_DRIVER)), transient)
     # Transient EEPROM implementation -- no data storage but provides runtime area for it
     OPT_DEFS += -DEEPROM_DRIVER -DEEPROM_TRANSIENT
+<<<<<<< HEAD
     COMMON_VPATH += $(DRIVER_PATH)/eeprom
+=======
+>>>>>>> playground_new
     SRC += eeprom_driver.c eeprom_transient.c
   else ifeq ($(strip $(EEPROM_DRIVER)), vendor)
     # Vendor-implemented EEPROM
@@ -186,6 +212,7 @@ else
       ifneq ($(filter STM32F3xx_% STM32F1xx_% %_STM32F401xC %_STM32F401xE %_STM32F405xG %_STM32F411xE %_STM32F072xB %_STM32F042x6 %_GD32VF103xB %_GD32VF103x8, $(MCU_SERIES)_$(MCU_LDSCRIPT)),)
         # Emulated EEPROM
         OPT_DEFS += -DEEPROM_DRIVER -DEEPROM_STM32_FLASH_EMULATED
+<<<<<<< HEAD
         COMMON_VPATH += $(DRIVER_PATH)/eeprom
         SRC += eeprom_driver.c
         SRC += $(PLATFORM_COMMON_DIR)/eeprom_stm32.c
@@ -193,28 +220,70 @@ else
       else ifneq ($(filter $(MCU_SERIES),STM32L0xx STM32L1xx),)
         # True EEPROM on STM32L0xx, L1xx
         OPT_DEFS += -DEEPROM_DRIVER -DEEPROM_STM32_L0_L1
+=======
+        COMMON_VPATH += $(PLATFORM_PATH)/$(PLATFORM_KEY)/$(DRIVER_DIR)/flash
+        COMMON_VPATH += $(DRIVER_PATH)/flash
+        SRC += eeprom_driver.c eeprom_stm32.c flash_stm32.c
+      else ifneq ($(filter $(MCU_SERIES),STM32L0xx STM32L1xx),)
+<<<<<<<< HEAD:common_features.mk
+        OPT_DEFS += -DEEPROM_DRIVER
+>>>>>>> playground_new
         COMMON_VPATH += $(DRIVER_PATH)/eeprom
         COMMON_VPATH += $(PLATFORM_PATH)/$(PLATFORM_KEY)/$(DRIVER_DIR)/eeprom
         SRC += eeprom_driver.c
         SRC += eeprom_stm32_L0_L1.c
+<<<<<<< HEAD
+=======
+      else ifneq ($(filter $(MCU_SERIES),STM32L4xx),)
+        OPT_DEFS += -DEEPROM_DRIVER
+        COMMON_VPATH += $(DRIVER_PATH)/eeprom
+        SRC += eeprom_driver.c
+        SRC += $(PLATFORM_COMMON_DIR)/eeprom_stm32_l4.c
+        SRC += $(PLATFORM_COMMON_DIR)/flash_stm32.c
+========
+        # True EEPROM on STM32L0xx, L1xx
+        OPT_DEFS += -DEEPROM_DRIVER -DEEPROM_STM32_L0_L1
+        SRC += eeprom_driver.c eeprom_stm32_L0_L1.c
+      else ifneq ($(filter $(MCU_SERIES),STM32L4xx),)
+        # Emulated EEPROM
+        OPT_DEFS += -DEEPROM_DRIVER -DEEPROM_STM32_FLASH_EMULATED
+        COMMON_VPATH += $(PLATFORM_PATH)/$(PLATFORM_KEY)/$(DRIVER_DIR)/flash
+        COMMON_VPATH += $(DRIVER_PATH)/flash
+        SRC += eeprom_driver.c eeprom_stm32_l4.c flash_stm32.c
+>>>>>>> playground_new
       else ifneq ($(filter $(MCU_SERIES),KL2x K20x),)
         # Teensy EEPROM implementations
         OPT_DEFS += -DEEPROM_TEENSY
         SRC += eeprom_teensy.c
+<<<<<<< HEAD
       else
         # Fall back to transient, i.e. non-persistent
         OPT_DEFS += -DEEPROM_DRIVER -DEEPROM_TRANSIENT
         COMMON_VPATH += $(DRIVER_PATH)/eeprom
+=======
+>>>>>>>> playground_new:builddefs/common_features.mk
+      else
+        # Fall back to transient, i.e. non-persistent
+        OPT_DEFS += -DEEPROM_DRIVER -DEEPROM_TRANSIENT
+>>>>>>> playground_new
         SRC += eeprom_driver.c eeprom_transient.c
       endif
     else ifeq ($(PLATFORM),ARM_ATSAM)
       # arm_atsam EEPROM
       OPT_DEFS += -DEEPROM_SAMD
+<<<<<<< HEAD
       SRC += $(PLATFORM_COMMON_DIR)/eeprom_samd.c
     else ifeq ($(PLATFORM),TEST)
       # Test harness "EEPROM"
       OPT_DEFS += -DEEPROM_TEST_HARNESS
       SRC += $(PLATFORM_COMMON_DIR)/eeprom.c
+=======
+      SRC += eeprom_samd.c
+    else ifeq ($(PLATFORM),TEST)
+      # Test harness "EEPROM"
+      OPT_DEFS += -DEEPROM_TEST_HARNESS
+      SRC += eeprom.c
+>>>>>>> playground_new
     endif
   endif
 endif
@@ -537,12 +606,15 @@ ifeq ($(strip $(LED_TABLES)), yes)
     SRC += $(QUANTUM_DIR)/led_tables.c
 endif
 
+<<<<<<< HEAD
 ifeq ($(strip $(TERMINAL_ENABLE)), yes)
     SRC += $(QUANTUM_DIR)/process_keycode/process_terminal.c
     OPT_DEFS += -DTERMINAL_ENABLE
     OPT_DEFS += -DUSER_PRINT
 endif
 
+=======
+>>>>>>> playground_new
 ifeq ($(strip $(VIA_ENABLE)), yes)
     DYNAMIC_KEYMAP_ENABLE := yes
     RAW_ENABLE := yes
@@ -646,8 +718,14 @@ ifeq ($(strip $(HAPTIC_ENABLE)),yes)
 endif
 
 ifeq ($(strip $(HD44780_ENABLE)), yes)
+<<<<<<< HEAD
     SRC += platforms/avr/drivers/hd44780.c
     OPT_DEFS += -DHD44780_ENABLE
+=======
+    OPT_DEFS += -DHD44780_ENABLE
+    COMMON_VPATH += $(DRIVER_PATH)/lcd
+    SRC += hd44780.c
+>>>>>>> playground_new
 endif
 
 VALID_OLED_DRIVER_TYPES := SSD1306 custom
@@ -695,7 +773,12 @@ endif
 
 ifeq ($(strip $(UNICODE_COMMON)), yes)
     OPT_DEFS += -DUNICODE_COMMON_ENABLE
+<<<<<<< HEAD
     SRC += $(QUANTUM_DIR)/process_keycode/process_unicode_common.c
+=======
+    SRC += $(QUANTUM_DIR)/process_keycode/process_unicode_common.c \
+           $(QUANTUM_DIR)/utf8.c
+>>>>>>> playground_new
 endif
 
 MAGIC_ENABLE ?= yes

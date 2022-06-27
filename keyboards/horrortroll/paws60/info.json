@@ -73,7 +73,11 @@
                 {"label":"Win", "x":12.5, "y":4, "w":1.25},
                 {"label":"Ctrl", "x":13.75, "y":4, "w":1.25}
             ]
+<<<<<<< HEAD
         }
+=======
+        },
+>>>>>>> playground_new
         "LAYOUT_60_ansi": {
             "layout": [
                 {"label":"Esc", "x":0, "y":0},
@@ -142,7 +146,11 @@
                 {"label":"Win", "x":12.5, "y":4, "w":1.25},
                 {"label":"Ctrl", "x":13.75, "y":4, "w":1.25}
             ]
+<<<<<<< HEAD
         }
+=======
+        },
+>>>>>>> playground_new
         "LAYOUT_60_ansi_tsangan": {
             "layout": [
                 {"label":"Esc", "x":0, "y":0},
@@ -210,7 +218,11 @@
                 {"label":"Win", "x":12.5, "y":4},
                 {"label":"Ctrl", "x":13.5, "y":4, "w":1.5}
             ]
+<<<<<<< HEAD
         }
+=======
+        },
+>>>>>>> playground_new
         "LAYOUT_60_tsangan_hhkb": {
             "layout": [
                 {"label":"Esc", "x":0, "y":0},

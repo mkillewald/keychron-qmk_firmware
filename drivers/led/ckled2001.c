@@ -30,6 +30,11 @@
 #    define SCAN_PHASE_CHANNEL MSKPHASE_12CHANNEL
 #endif
 
+#ifndef CONSTANT_CURRENT_STEP
+#    define CONSTANT_CURRENT_STEP \
+        { 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF }
+#endif
+
 // Transfer buffer for TWITransmitData()
 uint8_t g_twi_transfer_buffer[20];
 
@@ -95,7 +100,13 @@ bool CKLED2001_write_pwm_buffer(uint8_t addr, uint8_t *pwm_buffer) {
     return true;
 }
 
+<<<<<<< HEAD
 __attribute__((weak)) void CKLED2001_init(uint8_t addr) {
+=======
+void CKLED2001_init(uint8_t addr) {
+    uint8_t led_current_tune[LED_CURRENT_TUNE_LENGTH] = CONSTANT_CURRENT_STEP;
+
+>>>>>>> playground_new
     // Select to function page
     CKLED2001_write_register(addr, CONFIGURE_CMD_PAGE, FUNCTION_PAGE);
     // Setting LED driver to shutdown mode
@@ -126,6 +137,7 @@ __attribute__((weak)) void CKLED2001_init(uint8_t addr) {
     CKLED2001_write_register(addr, CONFIGURE_CMD_PAGE, CURRENT_TUNE_PAGE);
 #if defined(LOW_CURRENT_MODE)
     for (int i = 0; i < LED_CURRENT_TUNE_LENGTH; i++) {
+<<<<<<< HEAD
         switch (i) {
             case 2:
             case 5:
@@ -136,6 +148,9 @@ __attribute__((weak)) void CKLED2001_init(uint8_t addr) {
             default:
                 CKLED2001_write_register(addr, i, 0xA8);
         }
+=======
+        CKLED2001_write_register(addr, i, led_current_tune[i]);
+>>>>>>> playground_new
     }
 #elif defined(LOW_CURRENT_MODE_MOUSE)
     for (int i = 0; i < LED_CURRENT_TUNE_LENGTH; i++) {

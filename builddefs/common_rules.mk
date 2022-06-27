@@ -1,5 +1,6 @@
 # Hey Emacs, this is a -*- makefile -*-
 #----------------------------------------------------------------------------
+<<<<<<< HEAD
 # WinAVR Makefile Template written by Eric B. Weddington, Jg Wunsch, et al.
 #
 # Released to the Public Domain
@@ -14,6 +15,8 @@
 # Frederik Rouleau
 # Carlos Lamas
 #
+=======
+>>>>>>> playground_new
 
 # Enable vpath seraching for source files only
 # Without this, output files, could be read from the wrong .build directories
@@ -38,12 +41,16 @@ NO_LTO_OBJ := $(filter %.a,$(OBJ))
 
 MASTER_OUTPUT := $(firstword $(OUTPUTS))
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> playground_new
 # Output format. (can be srec, ihex, binary)
 FORMAT = ihex
 
 # Optimization level, can be [0, 1, 2, 3, s].
+<<<<<<< HEAD
 #     0 = turn off optimization. s = optimize for size.
 #     (Note: 3 is not always the best optimization level. See avr-libc FAQ.)
 OPT ?= s
@@ -68,6 +75,13 @@ CSTANDARD = -std=gnu99
 #CXXDEFS += -D__STDC_LIMIT_MACROS
 #CXXDEFS += -D__STDC_CONSTANT_MACROS
 #CXXDEFS +=
+=======
+OPT ?= s
+
+# Compiler flag to set the C and C++ language standard level
+CSTANDARD = -std=gnu11
+CXXSTANDARD = -std=gnu++14
+>>>>>>> playground_new
 
 # Speed up recompilations by opt-in usage of ccache
 USE_CCACHE ?= no
@@ -75,6 +89,7 @@ ifneq ($(USE_CCACHE),no)
     CC_PREFIX ?= ccache
 endif
 
+<<<<<<< HEAD
 #---------------- Compiler Options C ----------------
 #  -g*:          generate debugging information
 #  -O*:          optimization level
@@ -84,6 +99,13 @@ endif
 ifeq ($(strip $(LTO_ENABLE)), yes)
     ifeq ($(PLATFORM),CHIBIOS)
         $(info Enabling LTO on ChibiOS-targeting boards is known to have a high likelihood of failure.)
+=======
+#---------------- C Compiler Options ----------------
+
+ifeq ($(strip $(LTO_ENABLE)), yes)
+    ifeq ($(PLATFORM),ARM_ATSAM)
+        $(info Enabling LTO on arm_atsam-targeting boards is known to have a high likelihood of failure.)
+>>>>>>> playground_new
         $(info If unsure, set LTO_ENABLE = no.)
     endif
     CDEFS += -flto
@@ -111,23 +133,31 @@ CFLAGS += -Wstrict-prototypes
 ifneq ($(strip $(ALLOW_WARNINGS)), yes)
     CFLAGS += -Werror
 endif
+<<<<<<< HEAD
 #CFLAGS += -mshort-calls
 #CFLAGS += -fno-unit-at-a-time
 #CFLAGS += -Wundef
 #CFLAGS += -Wunreachable-code
 #CFLAGS += -Wsign-compare
+=======
+>>>>>>> playground_new
 CFLAGS += $(CSTANDARD)
 
 # This fixes lots of keyboards linking errors but SHOULDN'T BE A FINAL SOLUTION
 # Fixing of multiple variable definitions must be made.
 CFLAGS += -fcommon
 
+<<<<<<< HEAD
 #---------------- Compiler Options C++ ----------------
 #  -g*:          generate debugging information
 #  -O*:          optimization level
 #  -f...:        tuning, see GCC manual and avr-libc documentation
 #  -Wall...:     warning level
 #  -Wa,...:      tell GCC to pass this to the assembler.
+=======
+#---------------- C++ Compiler Options ----------------
+
+>>>>>>> playground_new
 ifeq ($(strip $(DEBUG_ENABLE)),yes)
   CXXFLAGS += -g$(DEBUG)
 endif
@@ -141,6 +171,7 @@ CXXFLAGS += -Wundef
 ifneq ($(strip $(ALLOW_WARNINGS)), yes)
     CXXFLAGS += -Werror
 endif
+<<<<<<< HEAD
 #CXXFLAGS += -mshort-calls
 #CXXFLAGS += -fno-unit-at-a-time
 #CXXFLAGS += -Wstrict-prototypes
@@ -149,11 +180,17 @@ endif
 #CXXFLAGS += $(CSTANDARD)
 
 #---------------- Assembler Options ----------------
+=======
+
+#---------------- Assembler Options ----------------
+
+>>>>>>> playground_new
 ASFLAGS += $(ADEFS)
 ifeq ($(VERBOSE_AS_CMD),yes)
 	ASFLAGS += -v
 endif
 
+<<<<<<< HEAD
 #---------------- Library Options ----------------
 # Minimalistic printf version
 PRINTF_LIB_MIN = -Wl,-u,vfprintf -lprintf_min
@@ -192,6 +229,11 @@ CREATE_MAP ?= yes
 # 	(.vectors+0x30): relocation truncated to fit: R_AVR_13_PCREL against symbol `__vector_12'
 #
 
+=======
+#---------------- Linker Options ----------------
+
+CREATE_MAP ?= yes
+>>>>>>> playground_new
 ifeq ($(CREATE_MAP),yes)
 	LDFLAGS += -Wl,-Map=$(BUILD_DIR)/$(TARGET).map,--cref
 endif
@@ -201,12 +243,17 @@ endif
 #LDFLAGS += -Wl,--relax
 LDFLAGS += $(EXTMEMOPTS)
 LDFLAGS += $(patsubst %,-L%,$(EXTRALIBDIRS))
+<<<<<<< HEAD
 LDFLAGS += $(PRINTF_LIB) $(SCANF_LIB) $(MATH_LIB)
 #LDFLAGS += -T linker_script.x
+=======
+LDFLAGS += -lm
+>>>>>>> playground_new
 # You can give EXTRALDFLAGS at 'make' command line.
 LDFLAGS += $(EXTRALDFLAGS)
 
 #---------------- Assembler Listings ----------------
+<<<<<<< HEAD
 #  -Wa,...:   tell GCC to pass this to the assembler.
 #  -adhlns:   create listing
 #  -gstabs:   have the assembler create line number information; note that
@@ -215,6 +262,8 @@ LDFLAGS += $(EXTRALDFLAGS)
 #             files -- see avr-libc docs [FIXME: not yet described there]
 #  -listing-cont-lines: Sets the maximum number of continuation lines of hex
 #       dump that will be displayed for a given single line of source input.
+=======
+>>>>>>> playground_new
 
 ADHLNS_ENABLE ?= no
 ifeq ($(ADHLNS_ENABLE),yes)
@@ -316,7 +365,11 @@ gccversion :
 	@$(BUILD_CMD)
 
 %.uf2: %.hex
+<<<<<<< HEAD
 	$(eval CMD=$(UF2CONV) $(BUILD_DIR)/$(TARGET).hex -o $(BUILD_DIR)/$(TARGET).uf2 -c -f $(UF2_FAMILY) >/dev/null 2>&1)
+=======
+	$(eval CMD=$(UF2CONV) $(BUILD_DIR)/$(TARGET).hex --output $(BUILD_DIR)/$(TARGET).uf2 --convert --family $(UF2_FAMILY) >/dev/null 2>&1)
+>>>>>>> playground_new
 	#@$(SILENT) || printf "$(MSG_EXECUTING) '$(CMD)':\n"
 	@$(SILENT) || printf "$(MSG_UF2) $@" | $(AWK_CMD)
 	@$(BUILD_CMD)

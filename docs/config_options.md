@@ -61,6 +61,8 @@ This is a C header file that is one of the first things included, and will persi
   * pins unused by the keyboard for reference
 * `#define MATRIX_HAS_GHOST`
   * define is matrix has ghost (unlikely)
+* `#define MATRIX_UNSELECT_DRIVE_HIGH`
+  * On un-select of matrix pins, rather than setting pins to input-high, sets them to output-high.
 * `#define DIODE_DIRECTION COL2ROW`
   * COL2ROW or ROW2COL - how your matrix is configured. COL2ROW means the black mark on your diode is facing to the rows, and between the switch and the rows.
 * `#define DIRECT_PINS { { F1, F0, B0, C7 }, { F4, F5, F6, F7 } }`
@@ -124,15 +126,13 @@ If you define these options you will disable the associated feature, which can s
   * disable tap dance and other tapping features
 * `#define NO_ACTION_ONESHOT`
   * disable one-shot modifiers
-* `#define NO_ACTION_MACRO`
-  * disable old-style macro handling using `MACRO()`, `action_get_macro()` _(deprecated)_
-* `#define NO_ACTION_FUNCTION`
-  * disable old-style function handling using `fn_actions`, `action_function()` _(deprecated)_
 
 ## Features That Can Be Enabled
 
 If you define these options you will enable the associated feature, which may increase your code size.
 
+* `#define ENABLE_COMPILE_KEYCODE`
+  * Enables the `QK_MAKE` keycode
 * `#define FORCE_NKRO`
   * NKRO by default requires to be turned on, this forces it on during keyboard startup regardless of EEPROM setting. NKRO can still be turned off but will be turned on again if the keyboard reboots.
 * `#define STRICT_LAYER_RELEASE`
@@ -174,6 +174,8 @@ If you define these options you will enable the associated feature, which may in
   * sets the timer for leader key chords to run on each key press rather than overall
 * `#define LEADER_KEY_STRICT_KEY_PROCESSING`
   * Disables keycode filtering for Mod-Tap and Layer-Tap keycodes. Eg, if you enable this, you would need to specify `MT(MOD_CTL, KC_A)` if you want to use `KC_A`.
+* `#define MOUSE_EXTENDED_REPORT`
+  * Enables support for extended reports (-32767 to 32767, instead of -127 to 127), which may allow for smoother reporting, and prevent maxing out of the reports. Applies to both Pointing Device and Mousekeys.
 * `#define ONESHOT_TIMEOUT 300`
   * how long before oneshot times out
 * `#define ONESHOT_TAP_TOGGLE 2`
@@ -383,7 +385,6 @@ This is a [make](https://www.gnu.org/software/make/manual/make.html) file that i
   * A list of [layouts](feature_layouts.md) this keyboard supports.
 * `LTO_ENABLE`
   * Enables Link Time Optimization (LTO) when compiling the keyboard.  This makes the process take longer, but it can significantly reduce the compiled size (and since the firmware is small, the added time is not noticeable).
-However, this will automatically disable the legacy TMK Macros and Functions features, as these break when LTO is enabled.  It does this by automatically defining `NO_ACTION_MACRO` and `NO_ACTION_FUNCTION`.  (Note: This does not affect QMK [Macros](feature_macros.md) and [Layers](feature_layers.md).)
 
 ## AVR MCU Options
 * `MCU = atmega32u4`
@@ -434,8 +435,8 @@ Use these to enable or disable building certain features. The more you have enab
   * MIDI controls
 * `UNICODE_ENABLE`
   * Unicode
-* `BLUETOOTH`
-  * Current options are AdafruitBLE, RN42
+* `BLUETOOTH_ENABLE`
+  * Current options are BluefruitLE, RN42
 * `SPLIT_KEYBOARD`
   * Enables split keyboard support (dual MCU like the let's split and bakingpy's boards) and includes all necessary files located at quantum/split_common
 * `CUSTOM_MATRIX`

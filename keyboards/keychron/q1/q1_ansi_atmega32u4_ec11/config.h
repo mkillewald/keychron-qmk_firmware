@@ -18,15 +18,26 @@
 
 /* USB Device descriptor parameter */
 #define PRODUCT_ID 0x0101
+<<<<<<< HEAD
 #define DEVICE_VER 0x0101
+=======
+#define DEVICE_VER 0x0109
+>>>>>>> playground_new
 
 /* key matrix size */
 #define MATRIX_ROWS 6
 #define MATRIX_COLS 15
 
 /* key matrix pins */
+<<<<<<< HEAD
 #define MATRIX_ROW_PINS { D3, D2, B3, B2, B1, B0 }
 #define MATRIX_COL_PINS { D5, D4, D6, D7, B4, B5, B6, C6, C7, F7, F6, F5, F4, F1, F0 }
+=======
+#define MATRIX_ROW_PINS \
+    { D3, D2, B3, B2, B1, B0 }
+#define MATRIX_COL_PINS \
+    { D5, D4, D6, D7, B4, B5, B6, C6, C7, F7, F6, F5, F4, F1, F0 }
+>>>>>>> playground_new
 
 /* DIP switch */
 #define DIP_SWITCH_MATRIX_GRID  { {0,1} }
@@ -46,6 +57,10 @@
 #define ENCODERS_PAD_B { B7 }
 #define ENCODER_RESOLUTION 4
 #define ENCODER_DEFAULT_POS 0x3
+<<<<<<< HEAD
+=======
+#define AVR_USE_INT
+>>>>>>> playground_new
 
 /* Enable caps-lock LED */
 #define CAPS_LOCK_LED_INDEX 45

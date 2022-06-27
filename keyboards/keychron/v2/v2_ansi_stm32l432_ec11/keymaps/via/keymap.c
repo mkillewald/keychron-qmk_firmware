@@ -121,6 +121,13 @@ void encoder_action_unregister(void) {
     }
 }
 
+<<<<<<< HEAD
+=======
+void matrix_scan_user(void) {
+    encoder_action_unregister();
+}
+
+>>>>>>> playground_new
 bool encoder_update_user(uint8_t index, bool clockwise) {
     encoder_action_register(index, clockwise);
     return false;
@@ -128,6 +135,7 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
 
 #endif
 
+<<<<<<< HEAD
 void matrix_scan_user(void) {
 #if defined(VIA_ENABLE) && defined(ENCODER_ENABLE)
     encoder_action_unregister();
@@ -136,6 +144,8 @@ void matrix_scan_user(void) {
     timer_task_start();
 }
 
+=======
+>>>>>>> playground_new
 bool dip_switch_update_user(uint8_t index, bool active) {
     /* Send default layer state to host */
     system_switch_state_report(index, active);
@@ -143,7 +153,10 @@ bool dip_switch_update_user(uint8_t index, bool active) {
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+<<<<<<< HEAD
     process_other_record(keycode, record);
+=======
+>>>>>>> playground_new
     switch (keycode) {
         case KC_MISSION_CONTROL:
             if (record->event.pressed) {

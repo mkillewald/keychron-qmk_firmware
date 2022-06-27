@@ -17,12 +17,21 @@
 #include "q6.h"
 
 const matrix_row_t matrix_mask[] = {
+<<<<<<< HEAD
     0b111111111111111111111,
     0b111111111111111111111,
     0b111111111111111111111,
     0b111111111111111111111,
     0b111111111111111111111,
     0b111111111111111101111,
+=======
+    0b11111111111111111111,
+    0b11111111111111111111,
+    0b11111111111111111111,
+    0b11111111111111111111,
+    0b11111111111111111111,
+    0b11111111111111101111,
+>>>>>>> playground_new
 };
 
 #ifdef DIP_SWITCH_ENABLE
@@ -40,6 +49,10 @@ bool dip_switch_update_kb(uint8_t index, bool active) {
 #endif
 
 #if defined(RGB_MATRIX_ENABLE) && (defined(CAPS_LOCK_LED_INDEX) || defined(NUM_LOCK_LED_INDEX))
+<<<<<<< HEAD
+=======
+
+>>>>>>> playground_new
     #if defined(CAPS_LOCK_LED_INDEX)
         #define CAPS_LOCK_MAX_BRIGHTNESS 0xFF
         #ifdef RGB_MATRIX_MAXIMUM_BRIGHTNESS
@@ -82,6 +95,10 @@ bool dip_switch_update_kb(uint8_t index, bool active) {
             rgb_matrix_set_color(CAPS_LOCK_LED_INDEX, b, b, b);  // white, with the adjusted brightness    }
         }
         #endif
+<<<<<<< HEAD
+=======
+
+>>>>>>> playground_new
         #if defined(NUM_LOCK_LED_INDEX)
         if (host_keyboard_led_state().num_lock) {
             uint8_t v = rgb_matrix_get_val();

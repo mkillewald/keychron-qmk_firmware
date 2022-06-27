@@ -83,11 +83,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TRNS,  KC_TRNS,  KC_TRNS,                                KC_TRNS,                                KC_TRNS,  KC_TRNS,   KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS),
 };
 
+<<<<<<< HEAD
 void matrix_scan_user(void) {
     /* Set timers for factory reset and backlight test */
     timer_task_start();
 }
 
+=======
+>>>>>>> playground_new
 bool dip_switch_update_user(uint8_t index, bool active) {
     /* Send default layer state to host */
     system_switch_state_report(index, active);
@@ -95,7 +98,10 @@ bool dip_switch_update_user(uint8_t index, bool active) {
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+<<<<<<< HEAD
     process_other_record(keycode, record);
+=======
+>>>>>>> playground_new
     switch (keycode) {
         case KC_MISSION_CONTROL:
             if (record->event.pressed) {
@@ -105,8 +111,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             }
             return false;  // Skip all further processing of this key
         case KC_LAUNCHPAD:
+<<<<<<< HEAD
             uprintf("a_state:%d: b_state:%d\r\n", readPin(A2), readPin(C14));
 
+=======
+>>>>>>> playground_new
             if (record->event.pressed) {
                 host_consumer_send(0x2A0);
             } else {

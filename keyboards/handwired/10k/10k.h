@@ -16,5 +16,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 #pragma once
 
+<<<<<<<< HEAD:keyboards/handwired/10k/10k.h
 #include "quantum.h"
+========
+#define EE_HANDS
+>>>>>>>> playground_new:keyboards/handwired/dactyl_manuform/5x6/keymaps/nabos/config.h
 

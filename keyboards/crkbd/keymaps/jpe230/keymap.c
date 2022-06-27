@@ -405,7 +405,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                     #ifdef RGB_MATRIX_ENABLE
                     prev_hsv = rgb_matrix_get_hsv();
                     prev_mode = rgb_matrix_get_mode();
+<<<<<<< HEAD
                     rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_MULTISPLASH);
+=======
+                    rgb_matrix_mode_noeeprom(RGB_MATRIX_ALPHAS_MODS);
+>>>>>>> playground_new
                     rgb_matrix_sethsv_noeeprom(HSV_YELLOW);
                     #endif
                 }

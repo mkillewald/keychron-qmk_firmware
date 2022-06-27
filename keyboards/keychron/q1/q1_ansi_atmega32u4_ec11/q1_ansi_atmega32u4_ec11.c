@@ -14,6 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+<<<<<<< HEAD
 #include "quantum.h"
 
 const matrix_row_t matrix_mask[] = {
@@ -23,6 +24,20 @@ const matrix_row_t matrix_mask[] = {
     0b0111111111111111,
     0b0111111111111111,
     0b0111111111111111,
+=======
+#include <avr/interrupt.h>
+#include <avr/io.h>
+
+#include "quantum.h"
+
+const matrix_row_t matrix_mask[] = {
+    0b111111111111101,
+    0b111111111111111,
+    0b111111111111111,
+    0b111111111111111,
+    0b111111111111111,
+    0b111111111111111,
+>>>>>>> playground_new
 };
 
 #ifdef RGB_MATRIX_ENABLE
@@ -149,7 +164,11 @@ led_config_t g_led_config = {
         1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,    1,
         1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1,    1,
         1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,    1,
+<<<<<<< HEAD
         8, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,    1,    1,
+=======
+        9, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,    1,    1,
+>>>>>>> playground_new
         1,    4, 4, 4, 4, 4, 4, 4, 4, 4, 4,    1, 1,
         1, 1, 1,          4,          1, 1, 1, 1, 1, 1,
     }
@@ -171,4 +190,18 @@ bool encoder_update_kb(uint8_t index, bool clockwise) {
     return true;
 }
 
+<<<<<<< HEAD
+=======
+#   ifdef AVR_USE_INT
+void keyboard_post_init_kb(void) {
+    PCMSK0 |= (1 << 7);
+    PCICR |= (1 << PCIE0);
+    sei();
+}
+
+ISR(PCINT0_vect) {
+    encoder_insert_state(0);
+}
+#   endif
+>>>>>>> playground_new
 #endif

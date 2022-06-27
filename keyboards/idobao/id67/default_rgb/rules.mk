@@ -16,7 +16,6 @@ NKRO_ENABLE = no            # Enable N-Key Rollover
 BACKLIGHT_ENABLE = no       # Enable keyboard backlight functionality
 RGBLIGHT_ENABLE = yes       # Enable keyboard RGB underglow
 AUDIO_ENABLE = no           # Audio output
+ENCODER_ENABLE = yes
 
-KEY_LOCK_ENABLE = yes       # Enable KC_LOCK support
-
-LAYOUTS = 65_ansi_blocker
+LAYOUTS = alice alice_split_bs

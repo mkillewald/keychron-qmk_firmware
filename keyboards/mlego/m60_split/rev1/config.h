@@ -18,7 +18,11 @@
 #include "config_common.h"
 
 /* USB Device descriptor parameter */
+<<<<<<< HEAD
 #define PRODUCT_ID 0x0001
+=======
+#define PRODUCT_ID 0x6361
+>>>>>>> playground_new
 #define DEVICE_VER 0x0001
 
 #define MATRIX_ROW_PINS \
@@ -32,12 +36,20 @@
 #define MATRIX_COL_PINS_RIGHT \
     { B0, A3, A2, A1, B7, B5 }  // cols are from right to left to match the layout
 
+<<<<<<< HEAD
+=======
+#ifdef ENCODER_ENABLE
+>>>>>>> playground_new
 #define ENCODERS_PAD_A \
     { A0 }
 #define ENCODERS_PAD_B \
     { B8 }
 #define ENCODER_RESOLUTIONS \
     { 4 }
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> playground_new
 
 #define LED_NUM_LOCK_PIN B12
 #define LED_SCROLL_LOCK_PIN B13
@@ -46,6 +58,7 @@
 #define SPLIT_LAYER_STATE_ENABLE
 #define SPLIT_LED_STATE_ENABLE
 
+<<<<<<< HEAD
 #define RGB_DI_PIN B15
 
 #define SPLIT_HAND_PIN B9
@@ -60,6 +73,17 @@
 #define DIODE_DIRECTION COL2ROW
 
 #define MATRIX_IO_DELAY 5
+=======
+
+#define SPLIT_HAND_PIN B9
+#define SERIAL_USART_TX_PIN B6
+#define SERIAL_USART_SPEED 921600
+
+#ifdef RGBLIGHT_ENABLE
+#define RGB_DI_PIN B15
+#define RGBLIGHT_SPLIT
+#define RGBLIGHT_LAYERS
+>>>>>>> playground_new
 
 #define RGBLIGHT_LIMIT_VAL 128
 #define RGBLIGHT_DEFAULT_HUE 213
@@ -84,3 +108,11 @@
 #define BOOTMAGIC_LITE_COLUMN 0
 #define BOOTMAGIC_LITE_ROW_RIGHT 5
 #define BOOTMAGIC_LITE_COLUMN_RIGHT 0
+<<<<<<< HEAD
+=======
+#endif
+
+#define UNUSED_PINS
+// you want to comment this if using stm32-dfu as bootloader
+#define FEE_PAGE_BASE_ADDRESS 0x08008000
+>>>>>>> playground_new

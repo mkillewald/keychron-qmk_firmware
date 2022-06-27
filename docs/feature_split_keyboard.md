@@ -141,6 +141,9 @@ Next, you will have to flash the EEPROM files once for the correct hand to the c
 * ARM controllers with a DFU compatible bootloader (e.g. Proton-C):
   * `:dfu-util-split-left`
   * `:dfu-util-split-right`
+* ARM controllers with a UF2 compatible bootloader:
+  * `:uf2-split-left`
+  * `:uf2-split-right`
 
 Example:
 
@@ -272,6 +275,14 @@ This enables transmitting the current OLED on/off status to the slave side of th
 ```
 
 This enables transmitting the current ST7565 on/off status to the slave side of the split keyboard. The purpose of this feature is to support state (on/off state only) syncing.
+
+```c
+#define SPLIT_POINTING_ENABLE
+```
+
+This enables transmitting the pointing device status to the master side of the split keyboard. The purpose of this feature is to enable use pointing devices on the slave side. 
+
+!> There is additional required configuration for `SPLIT_POINTING_ENABLE` outlined in the [pointing device documentation](feature_pointing_device.md?id=split-keyboard-configuration).
 
 ### Custom data sync between sides :id=custom-data-sync
 

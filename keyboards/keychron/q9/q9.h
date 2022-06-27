@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /* Copyright 2021 @ Keychron (https://www.keychron.com)
+=======
+/* Copyright 2022 @ Keychron (https://www.keychron.com)
+>>>>>>> playground_new
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,4 +26,11 @@
 #    include "q9_ansi_stm32l432.h"
 #elif defined(KEYBOARD_keychron_q9_q9_ansi_stm32l432_ec11)
 #    include "q9_ansi_stm32l432_ec11.h"
+<<<<<<< HEAD
+=======
+#elif defined(KEYBOARD_keychron_q9_q9_iso_stm32l432)
+#    include "q9_iso_stm32l432.h"
+#elif defined(KEYBOARD_keychron_q9_q9_iso_stm32l432_ec11)
+#    include "q9_iso_stm32l432_ec11.h"
+>>>>>>> playground_new
 #endif

@@ -379,9 +379,24 @@ void usl_reset(qk_tap_dance_state_t *state, void *user_data) {
 
 // Associate our tap dance key with its functionality
 qk_tap_dance_action_t tap_dance_actions[] = {
+<<<<<<< HEAD
     [UNDS_LOWER] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, usl_finished, usl_reset, 175)
 };
 
+=======
+    [UNDS_LOWER] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, usl_finished, usl_reset)
+};
+
+uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case TD(UNDS_LOWER):
+            return 175;
+        default:
+            return TAPPING_TERM;
+    }
+}
+
+>>>>>>> playground_new
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   if (!process_select_word(keycode, record, SELWORD)) { return false; }
   if (!process_caps_word(keycode, record)) { return false; }
@@ -661,4 +676,8 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
       }
       break;
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> playground_new
