@@ -16,8 +16,4 @@
 
 #pragma once
 
-<<<<<<< HEAD
-/* Set dynamic keymap layer counts to 4 */
-=======
->>>>>>> playground_new
 #define DYNAMIC_KEYMAP_LAYER_COUNT 4

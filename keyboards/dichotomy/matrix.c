@@ -117,16 +117,12 @@ uint8_t matrix_scan(void)
                 break;
             }
         }
-<<<<<<< HEAD
-        uart_data[i] = uart_read();
-=======
 
         if (timeout < UART_MATRIX_RESPONSE_TIMEOUT) {
             uart_data[i] = uart_read();
         } else {
             uart_data[i] = 0x00;
         }
->>>>>>> playground_new
     }
 
     //check for the end packet, the key state bytes use the LSBs, so 0xE0

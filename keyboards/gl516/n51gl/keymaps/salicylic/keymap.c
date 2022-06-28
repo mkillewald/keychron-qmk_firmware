@@ -16,11 +16,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include QMK_KEYBOARD_H
-<<<<<<< HEAD
-#include "keymap_jp.h"
-=======
 #include "keymap_japanese.h"
->>>>>>> playground_new
 
 
 // Each layer gets a name for readability, which is then used in the keymap matrix below.

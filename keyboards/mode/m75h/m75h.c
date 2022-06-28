@@ -18,9 +18,5 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "m75h.h"
 
 void board_init(void) {
-<<<<<<< HEAD
-    setPinInput(B9);
-=======
->>>>>>> playground_new
     setPinInput(B10);
 }

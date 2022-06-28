@@ -21,8 +21,6 @@ enum uno_keycode
   UNO = SAFE_RANGE
 };
 
-<<<<<<< HEAD:keyboards/uno/keymaps/default/keymap.c
-=======
 static uint16_t pressTimer = 0xFFFF;
 #define CUSTOM_LONGPRESS 150
 #define CUSTOM_LONGERPRESS 750
@@ -37,7 +35,6 @@ uint8_t presetCounter = 0;
 
 #define COUNTER X_A
 
->>>>>>> playground_new:keyboards/keyhive/uno/keymaps/demo/keymap.c
 enum encoder_names {
 	_ENCODER,
 };
@@ -51,13 +48,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 	switch (keycode) {
 		case UNO:
-<<<<<<< HEAD:keyboards/uno/keymaps/default/keymap.c
-			if (record->event.pressed) {
-				SEND_STRING("Hello!");
-			}
-			break;
-			return false;
-=======
             if (record->event.pressed) {
                 pressTimer = timer_read();
             } else {
@@ -105,24 +95,18 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 presetCounter++;
             }
         break;
->>>>>>> playground_new:keyboards/keyhive/uno/keymaps/demo/keymap.c
     }
     return true;
 }
 
 void keyboard_post_init_user(void) {
     rgblight_enable_noeeprom();
-<<<<<<< HEAD:keyboards/uno/keymaps/default/keymap.c
-    rgblight_sethsv_noeeprom(255, 255, 255);
-    rgblight_mode_noeeprom(RGBLIGHT_MODE_RAINBOW_MOOD);
-=======
     rgblight_sethsv_noeeprom(0, 0, 0);
     rgblight_mode(1);
     // Uncomment to enable rainbow mode when plugged in.
     // Otherwise, the LED will be revealed after a few keypresses.
     //rgblight_sethsv_noeeprom(255, 255, 255);
     //rgblight_mode_noeeprom(RGBLIGHT_MODE_RAINBOW_MOOD);
->>>>>>> playground_new:keyboards/keyhive/uno/keymaps/demo/keymap.c
 }
 
 bool encoder_update_user(uint8_t index, bool clockwise) {

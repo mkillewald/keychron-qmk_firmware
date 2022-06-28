@@ -16,19 +16,6 @@
 #include "0xc_pad.h"
 
 #ifdef RGB_MATRIX_ENABLE
-<<<<<<< HEAD
-#    define Q(...) __VA_ARGS__
-
-led_config_t g_led_config = {
-    // indices
-    LAYOUT(0, 6, 1, 5, 7, 2, 4, 8, 11, 3, 9, 10),
-    // phys position
-    LED_LAYOUT(Q({96, 110}), Q({128, 110}), Q({80, 83}), Q({112, 83}), Q({144, 83}), Q({64, 55}), Q({96, 55}), Q({128, 55}), Q({160, 55}), Q({80, 28}), Q({112, 28}), Q({144, 28})),
-    // flags
-    LED_LAYOUT(4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4),
-};
-#    undef Q
-=======
 led_config_t g_led_config = { {
     // indices
     {     0,    6, KC_NO, KC_NO },
@@ -44,5 +31,4 @@ led_config_t g_led_config = { {
     // flags
     4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4
 } };
->>>>>>> playground_new
 #endif

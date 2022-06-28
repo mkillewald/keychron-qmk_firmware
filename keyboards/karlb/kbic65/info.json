@@ -30,12 +30,9 @@
         "vid": "0x424B",
         "pid": "0xD87A",
         "device_version": "0.0.1"
-<<<<<<< HEAD
-=======
     },
     "layout_aliases": {
         "LAYOUT": "LAYOUT_all"
->>>>>>> playground_new
     },
     "layouts": {
         "LAYOUT_all": {

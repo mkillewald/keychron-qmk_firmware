@@ -1,10 +1,5 @@
 # Keychron V2
 
-<<<<<<< HEAD
-![Keychron V2]()
-
-=======
->>>>>>> playground_new
 A customizable 65% keyboard.
 
 * Keyboard Maintainer: [Keychron](https://github.com/keychron)

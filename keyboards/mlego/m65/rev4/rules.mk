@@ -2,14 +2,10 @@
 MCU = STM32F401
 
 # Bootloader selection
-<<<<<<< HEAD
-BOOTLOADER = stm32-dfu
-=======
 BOOTLOADER = tinyuf2
 #BOOTLOADER = stm32-dfu
 MCU_LDSCRIPT = STM32F401xE
 EEPROM_DRIVER = vendor
->>>>>>> playground_new
 
 # Build Options
 #   change yes to no to disable
@@ -26,4 +22,4 @@ AUDIO_ENABLE = no          # Audio output
 ENCODER_ENABLE = yes       # Enable encoder
 OLED_ENABLE = yes          # Enable OLED
 OLED_DRIVER = SSD1306      # Enable Support for SSD1306 or SH1106 OLED Displays; Communicating over I2C
-WPM_ENABLE = yes           # Enable WPM Counter 
+WPM_ENABLE = yes           # Enable WPM Counter

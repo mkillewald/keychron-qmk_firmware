@@ -31,8 +31,6 @@ __attribute__((weak)) void bootloader_jump(void) {
     for (;;)
         ;
 }
-<<<<<<< HEAD
-=======
 
 __attribute__((weak)) void mcu_reset(void) {
     // watchdog reset
@@ -40,4 +38,3 @@ __attribute__((weak)) void mcu_reset(void) {
     for (;;)
         ;
 }
->>>>>>> playground_new

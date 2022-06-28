@@ -151,11 +151,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_ADJUST] = LAYOUT_full(
     _______,EXPLR,  KC_UP,  PRVTAB, PRVWIN,     NXTWIN, NXTTAB, _______,_______,LCKGUI,
     TSKMGR, KC_LEFT,KC_DOWN,KC_RGHT,UPTAB,      DNTAB,  KC_ENT, KC_LGUI,_______,CALDL,
-<<<<<<< HEAD
-    _______,CLSGUI, _______,CONPST, RESET,      _______,_______,_______,_______,_______,
-=======
     _______,CLSGUI, _______,CONPST, QK_BOOT,      _______,_______,_______,_______,_______,
->>>>>>> playground_new
     _______,_______,_______,_______,_______,    _______,_______,_______,_______,_______
 ),
 };

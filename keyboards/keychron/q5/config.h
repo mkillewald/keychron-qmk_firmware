@@ -26,15 +26,10 @@
 #define MATRIX_COLS 18
 
 /* Key matrix pins */
-<<<<<<< HEAD
-#define MATRIX_ROW_PINS { B5, B4, B3, A15, A14, A13 }
-#define MATRIX_COL_PINS { A10, A9, A8, B1, B0, A7, A6, A5, A4, A3, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN }
-=======
 #define MATRIX_ROW_PINS \
     { B5, B4, B3, A15, A14, A13 }
 #define MATRIX_COL_PINS \
     { A10, A9, A8, B1, B0, A7, A6, A5, A4, A3, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN }
->>>>>>> playground_new
 
 /* COL2ROW or ROW2COL */
 #define DIODE_DIRECTION ROW2COL
@@ -47,17 +42,12 @@
 #define DRIVER_ADDR_1 0b1110111
 #define DRIVER_ADDR_2 0b1110100
 
-<<<<<<< HEAD
-/* DIP switch */
-#define DIP_SWITCH_MATRIX_GRID  { {5, 4} }
-=======
 #define CONSTANT_CURRENT_STEP \
     { 0xB6, 0xB6, 0x56, 0xB6, 0xB6, 0x56, 0xB6, 0xB6, 0x56, 0xB6, 0xB6, 0x56 }
 
 /* DIP switch */
 #define DIP_SWITCH_MATRIX_GRID  { {5, 4} }
 #define SCAN_COUNT_MAX 100
->>>>>>> playground_new
 
 /* Disable DIP switch in matrix data */
 #define MATRIX_MASKED
@@ -68,12 +58,6 @@
 /* turn off effects when suspended */
 #define RGB_DISABLE_WHEN_USB_SUSPENDED
 
-<<<<<<< HEAD
-/* Set USB polling interval to 1 milliseconds */
-#define USB_POLLING_INTERVAL_MS 1
-
-=======
->>>>>>> playground_new
 /* We have 2KB emulated EEPROM size on STM32L432*/
 #define DYNAMIC_KEYMAP_EEPROM_MAX_ADDR 2047
 
@@ -125,16 +109,7 @@
 #define ENABLE_RGB_MATRIX_MULTISPLASH
 #define ENABLE_RGB_MATRIX_SOLID_SPLASH
 #define ENABLE_RGB_MATRIX_SOLID_MULTISPLASH
-<<<<<<< HEAD
-// #define RGB_MATRIX_KEYPRESSES
-
-/* Allow VIA to edit lighting */
-#ifdef VIA_ENABLE
-#    define VIA_QMK_RGBLIGHT_ENABLE
-#endif
-=======
 #define RGB_MATRIX_KEYPRESSES
->>>>>>> playground_new
 
 /* Enable receive custom command from host */
 #define RAW_HID_CMD 0xAB

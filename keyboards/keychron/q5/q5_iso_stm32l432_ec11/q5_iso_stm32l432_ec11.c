@@ -17,11 +17,7 @@
 #include "quantum.h"
 
 #ifdef RGB_MATRIX_ENABLE
-<<<<<<< HEAD
-
-=======
 // clang-format off
->>>>>>> playground_new
 const ckled2001_led PROGMEM g_ckled2001_leds[DRIVER_LED_TOTAL] = {
 /* Refer to IS31 manual for these locations
  *   driver
@@ -47,26 +43,6 @@ const ckled2001_led PROGMEM g_ckled2001_leds[DRIVER_LED_TOTAL] = {
     {0, L_13,   J_13,   K_13},
     {0, L_14,   J_14,   K_14},
 
-<<<<<<< HEAD
-    {0, C_1,    A_1,    B_1},
-    {0, C_2,    A_2,    B_2},
-    {0, C_3,    A_3,    B_3},
-    {0, C_4,    A_4,    B_4},
-    {0, C_5,    A_5,    B_5},
-    {0, C_6,    A_6,    B_6},
-    {0, C_7,    A_7,    B_7},
-    {0, C_8,    A_8,    B_8},
-    {0, C_9,    A_9,    B_9},
-    {0, C_10,   A_10,   B_10},
-    {0, C_11,   A_11,   B_11},
-    {0, C_12,   A_12,   B_12},
-    {0, C_13,   A_13,   B_13},
-    {0, C_14,   A_14,   B_14},
-    {0, C_16,   A_16,   B_16},
-    {0, L_9,    J_9,    K_9},
-    {0, L_10,   J_10,   K_10},
-    {0, L_11,   J_11,   K_11},
-=======
     {0, C_1,    A_1,    B_1}, // `~
     {0, C_2,    A_2,    B_2}, // 1!
     {0, C_3,    A_3,    B_3}, // 2@
@@ -85,7 +61,6 @@ const ckled2001_led PROGMEM g_ckled2001_leds[DRIVER_LED_TOTAL] = {
     {0, L_9,    J_9,    K_9},  // /
     {0, L_10,   J_10,   K_10}, // *
     {0, L_11,   J_11,   K_11}, // -
->>>>>>> playground_new
 
     {0, F_1,    D_1,    E_1},
     {0, F_2,    D_2,    E_2},
@@ -177,24 +152,14 @@ led_config_t g_led_config = {
     },
     {
         1,    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,    1, 1, 1, 1,
-<<<<<<< HEAD
-        1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1,    9, 4, 4, 4,
-        1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,       4, 4, 4,
-        9, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1,    4, 4, 4, 4,
-=======
         1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1,    1, 4, 4, 4,
         1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,       4, 4, 4,
         1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1,    4, 4, 4, 4,
->>>>>>> playground_new
         1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,    1, 1, 4, 4, 4,
         1, 1, 1,          4,          1, 1, 1, 1, 1, 1, 4, 4, 1,
     }
 };
-<<<<<<< HEAD
-
-=======
 // clang-format on
->>>>>>> playground_new
 #endif
 
 #ifdef ENCODER_ENABLE

@@ -17,9 +17,6 @@ BACKLIGHT_ENABLE = no      # Enable keyboard backlight functionality
 RGBLIGHT_ENABLE = no        # Enable keyboard RGB underglow
 AUDIO_ENABLE = no           # Audio output
 LTO_ENABLE = yes
-<<<<<<< HEAD
-=======
 SPACE_CADET_ENABLE = no
-GRAVE_ESC_ENABLE = no 
+GRAVE_ESC_ENABLE = no
 MAGIC_ENABLE = no
->>>>>>> playground_new

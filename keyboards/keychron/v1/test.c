@@ -73,11 +73,7 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
             if (record->event.pressed) {
                 key_press_status |= KEY_PRESS_J;
                 if (key_press_status == KEY_PRESS_FACTORY_RESET) {
-<<<<<<< HEAD
-                    timer_3s_buffer = sync_timer_read32() | 1;
-=======
                     timer_3s_buffer = sync_timer_read32();
->>>>>>> playground_new
                 }
             } else {
                 key_press_status &= ~KEY_PRESS_J;
@@ -88,11 +84,7 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
             if (record->event.pressed) {
                 key_press_status |= KEY_PRESS_Z;
                 if (key_press_status == KEY_PRESS_FACTORY_RESET) {
-<<<<<<< HEAD
-                    timer_3s_buffer = sync_timer_read32() | 1;
-=======
                     timer_3s_buffer = sync_timer_read32();
->>>>>>> playground_new
                 }
             } else {
                 key_press_status &= ~KEY_PRESS_Z;
@@ -107,11 +99,7 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
                         led_test_mode = LED_TEST_MODE_WHITE;
                     }
                 } else if (key_press_status == KEY_PRESS_LED_TEST) {
-<<<<<<< HEAD
-                    timer_3s_buffer = sync_timer_read32() | 1;
-=======
                     timer_3s_buffer = sync_timer_read32();
->>>>>>> playground_new
                 }
             } else {
                 key_press_status &= ~KEY_PRESS_RIGHT;
@@ -124,11 +112,7 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
                 if (led_test_mode) {
                     led_test_mode = LED_TEST_MODE_OFF;
                 } else if (key_press_status == KEY_PRESS_LED_TEST) {
-<<<<<<< HEAD
-                    timer_3s_buffer = sync_timer_read32() | 1;
-=======
                     timer_3s_buffer = sync_timer_read32();
->>>>>>> playground_new
                 }
             } else {
                 key_press_status &= ~KEY_PRESS_HOME;
@@ -155,12 +139,8 @@ static void timer_3s_task(void) {
     if (sync_timer_elapsed32(timer_3s_buffer) > 3000) {
         timer_3s_buffer = 0;
         if (key_press_status == KEY_PRESS_FACTORY_RESET) {
-<<<<<<< HEAD
-            timer_300ms_buffer = sync_timer_read32() | 1;
-=======
             key_press_status &= ~KEY_PRESS_FACTORY_RESET;
             timer_300ms_buffer = sync_timer_read32();
->>>>>>> playground_new
             factory_reset_count++;
             layer_state_t default_layer_tmp = default_layer_state;
             eeconfig_init();
@@ -177,10 +157,7 @@ static void timer_3s_task(void) {
             rgb_matrix_init();
 #endif
         } else if (key_press_status == KEY_PRESS_LED_TEST) {
-<<<<<<< HEAD
-=======
             key_press_status &= ~KEY_PRESS_LED_TEST;
->>>>>>> playground_new
             led_test_mode = LED_TEST_MODE_WHITE;
 #ifdef RGB_MATRIX_ENABLE
             if (!rgb_matrix_is_enabled()) {
@@ -188,11 +165,7 @@ static void timer_3s_task(void) {
             }
 #endif
         }
-<<<<<<< HEAD
-        key_press_status = 0;
-=======
         // key_press_status = 0;
->>>>>>> playground_new
     }
 }
 
@@ -202,11 +175,7 @@ static void timer_300ms_task(void) {
             timer_300ms_buffer = 0;
             factory_reset_count = 0;
         } else {
-<<<<<<< HEAD
-            timer_300ms_buffer = sync_timer_read32() | 1;
-=======
             timer_300ms_buffer = sync_timer_read32();
->>>>>>> playground_new
         }
     }
 }

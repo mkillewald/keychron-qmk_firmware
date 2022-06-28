@@ -37,13 +37,9 @@ typedef enum { FLASH_BUSY = 1, FLASH_ERROR_PG, FLASH_ERROR_WRP, FLASH_ERROR_OPT,
 FLASH_Status FLASH_WaitForLastOperation(uint32_t Timeout);
 FLASH_Status FLASH_ErasePage(uint32_t Page_Address);
 FLASH_Status FLASH_ProgramHalfWord(uint32_t Address, uint16_t Data);
-<<<<<<< HEAD:platforms/chibios/flash_stm32.h
-FLASH_Status FLASH_ProgramDoubleWord(uint32_t Address, uint64_t Data);
-=======
 #if defined(STM32L4XX)
 FLASH_Status FLASH_ProgramDoubleWord(uint32_t Address, uint64_t Data);
 #endif
->>>>>>> playground_new:platforms/chibios/drivers/flash/flash_stm32.h
 
 void FLASH_Unlock(void);
 void FLASH_Lock(void);

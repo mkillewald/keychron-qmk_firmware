@@ -22,10 +22,7 @@
 #include "protocol.h"
 
 ap2_led_t       led_mask[KEY_COUNT];
-<<<<<<< HEAD
-=======
 ap2_led_t       led_colors[KEY_COUNT];
->>>>>>> playground_new
 ap2_led_status_t ap2_led_status;
 uint8_t rgb_row_changed[NUM_ROW];
 
@@ -95,8 +92,6 @@ void ap2_led_mask_set_all(void) {
 /* Set all keys to a given color */
 void ap2_led_mask_set_mono(const ap2_led_t color) { proto_tx(CMD_LED_MASK_SET_MONO, (uint8_t *)&color, sizeof(color), 1); }
 
-<<<<<<< HEAD
-=======
 void ap2_led_colors_set_key(uint8_t row, uint8_t col, ap2_led_t color) {
     uint8_t payload[] = {row, col, color.p.blue, color.p.green, color.p.red, color.p.alpha};
     proto_tx(CMD_LED_COLOR_SET_KEY, payload, sizeof(payload), 1);
@@ -123,7 +118,6 @@ void ap2_led_set_manual_control(uint8_t manual) {
     proto_tx(CMD_LED_SET_MANUAL, payload, sizeof(payload), 1);
 }
 
->>>>>>> playground_new
 void ap2_led_blink(uint8_t row, uint8_t col, ap2_led_t color, uint8_t count, uint8_t hundredths) {
     uint8_t payload[] = {row, col, color.p.blue, color.p.green, color.p.red, color.p.alpha, count, hundredths};
     proto_tx(CMD_LED_KEY_BLINK, payload, sizeof(payload), 1);

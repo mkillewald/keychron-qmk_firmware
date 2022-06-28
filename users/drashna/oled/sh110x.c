@@ -521,8 +521,6 @@ void oled_pan(bool left) {
     oled_dirty = OLED_ALL_BLOCKS_MASK;
 }
 
-<<<<<<< HEAD
-=======
 void oled_pan_section(bool left, uint16_t y_start, uint16_t y_end, uint16_t x_start, uint16_t x_end) {
     uint16_t i = 0;
     for (uint16_t y = y_start; y < y_end; y++) {
@@ -542,7 +540,6 @@ void oled_pan_section(bool left, uint16_t y_start, uint16_t y_end, uint16_t x_st
     }
 }
 
->>>>>>> playground_new
 oled_buffer_reader_t oled_read_raw(uint16_t start_index) {
     if (start_index > OLED_MATRIX_SIZE) start_index = OLED_MATRIX_SIZE;
     oled_buffer_reader_t ret_reader;

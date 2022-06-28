@@ -16,9 +16,6 @@
 
 #include QMK_KEYBOARD_H
 
-<<<<<<< HEAD
-#include "layer_number.h"
-=======
 #include "key_blocks.h"
 #include "layer_number_util.h"
 
@@ -67,7 +64,6 @@ const char *layer_names[] = {
 #endif
 
 const size_t num_of_layer_names = GET_ITEM_COUNT(LAYER_NAME_LIST);
->>>>>>> playground_new
 
 extern keymap_config_t keymap_config;
 

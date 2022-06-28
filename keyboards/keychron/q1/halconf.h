@@ -16,17 +16,9 @@
 
 #pragma once
 
-<<<<<<<< HEAD:keyboards/keychron/q1/halconf.h
-#define HAL_USE_I2C TRUE
-#ifdef ENCODER_ENABLE
-#    define PAL_USE_CALLBACKS TRUE
-#endif
-
-========
 #define HAL_USE_PWM TRUE
 #define HAL_USE_PAL TRUE
 
 #define HAL_USE_I2C TRUE
 
->>>>>>>> playground_new:keyboards/acheron/shark/beta/halconf.h
 #include_next <halconf.h>

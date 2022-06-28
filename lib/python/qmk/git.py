@@ -108,8 +108,6 @@ def git_check_deviation(active_branch):
     cli.run(['git', 'fetch', 'upstream', active_branch])
     deviations = cli.run(['git', '--no-pager', 'log', f'upstream/{active_branch}...{active_branch}'])
     return bool(deviations.returncode)
-<<<<<<< HEAD
-=======
 
 
 def git_get_ignored_files(check_dir='.'):
@@ -119,4 +117,3 @@ def git_get_ignored_files(check_dir='.'):
     if invalid.returncode != 0:
         return []
     return invalid.stdout.strip().splitlines()
->>>>>>> playground_new

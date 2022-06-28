@@ -18,12 +18,9 @@
 
 #define MAC_FN 1
 #define WIN_FN 3
-<<<<<<< HEAD
-=======
 #ifndef RAW_EPSIZE
 #    define RAW_EPSIZE 32
 #endif
->>>>>>> playground_new
 
 static void timer_3s_task(void);
 static void timer_300ms_task(void);

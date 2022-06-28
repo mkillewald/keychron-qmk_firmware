@@ -17,7 +17,4 @@
 #include "bootloader.h"
 
 void bootloader_jump(void) {}
-<<<<<<< HEAD
-=======
 void mcu_reset(void) {}
->>>>>>> playground_new

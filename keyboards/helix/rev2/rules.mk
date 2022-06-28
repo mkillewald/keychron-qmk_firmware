@@ -1,10 +1,6 @@
 KEYBOARD_LOCAL_FEATURES_MK := $(dir $(lastword $(MAKEFILE_LIST)))local_features.mk
 
-<<<<<<< HEAD
-# SPLIT_KEYBOARD = yes
-=======
 SPLIT_KEYBOARD = yes
->>>>>>> playground_new
 
 # Helix Spacific Build Options default values
 HELIX_ROWS = 5              # Helix Rows is 4 or 5

@@ -37,25 +37,6 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
 #include "pseudo_sprintf.c"
 #endif
 
-<<<<<<< HEAD
-void matrix_update(struct CharacterMatrix *dest,
-                   const struct CharacterMatrix *source) {
-    if (memcmp(dest->display, source->display, sizeof(dest->display))) {
-        memcpy(dest->display, source->display, sizeof(dest->display));
-        dest->dirty = true;
-    }
-}
-#    endif
-
-#ifndef PSEUDO_SPRINTF_DEFINED
-#include "pseudo_sprintf.c"
-#endif
-
-#    ifdef SSD1306OLED
-static void render_logo(struct CharacterMatrix *matrix) {
-#    else
-=======
->>>>>>> playground_new
 static void render_logo(void) {
     static const char helix_logo[] PROGMEM = {
         0x80,0x81,0x82,0x83,0x84,0x85,0x86,0x87,0x88,0x89,0x8a,0x8b,0x8c,0x8d,0x8e,0x8f,0x90,0x91,0x92,0x93,0x94,

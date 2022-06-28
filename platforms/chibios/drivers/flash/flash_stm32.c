@@ -56,13 +56,9 @@ static uint8_t ADDR2PAGE(uint32_t Page_Address) {
 #    define FLASH_KEY1 0x45670123U
 #    define FLASH_KEY2 0xCDEF89ABU
 
-<<<<<<< HEAD:platforms/chibios/flash_stm32.c
-static uint32_t ADDR2PAGE(uint32_t Page_Address) { return (Page_Address - FLASH_BASE) / 0x800; }
-=======
 static uint32_t ADDR2PAGE(uint32_t Page_Address) {
     return (Page_Address - FLASH_BASE) / 0x800;
 }
->>>>>>> playground_new:platforms/chibios/drivers/flash/flash_stm32.c
 #endif
 
 /* Delay definition */

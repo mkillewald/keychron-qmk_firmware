@@ -161,24 +161,6 @@ bool encoder_update_kb(uint8_t index, bool clockwise) {
     }
     return true;
 }
-<<<<<<< HEAD
-
-void encoder0_pad_cb(void *param) {
-    (void)param;
-
-    encoder_insert_state(0);
-}
-
-void keyboard_post_init_kb(void) {
-    pin_t encoders_pad_a[] = ENCODERS_PAD_A;
-    pin_t encoders_pad_b[] = ENCODERS_PAD_B;
-    palEnableLineEvent(encoders_pad_a[0], PAL_EVENT_MODE_BOTH_EDGES);
-    palEnableLineEvent(encoders_pad_b[0], PAL_EVENT_MODE_BOTH_EDGES);
-    palSetLineCallback(encoders_pad_a[0], encoder0_pad_cb, NULL);
-    palSetLineCallback(encoders_pad_b[0], encoder0_pad_cb, NULL);
-}
-
-=======
 #    if defined(PAL_USE_CALLBACKS)
     void encoder0_pad_cb(void *param) {
         (void)param;
@@ -195,5 +177,4 @@ void keyboard_post_init_kb(void) {
         palSetLineCallback(encoders_pad_b[0], encoder0_pad_cb, NULL);
     }
 #    endif
->>>>>>> playground_new
 #endif

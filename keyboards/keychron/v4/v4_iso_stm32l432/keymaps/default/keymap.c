@@ -93,23 +93,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TRNS, KC_TRNS, KC_TRNS,                            KC_TRNS,                            KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS)
 };
 
-<<<<<<< HEAD
-void matrix_scan_user(void) {
-    timer_task_start();
-}
-
-=======
->>>>>>> playground_new
 bool dip_switch_update_user(uint8_t index, bool active) {
     system_switch_state_report(index, active);
     return true;
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-<<<<<<< HEAD
-    process_other_record(keycode, record);
-=======
->>>>>>> playground_new
     switch (keycode) {
         case KC_MISSION_CONTROL:
             if (record->event.pressed) {

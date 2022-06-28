@@ -17,26 +17,15 @@
 #include "q9.h"
 
 const matrix_row_t matrix_mask[] = {
-<<<<<<< HEAD
-    0b0111111111111111,
-    0b0111111111111111,
-    0b0111111111111111,
-    0b0111111111101111,
-=======
     0b111111111111111,
     0b111111111111111,
     0b111111111111111,
     0b111111111101111,
->>>>>>> playground_new
 };
 
 #ifdef DIP_SWITCH_ENABLE
 
 bool dip_switch_update_kb(uint8_t index, bool active) {
-<<<<<<< HEAD
-    uprintf("%d\r\n", active);
-=======
->>>>>>> playground_new
     if (!dip_switch_update_user(index, active)) { return false;}
     if (index == 0) {
         default_layer_set(1UL << (active ? 1 : 0));

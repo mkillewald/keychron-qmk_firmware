@@ -3,23 +3,6 @@
     "url": "https://github.com/Keychron",
     "maintainer": "lalalademaxiya1",
     "layouts": {
-<<<<<<< HEAD
-        "LAYOUT_iso_109": {
-            "layout": [
-                {"label":"Esc", "x":0, "y":0},
-                {"label":"F1", "x":2, "y":0},
-                {"label":"F2", "x":3, "y":0},
-                {"label":"F3", "x":4, "y":0},
-                {"label":"F4", "x":5, "y":0},
-                {"label":"F5", "x":6.5, "y":0},
-                {"label":"F6", "x":7.5, "y":0},
-                {"label":"F7", "x":8.5, "y":0},
-                {"label":"F8", "x":9.5, "y":0},
-                {"label":"F9", "x":11, "y":0},
-                {"label":"F10", "x":12, "y":0},
-                {"label":"F11", "x":13, "y":0},
-                {"label":"F12", "x":14, "y":0},
-=======
         "LAYOUT_iso_110": {
             "layout": [
                 {"label":"Esc", "x":0, "y":0},
@@ -36,7 +19,6 @@
                 {"label":"F11", "x":11.75, "y":0},
                 {"label":"F12", "x":12.75, "y":0},
                 {"label":"Mute", "x":14, "y":0},
->>>>>>> playground_new
                 {"label":"PrtSc", "x":15.25, "y":0},
                 {"label":"Cortana", "x":16.25, "y":0},
                 {"label":"Light", "x":17.25, "y":0},
@@ -139,8 +121,6 @@
                 {"label":"0", "x":18.5, "y":5.25, "w":2},
                 {"label":".", "x":20.5, "y":5.25}
             ]
-<<<<<<< HEAD
-=======
         },
         "LAYOUT_all": {
             "layout": [
@@ -262,7 +242,6 @@
                 {"label":"0", "x":18.5, "y":5.75, "w":2},
                 {"label":".", "x":20.5, "y":5.75}
             ]
->>>>>>> playground_new
         }
     }
 }

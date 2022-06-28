@@ -15,10 +15,6 @@
  */
 
 #include "bootloader.h"
-<<<<<<< HEAD
-
-__attribute__((weak)) void bootloader_jump(void) {}
-=======
 #include <avr/wdt.h>
 
 __attribute__((weak)) void bootloader_jump(void) {}
@@ -30,4 +26,3 @@ __attribute__((weak)) void mcu_reset(void) {
     while (1) {
     }
 }
->>>>>>> playground_new

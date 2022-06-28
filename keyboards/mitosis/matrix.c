@@ -20,11 +20,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "matrix.h"
 #include "uart.h"
 
-<<<<<<< HEAD
-=======
 #define UART_MATRIX_RESPONSE_TIMEOUT 10000
 
->>>>>>> playground_new
 void matrix_init_custom(void) {
     uart_init(1000000);
 }
@@ -46,13 +43,6 @@ bool matrix_scan_custom(matrix_row_t current_matrix[]) {
         //harm to leave it in here
         while (!uart_available()) {
             timeout++;
-<<<<<<< HEAD
-            if (timeout > 10000) {
-                break;
-            }
-        }
-        uart_data[i] = uart_read();
-=======
             if (timeout > UART_MATRIX_RESPONSE_TIMEOUT) {
                 break;
             }
@@ -63,7 +53,6 @@ bool matrix_scan_custom(matrix_row_t current_matrix[]) {
         } else {
             uart_data[i] = 0x00;
         }
->>>>>>> playground_new
     }
 
     //check for the end packet, the key state bytes use the LSBs, so 0xE0

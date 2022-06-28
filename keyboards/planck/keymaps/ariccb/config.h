@@ -40,10 +40,7 @@
 //#define MIDI_ADVANCED
 
 #define TAPPING_TERM 150
-<<<<<<< HEAD
-=======
 #define TAPPING_TERM_PER_KEY
->>>>>>> playground_new
 #define IGNORE_MOD_TAP_INTERRUPT
 // #define IGNORE_MOD_TAP_INTERRUPT
 // #define HOLD_ON_OTHER_KEY_PRESS

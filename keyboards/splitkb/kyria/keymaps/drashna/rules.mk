@@ -21,10 +21,6 @@ ifeq ($(strip $(KEYBOARD)), splitkb/kyria/rev1/proton_c)
     AUTOCORRECTION_ENABLE  = yes
     CAPS_WORD_ENABLE       = yes
     OLED_DRIVER            = custom
-<<<<<<< HEAD
-    DEBUG_MATRIX_SCAN_RATE_ENABLE = api
-=======
->>>>>>> playground_new
 else
     LTO_ENABLE             = yes
     BOOTLOADER             = qmk-hid
