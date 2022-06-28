@@ -15,6 +15,7 @@
  */
 
 #include "ckled2001.h"
+
 #include "i2c_master.h"
 #include "wait.h"
 
@@ -26,8 +27,8 @@
 #    define CKLED2001_PERSISTENCE 0
 #endif
 
-#ifndef SCAN_PHASE_CHANNEL
-#    define SCAN_PHASE_CHANNEL MSKPHASE_12CHANNEL
+#ifndef PHASE_CHANNEL
+#    define PHASE_CHANNEL MSKPHASE_12CHANNEL
 #endif
 
 #ifndef CONSTANT_CURRENT_STEP
@@ -110,7 +111,7 @@ void CKLED2001_init(uint8_t addr) {
     // Setting internal channel pulldown/pullup
     CKLED2001_write_register(addr, PDU_REG, MSKSET_CA_CB_CHANNEL);
     // Select number of scan phase
-    CKLED2001_write_register(addr, SCAN_PHASE_REG, SCAN_PHASE_CHANNEL);
+    CKLED2001_write_register(addr, SCAN_PHASE_REG, PHASE_CHANNEL);
     // Setting PWM Delay Phase
     CKLED2001_write_register(addr, SLEW_RATE_CONTROL_MODE1_REG, MSKPWM_DELAY_PHASE_ENABLE);
     // Setting Driving/Sinking Channel Slew Rate
@@ -131,28 +132,10 @@ void CKLED2001_init(uint8_t addr) {
 
     // Set CURRENT PAGE (Page 4)
     CKLED2001_write_register(addr, CONFIGURE_CMD_PAGE, CURRENT_TUNE_PAGE);
-#if defined(LOW_CURRENT_MODE)
     for (int i = 0; i < LED_CURRENT_TUNE_LENGTH; i++) {
         CKLED2001_write_register(addr, i, led_current_tune[i]);
     }
-#elif defined(LOW_CURRENT_MODE_MOUSE)
-    for (int i = 0; i < LED_CURRENT_TUNE_LENGTH; i++) {
-        CKLED2001_write_register(addr, i, 0x80);
-    }
-#else
-    for (int i = 0; i < LED_CURRENT_TUNE_LENGTH; i++) {
-        switch (i) {
-            case 2:
-            case 5:
-            case 8:
-            case 11:
-                CKLED2001_write_register(addr, i, 0xA0);
-                break;
-            default:
-                CKLED2001_write_register(addr, i, 0xFF);
-        }
-    }
-#endif
+
     // Enable LEDs ON/OFF
     CKLED2001_write_register(addr, CONFIGURE_CMD_PAGE, LED_CONTROL_PAGE);
     for (int i = 0; i < LED_CONTROL_ON_OFF_LENGTH; i++) {
