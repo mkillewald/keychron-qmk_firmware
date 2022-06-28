@@ -1,10 +1,6 @@
 # Keychron Q3
 
-<<<<<<< HEAD
-A customizable 87 keys keyboard.
-=======
 A customizable 80% keyboard.
->>>>>>> playground_new
 
 * Keyboard Maintainer: [Keychron](https://github.com/keychron)
 * Hardware Supported: Keychron Q3

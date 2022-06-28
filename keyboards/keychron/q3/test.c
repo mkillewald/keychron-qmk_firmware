@@ -73,7 +73,7 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
             if (record->event.pressed) {
                 key_press_status |= KEY_PRESS_J;
                 if (key_press_status == KEY_PRESS_FACTORY_RESET) {
-                    timer_3s_buffer = sync_timer_read32() | 1;
+                    timer_3s_buffer = sync_timer_read32();
                 }
             } else {
                 key_press_status &= ~KEY_PRESS_J;
@@ -84,7 +84,7 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
             if (record->event.pressed) {
                 key_press_status |= KEY_PRESS_Z;
                 if (key_press_status == KEY_PRESS_FACTORY_RESET) {
-                    timer_3s_buffer = sync_timer_read32() | 1;
+                    timer_3s_buffer = sync_timer_read32();
                 }
             } else {
                 key_press_status &= ~KEY_PRESS_Z;
@@ -99,7 +99,7 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
                         led_test_mode = LED_TEST_MODE_WHITE;
                     }
                 } else if (key_press_status == KEY_PRESS_LED_TEST) {
-                    timer_3s_buffer = sync_timer_read32() | 1;
+                    timer_3s_buffer = sync_timer_read32();
                 }
             } else {
                 key_press_status &= ~KEY_PRESS_RIGHT;
@@ -112,7 +112,7 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
                 if (led_test_mode) {
                     led_test_mode = LED_TEST_MODE_OFF;
                 } else if (key_press_status == KEY_PRESS_LED_TEST) {
-                    timer_3s_buffer = sync_timer_read32() | 1;
+                    timer_3s_buffer = sync_timer_read32();
                 }
             } else {
                 key_press_status &= ~KEY_PRESS_HOME;
@@ -139,7 +139,7 @@ static void timer_3s_task(void) {
     if (sync_timer_elapsed32(timer_3s_buffer) > 3000) {
         timer_3s_buffer = 0;
         if (key_press_status == KEY_PRESS_FACTORY_RESET) {
-            timer_300ms_buffer = sync_timer_read32() | 1;
+            timer_300ms_buffer = sync_timer_read32();
             factory_reset_count++;
             layer_state_t default_layer_tmp = default_layer_state;
             eeconfig_init();
@@ -173,7 +173,7 @@ static void timer_300ms_task(void) {
             timer_300ms_buffer = 0;
             factory_reset_count = 0;
         } else {
-            timer_300ms_buffer = sync_timer_read32() | 1;
+            timer_300ms_buffer = sync_timer_read32();
         }
     }
 }
@@ -264,15 +264,7 @@ void system_switch_state_report(uint8_t index, bool active) {
     if (report_os_sw_state) {
         payload[0] = FACTORY_TEST_CMD_OS_SWITCH;
         payload[1] = OS_SWITCH;
-<<<<<<< HEAD
         payload[2] = active;
-=======
-#    if defined(OS_SWITCH_REVERT)
-        payload[2] = !active;
-#    else
-        payload[2] = active;
-#    endif
->>>>>>> playground_new
         data[0] = 0xAB;
         memcpy(&data[1], payload, 3);
         for (uint8_t i=1; i<RAW_EPSIZE-3; i++ ) {
@@ -283,8 +275,9 @@ void system_switch_state_report(uint8_t index, bool active) {
         raw_hid_send(data, RAW_EPSIZE);
     }
 }
-
+#if 0
 /* To solve the problem that keyboard can not wakeup the host */
 void restart_usb_driver(USBDriver *usbp) {
     // Do nothing here.
 }
+#endif

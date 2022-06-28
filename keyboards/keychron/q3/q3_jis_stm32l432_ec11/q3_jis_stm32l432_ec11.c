@@ -17,7 +17,9 @@
 #include "quantum.h"
 
 #ifdef RGB_MATRIX_ENABLE
+
 // clang-format off
+
 const ckled2001_led PROGMEM g_ckled2001_leds[DRIVER_LED_TOTAL] = {
 /* Refer to IS31 manual for these locations
  *   driver
@@ -155,7 +157,9 @@ led_config_t g_led_config = {
         1, 1, 1, 1,       4,       1, 1, 1, 1, 1,    1, 1, 1,
     }
 };
+
 // clang-format on
+
 #endif
 
 #ifdef ENCODER_ENABLE
