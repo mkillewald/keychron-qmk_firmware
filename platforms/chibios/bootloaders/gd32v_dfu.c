@@ -36,8 +36,6 @@ __attribute__((weak)) void bootloader_jump(void) {
     *DBGMCU_CMD = DBGMCU_CMD_RESET;
 }
 
-<<<<<<< HEAD
-=======
 __attribute__((weak)) void mcu_reset(void) {
     // Confirmed by karlk90, there is no actual reset to bootloader.
     // This just resets the controller.
@@ -45,6 +43,5 @@ __attribute__((weak)) void mcu_reset(void) {
     *DBGMCU_CMD = DBGMCU_CMD_RESET;
 }
 
->>>>>>> playground_new
 /* Jumping to bootloader is not possible from user code. */
 void enter_bootloader_mode_if_requested(void) {}

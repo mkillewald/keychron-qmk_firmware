@@ -51,17 +51,6 @@ A simple QWERTY keymap with 3 Layers. Both sides are connected via serial and th
 
 Similar layout to 5x6 but with only 5 thumb keys per side instead of 6.
 
-<<<<<<< HEAD
-#### Default
-QWERTY layout with 7 Layers.
-
-#### Via
-Similar to Default but adds support for the [Via](https://www.caniusevia.com/) keymap configurator. Reduces the number of layers to 4 to comply with Via defaults, and remaps
-some keys to accomodate that constraint.
-
-### [Keymaps 5x7 aka almost Ergodox](/keyboards/handwired/dactyl_manuform/5x7/keymaps/)
-=======
->>>>>>> playground_new
 #### Default
 QWERTY layout with 7 Layers.
 

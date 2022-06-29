@@ -2,9 +2,6 @@
 
 In here, you can find:
 - Chinese PCB that doesn't have source code (lost contact of Maker, can't found on Taobao, ... etc)
-<<<<<<< HEAD
-- My keyboard (ETA on future)
-=======
 - My keyboard
 
 ## List for my keyboard in here:
@@ -27,7 +24,6 @@ In here, you can find:
   | Lemon40        | Atmega32U4    | 47 Keys (40% Alice) | No      | RGB Lighting | Yes  | No    |
   |                |               |                     |         |              |      |       |
 </details>
->>>>>>> playground_new
 
 ## Contact me if you have any problem
 

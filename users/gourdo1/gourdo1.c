@@ -1,6 +1,6 @@
 /* Copyright 2021 Jonavin Eng @Jonavin
    Copyright 2022 gourdo1 <jcblake@outlook.com>
-   
+
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, either version 2 of the License, or
@@ -45,11 +45,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
     [TD_LSFT_CAPSLOCK] = ACTION_TAP_DANCE_DOUBLE(KC_LSFT, KC_CAPS),
     [TD_LSFT_CAPS_WIN] = ACTION_TAP_DANCE_FN_ADVANCED(dance_LSFT_each_tap, NULL, dance_LSFT_reset),
     // Tap once for Escape, twice to reset to base layer
-<<<<<<< HEAD
-    [TD_ESC_BASELYR] = ACTION_TAP_DANCE_DUAL_ROLE(KC_ESC, _BASE),
-=======
     [TD_ESC_BASELYR] = ACTION_TAP_DANCE_LAYER_MOVE(KC_ESC, _BASE),
->>>>>>> playground_new
 };
 #endif // TD_LSFT_CAPSLOCK_ENABLE
 
@@ -177,7 +173,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t * record) {
             // when keycode is released
         }
         break;
-		
+
 /*
     case YAHOO:
         if (record -> event.pressed) SEND_STRING("yahoo.com");
@@ -202,14 +198,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t * record) {
         break;
 */
 
-    // Windows key lock		
+    // Windows key lock
     case KC_WINLCK:
         if (record -> event.pressed) {
             keymap_config.no_gui = !keymap_config.no_gui; //toggle status
         } else unregister_code16(keycode);
         break;
 
-    // Double Zero    
+    // Double Zero
     case KC_00:
         if (record -> event.pressed) {
             // when keycode KC_00 is pressed

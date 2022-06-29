@@ -37,8 +37,6 @@ __attribute__((weak)) void bootloader_jump(void) {
     while (1) {
     }
 }
-<<<<<<< HEAD
-=======
 
 __attribute__((weak)) void mcu_reset(void) {
     // setup watchdog timeout
@@ -48,4 +46,3 @@ __attribute__((weak)) void mcu_reset(void) {
     while (1) {
     }
 }
->>>>>>> playground_new

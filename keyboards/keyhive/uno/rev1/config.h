@@ -18,9 +18,6 @@
 
 #include "config_common.h"
 
-<<<<<<< HEAD:keyboards/uno/config.h
-// See rev1/config.h and rev2/config.h to configure your uno.
-=======
 /* USB Device descriptor parameter */
 #define VENDOR_ID       0xFEED
 #define PRODUCT_ID      0xACC8
@@ -76,4 +73,3 @@
 
 /* Debounce reduces chatter (unintended double-presses) - set 0 if debouncing is not needed */
 #define DEBOUNCE 5
->>>>>>> playground_new:keyboards/keyhive/uno/rev1/config.h

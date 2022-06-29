@@ -18,19 +18,11 @@
 
 /* USB Device descriptor parameter */
 #define PRODUCT_ID 0x0181
-<<<<<<< HEAD
-#define DEVICE_VER 0x0103
-
-/* RGB Matrix Configuration */
-#define DRIVER_1_LED_TOTAL 35
-#define DRIVER_2_LED_TOTAL 35
-=======
 #define DEVICE_VER 0x0104
 
 /* RGB Matrix Configuration */
 #define DRIVER_1_LED_TOTAL 35
 #define DRIVER_2_LED_TOTAL 34
->>>>>>> playground_new
 #define DRIVER_LED_TOTAL (DRIVER_1_LED_TOTAL + DRIVER_2_LED_TOTAL)
 
 /* Encoder Configuration */

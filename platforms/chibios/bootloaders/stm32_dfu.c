@@ -38,11 +38,7 @@ extern uint32_t __ram0_end__;
 #    endif
 
 #    ifndef STM32_BOOTLOADER_DUAL_BANK_DELAY
-<<<<<<< HEAD
-#        define STM32_BOOTLOADER_DUAL_BANK_DELAY 100000
-=======
 #        define STM32_BOOTLOADER_DUAL_BANK_DELAY 100
->>>>>>> playground_new
 #    endif
 
 __attribute__((weak)) void bootloader_jump(void) {
@@ -59,22 +55,15 @@ __attribute__((weak)) void bootloader_jump(void) {
 #    endif
 
     // Wait for a while for the capacitor to charge
-<<<<<<< HEAD
-    wait_ms(100);
-=======
     wait_ms(STM32_BOOTLOADER_DUAL_BANK_DELAY);
->>>>>>> playground_new
 
     // Issue a system reset to get the ROM bootloader to execute, with BOOT0 high
     NVIC_SystemReset();
 }
 
-<<<<<<< HEAD
-=======
 __attribute__((weak)) void mcu_reset(void) {
     NVIC_SystemReset();
 }
->>>>>>> playground_new
 // not needed at all, but if anybody attempts to invoke it....
 void enter_bootloader_mode_if_requested(void) {}
 
@@ -90,13 +79,10 @@ __attribute__((weak)) void bootloader_jump(void) {
     NVIC_SystemReset();
 }
 
-<<<<<<< HEAD
-=======
 __attribute__((weak)) void mcu_reset(void) {
     NVIC_SystemReset();
 }
 
->>>>>>> playground_new
 void enter_bootloader_mode_if_requested(void) {
     unsigned long *check = MAGIC_ADDR;
     if (*check == BOOTLOADER_MAGIC) {

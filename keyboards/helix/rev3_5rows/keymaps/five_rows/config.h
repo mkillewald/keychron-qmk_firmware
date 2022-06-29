@@ -17,9 +17,4 @@
 #endif
 
 #define PSEUDO_SPRINTF_DEFINED
-<<<<<<< HEAD
-
-// place overrides here
-=======
->>>>>>> playground_new
 

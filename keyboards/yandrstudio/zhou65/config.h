@@ -43,8 +43,3 @@
 
 /* Set 0 if debouncing isn't needed */
 #define DEBOUNCE 5
-<<<<<<< HEAD
-
-#define QMK_KEYS_PER_SCAN 4
-=======
->>>>>>> playground_new

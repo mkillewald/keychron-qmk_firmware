@@ -86,12 +86,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TRNS,  KC_TRNS,  KC_TRNS,                                KC_TRNS,                                KC_TRNS,  KC_TRNS,   KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS),
 };
 
-<<<<<<< HEAD
-void matrix_scan_user(void) {
-    /* Set timers for factory reset and backlight test */
-    timer_task_start();
-}
-=======
 #if defined(ENCODER_MAP_ENABLE)
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][2] = {
     [MAC_BASE] = {ENCODER_CCW_CW(KC_VOLD, KC_VOLU)},
@@ -100,7 +94,6 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][2] = {
     [WIN_FN]   = {ENCODER_CCW_CW(RGB_VAI, RGB_VAD)},
 };
 #endif
->>>>>>> playground_new
 
 bool dip_switch_update_user(uint8_t index, bool active) {
     /* Send default layer state to host */
@@ -109,10 +102,6 @@ bool dip_switch_update_user(uint8_t index, bool active) {
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-<<<<<<< HEAD
-    process_other_record(keycode, record);
-=======
->>>>>>> playground_new
     switch (keycode) {
         case KC_MISSION_CONTROL:
             if (record->event.pressed) {

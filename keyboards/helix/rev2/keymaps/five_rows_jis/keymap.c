@@ -1,9 +1,5 @@
 #include QMK_KEYBOARD_H
-<<<<<<< HEAD
-#include "keymap_jp.h"
-=======
 #include "keymap_japanese.h"
->>>>>>> playground_new
 #include <stdio.h>
 #include <string.h>
 #ifdef SSD1306OLED

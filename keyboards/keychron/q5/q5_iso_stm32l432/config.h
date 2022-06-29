@@ -18,11 +18,7 @@
 
 /* USB Device descriptor parameter */
 #define PRODUCT_ID 0x0152
-<<<<<<< HEAD
-#define DEVICE_VER 0x0101
-=======
 #define DEVICE_VER 0x0102
->>>>>>> playground_new
 
 /* RGB Matrix Configuration */
 #define DRIVER_1_LED_TOTAL 55

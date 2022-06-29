@@ -30,11 +30,7 @@ bool lock_state     = false;
 // Dummy
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {{{ KC_NO }}};
 
-<<<<<<< HEAD
-void process_mouse_user(report_mouse_t *mouse_report, int8_t x, int8_t y) {
-=======
 report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
->>>>>>> playground_new
     if (scroll_enabled) {
         delta_x += mouse_report.x;
         delta_y += mouse_report.y;

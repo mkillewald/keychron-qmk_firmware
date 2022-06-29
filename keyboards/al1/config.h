@@ -29,14 +29,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 /* key matrix size */
 #define MATRIX_ROWS 6
 #define MATRIX_COLS 16
-<<<<<<< HEAD
-=======
 
 #define MATRIX_ROW_PINS { C7, B1, B2, C6, B4, B5 }
 
 #define SN74X154_ADDRESS_PINS { D4, D5, D6, D7 }
 #define SN74X154_E1_PIN D3
->>>>>>> playground_new
 
 #define LED_NUM_LOCK_PIN D0
 #define LED_CAPS_LOCK_PIN B7

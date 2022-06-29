@@ -1,18 +1,12 @@
 {
     "keyboard_name": "CAPSULE65",
     "url": "",
-<<<<<<< HEAD
-    "maintainer": "eason",
-    "layouts": {
-        "LAYOUT": {
-=======
     "maintainer": "EasonQian1",
     "layout_aliases": {
         "LAYOUT": "LAYOUT_all"
     },
     "layouts": {
         "LAYOUT_all": {
->>>>>>> playground_new
             "layout": [
                 { "label": "K00 (F4,D5)", "x": 0, "y": 0 },
                 { "label": "K01 (F4,D2)", "x": 1, "y": 0 },
@@ -85,8 +79,6 @@
                 { "label": "K4D (F5,B1)", "x": 14, "y": 4 },
                 { "label": "K4F (F5,B2)", "x": 15, "y": 4 }
             ]
-<<<<<<< HEAD
-=======
         },
         "LAYOUT_65_ansi": {
             "layout": [
@@ -999,7 +991,6 @@
                 {"label":"\u2193", "x":14, "y":4},
                 {"label":"\u2192", "x":15, "y":4}
             ]
->>>>>>> playground_new
         }
     }
 }

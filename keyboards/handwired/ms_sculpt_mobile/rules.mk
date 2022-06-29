@@ -10,8 +10,5 @@ NKRO_ENABLE = no            # Enable N-Key Rollover
 BACKLIGHT_ENABLE = no       # Enable keyboard backlight functionality
 RGBLIGHT_ENABLE = no        # Enable keyboard RGB underglow
 AUDIO_ENABLE = no           # Audio output
-<<<<<<< HEAD
-=======
 
 DEFAULT_FOLDER = handwired/ms_sculpt_mobile/teensy2pp
->>>>>>> playground_new

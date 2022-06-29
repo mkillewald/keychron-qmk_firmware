@@ -62,44 +62,6 @@ static void expander_scan(void) {
         return;
     }
 
-<<<<<<< HEAD
-  for (uint8_t i = 0; i < MATRIX_ROWS; i++) {
-    select_row(i);
-    wait_us(30);  // without this wait read unstable value.
-    matrix_row_t mask = debounce_mask(i);
-    matrix_row_t cols = (read_cols(i) & mask) | (matrix[i] & ~mask);
-    debounce_report(cols ^ matrix[i], i);
-    matrix[i] = cols;
-
-    unselect_rows();
-  }
-
-  matrix_scan_quantum();
-
-  return 1;
-}
-
-inline
-bool matrix_is_on(uint8_t row, uint8_t col)
-{
-  return (matrix[row] & ((matrix_row_t)1<<col));
-}
-
-inline
-matrix_row_t matrix_get_row(uint8_t row)
-{
-  return matrix[row];
-}
-
-void matrix_print(void)
-{
-  print("\nr/c 0123456789ABCDEF\n");
-  for (uint8_t row = 0; row < MATRIX_ROWS; row++) {
-    print_hex8(row); print(": ");
-    print_bin_reverse16(matrix_get_row(row));
-    print("\n");
-  }
-=======
     static uint16_t mcp23018_reset_loop = 0;
     if (++mcp23018_reset_loop > 0x1FFF) {
         // tuned to about 5s given the current scan rate
@@ -109,7 +71,6 @@ void matrix_print(void)
         expander_unselect_rows();
         expander_init_cols();
     }
->>>>>>> playground_new
 }
 
 /* Column pin configuration

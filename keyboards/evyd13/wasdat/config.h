@@ -39,17 +39,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define SN74X138_ADDRESS_PINS { D2, D1, D0 }
 
-<<<<<<< HEAD
-// For QMK DFU
-#define QMK_ESC_OUTPUT D6
-#define QMK_ESC_INPUT D7
-#define QMK_LED B0
-
-#define LED_NUM_LOCK_PIN B2
-#define LED_CAPS_LOCK_PIN B0
-#define LED_SCROLL_LOCK_PIN B1
-=======
->>>>>>> playground_new
 #define LED_PIN_ON_STATE 0
 
 /*

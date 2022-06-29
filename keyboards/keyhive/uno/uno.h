@@ -18,14 +18,8 @@
 
 #include "quantum.h"
 
-<<<<<<< HEAD:keyboards/uno/uno.h
-#if defined(KEYBOARD_uno_rev1)
-#    include "rev1.h"
-#elif defined(KEYBOARD_uno_rev2)
-=======
 #if defined(KEYBOARD_keyhive_uno_rev1)
 #    include "rev1.h"
 #elif defined(KEYBOARD_keyhive_uno_rev2)
->>>>>>> playground_new:keyboards/keyhive/uno/uno.h
 #    include "rev2.h"
 #endif

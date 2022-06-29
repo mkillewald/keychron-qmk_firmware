@@ -1,10 +1,6 @@
 # Keychron Q9
 
-<<<<<<< HEAD
-A customizable 40% keyboard.
-=======
 A customizable 50% keyboard.
->>>>>>> playground_new
 
 * Keyboard Maintainer: [Keychron](https://github.com/keychron)
 * Hardware Supported: Keychron Q9

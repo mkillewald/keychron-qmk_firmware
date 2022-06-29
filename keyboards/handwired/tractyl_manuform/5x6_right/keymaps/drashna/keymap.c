@@ -120,21 +120,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                      _______, _______,      _______, _______
     ),
     [_ADJUST] = LAYOUT_5x6_right_wrapper(
-<<<<<<< HEAD
-        KC_MAKE, KC_WIDE,KC_AUSSIE,KC_SCRIPT,KC_ZALGO,KC_NOMODE,                 KC_NOMODE,KC_BLOCKS,KC_REGIONAL,_______,_______, KC_RST,
-        VRSN,    _________________ADJUST_L1_________________,                        _________________ADJUST_R1_________________, EEP_RST,
-        KEYLOCK, _________________ADJUST_L2_________________,                        _________________ADJUST_R2_________________, TG_MODS,
-        UC_MOD,  _________________ADJUST_L3_________________,                        _________________ADJUST_R3_________________, KC_MPLY,
-                   TG(_DIABLOII), AUTO_CTN,                                                            TG_GAME, TG_DBLO,
-                                            _______, REBOOT,                                  KC_NUKE,
-=======
         QK_MAKE, KC_WIDE,KC_AUSSIE,KC_SCRIPT,KC_ZALGO,KC_NOMODE,                 KC_NOMODE,KC_BLOCKS,KC_REGIONAL,_______,_______, QK_BOOT,
         VRSN,    _________________ADJUST_L1_________________,                        _________________ADJUST_R1_________________, EE_CLR,
         KEYLOCK, _________________ADJUST_L2_________________,                        _________________ADJUST_R2_________________, TG_MODS,
         UC_MOD,  _________________ADJUST_L3_________________,                        _________________ADJUST_R3_________________, KC_MPLY,
                    TG(_DIABLOII), AUTO_CTN,                                                            TG_GAME, TG_DBLO,
                                             _______, QK_RBT,                                  KC_NUKE,
->>>>>>> playground_new
                                                      _______, _______,               _______,
                                                      _______, _______,      KC_NUKE, _______
     ),
@@ -196,25 +187,15 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
 #endif
 
 #ifdef OLED_ENABLE
-<<<<<<< HEAD
-extern uint16_t typing_mode;
-=======
 #    include "keyrecords/unicode.h"
->>>>>>> playground_new
 
 oled_rotation_t oled_init_keymap(oled_rotation_t rotation) {
     return OLED_ROTATION_180;
 }
 
-<<<<<<< HEAD
-void oled_render_large_display(void) {
-    if (is_keyboard_left()) {
-        render_wpm_graph(54, 64);
-=======
 void oled_render_large_display(bool side) {
     if (side) {
         render_wpm_graph(56, 64);
->>>>>>> playground_new
     } else {
         oled_advance_page(true);
         oled_advance_page(true);
@@ -232,27 +213,6 @@ void oled_render_large_display(bool side) {
         oled_set_cursor(1, 14);
         oled_write_ln_P(PSTR("Unicode:"), false);
         switch (typing_mode) {
-<<<<<<< HEAD
-            case KC_WIDE:
-                oled_write_P(PSTR("        Wide"), false);
-                break;
-            case KC_SCRIPT:
-                oled_write_P(PSTR("      Script"), false);
-                break;
-            case KC_BLOCKS:
-                oled_write_P(PSTR("      Blocks"), false);
-                break;
-            case KC_REGIONAL:
-                oled_write_P(PSTR("    Regional"), false);
-                break;
-            case KC_AUSSIE:
-                oled_write_P(PSTR("      Aussie"), false);
-                break;
-            case KC_ZALGO:
-                oled_write_P(PSTR("       Zalgo"), false);
-                break;
-            case KC_NOMODE:
-=======
             case UCTM_WIDE:
                 oled_write_P(PSTR("        Wide"), false);
                 break;
@@ -272,7 +232,6 @@ void oled_render_large_display(bool side) {
                 oled_write_P(PSTR("       Zalgo"), false);
                 break;
             case UCTM_NO_MODE:
->>>>>>> playground_new
                 oled_write_P(PSTR("      Normal"), false);
                 break;
             default:

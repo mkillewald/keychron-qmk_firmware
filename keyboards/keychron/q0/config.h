@@ -39,27 +39,18 @@
 #define DRIVER_COUNT 1
 #define DRIVER_ADDR_1 0b1110100
 
-<<<<<<< HEAD
-=======
 #define HUE_ADJUST
 #ifdef HUE_ADJUST
 #   define CONSTANT_CURRENT_STEP \
         { 0xFF, 0xFF, 0x70, 0xFF, 0xFF, 0x70, 0xFF, 0xFF, 0x70, 0xFF, 0xFF, 0x70 }
 #endif
 
->>>>>>> playground_new
 /* NKRO */
 #define FORCE_NKRO
 
 /* turn off effects when suspended */
 #define RGB_DISABLE_WHEN_USB_SUSPENDED
 
-<<<<<<< HEAD
-/* Set USB polling interval to 1 milliseconds */
-#define USB_POLLING_INTERVAL_MS 1
-
-=======
->>>>>>> playground_new
 /* We have 2KB EEPROM size on STM32L432 */
 #define DYNAMIC_KEYMAP_EEPROM_MAX_ADDR 2047
 
@@ -113,13 +104,5 @@
 #define ENABLE_RGB_MATRIX_SOLID_MULTISPLASH
 // #define RGB_MATRIX_KEYPRESSES
 
-<<<<<<< HEAD
-/* Allow VIA to edit lighting */
-#ifdef VIA_ENABLE
-#    define VIA_QMK_RGBLIGHT_ENABLE
-#endif
-
-=======
->>>>>>> playground_new
 /* Enable receive custom command from host */
 #define RAW_HID_CMD 0xAB

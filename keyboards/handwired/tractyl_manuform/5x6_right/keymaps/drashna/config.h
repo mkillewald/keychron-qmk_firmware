@@ -29,18 +29,7 @@
 
 #define ENCODER_DEFAULT_POS 0x3
 
-<<<<<<< HEAD
-#ifdef OLED_DRIVER_SH1107
-#    undef OLED_DISPLAY_128X64
-#endif
-
-#        define CHARYBDIS_MINIMUM_DEFAULT_DPI 1200
-#        define CHARYBDIS_DEFAULT_DPI_CONFIG_STEP 200
-#        define CHARYBDIS_MINIMUM_SNIPING_DPI 400
-#        define CHARYBDIS_SNIPING_DPI_CONFIG_STEP 200
-=======
 #define SECURE_UNLOCK_SEQUENCE \
     {                          \
         { 2, 1 }, { 2, 2 }, { 2, 3 }, { 2, 4 } \
     }
->>>>>>> playground_new

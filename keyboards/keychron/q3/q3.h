@@ -26,11 +26,8 @@
 #    include "q3_iso_stm32l432.h"
 #elif defined(KEYBOARD_keychron_q3_q3_iso_stm32l432_ec11)
 #    include "q3_iso_stm32l432_ec11.h"
-<<<<<<< HEAD
-=======
 #elif defined(KEYBOARD_keychron_q3_q3_jis_stm32l432)
 #    include "q3_jis_stm32l432.h"
 #elif defined(KEYBOARD_keychron_q3_q3_jis_stm32l432_ec11)
 #    include "q3_jis_stm32l432_ec11.h"
->>>>>>> playground_new
 #endif
