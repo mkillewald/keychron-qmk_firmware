@@ -92,29 +92,10 @@ ifeq ($(MUSIC_ENABLE), yes)
     SRC += $(QUANTUM_DIR)/process_keycode/process_music.c
 endif
 
-VALID_STENO_PROTOCOL_TYPES := geminipr txbolt all
-STENO_PROTOCOL ?= all
 ifeq ($(strip $(STENO_ENABLE)), yes)
-    ifeq ($(filter $(STENO_PROTOCOL),$(VALID_STENO_PROTOCOL_TYPES)),)
-        $(call CATASTROPHIC_ERROR,Invalid STENO_PROTOCOL,STENO_PROTOCOL="$(STENO_PROTOCOL)" is not a valid stenography protocol)
-    else
-        OPT_DEFS += -DSTENO_ENABLE
-        VIRTSER_ENABLE ?= yes
-
-        ifeq ($(strip $(STENO_PROTOCOL)), geminipr)
-            OPT_DEFS += -DSTENO_ENABLE_GEMINI
-        endif
-        ifeq ($(strip $(STENO_PROTOCOL)), txbolt)
-            OPT_DEFS += -DSTENO_ENABLE_BOLT
-        endif
-        ifeq ($(strip $(STENO_PROTOCOL)), all)
-            OPT_DEFS += -DSTENO_ENABLE_ALL
-            OPT_DEFS += -DSTENO_ENABLE_GEMINI
-            OPT_DEFS += -DSTENO_ENABLE_BOLT
-        endif
-
-        SRC += $(QUANTUM_DIR)/process_keycode/process_steno.c
-    endif
+    OPT_DEFS += -DSTENO_ENABLE
+    VIRTSER_ENABLE ?= yes
+    SRC += $(QUANTUM_DIR)/process_keycode/process_steno.c
 endif
 
 ifeq ($(strip $(VIRTSER_ENABLE)), yes)
@@ -216,6 +197,12 @@ else
         # True EEPROM on STM32L0xx, L1xx
         OPT_DEFS += -DEEPROM_DRIVER -DEEPROM_STM32_L0_L1
         SRC += eeprom_driver.c eeprom_stm32_L0_L1.c
+      else ifneq ($(filter $(MCU_SERIES),STM32L4xx),)
+        # Emulated EEPROM
+        OPT_DEFS += -DEEPROM_DRIVER -DEEPROM_STM32_FLASH_EMULATED
+        COMMON_VPATH += $(PLATFORM_PATH)/$(PLATFORM_KEY)/$(DRIVER_DIR)/flash
+        COMMON_VPATH += $(DRIVER_PATH)/flash
+        SRC += eeprom_driver.c eeprom_stm32_l4.c flash_stm32.c
       else ifneq ($(filter $(MCU_SERIES),KL2x K20x),)
         # Teensy EEPROM implementations
         OPT_DEFS += -DEEPROM_TEENSY
@@ -602,14 +589,6 @@ ifneq ($(strip $(DEBOUNCE_TYPE)), custom)
     QUANTUM_SRC += $(QUANTUM_DIR)/debounce/$(strip $(DEBOUNCE_TYPE)).c
 endif
 
-
-VALID_SERIAL_DRIVER_TYPES := bitbang usart
-
-SERIAL_DRIVER ?= bitbang
-ifeq ($(filter $(SERIAL_DRIVER),$(VALID_SERIAL_DRIVER_TYPES)),)
-    $(call CATASTROPHIC_ERROR,Invalid SERIAL_DRIVER,SERIAL_DRIVER="$(SERIAL_DRIVER)" is not a valid SERIAL driver)
-endif
-
 ifeq ($(strip $(SPLIT_KEYBOARD)), yes)
     POST_CONFIG_H += $(QUANTUM_DIR)/split_common/post_config.h
     OPT_DEFS += -DSPLIT_KEYBOARD
@@ -634,11 +613,11 @@ ifeq ($(strip $(SPLIT_KEYBOARD)), yes)
             endif
         endif
 
+        SERIAL_DRIVER ?= bitbang
         OPT_DEFS += -DSERIAL_DRIVER_$(strip $(shell echo $(SERIAL_DRIVER) | tr '[:lower:]' '[:upper:]'))
         ifeq ($(strip $(SERIAL_DRIVER)), bitbang)
             QUANTUM_LIB_SRC += serial.c
         else
-            QUANTUM_LIB_SRC += serial_protocol.c
             QUANTUM_LIB_SRC += serial_$(strip $(SERIAL_DRIVER)).c
         endif
     endif
@@ -648,12 +627,6 @@ endif
 ifeq ($(strip $(CRC_ENABLE)), yes)
     OPT_DEFS += -DCRC_ENABLE
     SRC += crc.c
-endif
-
-ifeq ($(strip $(FNV_ENABLE)), yes)
-    OPT_DEFS += -DFNV_ENABLE
-    VPATH += $(LIB_PATH)/fnv
-    SRC += qmk_fnv_type_validation.c hash_32a.c hash_64a.c
 endif
 
 ifeq ($(strip $(HAPTIC_ENABLE)),yes)
