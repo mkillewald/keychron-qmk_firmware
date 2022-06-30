@@ -66,7 +66,11 @@ To abort and get back to the state before "git rebase", run "git rebase --abort"
 テキストエディタで競合するファイルを開くと、ファイルのどこかに次のような行があります:
 
 ```
+<<<<<<< HEAD
+<p>For help with any issues, email us at support@webhost.us.</p>
+=======
 <p>Need help? Email support@webhost.us.</p>
+>>>>>>> Commit #1
 ```
 
 行 `<<<<<<< HEAD` はマージ競合の始まりを示し、行 `>>>>>>> commit #1` は終了を示し、競合するセクションは `=======` で区切られます。
