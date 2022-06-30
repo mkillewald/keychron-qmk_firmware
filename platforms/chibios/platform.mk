@@ -36,6 +36,7 @@ ifeq ($(strip $(MCU)), risc-v)
     # RISC-V Support
     # As of 7.4.2021 there is only one supported RISC-V platform in Chibios-Contrib,
     # therefore all required settings are hard-coded
+    USE_CHIBIOS_CONTRIB = yes
     STARTUP_MK = $(CHIBIOS_CONTRIB)/os/common/startup/RISCV-ECLIC/compilers/GCC/mk/startup_$(MCU_STARTUP).mk
     PORT_V = $(CHIBIOS_CONTRIB)/os/common/ports/RISCV-ECLIC/compilers/GCC/mk/port.mk
     RULESPATH = $(CHIBIOS_CONTRIB)/os/common/startup/RISCV-ECLIC/compilers/GCC
@@ -91,6 +92,11 @@ ifeq ("$(wildcard $(PLATFORM_MK))","")
     ifeq ("$(wildcard $(PLATFORM_MK))","")
         PLATFORM_MK = $(CHIBIOS_CONTRIB)/os/hal/ports/$(MCU_PORT_NAME)/$(MCU_SERIES)/$(PLATFORM_NAME).mk
     endif
+endif
+
+# If no MCU architecture specified, use the MCU instead (allows for mcu_selection.mk to swap to cortex-m0 etc.)
+ifeq ("$(MCU_ARCH)","")
+    MCU_ARCH = $(MCU)
 endif
 
 include $(STARTUP_MK)
