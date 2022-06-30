@@ -47,7 +47,6 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
         return OLED_ROTATION_180;
     }
 }
-#    endif
 
 static void render_rgbled_status(bool full) {
 #    ifdef RGBLIGHT_ENABLE

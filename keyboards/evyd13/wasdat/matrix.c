@@ -122,8 +122,6 @@ void matrix_init_custom(void) {
     sn74x138_init();
     // initialize key pins
     init_pins();
-    // initialize demultiplexer
-    sn74x138_init();
 }
 
 bool matrix_scan_custom(matrix_row_t current_matrix[]) {
