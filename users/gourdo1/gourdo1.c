@@ -1,6 +1,6 @@
 /* Copyright 2021 Jonavin Eng @Jonavin
    Copyright 2022 gourdo1 <jcblake@outlook.com>
-
+   
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, either version 2 of the License, or
@@ -173,7 +173,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t * record) {
             // when keycode is released
         }
         break;
-
+		
 /*
     case YAHOO:
         if (record -> event.pressed) SEND_STRING("yahoo.com");
@@ -198,14 +198,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t * record) {
         break;
 */
 
-    // Windows key lock
+    // Windows key lock		
     case KC_WINLCK:
         if (record -> event.pressed) {
             keymap_config.no_gui = !keymap_config.no_gui; //toggle status
         } else unregister_code16(keycode);
         break;
 
-    // Double Zero
+    // Double Zero    
     case KC_00:
         if (record -> event.pressed) {
             // when keycode KC_00 is pressed

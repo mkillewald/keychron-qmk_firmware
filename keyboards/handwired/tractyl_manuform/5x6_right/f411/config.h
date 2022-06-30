@@ -73,10 +73,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define CRC8_USE_TABLE
 #define CRC8_OPTIMIZE_SPEED
 
-
-#define CRC8_USE_TABLE
-#define CRC8_OPTIMIZE_SPEED
-
 /* i2c config for oleds */
 #define I2C_DRIVER        I2CD1
 #define I2C1_SCL_PIN      B8

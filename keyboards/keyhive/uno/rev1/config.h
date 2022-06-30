@@ -15,7 +15,6 @@
  */
 
 #pragma once
-
 #include "config_common.h"
 
 /* USB Device descriptor parameter */
