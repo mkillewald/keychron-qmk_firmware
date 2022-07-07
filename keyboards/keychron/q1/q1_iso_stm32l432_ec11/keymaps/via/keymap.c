@@ -75,7 +75,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
          KC_TAB,   KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,     KC_Y,     KC_U,     KC_I,     KC_O,     KC_P,     KC_LBRC,    KC_RBRC,                      KC_PGDN,
          KC_CAPS,  KC_A,     KC_S,     KC_D,     KC_F,     KC_G,     KC_H,     KC_J,     KC_K,     KC_L,     KC_SCLN,  KC_QUOT,    KC_NUHS,  KC_ENT,             KC_HOME,
          KC_LSFT,  KC_NUBS,  KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,     KC_N,     KC_M,     KC_COMM,  KC_DOT,   KC_SLSH,              KC_RSFT,  KC_UP,
-         KC_LCTL,  KC_LGUI,  KC_LALT,                                KC_SPC,                                 KC_RALT, MO(WIN_FN), KC_RCTL,   KC_LEFT,  KC_DOWN,  KC_RGHT),
+         KC_LCTL,  KC_LGUI,  KC_LALT,                                KC_SPC,                                 KC_RALT,  MO(WIN_FN), KC_RCTL,  KC_LEFT,  KC_DOWN,  KC_RGHT),
 
     [WIN_FN] = LAYOUT_all(
          KC_TRNS,  KC_BRID,  KC_BRIU,  KC_TASK,  KC_FLXP,  RGB_VAD,  RGB_VAI,  KC_MPRV,  KC_MPLY,  KC_MNXT,  KC_MUTE,  KC_VOLD,    KC_VOLU,  KC_TRNS,             RGB_VAD, RGB_TOG, RGB_VAI,
@@ -117,20 +117,16 @@ void encoder_action_register(uint8_t index, bool clockwise) {
     action_exec(encoder_event);
 }
 
+void matrix_scan_user(void) {
+    encoder_action_unregister();
+}
+
 bool encoder_update_user(uint8_t index, bool clockwise) {
     encoder_action_register(index, clockwise);
     return false;
 };
 
 #endif
-
-void matrix_scan_user(void) {
-#if defined(VIA_ENABLE) && defined(ENCODER_ENABLE)
-    encoder_action_unregister();
-#endif
-    /* Set timers for factory reset and backlight test */
-    timer_task_start();
-}
 
 bool dip_switch_update_user(uint8_t index, bool active) {
     /* Send default layer state to host */
@@ -139,7 +135,6 @@ bool dip_switch_update_user(uint8_t index, bool active) {
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    process_other_record(keycode, record);
     switch (keycode) {
         case KC_MISSION_CONTROL:
             if (record->event.pressed) {

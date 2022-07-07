@@ -36,7 +36,11 @@ bool dip_switch_update_kb(uint8_t index, bool active) {
         return false;
     }
     if (index == 0) {
+#    if defined(OS_SWITCH_REVERSE)
+        default_layer_set(1UL << (!active ? 2 : 0));
+#    else
         default_layer_set(1UL << (active ? 2 : 0));
+#    endif
     }
     return true;
 }
@@ -71,4 +75,4 @@ void rgb_matrix_indicators_kb(void) {
     }
 }
 
-#endif
+#endif // CAPS_LOCK_LED_INDEX

@@ -105,3 +105,5 @@
 
 /* Enable receive custom command from host */
 #define RAW_HID_CMD 0xAB
+
+#define OS_SWITCH_REVERSE

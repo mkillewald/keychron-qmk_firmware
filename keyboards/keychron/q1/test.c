@@ -280,7 +280,7 @@ void system_switch_state_report(uint8_t index, bool active) {
 }
 
 /* To solve the problem that keyboard can not wakeup the host */
-#if defined(KEYBOARD_keychron_q1_q1_ansi_atmega32u4)
+#if   defined(KEYBOARD_keychron_q1_q1_ansi_atmega32u4)
 #elif defined(KEYBOARD_keychron_q1_q1_ansi_atmega32u4_ec11)
 #elif defined(KEYBOARD_keychron_q1_q1_iso_atmega32u4)
 #elif defined(KEYBOARD_keychron_q1_q1_iso_atmega32u4_ec11)

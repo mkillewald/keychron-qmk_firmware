@@ -174,7 +174,8 @@ bool encoder_update_kb(uint8_t index, bool clockwise) {
     return true;
 }
 
-#   ifdef AVR_USE_INT
+#    if defined(AVR_USE_INT)
+
 void keyboard_post_init_kb(void) {
     PCMSK0 |= (1 << 7);
     PCICR |= (1 << PCIE0);
@@ -184,5 +185,6 @@ void keyboard_post_init_kb(void) {
 ISR(PCINT0_vect) {
     encoder_insert_state(0);
 }
+
 #   endif
 #endif
