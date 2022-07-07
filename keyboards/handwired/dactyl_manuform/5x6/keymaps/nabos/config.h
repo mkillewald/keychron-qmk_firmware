@@ -1,5 +1,5 @@
 /*
-Copyright 2022 Kyle McCreery
+Copyright 2022 Nabos <nabos at glargh dot fr>
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -17,4 +17,5 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-#define EEPROM_I2C_24LC64
+#define EE_HANDS
+

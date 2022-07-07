@@ -1,4 +1,4 @@
-/* Copyright 2022 QMK
+/* Copyright 2020 QMK
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,6 +19,6 @@
 #define HAL_USE_PWM TRUE
 #define HAL_USE_PAL TRUE
 
-#define HAL_USE_SPI TRUE
+#define HAL_USE_I2C TRUE
 
 #include_next <halconf.h>

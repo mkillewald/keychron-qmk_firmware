@@ -61,7 +61,11 @@ To abort and get back to the state before "git rebase", run "git rebase --abort"
 以上内容是在告诉我们有合并冲突存在，并给出了冲突所在的文件名。在编辑器中打开该文件，可以在某处发现类似如下形式的内容：
 
 ```
+<<<<<<< HEAD
+<p>For help with any issues, email us at support@webhost.us.</p>
+=======
 <p>Need help? Email support@webhost.us.</p>
+>>>>>>> Commit #1
 ```
 
 `<<<<<<< HEAD` 标记了合并冲突的起始行，直至 `>>>>>>> Commit #1` 标记的结束行，中间通过 `=======` 分隔开冲突双方。其中 `HEAD` 部分为QMK主干上的版本，标记了提交日志的部分为当前分支的本地提交。

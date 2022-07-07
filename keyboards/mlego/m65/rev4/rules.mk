@@ -22,4 +22,4 @@ AUDIO_ENABLE = no          # Audio output
 ENCODER_ENABLE = yes       # Enable encoder
 OLED_ENABLE = yes          # Enable OLED
 OLED_DRIVER = SSD1306      # Enable Support for SSD1306 or SH1106 OLED Displays; Communicating over I2C
-WPM_ENABLE = yes           # Enable WPM Counter
+WPM_ENABLE = yes           # Enable WPM Counter 
