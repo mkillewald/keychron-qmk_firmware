@@ -18,7 +18,7 @@
 
 /* USB Device descriptor parameter */
 #define PRODUCT_ID 0x0103
-#define DEVICE_VER 0x0101
+#define DEVICE_VER 0x0102
 
 /* key matrix pins */
 #define MATRIX_ROW_PINS { D3, D2, B3, B2, B1, B0 }
@@ -42,6 +42,7 @@
 #define ENCODERS_PAD_B { B7 }
 #define ENCODER_RESOLUTION 4
 #define ENCODER_DEFAULT_POS 0x3
+#define AVR_USE_INT
 
 /* Enable caps-lock LED */
 #define CAPS_LOCK_LED_INDEX 44

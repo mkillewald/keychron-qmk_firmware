@@ -346,7 +346,7 @@ uint8_t EEPROM_WriteDataByte(uint16_t Address, uint8_t DataByte) {
 
 uint8_t EEPROM_WriteDataWord(uint16_t Address, uint16_t DataWord) {
     /* if the address is out-of-bounds, do nothing */
-    if (Address >= (FEE_DENSITY_BYTES)) {
+    if (Address >= (FEE_DENSITY_BYTES - 1)) {
         return FLASH_BAD_ADDRESS;
     }
 
@@ -371,7 +371,7 @@ uint8_t EEPROM_WriteDataWord(uint16_t Address, uint16_t DataWord) {
 
 uint8_t EEPROM_WriteDataDWord(uint16_t Address, uint32_t DataDWord) {
     /* if the address is out-of-bounds, do nothing */
-    if (Address >= (FEE_DENSITY_BYTES)) {
+    if (Address >= (FEE_DENSITY_BYTES - 3)) {
         return FLASH_BAD_ADDRESS;
     }
 

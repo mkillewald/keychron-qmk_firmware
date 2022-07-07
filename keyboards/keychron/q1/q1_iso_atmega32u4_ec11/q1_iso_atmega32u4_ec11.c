@@ -17,12 +17,12 @@
 #include "quantum.h"
 
 const matrix_row_t matrix_mask[] = {
-    0b0111111111111101,
-    0b0111111111111111,
-    0b0111111111111111,
-    0b0111111111111111,
-    0b0111111111111111,
-    0b0111111111111111,
+    0b111111111111101,
+    0b111111111111111,
+    0b111111111111111,
+    0b111111111111111,
+    0b111111111111111,
+    0b111111111111111,
 };
 
 #ifdef RGB_MATRIX_ENABLE
@@ -150,7 +150,7 @@ led_config_t g_led_config = {
         1,    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
         1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1,    1,
         1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,       1,
-        8, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1,    1,
+        9, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1,    1,
         1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,    1, 1,
         1, 1, 1,           4,         1, 1, 1, 1, 1, 1
     }
@@ -172,4 +172,17 @@ bool encoder_update_kb(uint8_t index, bool clockwise) {
     return true;
 }
 
+#    if defined(AVR_USE_INT)
+
+void keyboard_post_init_kb(void) {
+    PCMSK0 |= (1 << 7);
+    PCICR |= (1 << PCIE0);
+    sei();
+}
+
+ISR(PCINT0_vect) {
+    encoder_insert_state(0);
+}
+
+#    endif
 #endif

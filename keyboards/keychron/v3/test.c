@@ -266,7 +266,7 @@ void system_switch_state_report(uint8_t index, bool active) {
     if (report_os_sw_state) {
         payload[0] = FACTORY_TEST_CMD_OS_SWITCH;
         payload[1] = OS_SWITCH;
-#    if defined(OS_SWITCH_REVERT)
+#    if defined(OS_SWITCH_REVERSE)
         payload[2] = !active;
 #    else
         payload[2] = active;
