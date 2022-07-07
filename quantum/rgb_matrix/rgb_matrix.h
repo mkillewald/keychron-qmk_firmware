@@ -132,6 +132,10 @@ void rgb_matrix_indicators(void);
 void rgb_matrix_indicators_kb(void);
 void rgb_matrix_indicators_user(void);
 
+void rgb_matrix_none_indicators(void);
+void rgb_matrix_indicators_none_kb(void);
+void rgb_matrix_indicators_none_user(void);
+
 void rgb_matrix_indicators_advanced(effect_params_t *params);
 void rgb_matrix_indicators_advanced_kb(uint8_t led_min, uint8_t led_max);
 void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max);
