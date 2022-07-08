@@ -34,7 +34,7 @@
 #define MATRIX_COL_PINS \
     { C14, C15, A0, A1, A2, A3, A4, A5, A6, A7, B0, B1, A8, A9, H3 }
 
-/* We use a pin with a stronger pull resistor than the internal MCU pins */
+/* If uses PH3 with a stronger pull resistor then the following definition should be included */
 #define MATRIX_UNSELECT_DRIVE_HIGH
 
 /* Set 0 if debouncing isn't needed */
@@ -48,7 +48,7 @@
 /* Scan phase of led driver set as MSKPHASE_9CHANNEL(defined as 0x03 in CKLED2001.h) */
 #define PHASE_CHANNEL MSKPHASE_9CHANNEL
 #define CONSTANT_CURRENT_STEP \
-    { 0xC0, 0xC0, 0x60, 0xC0, 0xC0, 0x60, 0xC0, 0xC0, 0x60, 0xC0, 0xC0, 0x60 }
+    { 0xCA, 0xCA, 0x60, 0xCA, 0xCA, 0x60, 0xCA, 0xCA, 0x60, 0xCA, 0xCA, 0x60 }
 
 /* Disable DIP switch in matrix data */
 #define MATRIX_MASKED
@@ -57,14 +57,12 @@
 #define DIP_SWITCH_MATRIX_GRID  { {4,4} }
 #define SCAN_COUNT_MAX 100
 
-/* NKRO */
-#define FORCE_NKRO
-
 /* Turn off effects when suspended */
 #define RGB_DISABLE_WHEN_USB_SUSPENDED
 
 /* We have 2KB EEPROM size on STM32L432 */
 #define DYNAMIC_KEYMAP_EEPROM_MAX_ADDR 2047
+#define DYNAMIC_KEYMAP_LAYER_COUNT 5
 
 // RGB Matrix Animation modes. Explicitly enabled
 // For full list of effects, see:
