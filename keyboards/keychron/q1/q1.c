@@ -42,7 +42,7 @@ bool dip_switch_update_kb(uint8_t index, bool active) {
     #define CAPS_LOCK_VAL_STEP RGB_MATRIX_VAL_STEP
 #endif
 
-extern void    rgb_matrix_update_pwm_buffers(void);
+extern void rgb_matrix_update_pwm_buffers(void);
 
 static uint8_t light_brightness_get(void) {
     uint8_t value = rgb_matrix_get_val();
