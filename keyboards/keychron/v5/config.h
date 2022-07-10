@@ -1,4 +1,4 @@
-/* Copyright 2021 @ Keychron(https://www.keychron.com)
+/* Copyright 2022 @ Keychron(https://www.keychron.com)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,8 +26,10 @@
 #define MATRIX_COLS 18
 
 /* Key matrix pins */
-#define MATRIX_ROW_PINS { B5, B4, B3, A15, A14, A13 }
-#define MATRIX_COL_PINS { A10, A9, A8, B1, B0, A7, A6, A5, A4, A3, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN }
+#define MATRIX_ROW_PINS \
+    { B5, B4, B3, A15, A14, A13 }
+#define MATRIX_COL_PINS \
+    { A10, A9, A8, B1, B0, A7, A6, A5, A4, A3, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN }
 
 /* COL2ROW or ROW2COL */
 #define DIODE_DIRECTION ROW2COL
@@ -40,22 +42,26 @@
 #define DRIVER_ADDR_1 0b1110111
 #define DRIVER_ADDR_2 0b1110100
 
-#define CONSTANT_CURRENT_STEP { 0xFF, 0xFF, 0xA0, 0xFF, 0xFF, 0xA0, 0xFF, 0xFF, 0xA0, 0xFF, 0xFF, 0xA0 }
+/* Limit the maximum brigtness current of colour white to 500mA */
+#define CONSTANT_CURRENT_STEP \
+    { 0xB6, 0xB6, 0x50, 0xB6, 0xB6, 0x50, 0xB6, 0xB6, 0x50, 0xB6, 0xB6, 0x50 }
 
 /* DIP switch */
 #define DIP_SWITCH_MATRIX_GRID  { {5, 4} }
+#define SCAN_COUNT_MAX 100
 
 /* Disable DIP switch in matrix data */
 #define MATRIX_MASKED
-
-/* NKRO */
-#define FORCE_NKRO
 
 /* turn off effects when suspended */
 #define RGB_DISABLE_WHEN_USB_SUSPENDED
 
 /* We have 2KB emulated EEPROM size on STM32L432*/
 #define DYNAMIC_KEYMAP_EEPROM_MAX_ADDR 2047
+
+/* EEPROM Driver Configuration */
+#define WEAR_LEVELING_LOGICAL_SIZE 2048
+#define WEAR_LEVELING_BACKING_SIZE (WEAR_LEVELING_LOGICAL_SIZE * 2)
 
 // RGB Matrix Animation modes. Explicitly enabled
 // For full list of effects, see:
@@ -106,11 +112,6 @@
 #define ENABLE_RGB_MATRIX_SOLID_SPLASH
 #define ENABLE_RGB_MATRIX_SOLID_MULTISPLASH
 // #define RGB_MATRIX_KEYPRESSES
-
-/* Allow VIA to edit lighting */
-#ifdef VIA_ENABLE
-#    define VIA_QMK_RGBLIGHT_ENABLE
-#endif
 
 /* Enable receive custom command from host */
 #define RAW_HID_CMD 0xAB

@@ -1,4 +1,4 @@
-/* Copyright 2022 @ Keychron (https://www.keychron.com)
+/* Copyright 2021 @ Keychron (https://www.keychron.com)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,13 +17,32 @@
 #pragma once
 
 /* USB Device descriptor parameter */
-#define PRODUCT_ID 0x0352
+#define PRODUCT_ID 0x0361
 #define DEVICE_VER 0x0100
 
+/* Key matrix pins */
+#define MATRIX_ROW_PINS \
+    { B5, B4, B3, A15, A14, A13 }
+#define MATRIX_COL_PINS \
+    { A10, A9, A8, B1, B0, A7, A6, A5, A4, A3, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN }
+
+/* There must be the following definiton when number of NO_PIN is over 8 */
+#define NO_PIN_NUM 10
+#define MAX_NO_PIN_INDEX 19
+
 /* RGB Matrix Configuration */
-#define DRIVER_1_LED_TOTAL 55
-#define DRIVER_2_LED_TOTAL 46
+#define DRIVER_1_LED_TOTAL 60
+#define DRIVER_2_LED_TOTAL 48
 #define DRIVER_LED_TOTAL (DRIVER_1_LED_TOTAL + DRIVER_2_LED_TOTAL)
 
-/* Enable caps-lock LED */
-#define CAPS_LOCK_LED_INDEX 53
+/* Encoder Configuration */
+#define ENCODERS_PAD_A { C14 }
+#define ENCODERS_PAD_B { A2 }
+#define ENCODER_RESOLUTION 4
+#define ENCODER_DEFAULT_POS 0x3
+
+/* Enable caps-lock LED*/
+#define CAPS_LOCK_LED_INDEX 61
+
+/* Enable NUM_LOCK_LED_INDEX */
+// #define NUM_LOCK_LED_INDEX 37
