@@ -15,7 +15,6 @@
 
 QUANTUM_SRC += \
     $(QUANTUM_DIR)/quantum.c \
-    $(QUANTUM_DIR)/send_string.c \
     $(QUANTUM_DIR)/bitwise.c \
     $(QUANTUM_DIR)/led.c \
     $(QUANTUM_DIR)/action.c \
@@ -220,12 +219,11 @@ else
         # True EEPROM on STM32L0xx, L1xx
         OPT_DEFS += -DEEPROM_DRIVER -DEEPROM_STM32_L0_L1
         SRC += eeprom_driver.c eeprom_stm32_L0_L1.c
-      else ifneq ($(filter $(MCU_SERIES),STM32L4xx),)
-        # Emulated EEPROM
-        OPT_DEFS += -DEEPROM_DRIVER -DEEPROM_STM32_FLASH_EMULATED
-        COMMON_VPATH += $(PLATFORM_PATH)/$(PLATFORM_KEY)/$(DRIVER_DIR)/flash
-        COMMON_VPATH += $(DRIVER_PATH)/flash
-        SRC += eeprom_driver.c eeprom_stm32_l4.c flash_stm32.c
+      else ifneq ($(filter $(MCU_SERIES),RP2040),)
+		# Wear-leveling EEPROM implementation, backed by RP2040 flash
+		OPT_DEFS += -DEEPROM_DRIVER -DEEPROM_WEAR_LEVELING
+		SRC += eeprom_driver.c eeprom_wear_leveling.c
+        WEAR_LEVELING_DRIVER = rp2040_flash
       else ifneq ($(filter $(MCU_SERIES),KL2x K20x),)
         # Teensy EEPROM implementations
         OPT_DEFS += -DEEPROM_TEENSY
@@ -247,7 +245,7 @@ else
   endif
 endif
 
-VALID_WEAR_LEVELING_DRIVER_TYPES := custom embedded_flash spi_flash legacy
+VALID_WEAR_LEVELING_DRIVER_TYPES := custom embedded_flash spi_flash rp2040_flash legacy
 WEAR_LEVELING_DRIVER ?= none
 ifneq ($(strip $(WEAR_LEVELING_DRIVER)),none)
   ifeq ($(filter $(WEAR_LEVELING_DRIVER),$(VALID_WEAR_LEVELING_DRIVER_TYPES)),)
@@ -268,6 +266,9 @@ ifneq ($(strip $(WEAR_LEVELING_DRIVER)),none)
       FLASH_DRIVER := spi
       SRC += wear_leveling_flash_spi.c
       POST_CONFIG_H += $(DRIVER_PATH)/wear_leveling/wear_leveling_flash_spi_config.h
+    else ifeq ($(strip $(WEAR_LEVELING_DRIVER)), rp2040_flash)
+      SRC += wear_leveling_rp2040_flash.c
+      POST_CONFIG_H += $(DRIVER_PATH)/wear_leveling/wear_leveling_rp2040_flash_config.h
     else ifeq ($(strip $(WEAR_LEVELING_DRIVER)), legacy)
       COMMON_VPATH += $(PLATFORM_PATH)/$(PLATFORM_KEY)/$(DRIVER_DIR)/flash
       SRC += flash_stm32.c wear_leveling_legacy.c
@@ -553,7 +554,7 @@ ifeq ($(strip $(BACKLIGHT_ENABLE)), yes)
     endif
 endif
 
-VALID_WS2812_DRIVER_TYPES := bitbang pwm spi i2c
+VALID_WS2812_DRIVER_TYPES := bitbang pwm spi i2c vendor
 
 WS2812_DRIVER ?= bitbang
 ifeq ($(strip $(WS2812_DRIVER_REQUIRED)), yes)
@@ -643,7 +644,7 @@ ifneq ($(strip $(DEBOUNCE_TYPE)), custom)
 endif
 
 
-VALID_SERIAL_DRIVER_TYPES := bitbang usart
+VALID_SERIAL_DRIVER_TYPES := bitbang usart vendor
 
 SERIAL_DRIVER ?= bitbang
 ifeq ($(filter $(SERIAL_DRIVER),$(VALID_SERIAL_DRIVER_TYPES)),)
@@ -770,6 +771,13 @@ MAGIC_ENABLE ?= yes
 ifeq ($(strip $(MAGIC_ENABLE)), yes)
     SRC += $(QUANTUM_DIR)/process_keycode/process_magic.c
     OPT_DEFS += -DMAGIC_KEYCODE_ENABLE
+endif
+
+SEND_STRING_ENABLE ?= yes
+ifeq ($(strip $(SEND_STRING_ENABLE)), yes)
+    OPT_DEFS += -DSEND_STRING_ENABLE
+    COMMON_VPATH += $(QUANTUM_DIR)/send_string
+    SRC += $(QUANTUM_DIR)/send_string/send_string.c
 endif
 
 ifeq ($(strip $(AUTO_SHIFT_ENABLE)), yes)
