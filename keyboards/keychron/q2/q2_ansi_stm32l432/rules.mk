@@ -19,6 +19,8 @@ AUDIO_ENABLE = no           # Audio output
 DIP_SWITCH_ENABLE = yes
 RGB_MATRIX_ENABLE = yes
 RGB_MATRIX_DRIVER = CKLED2001
+RAW_ENABLE = yes
+LTO_ENABLE = yes
 EEPROM_DRIVER = wear_leveling
 WEAR_LEVELING_DRIVER = embedded_flash
 
