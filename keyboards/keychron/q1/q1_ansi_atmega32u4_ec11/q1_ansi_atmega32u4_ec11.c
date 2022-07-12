@@ -16,7 +16,6 @@
 
 #include <avr/interrupt.h>
 #include <avr/io.h>
-
 #include "quantum.h"
 
 const matrix_row_t matrix_mask[] = {
