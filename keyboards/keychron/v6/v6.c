@@ -73,7 +73,7 @@ static uint8_t light_brightness_get(void) {
 }
 
 void rgb_matrix_indicators_kb(void) {
-#    if defined(NUM_LOCK_LED_INDEX)
+#    if defined(CAPS_LOCK_LED_INDEX)
     if (host_keyboard_led_state().caps_lock) {
         uint8_t v = light_brightness_get();
         rgb_matrix_set_color(CAPS_LOCK_LED_INDEX, v, v, v); // white, with the adjusted brightness
@@ -100,8 +100,8 @@ bool led_update_kb(led_t led_state) {
     }
 
     if (res) {
-        if (led_state.caps_lock) {
 #    if defined(CAPS_LOCK_LED_INDEX)
+        if (led_state.caps_lock) {
             uint8_t v = light_brightness_get();
             rgb_matrix_set_color(CAPS_LOCK_LED_INDEX, v, v, v);
         } else {
