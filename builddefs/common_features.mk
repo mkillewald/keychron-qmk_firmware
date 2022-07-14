@@ -149,7 +149,7 @@ ifeq ($(strip $(POINTING_DEVICE_ENABLE)), yes)
         else ifeq ($(strip $(POINTING_DEVICE_DRIVER)), cirque_pinnacle_i2c)
             OPT_DEFS += -DSTM32_I2C -DHAL_USE_I2C=TRUE
             SRC += drivers/sensors/cirque_pinnacle.c
-     		SRC += drivers/sensors/cirque_pinnacle_gestures.c
+            SRC += drivers/sensors/cirque_pinnacle_gestures.c
             SRC += $(QUANTUM_DIR)/pointing_device_gestures.c
             QUANTUM_LIB_SRC += i2c_master.c
         else ifeq ($(strip $(POINTING_DEVICE_DRIVER)), cirque_pinnacle_spi)
