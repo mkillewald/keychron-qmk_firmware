@@ -149,10 +149,14 @@ ifeq ($(strip $(POINTING_DEVICE_ENABLE)), yes)
         else ifeq ($(strip $(POINTING_DEVICE_DRIVER)), cirque_pinnacle_i2c)
             OPT_DEFS += -DSTM32_I2C -DHAL_USE_I2C=TRUE
             SRC += drivers/sensors/cirque_pinnacle.c
+     		SRC += drivers/sensors/cirque_pinnacle_gestures.c
+            SRC += $(QUANTUM_DIR)/pointing_device_gestures.c
             QUANTUM_LIB_SRC += i2c_master.c
         else ifeq ($(strip $(POINTING_DEVICE_DRIVER)), cirque_pinnacle_spi)
             OPT_DEFS += -DSTM32_SPI -DHAL_USE_SPI=TRUE
             SRC += drivers/sensors/cirque_pinnacle.c
+            SRC += drivers/sensors/cirque_pinnacle_gestures.c
+            SRC += $(QUANTUM_DIR)/pointing_device_gestures.c
             QUANTUM_LIB_SRC += spi_master.c
         else ifeq ($(strip $(POINTING_DEVICE_DRIVER)), pimoroni_trackball)
             OPT_DEFS += -DSTM32_SPI -DHAL_USE_I2C=TRUE
@@ -219,16 +223,10 @@ else
         # True EEPROM on STM32L0xx, L1xx
         OPT_DEFS += -DEEPROM_DRIVER -DEEPROM_STM32_L0_L1
         SRC += eeprom_driver.c eeprom_stm32_L0_L1.c
-      else ifneq ($(filter $(MCU_SERIES),STM32L4xx),)
-        # Emulated EEPROM
-        OPT_DEFS += -DEEPROM_DRIVER -DEEPROM_STM32_FLASH_EMULATED
-        COMMON_VPATH += $(PLATFORM_PATH)/$(PLATFORM_KEY)/$(DRIVER_DIR)/flash
-        COMMON_VPATH += $(DRIVER_PATH)/flash
-        SRC += eeprom_driver.c eeprom_stm32_l4.c flash_stm32.c
       else ifneq ($(filter $(MCU_SERIES),RP2040),)
-		# Wear-leveling EEPROM implementation, backed by RP2040 flash
-		OPT_DEFS += -DEEPROM_DRIVER -DEEPROM_WEAR_LEVELING
-		SRC += eeprom_driver.c eeprom_wear_leveling.c
+        # Wear-leveling EEPROM implementation, backed by RP2040 flash
+        OPT_DEFS += -DEEPROM_DRIVER -DEEPROM_WEAR_LEVELING
+        SRC += eeprom_driver.c eeprom_wear_leveling.c
         WEAR_LEVELING_DRIVER = rp2040_flash
       else ifneq ($(filter $(MCU_SERIES),KL2x K20x),)
         # Teensy EEPROM implementations
