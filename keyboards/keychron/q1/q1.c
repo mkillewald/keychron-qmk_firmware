@@ -71,6 +71,10 @@ void rgb_matrix_indicators_none_kb(void) {
 
 bool led_update_kb(led_t led_state) {
     bool res = led_update_user(led_state);
+    
+    if (rgb_matrix_is_enabled()) {
+        return res;
+    }
 
     if (res) {
         if (led_state.caps_lock) {

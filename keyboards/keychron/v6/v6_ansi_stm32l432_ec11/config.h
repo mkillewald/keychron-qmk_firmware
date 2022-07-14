@@ -25,10 +25,8 @@
     { B5, B4, B3, A15, A14, A13 }
 #define MATRIX_COL_PINS \
     { A10, A9, A8, B1, B0, A7, A6, A5, A4, A3, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN }
-
-/* There must be the following definiton when number of NO_PIN is over 8 */
 #define NO_PIN_NUM 10
-#define MAX_NO_PIN_INDEX 19
+#define CLR_VAL 0x3FF
 
 /* RGB Matrix Configuration */
 #define DRIVER_1_LED_TOTAL 60
@@ -43,6 +41,3 @@
 
 /* Enable caps-lock LED*/
 #define CAPS_LOCK_LED_INDEX 61
-
-/* Enable NUM_LOCK_LED_INDEX */
-// #define NUM_LOCK_LED_INDEX 37

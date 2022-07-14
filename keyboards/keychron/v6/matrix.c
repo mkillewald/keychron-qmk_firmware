@@ -38,9 +38,14 @@ static pin_t col_pins[MATRIX_COLS] = MATRIX_COL_PINS;
 
 #ifndef NO_PIN_NUM
 #    define NO_PIN_NUM 8
-#    ifndef MAX_NO_PIN_INDEX
-#        define MAX_NO_PIN_INDEX 18
-#    endif
+#endif
+
+#ifndef COL_OFFSET
+#    define COL_OFFSET 0
+#endif
+
+#ifndef CLR_VAL
+#    define CLR_VAL 0xFF
 #endif
 
 /* matrix state(1:on, 0:off) */
@@ -73,22 +78,12 @@ static inline uint8_t readMatrixPin(pin_t pin) {
     }
 }
 
-static void shiftOut(uint16_t dataOut, bool singleFlag) {
-    if (singleFlag) {
+static void shiftOut(uint16_t dataOut) {
+    for (uint8_t i = 0; i < NO_PIN_NUM; i++) {
         if (dataOut & 0x1) {
             setPinOutput_writeHigh(DATA_PIN);
         } else {
             setPinOutput_writeLow(DATA_PIN);
-        }
-        setPinOutput_writeHigh(CLOCK_PIN);
-        setPinOutput_writeLow(CLOCK_PIN);
-    } else {
-        for (uint8_t i = 0; i < NO_PIN_NUM; i++) {
-            if (dataOut & 0x1) {
-                setPinOutput_writeHigh(DATA_PIN);
-            } else {
-                setPinOutput_writeLow(DATA_PIN);
-            }
         }
         dataOut = dataOut >> 1;
         setPinOutput_writeHigh(CLOCK_PIN);
@@ -102,11 +97,7 @@ static bool select_col(uint8_t col) {
     pin_t pin = col_pins[col];
 
     if (pin == NO_PIN) {
-        if (col == 10) {
-            shiftOut(0x00, true);
-        } else {
-            shiftOut(0x01, true);
-        }
+        shiftOut(~(0x1 << ((MATRIX_COLS - COL_OFFSET) - col - 1)));
         return true;
     } else {
         setPinOutput_writeLow(pin);
@@ -117,9 +108,20 @@ static bool select_col(uint8_t col) {
 
 static void unselect_col(uint8_t col) {
     pin_t pin = col_pins[col];
+
     if (pin == NO_PIN) {
-        if (col == MAX_NO_PIN_INDEX) {
-            shiftOut(0x01, true);
+        shiftOut(CLR_VAL);
+    } else {
+        setPinInputHigh_atomic(pin);
+    }
+}
+
+static void unselect_col_my(uint8_t col) {
+    pin_t pin = col_pins[col];
+
+    if (pin == NO_PIN) {
+        if (col == (MATRIX_COLS - COL_OFFSET - 1)) {
+            shiftOut(CLR_VAL);
         }
     } else {
         setPinInputHigh_atomic(pin);
@@ -128,13 +130,8 @@ static void unselect_col(uint8_t col) {
 
 static void unselect_cols(void) {
     for (uint8_t x = 0; x < MATRIX_COLS; x++) {
-        unselect_col(x);
+        unselect_col_my(x);
     }
-#if defined(MAX_NO_PIN_INDEX)
-    shiftOut(0x3FF, false);
-#else
-    shiftOut(0xFF, false);
-#endif
 }
 
 static void matrix_init_pins(void) {

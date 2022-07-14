@@ -42,9 +42,9 @@ bool dip_switch_update_kb(uint8_t index, bool active) {
     return true;
 }
 
-#endif
+#endif // DIP_SWITCH_ENABLE
 
-#if defined(RGB_MATRIX_ENABLE) && defined(CAPS_LOCK_LED_INDEX)
+#if defined(RGB_MATRIX_ENABLE) && (defined(CAPS_LOCK_LED_INDEX) || defined(NUM_LOCK_LED_INDEX))
 
 #    define CAPS_LOCK_MAX_BRIGHTNESS 0xFF
 #    ifdef RGB_MATRIX_MAXIMUM_BRIGHTNESS
@@ -58,18 +58,52 @@ bool dip_switch_update_kb(uint8_t index, bool active) {
 #        define CAPS_LOCK_VAL_STEP RGB_MATRIX_VAL_STEP
 #    endif
 
+extern void rgb_matrix_update_pwm_buffers(void);
+
+static uint8_t light_brightness_get(void) {
+    uint8_t value = rgb_matrix_get_val();
+    if (value < CAPS_LOCK_VAL_STEP) {
+        value = CAPS_LOCK_VAL_STEP;
+    } else if (value < (CAPS_LOCK_MAX_BRIGHTNESS - CAPS_LOCK_VAL_STEP)) {
+        value += CAPS_LOCK_VAL_STEP; // one step more than current brightness
+    } else {
+        value = CAPS_LOCK_MAX_BRIGHTNESS;
+    }
+
+    return value;
+}
+
 void rgb_matrix_indicators_kb(void) {
     if (host_keyboard_led_state().caps_lock) {
-        uint8_t b = rgb_matrix_get_val();
-        if (b < CAPS_LOCK_VAL_STEP) {
-            b = CAPS_LOCK_VAL_STEP;
-        } else if (b < (CAPS_LOCK_MAX_BRIGHTNESS - CAPS_LOCK_VAL_STEP)) {
-            b += CAPS_LOCK_VAL_STEP;  // one step more than current brightness
-        } else {
-            b = CAPS_LOCK_MAX_BRIGHTNESS;
-        }
-        rgb_matrix_set_color(CAPS_LOCK_LED_INDEX, b, b, b);  // white, with the adjusted brightness
+        uint8_t v = light_brightness_get();
+        rgb_matrix_set_color(CAPS_LOCK_LED_INDEX, v, v, v); // white, with the adjusted brightness
     }
 }
 
-#endif
+void rgb_matrix_indicators_none_kb(void) {
+    rgb_matrix_indicators_kb();
+    rgb_matrix_update_pwm_buffers();
+}
+
+bool led_update_kb(led_t led_state) {
+    bool res = led_update_user(led_state);
+
+    if (rgb_matrix_is_enabled()) {
+        return res;
+    }
+
+    if (res) {
+        if (led_state.caps_lock) {
+            uint8_t v = light_brightness_get();
+            rgb_matrix_set_color(CAPS_LOCK_LED_INDEX, v, v, v);
+        } else {
+            rgb_matrix_set_color(CAPS_LOCK_LED_INDEX, 0, 0, 0);
+        }
+
+        rgb_matrix_update_pwm_buffers();
+    }
+
+    return res;
+}
+
+#endif // CAPS_LOCK_LED_INDEX
