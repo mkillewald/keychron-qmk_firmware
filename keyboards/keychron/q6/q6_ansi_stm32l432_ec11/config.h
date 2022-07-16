@@ -18,7 +18,7 @@
 
 /* USB Device descriptor parameter */
 #define PRODUCT_ID 0x0161
-#define DEVICE_VER 0x0102
+#define DEVICE_VER 0x0103
 
 /* Key matrix pins */
 #define MATRIX_ROW_PINS \
@@ -26,7 +26,7 @@
 #define MATRIX_COL_PINS \
     { A10, A9, A8, B1, B0, A7, A6, A5, A4, A3, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN }
 #define NO_PIN_NUM 10
-#define CLEAR_VAL 0x3FF
+#define CLR_VAL 0x3FF
 
 /* RGB Matrix Configuration */
 #define DRIVER_1_LED_TOTAL 60
@@ -41,6 +41,3 @@
 
 /* Enable caps-lock LED*/
 #define CAPS_LOCK_LED_INDEX 61
-
-/* Enable NUM_LOCK_LED_INDEX */
-// #define NUM_LOCK_LED_INDEX 37

@@ -14,43 +14,33 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <stdint.h>
-#include <stdbool.h>
-#include <string.h>
-#include "util.h"
 #include "matrix.h"
+
+#include <stdbool.h>
+#include <stdint.h>
+#include <string.h>
+
 #include "debounce.h"
 #include "quantum.h"
+#include "util.h"
 
 // Pin connected to DS of 74HC595
-#define DATA_PIN C15
+#define DATA_PIN A7
 // Pin connected to SH_CP of 74HC595
-#define CLOCK_PIN A1
+#define CLOCK_PIN B1
 // Pin connected to ST_CP of 74HC595
-#define LATCH_PIN A0
+#define LATCH_PIN B0
 
 #ifdef MATRIX_ROW_PINS
 static pin_t row_pins[MATRIX_ROWS] = MATRIX_ROW_PINS;
-#endif  // MATRIX_ROW_PINS
+#endif // MATRIX_ROW_PINS
 #ifdef MATRIX_COL_PINS
 static pin_t col_pins[MATRIX_COLS] = MATRIX_COL_PINS;
-#endif  // MATRIX_COL_PINS
-
-#ifndef NO_PIN_NUM
-#    define NO_PIN_NUM 8
-#endif
-
-#ifndef COL_OFFSET
-#    define COL_OFFSET 0
-#endif
-
-#ifndef CLR_VAL
-#    define CLR_VAL 0xFF
-#endif
+#endif // MATRIX_COL_PINS
 
 /* matrix state(1:on, 0:off) */
-extern matrix_row_t raw_matrix[MATRIX_ROWS];  // raw values
-extern matrix_row_t matrix[MATRIX_ROWS];      // debounced values
+extern matrix_row_t raw_matrix[MATRIX_ROWS]; // raw values
+extern matrix_row_t matrix[MATRIX_ROWS];     // debounced values
 
 static inline void setPinOutput_writeLow(pin_t pin) {
     ATOMIC_BLOCK_FORCEON {
@@ -67,7 +57,9 @@ static inline void setPinOutput_writeHigh(pin_t pin) {
 }
 
 static inline void setPinInputHigh_atomic(pin_t pin) {
-    ATOMIC_BLOCK_FORCEON { setPinInputHigh(pin); }
+    ATOMIC_BLOCK_FORCEON {
+        setPinInputHigh(pin);
+    }
 }
 
 static inline uint8_t readMatrixPin(pin_t pin) {
@@ -78,8 +70,8 @@ static inline uint8_t readMatrixPin(pin_t pin) {
     }
 }
 
-static void shiftOut(uint16_t dataOut) {
-    for (uint8_t i = 0; i < NO_PIN_NUM; i++) {
+static void shiftOutMultiple(uint8_t dataOut) {
+    for (uint8_t i = 0; i < 8; i++) {
         if (dataOut & 0x1) {
             setPinOutput_writeHigh(DATA_PIN);
         } else {
@@ -93,11 +85,28 @@ static void shiftOut(uint16_t dataOut) {
     setPinOutput_writeLow(LATCH_PIN);
 }
 
+static void shiftOutSingle(uint8_t dataOut) {
+    if (dataOut & 0x1) {
+        setPinOutput_writeHigh(DATA_PIN);
+    } else {
+        setPinOutput_writeLow(DATA_PIN);
+    }
+    setPinOutput_writeHigh(CLOCK_PIN);
+    setPinOutput_writeLow(CLOCK_PIN);
+
+    setPinOutput_writeHigh(LATCH_PIN);
+    setPinOutput_writeLow(LATCH_PIN);
+}
+
 static bool select_col(uint8_t col) {
     pin_t pin = col_pins[col];
 
     if (pin == NO_PIN) {
-        shiftOut(~(0x1 << ((MATRIX_COLS - COL_OFFSET) - col - 1)));
+        if (col == 8) {
+            shiftOutSingle(0x0);
+        } else {
+            shiftOutSingle(0x01);
+        }
         return true;
     } else {
         setPinOutput_writeLow(pin);
@@ -108,20 +117,9 @@ static bool select_col(uint8_t col) {
 
 static void unselect_col(uint8_t col) {
     pin_t pin = col_pins[col];
-
     if (pin == NO_PIN) {
-        shiftOut(CLR_VAL);
-    } else {
-        setPinInputHigh_atomic(pin);
-    }
-}
-
-static void unselect_col_my(uint8_t col) {
-    pin_t pin = col_pins[col];
-
-    if (pin == NO_PIN) {
-        if (col == (MATRIX_COLS - COL_OFFSET - 1)) {
-            shiftOut(CLR_VAL);
+        if (col == 15) {
+            shiftOutSingle(0x01);
         }
     } else {
         setPinInputHigh_atomic(pin);
@@ -130,8 +128,9 @@ static void unselect_col_my(uint8_t col) {
 
 static void unselect_cols(void) {
     for (uint8_t x = 0; x < MATRIX_COLS; x++) {
-        unselect_col_my(x);
+        unselect_col(x);
     }
+    shiftOutMultiple(0xFF);
 }
 
 static void matrix_init_pins(void) {
@@ -148,7 +147,7 @@ void matrix_read_rows_on_col(matrix_row_t current_matrix[], uint8_t current_col)
 
     // Select col
     if (!select_col(current_col)) {
-        return;                      // skip NO_PIN col
+        return; // skip NO_PIN col
     }
     matrix_output_select_delay();
 
@@ -167,7 +166,7 @@ void matrix_read_rows_on_col(matrix_row_t current_matrix[], uint8_t current_col)
 
     // Unselect col
     unselect_col(current_col);
-    matrix_output_unselect_delay(current_col, key_pressed);  // wait for all Row signals to go HIGH
+    matrix_output_unselect_delay(current_col, key_pressed); // wait for all Row signals to go HIGH
 }
 
 void matrix_init_custom(void) {

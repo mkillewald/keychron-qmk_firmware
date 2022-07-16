@@ -54,14 +54,20 @@
 #define DIP_SWITCH_MATRIX_GRID  { {4,4} }
 #define SCAN_COUNT_MAX 100
 
-/* NKRO */
-#define FORCE_NKRO
-
 /* Turn off effects when suspended */
 #define RGB_DISABLE_WHEN_USB_SUSPENDED
 
 /* We have 2KB EEPROM size on STM32L432 */
 #define DYNAMIC_KEYMAP_EEPROM_MAX_ADDR 2047
+#define DYNAMIC_KEYMAP_LAYER_COUNT 5
+
+/* EEPROM Driver Configuration */
+#define WEAR_LEVELING_LOGICAL_SIZE 2048
+#define WEAR_LEVELING_BACKING_SIZE (WEAR_LEVELING_LOGICAL_SIZE * 2)
+
+/* Specify (0,15) which is "INS" key on this keyboard as bootmagic key */
+#define BOOTMAGIC_LITE_ROW 0
+#define BOOTMAGIC_LITE_COLUMN 15
 
 // RGB Matrix Animation modes. Explicitly enabled
 // For full list of effects, see:

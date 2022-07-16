@@ -46,14 +46,15 @@
 /* Disable DIP switch in matrix data */
 #define MATRIX_MASKED
 
-/* NKRO */
-#define FORCE_NKRO
-
 /* turn off effects when suspended */
 #define RGB_DISABLE_WHEN_USB_SUSPENDED
 
 /* We have 2KB EEPROM size on STM32L432 */
 #define DYNAMIC_KEYMAP_EEPROM_MAX_ADDR 2047
+
+/* EEPROM Driver Configuration */
+#define WEAR_LEVELING_LOGICAL_SIZE 2048
+#define WEAR_LEVELING_BACKING_SIZE (WEAR_LEVELING_LOGICAL_SIZE * 2)
 
 // RGB Matrix Animation modes. Explicitly enabled
 // For full list of effects, see:
