@@ -167,6 +167,7 @@ bool encoder_update_kb(uint8_t index, bool clockwise) {
     }
     return true;
 }
+
 #    ifdef PAL_USE_CALLBACKS
 
 void encoder0_pad_cb(void *param) {

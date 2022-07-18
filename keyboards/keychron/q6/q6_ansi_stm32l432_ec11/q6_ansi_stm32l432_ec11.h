@@ -36,7 +36,7 @@
     { K50, K51, K52, XXX, XXX, XXX, K56, XXX, XXX, XXX, K5A, K5B, K5C, K5D, K5E, K5F, K5G, K5H, K5I, XXX }  \
 }
 #define LAYOUT_all( \
-                                                                         K57, K58,                             \
+                                                                        K57, K58,                              \
     K00, K01, K02, K03, K04, K05, K06, K07, K08, K09, K0A, K0B, K0C, K4J,  K0E,  K0F, K0G, K0J, K1J, K2J, K3J, \
     K10, K11, K12, K13, K14, K15, K16, K17, K18, K19, K1A, K1B, K1C, K1D,  K1E,  K1F, K1G, K1H, K1I, K0H, K0I, \
     K20, K21, K22, K23, K24, K25, K26, K27, K28, K29, K2A, K2B, K2C, K2D,  K2E,  K2F, K2G, K2H, K2I, K3E,      \
