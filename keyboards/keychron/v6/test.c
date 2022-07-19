@@ -73,7 +73,7 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
             if (record->event.pressed) {
                 key_press_status |= KEY_PRESS_J;
                 if (key_press_status == KEY_PRESS_FACTORY_RESET) {
-                    timer_3s_buffer = sync_timer_read32();
+                    timer_3s_buffer = sync_timer_read32() | 1;
                 }
             } else {
                 key_press_status &= ~KEY_PRESS_J;
@@ -84,7 +84,7 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
             if (record->event.pressed) {
                 key_press_status |= KEY_PRESS_Z;
                 if (key_press_status == KEY_PRESS_FACTORY_RESET) {
-                    timer_3s_buffer = sync_timer_read32();
+                    timer_3s_buffer = sync_timer_read32() | 1;
                 }
             } else {
                 key_press_status &= ~KEY_PRESS_Z;
@@ -99,7 +99,7 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
                         led_test_mode = LED_TEST_MODE_WHITE;
                     }
                 } else if (key_press_status == KEY_PRESS_LED_TEST) {
-                    timer_3s_buffer = sync_timer_read32();
+                    timer_3s_buffer = sync_timer_read32() | 1;
                 }
             } else {
                 key_press_status &= ~KEY_PRESS_RIGHT;
@@ -112,7 +112,7 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
                 if (led_test_mode) {
                     led_test_mode = LED_TEST_MODE_OFF;
                 } else if (key_press_status == KEY_PRESS_LED_TEST) {
-                    timer_3s_buffer = sync_timer_read32();
+                    timer_3s_buffer = sync_timer_read32() | 1;
                 }
             } else {
                 key_press_status &= ~KEY_PRESS_HOME;
@@ -140,7 +140,7 @@ static void timer_3s_task(void) {
         timer_3s_buffer = 0;
         if (key_press_status == KEY_PRESS_FACTORY_RESET) {
             key_press_status &= ~KEY_PRESS_FACTORY_RESET;
-            timer_300ms_buffer = sync_timer_read32();
+            timer_300ms_buffer = sync_timer_read32() | 1;
             factory_reset_count++;
             layer_state_t default_layer_tmp = default_layer_state;
             eeconfig_init();
@@ -175,7 +175,7 @@ static void timer_300ms_task(void) {
             timer_300ms_buffer = 0;
             factory_reset_count = 0;
         } else {
-            timer_300ms_buffer = sync_timer_read32();
+            timer_300ms_buffer = sync_timer_read32() | 1;
         }
     }
 }
