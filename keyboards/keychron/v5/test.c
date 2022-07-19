@@ -112,7 +112,7 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
                 if (led_test_mode) {
                     led_test_mode = LED_TEST_MODE_OFF;
                 } else if (key_press_status == KEY_PRESS_LED_TEST) {
-                    timer_3s_buffer = sync_timer_read32() | 1;
+                    timer_3s_buffer = sync_timer_read32();
                 }
             } else {
                 key_press_status &= ~KEY_PRESS_HOME;

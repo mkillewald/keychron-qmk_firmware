@@ -139,6 +139,7 @@ static void timer_3s_task(void) {
     if (sync_timer_elapsed32(timer_3s_buffer) > 3000) {
         timer_3s_buffer = 0;
         if (key_press_status == KEY_PRESS_FACTORY_RESET) {
+            key_press_status &= ~KEY_PRESS_FACTORY_RESET;
             timer_300ms_buffer = sync_timer_read32() | 1;
             factory_reset_count++;
             layer_state_t default_layer_tmp = default_layer_state;
@@ -156,6 +157,7 @@ static void timer_3s_task(void) {
             rgb_matrix_init();
 #endif
         } else if (key_press_status == KEY_PRESS_LED_TEST) {
+            key_press_status &= ~KEY_PRESS_LED_TEST;
             led_test_mode = LED_TEST_MODE_WHITE;
 #ifdef RGB_MATRIX_ENABLE
             if (!rgb_matrix_is_enabled()) {
@@ -163,7 +165,7 @@ static void timer_3s_task(void) {
             }
 #endif
         }
-        key_press_status = 0;
+        // key_press_status = 0;
     }
 }
 
