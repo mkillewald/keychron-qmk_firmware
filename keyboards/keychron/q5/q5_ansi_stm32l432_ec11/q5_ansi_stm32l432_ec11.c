@@ -153,9 +153,9 @@ led_config_t g_led_config = {
     },
     {
         1,    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,    1, 1, 1, 1,
-        1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1,    1, 4, 4, 4,
+        1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1,    9, 4, 4, 4,
         1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,    4, 4, 4,
-        1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,    1,    4, 4, 4, 4,
+        9, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,    1,    4, 4, 4, 4,
         1,    4, 4, 4, 4, 4, 4, 4, 4, 4, 4,    1, 1, 4, 4, 4,
         1, 1, 1,          4,          1, 1, 1, 1, 1, 4, 4, 4, 1
     }
@@ -177,6 +177,8 @@ bool encoder_update_kb(uint8_t index, bool clockwise) {
     return true;
 }
 
+#    ifdef PAL_USE_CALLBACKS
+
 void encoder0_pad_cb(void *param) {
     (void)param;
 
@@ -192,5 +194,5 @@ void keyboard_post_init_kb(void) {
     palSetLineCallback(encoders_pad_b[0], encoder0_pad_cb, NULL);
 }
 
-#endif
-
+#    endif // PAL_USE_CALLBACKS
+#endif // ENCODER_ENABLE
