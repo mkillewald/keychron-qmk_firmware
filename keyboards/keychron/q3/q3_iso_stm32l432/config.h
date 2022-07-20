@@ -26,7 +26,7 @@
 #define MATRIX_COL_PINS \
     { C14, C15, A0, A1, A2, A3, A4, A5, A6, A7, B0, B1, A8, A9, A10, H3 }
 
-/* If uses PH3 with a stronger pull resistor then the following definition should be included */
+/* If use PH3 with a stronger pull resistor then the following definition should be included */
 // #define MATRIX_UNSELECT_DRIVE_HIGH
 
 /* RGB Matrix Configuration */

@@ -17,6 +17,8 @@
 #include QMK_KEYBOARD_H
 #include "test.h"
 
+// clang-format off
+
 enum layers{
     MAC_BASE,
     MAC_FN,
@@ -58,8 +60,6 @@ key_combination_t key_comb_list[4] = {
 };
 
 static uint8_t mac_keycode[4] = { KC_LOPT, KC_ROPT, KC_LCMD, KC_RCMD };
-
-// clang-format off
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [MAC_BASE] = LAYOUT_iso_89(
