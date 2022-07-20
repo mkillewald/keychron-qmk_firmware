@@ -18,7 +18,7 @@
 
 /* USB Device descriptor parameter */
 #define PRODUCT_ID 0x0314
-#define DEVICE_VER 0x0100
+#define DEVICE_VER 0x0101
 
 /* RGB Matrix Driver Configuration */
 #define DRIVER_COUNT 2

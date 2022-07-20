@@ -146,7 +146,7 @@ led_config_t g_led_config = {
     }
 };
 
-#endif
+#endif // RGB_MATRIX_ENABLE
 
 #ifdef ENCODER_ENABLE
 
@@ -162,6 +162,7 @@ bool encoder_update_kb(uint8_t index, bool clockwise) {
     return true;
 }
 #    if defined(PAL_USE_CALLBACKS)
+
     void encoder0_pad_cb(void *param) {
         (void)param;
 
@@ -176,5 +177,6 @@ bool encoder_update_kb(uint8_t index, bool clockwise) {
         palSetLineCallback(encoders_pad_a[0], encoder0_pad_cb, NULL);
         palSetLineCallback(encoders_pad_b[0], encoder0_pad_cb, NULL);
     }
-#    endif
-#endif
+
+#    endif // PAL_USE_CALLBACKS
+#endif     // ENCODER_ENABLE
