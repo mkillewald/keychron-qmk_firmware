@@ -1,4 +1,3 @@
-/*
 /* Copyright 2021 @ Keychron (https://www.keychron.com)
  *
  * This program is free software: you can redistribute it and/or modify
@@ -19,7 +18,7 @@
 
 /* USB Device descriptor parameter */
 #define PRODUCT_ID 0x0340
-#define DEVICE_VER 0x0101
+#define DEVICE_VER 0x0103
 
 /* RGB Matrix Configuration */
 #define DRIVER_1_LED_TOTAL 61
