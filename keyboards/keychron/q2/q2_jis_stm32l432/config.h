@@ -25,5 +25,8 @@
 #define DRIVER_2_LED_TOTAL 36
 #define DRIVER_LED_TOTAL (DRIVER_1_LED_TOTAL + DRIVER_2_LED_TOTAL)
 
+#define CONSTANT_CURRENT_STEP \
+    { 0xC0, 0xC0, 0x5D, 0xC0, 0xC0, 0x5D, 0xC0, 0xC0, 0x5D, 0xC0, 0xC0, 0x5D }
+
 /* Enable caps-lock LED */
 #define CAPS_LOCK_LED_INDEX 30

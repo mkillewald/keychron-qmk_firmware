@@ -38,6 +38,8 @@ static pin_t row_pins[MATRIX_ROWS] = MATRIX_ROW_PINS;
 static pin_t col_pins[MATRIX_COLS] = MATRIX_COL_PINS;
 #endif // MATRIX_COL_PINS
 
+#define ROWS_PER_HAND (MATRIX_ROWS)
+
 #ifndef NO_PIN_NUM
 #    define NO_PIN_NUM 8
 #endif
@@ -147,25 +149,25 @@ static void matrix_init_pins(void) {
     }
 }
 
-void matrix_read_rows_on_col(matrix_row_t current_matrix[], uint8_t current_col) {
+static void matrix_read_rows_on_col(matrix_row_t current_matrix[], uint8_t current_col, matrix_row_t row_shifter) {
     bool key_pressed = false;
 
     // Select col
-    if (!select_col(current_col)) {
-        return; // skip NO_PIN col
+    if (!select_col(current_col)) { // select col
+        return;                     // skip NO_PIN col
     }
     matrix_output_select_delay();
 
     // For each row...
-    for (uint8_t row_index = 0; row_index < MATRIX_ROWS; row_index++) {
+    for (uint8_t row_index = 0; row_index < ROWS_PER_HAND; row_index++) {
         // Check row pin state
         if (readMatrixPin(row_pins[row_index]) == 0) {
             // Pin LO, set col bit
-            current_matrix[row_index] |= (MATRIX_ROW_SHIFTER << current_col);
+            current_matrix[row_index] |= row_shifter;
             key_pressed = true;
         } else {
             // Pin HI, clear col bit
-            current_matrix[row_index] &= ~(MATRIX_ROW_SHIFTER << current_col);
+            current_matrix[row_index] &= ~row_shifter;
         }
     }
 
@@ -183,8 +185,9 @@ bool matrix_scan_custom(matrix_row_t current_matrix[]) {
     matrix_row_t curr_matrix[MATRIX_ROWS] = {0};
 
     // Set col, read rows
-    for (uint8_t current_col = 0; current_col < MATRIX_COLS; current_col++) {
-        matrix_read_rows_on_col(curr_matrix, current_col);
+    matrix_row_t row_shifter = MATRIX_ROW_SHIFTER;
+    for (uint8_t current_col = 0; current_col < MATRIX_COLS; current_col++, row_shifter <<= 1) {
+        matrix_read_rows_on_col(curr_matrix, current_col, row_shifter);
     }
 
     bool changed = memcmp(current_matrix, curr_matrix, sizeof(curr_matrix)) != 0;

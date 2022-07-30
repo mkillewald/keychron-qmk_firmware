@@ -281,8 +281,3 @@ void system_switch_state_report(uint8_t index, bool active) {
         raw_hid_send(data, RAW_EPSIZE);
     }
 }
-
-/* To solve the problem that keyboard can not wakeup the host */
-void restart_usb_driver(USBDriver *usbp) {
-    // Do nothing here.
-}

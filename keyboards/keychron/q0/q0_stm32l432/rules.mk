@@ -16,8 +16,6 @@ NKRO_ENABLE = yes           # Enable USB N-key Rollover
 BACKLIGHT_ENABLE = no       # Enable keyboard backlight functionality
 RGBLIGHT_ENABLE = no        # Enable keyboard RGB underglow
 AUDIO_ENABLE = no           # Audio output
-ENCODER_ENABLE = no         # Enable Encoder
-ENCODER_MAP_ENABLE = no
 DIP_SWITCH_ENABLE = no
 RGB_MATRIX_ENABLE = yes
 RGB_MATRIX_DRIVER = CKLED2001
@@ -27,4 +25,4 @@ LTO_ENABLE = yes
 # Enter lower-power sleep mode when on the ChibiOS idle thread
 OPT_DEFS += -DCORTEX_ENABLE_WFI_IDLE=TRUE
 
-SRC += test.c
+SRC += ./../test/num_pad/test.c

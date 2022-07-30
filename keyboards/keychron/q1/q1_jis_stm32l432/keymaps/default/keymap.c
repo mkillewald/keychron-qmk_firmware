@@ -15,7 +15,6 @@
  */
 
 #include QMK_KEYBOARD_H
-#include "test.h"
 
 // clang-format off
 
@@ -89,12 +88,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 // clang-format off
-
-bool dip_switch_update_user(uint8_t index, bool active) {
-    /* Send default layer state to host */
-    system_switch_state_report(index, active);
-    return true;
-}
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {

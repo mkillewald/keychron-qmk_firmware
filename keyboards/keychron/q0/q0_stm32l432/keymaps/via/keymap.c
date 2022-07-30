@@ -15,7 +15,6 @@
  */
 
 #include QMK_KEYBOARD_H
-#include "test.h"
 
 enum layers { _BASE, _FN1, _RESERVED1, _RESERVED2 };
 
@@ -52,9 +51,3 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TRNS,    KC_TRNS, KC_TRNS,
         KC_TRNS,             KC_TRNS,   KC_TRNS)
 };
-
-bool dip_switch_update_user(uint8_t index, bool active) {
-    /* Send default layer state to host */
-    system_switch_state_report(index, active);
-    return true;
-}

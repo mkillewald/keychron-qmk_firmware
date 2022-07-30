@@ -52,10 +52,6 @@
 /* Scan phase of led driver set as MSKPHASE_9CHANNEL(defined as 0x03 in CKLED2001.h) */
 #define PHASE_CHANNEL MSKPHASE_9CHANNEL
 
-/* Limit the maximum brigtness current of colour white to 500mA */
-#define CONSTANT_CURRENT_STEP \
-    { 0xA2, 0xA2, 0x50, 0xA2, 0xA2, 0x50, 0xA2, 0xA2, 0x50, 0xA0, 0xA0, 0x50 }
-
 /* turn off effects when suspended */
 #define RGB_DISABLE_WHEN_USB_SUSPENDED
 
