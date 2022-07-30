@@ -1,6 +1,6 @@
 # Keychron Q0
 
-This is 21 keys keypad.
+A customizable number keypad.
 
 * Keyboard Maintainer: [Keychron](https://github.com/keychron)
 * Hardware Supported: Keychron Q0

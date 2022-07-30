@@ -20,7 +20,7 @@ enum layers { _BASE, _FN1, _RESERVED1, _RESERVED2 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_BASE] = LAYOUT_numpad_6x4(
-        MO(_FN1), KC_ESC,  KC_BSPACE, KC_TAB,
+        MO(_FN1),   KC_ESC,  KC_BSPACE, KC_TAB,
         KC_NUMLOCK, KC_PSLS, KC_PAST,   KC_PMNS,
         KC_P7,      KC_P8,   KC_P9,
         KC_P4,      KC_P5,   KC_P6,     KC_PPLS,
@@ -28,26 +28,26 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_P0,               KC_PDOT,   KC_PENT),
 
     [_FN1] = LAYOUT_numpad_6x4(
-        KC_TRNS,    KC_MUTE, KC_VOLD,   KC_VOLU,
+        _______,    KC_MUTE, KC_VOLD,   KC_VOLU,
         RGB_MOD,    RGB_VAI, RGB_HUI,   KC_DEL,
         RGB_RMOD,   RGB_VAD, RGB_HUD,
-        RGB_SAI,    RGB_SPI, KC_MPRV,   KC_TRNS,
+        RGB_SAI,    RGB_SPI, KC_MPRV,   _______,
         RGB_SAD,    RGB_SPD, KC_MPLY,
-        RGB_TOG,             KC_MNXT,   KC_TRNS),
+        RGB_TOG,             KC_MNXT,   _______),
 
     [_RESERVED1] = LAYOUT_numpad_6x4(
-        KC_TRNS,    KC_TRNS, KC_TRNS,   KC_TRNS,
-        KC_TRNS,    KC_TRNS, KC_TRNS,   KC_TRNS,
-        KC_TRNS,    KC_TRNS, KC_TRNS,
-        KC_TRNS,    KC_TRNS, KC_TRNS,   KC_TRNS,
-        KC_TRNS,    KC_TRNS, KC_TRNS,
-        KC_TRNS,             KC_TRNS,   KC_TRNS),
+        _______,    _______, _______,   _______,
+        _______,    _______, _______,   _______,
+        _______,    _______, _______,
+        _______,    _______, _______,   _______,
+        _______,    _______, _______,
+        _______,             _______,   _______),
 
     [_RESERVED2] = LAYOUT_numpad_6x4(
-        KC_TRNS,    KC_TRNS, KC_TRNS,   KC_TRNS,
-        KC_TRNS,    KC_TRNS, KC_TRNS,   KC_TRNS,
-        KC_TRNS,    KC_TRNS, KC_TRNS,
-        KC_TRNS,    KC_TRNS, KC_TRNS,   KC_TRNS,
-        KC_TRNS,    KC_TRNS, KC_TRNS,
-        KC_TRNS,             KC_TRNS,   KC_TRNS)
+        _______,    _______, _______,   _______,
+        _______,    _______, _______,   _______,
+        _______,    _______, _______,
+        _______,    _______, _______,   _______,
+        _______,    _______, _______,
+        _______,             _______,   _______)
 };

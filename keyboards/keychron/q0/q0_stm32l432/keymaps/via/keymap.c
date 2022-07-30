@@ -28,26 +28,26 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_P0,               KC_PDOT,   KC_PENT),
 
     [_FN1] = LAYOUT_numpad_6x4(
-        KC_TRNS,    KC_MUTE, KC_VOLD,   KC_VOLU,
+        _______,    KC_MUTE, KC_VOLD,   KC_VOLU,
         RGB_MOD,    RGB_VAI, RGB_HUI,   KC_DEL,
         RGB_RMOD,   RGB_VAD, RGB_HUD,
-        RGB_SAI,    RGB_SPI, KC_MPRV,   KC_TRNS,
+        RGB_SAI,    RGB_SPI, KC_MPRV,   _______,
         RGB_SAD,    RGB_SPD, KC_MPLY,
-        RGB_TOG,             KC_MNXT,   KC_TRNS),
+        RGB_TOG,             KC_MNXT,   _______),
 
     [_RESERVED1] = LAYOUT_numpad_6x4(
-        KC_TRNS,    KC_TRNS, KC_TRNS,   KC_TRNS,
-        KC_TRNS,    KC_TRNS, KC_TRNS,   KC_TRNS,
-        KC_TRNS,    KC_TRNS, KC_TRNS,
-        KC_TRNS,    KC_TRNS, KC_TRNS,   KC_TRNS,
-        KC_TRNS,    KC_TRNS, KC_TRNS,
-        KC_TRNS,             KC_TRNS,   KC_TRNS),
+        _______,    _______, _______,   _______,
+        _______,    _______, _______,   _______,
+        _______,    _______, _______,
+        _______,    _______, _______,   _______,
+        _______,    _______, _______,
+        _______,             _______,   _______),
 
     [_RESERVED2] = LAYOUT_numpad_6x4(
-        KC_TRNS,    KC_TRNS, KC_TRNS,   KC_TRNS,
-        KC_TRNS,    KC_TRNS, KC_TRNS,   KC_TRNS,
-        KC_TRNS,    KC_TRNS, KC_TRNS,
-        KC_TRNS,    KC_TRNS, KC_TRNS,   KC_TRNS,
-        KC_TRNS,    KC_TRNS, KC_TRNS,
-        KC_TRNS,             KC_TRNS,   KC_TRNS)
+        _______,    _______, _______,   _______,
+        _______,    _______, _______,   _______,
+        _______,    _______, _______,
+        _______,    _______, _______,   _______,
+        _______,    _______, _______,
+        _______,             _______,   _______)
 };
