@@ -18,7 +18,7 @@
 
 #include "quantum.h"
 
-#if defined(KEYBOARD_keychron_q8_q8_ansi_stm32l432)
+#if   defined(KEYBOARD_keychron_q8_q8_ansi_stm32l432)
 #    include "q8_ansi_stm32l432.h"
 #elif defined(KEYBOARD_keychron_q8_q8_ansi_stm32l432_ec11)
 #    include "q8_ansi_stm32l432_ec11.h"

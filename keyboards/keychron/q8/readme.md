@@ -1,6 +1,6 @@
 # Keychron Q8
 
-A customizable 65% and ergonomic keyboard.
+A customizable 65% Alice layout keyboard.
 
 * Keyboard Maintainer: [Keychron](https://github.com/keychron)
 * Hardware Supported: Keychron Q8

@@ -31,6 +31,9 @@
 #define DRIVER_2_LED_TOTAL 43
 #define DRIVER_LED_TOTAL (DRIVER_1_LED_TOTAL + DRIVER_2_LED_TOTAL)
 
+#define CONSTANT_CURRENT_STEP \
+    { 0x94, 0x94, 0x44, 0x94, 0x94, 0x44, 0x94, 0x94, 0x44, 0x94, 0x94, 0x44 }
+
 /* Encoder Configuration */
 #define ENCODERS_PAD_A { A10 }
 #define ENCODERS_PAD_B { A8 }

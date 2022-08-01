@@ -124,13 +124,13 @@ led_config_t g_led_config = {
         // RGB LED Index to Flag
         1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1,    1,
         1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,    1,
-        8, 4, 4, 4, 4, 4,    4, 4, 4, 4, 4, 4, 1,    1,
+        9, 4, 4, 4, 4, 4,    4, 4, 4, 4, 4, 4, 1,    1,
         1,    4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 1,
         1, 1, 1,    4,    1,    1, 4,    1,    1, 1, 1,
     }
 };
 
-#endif
+#endif // RGB_MATRIX_ENABLE
 
 #ifdef ENCODER_ENABLE
 
@@ -145,6 +145,8 @@ bool encoder_update_kb(uint8_t index, bool clockwise) {
     }
     return true;
 }
+
+#    ifdef PAL_USE_CALLBACKS
 
 void encoder0_pad_cb(void *param) {
     (void)param;
@@ -161,5 +163,5 @@ void keyboard_post_init_kb(void) {
     palSetLineCallback(encoders_pad_b[0], encoder0_pad_cb, NULL);
 }
 
-#endif
-
+#    endif // PAL_USE_CALLBACKS
+#endif     // ENCODER_ENABLE

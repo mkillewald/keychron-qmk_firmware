@@ -38,8 +38,6 @@
 
 /* Scan phase of led driver set as MSKPHASE_9CHANNEL(defined as 0x03 in CKLED2001.h) */
 #define PHASE_CHANNEL MSKPHASE_9CHANNEL
-#define CONSTANT_CURRENT_STEP \
-    { 0xA0, 0xA0, 0x44, 0xA0, 0xA0, 0x44, 0xA0, 0xA0, 0x44, 0xA0, 0xA0, 0x44 }
 
 /* DIP switch */
 #define DIP_SWITCH_MATRIX_GRID  { {5, 4} }
@@ -107,6 +105,3 @@
 #define ENABLE_RGB_MATRIX_SOLID_SPLASH
 #define ENABLE_RGB_MATRIX_SOLID_MULTISPLASH
 // #define RGB_MATRIX_KEYPRESSES
-
-/* Enable receive custom command from host */
-#define RAW_HID_CMD 0xAB

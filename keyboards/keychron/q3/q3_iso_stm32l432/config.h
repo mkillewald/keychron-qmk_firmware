@@ -26,13 +26,16 @@
 #define MATRIX_COL_PINS \
     { C14, C15, A0, A1, A2, A3, A4, A5, A6, A7, B0, B1, A8, A9, A10, H3 }
 
-/* If use PH3 with a stronger pull resistor then the following definition should be included */
+/* If PH3 used with a stronger pull resistor then the following definition needs be included */
 // #define MATRIX_UNSELECT_DRIVE_HIGH
 
 /* RGB Matrix Configuration */
 #define DRIVER_1_LED_TOTAL 48
 #define DRIVER_2_LED_TOTAL 40
 #define DRIVER_LED_TOTAL (DRIVER_1_LED_TOTAL + DRIVER_2_LED_TOTAL)
+
+#define CONSTANT_CURRENT_STEP \
+    { 0x9D, 0x9D, 0x44, 0x9D, 0x9D, 0x44, 0x9D, 0x9D, 0x44, 0x9D, 0x9D, 0x44 }
 
 /* Enable caps-lock LED */
 #define CAPS_LOCK_LED_INDEX 49
