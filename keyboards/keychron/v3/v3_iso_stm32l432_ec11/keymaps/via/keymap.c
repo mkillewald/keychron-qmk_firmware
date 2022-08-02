@@ -68,7 +68,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB,   KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,     KC_Y,     KC_U,     KC_I,     KC_O,     KC_P,     KC_LBRC,  KC_RBRC,                KC_DEL,   KC_END,   KC_PGDN,
         KC_CAPS,  KC_A,     KC_S,     KC_D,     KC_F,     KC_G,     KC_H,     KC_J,     KC_K,     KC_L,     KC_SCLN,  KC_QUOT,  KC_NUHS,    KC_ENT,
         KC_LSFT,  KC_NUBS,  KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,     KC_N,     KC_M,     KC_COMM,  KC_DOT,   KC_SLSH,              KC_RSFT,              KC_UP,
-        KC_LCTL,  KC_LOPTN, KC_LCMMD,                               KC_SPC,                                 KC_RCMMD, KC_ROPTN,MO(MAC_FN),  KC_RCTL,    KC_LEFT,  KC_DOWN,  KC_RGHT),
+        KC_LCTL,  KC_LOPTN, KC_LCMMD,                               KC_SPC,                                 KC_RCMMD, KC_ROPTN, MO(MAC_FN), KC_RCTL,    KC_LEFT,  KC_DOWN,  KC_RGHT),
 
     [MAC_FN] = LAYOUT_all(
                                                                                                                                         RGB_VAD, RGB_VAI,
@@ -100,8 +100,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 // clang-format on
 
-uint16_t prev;
-bool siri;
+static uint32_t time;
 
 #if defined(VIA_ENABLE) && defined(ENCODER_ENABLE)
 
@@ -142,12 +141,10 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
 #endif
 
 void matrix_scan_user(void) {
-    if (siri) {
-         if (timer_elapsed(prev) >= 500) {
-            siri = false;
-            unregister_code(KC_LCMD);
-            unregister_code(KC_SPACE);
-        }
+    if (time && sync_timer_elapsed32(time) >= 500) {
+        time = 0;
+        unregister_code(KC_LCMD);
+        unregister_code(KC_SPACE);
     }
 #if defined(VIA_ENABLE) && defined(ENCODER_ENABLE)
     encoder_action_unregister();
@@ -181,11 +178,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             }
             return false;  // Skip all further processing of this key
         case KC_SIRI:
-            if (record->event.pressed) {
+            if (record->event.pressed && time == 0) {
                 register_code(KC_LCMD);
                 register_code(KC_SPACE);
-                prev = timer_read() | 1;
-                siri = true;
+                time = sync_timer_read32();
             } else {
                 // Do something else when release
             }

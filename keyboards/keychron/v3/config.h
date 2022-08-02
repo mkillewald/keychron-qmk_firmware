@@ -40,12 +40,10 @@
 /* DIP switch */
 #define DIP_SWITCH_MATRIX_GRID  { {5, 4} }
 #define SCAN_COUNT_MAX 100
+#define OS_SWITCH_REVERSE
 
 /* Disable DIP switch in matrix data */
 #define MATRIX_MASKED
-
-/* NKRO */
-#define FORCE_NKRO
 
 /* turn off effects when suspended */
 #define RGB_DISABLE_WHEN_USB_SUSPENDED
