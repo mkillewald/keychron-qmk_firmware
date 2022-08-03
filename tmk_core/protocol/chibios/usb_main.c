@@ -639,8 +639,7 @@ static bool usb_request_hook_cb(USBDriver *usbp) {
                         if ((usbp->setup[4] == KEYBOARD_INTERFACE) && (usbp->setup[5] == 0)) { /* wIndex */
                             keyboard_protocol = ((usbp->setup[2]) != 0x00);                    /* LSB(wValue) */
 #ifdef NKRO_ENABLE
-                            keymap_config.nkro = !!keyboard_protocol;
-                            if (!keymap_config.nkro && keyboard_idle) {
+                            if (!keyboard_protocol && keyboard_idle) {
 #else  /* NKRO_ENABLE */
                             if (keyboard_idle) {
 #endif /* NKRO_ENABLE */
@@ -745,20 +744,23 @@ void init_usb_driver(USBDriver *usbp) {
     chVTObjectInit(&keyboard_idle_timer);
 }
 
-__attribute__((weak)) void restart_usb_driver(USBDriver *usbp) {
-    usbStop(usbp);
-    usbDisconnectBus(usbp);
+__attribute__((weak)) void usb_wakeup(USBDriver *usbp) {
+#if STM32_USB_USE_OTG1 || STM32_USB_USE_OTG1
+    stm32_otg_t *otgp = usbp->otg;
 
-#if USB_SUSPEND_WAKEUP_DELAY > 0
-    // Some hubs, kvm switches, and monitors do
-    // weird things, with USB device state bouncing
-    // around wildly on wakeup, yielding race
-    // conditions that can corrupt the keyboard state.
-    //
-    // Pause for a while to let things settle...
-    wait_ms(USB_SUSPEND_WAKEUP_DELAY);
+    osalSysLock();
+    /* If clocks are gated off, turn them back on (may be the case if
+     coming out of suspend mode).*/
+    if (otgp->PCGCCTL & (PCGCCTL_STPPCLK | PCGCCTL_GATEHCLK)) {
+        /* Set to zero to un-gate the USB core clocks.*/
+        otgp->PCGCCTL &= ~(PCGCCTL_STPPCLK | PCGCCTL_GATEHCLK);
+    }
+    _usb_wakeup(usbp);
+    osalSysUnlock();
 #endif
+}
 
+__attribute__((weak)) void usb_start(USBDriver *usbp) {
     usbStart(usbp, &usbcfg);
     usbConnectBus(usbp);
 }
