@@ -195,4 +195,4 @@ void keyboard_post_init_kb(void) {
 }
 
 #    endif // PAL_USE_CALLBACKS
-#endif // ENCODER_ENABLE
+#endif     // ENCODER_ENABLE

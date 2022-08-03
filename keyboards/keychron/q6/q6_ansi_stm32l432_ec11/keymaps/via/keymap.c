@@ -135,16 +135,13 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
 
 #endif
 
-uint16_t prev;
-bool siri;
+static uint32_t time;
 
 void matrix_scan_user(void) {
-    if (siri) {
-        if (timer_elapsed(prev) >= 500) {
-            siri = false;
-            unregister_code(KC_LCMD);
-            unregister_code(KC_SPACE);
-        }
+    if (time && sync_timer_elapsed32(time) >= 500) {
+        time = 0;
+        unregister_code(KC_LCMD);
+        unregister_code(KC_SPACE);
     }
 #if defined(VIA_ENABLE) && defined(ENCODER_ENABLE)
     encoder_action_unregister();
@@ -178,11 +175,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             }
             return false;  // Skip all further processing of this key
         case KC_SIRI:
-            if (record->event.pressed) {
+            if (record->event.pressed && time == 0) {
                 register_code(KC_LCMD);
                 register_code(KC_SPACE);
-                prev = timer_read() | 1;
-                siri = true;
+                time = sync_timer_read32();
             } else {
                 // Do something else when release
             }
