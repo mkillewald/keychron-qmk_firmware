@@ -83,7 +83,17 @@ void rgb_matrix_indicators_none_kb(void) {
 bool led_update_kb(led_t led_state) {
     bool res = led_update_user(led_state);
 
-    if (rgb_matrix_is_enabled()) {
+    if (rgb_matrix_is_enabled()
+#    if defined(ENABLE_RGB_MATRIX_RAINDROPS)
+        && (rgb_matrix_get_mode() != RGB_MATRIX_RAINDROPS)
+#    endif
+#    if defined(ENABLE_RGB_MATRIX_JELLYBEAN_RAINDROPS)
+        && (rgb_matrix_get_mode() != RGB_MATRIX_JELLYBEAN_RAINDROPS)
+#    endif
+#    if defined(ENABLE_RGB_MATRIX_PIXEL_RAIN)
+        && (rgb_matrix_get_mode() != RGB_MATRIX_PIXEL_RAIN)
+#    endif
+    ) {
         return res;
     }
 

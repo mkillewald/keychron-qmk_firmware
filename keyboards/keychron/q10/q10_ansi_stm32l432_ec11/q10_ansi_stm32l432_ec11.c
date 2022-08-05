@@ -189,5 +189,5 @@ void keyboard_post_init_kb(void) {
     palSetLineCallback(encoders_pad_b[0], encoder0_pad_cb, NULL);
 }
 
-#    endif
-#endif
+#    endif // ENCODER_ENABLE
+#endif     // PAL_USE_CALLBACKS
