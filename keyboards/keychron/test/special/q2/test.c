@@ -186,7 +186,7 @@ void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     }
 }
 
-#endif
+#endif // LED_MATRIX_ENABLE
 
 #if RGB_MATRIX_ENABLE
 
@@ -223,7 +223,7 @@ void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     }
 }
 
-#endif
+#endif // RGB_MATRIX_ENABLE
 
 void raw_hid_receive_kb(uint8_t *data, uint8_t length) {
     if ( data[0] == 0xAB ) {
@@ -275,4 +275,10 @@ void system_switch_state_report(uint8_t index, bool active) {
         data[RAW_EPSIZE-1] = (checksum >> 8) & 0xFF;
         raw_hid_send(data, RAW_EPSIZE);
     }
+}
+
+bool dip_switch_update_user(uint8_t index, bool active) {
+    /* Send default layer state to host */
+    system_switch_state_report(index, active);
+    return true;
 }

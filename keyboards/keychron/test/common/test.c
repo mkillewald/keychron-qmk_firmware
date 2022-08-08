@@ -23,9 +23,6 @@
 #    define RAW_EPSIZE 32
 #endif
 
-/* Enable receive custom command from host */
-#define RAW_HID_CMD 0xAB
-
 static void timer_3s_task(void);
 static void timer_300ms_task(void);
 
@@ -278,4 +275,10 @@ void system_switch_state_report(uint8_t index, bool active) {
         data[RAW_EPSIZE-1] = (checksum >> 8) & 0xFF;
         raw_hid_send(data, RAW_EPSIZE);
     }
+}
+
+bool dip_switch_update_user(uint8_t index, bool active) {
+    /* Send default layer state to host */
+    system_switch_state_report(index, active);
+    return true;
 }
