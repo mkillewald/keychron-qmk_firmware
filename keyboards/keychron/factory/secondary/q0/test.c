@@ -15,12 +15,8 @@
  */
 
 #include "quantum.h"
-#include "raw_hid.h"
 
 #define _FN1 1
-#ifndef RAW_EPSIZE
-#    define RAW_EPSIZE 32
-#endif
 
 #define KEY_PRESS_FN    (0x1<<0)
 #define KEY_PRESS_J     (0x1<<1)
@@ -188,7 +184,7 @@ void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     }
 }
 
-#endif
+#endif // LED_MATRIX_ENABLE
 
 #if RGB_MATRIX_ENABLE
 
@@ -225,59 +221,4 @@ void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     }
 }
 
-#endif
-
-void raw_hid_receive_kb(uint8_t *data, uint8_t length) {
-    if ( data[0] == 0xAB ) {
-        uint16_t checksum = 0;
-        for (uint8_t i  = 1; i < RAW_EPSIZE-3; i++) {
-            checksum += data[i];
-        }
-        /* Verify checksum */
-        if ((checksum & 0xFF) != data[RAW_EPSIZE-2] || checksum >> 8 != data[RAW_EPSIZE-1]) {
-            return;
-        }
-        switch (data[1]) {
-            case FACTORY_TEST_CMD_BACKLIGHT:
-                led_test_mode = data[2];
-                timer_3s_buffer = 0;
-                break;
-            case FACTORY_TEST_CMD_OS_SWITCH:
-                report_os_sw_state = data[2];
-                // if (report_os_sw_state) {
-                //     dip_switch_read(true);
-                // }
-                break;
-            case FACTORY_TEST_CMD_JUMP_TO_BL:
-                if (memcmp(&data[2], "JumpToBootloader", strlen("JumpToBootloader")) == 0)
-                    bootloader_jump();
-                break;
-        }
-   }
-}
-
-static void system_switch_state_report(uint8_t index, bool active) {
-    uint16_t checksum = 0;
-    uint8_t data[RAW_EPSIZE] = {0};
-    uint8_t payload[3] = { 0 };
-
-    if (report_os_sw_state) {
-        payload[0] = FACTORY_TEST_CMD_OS_SWITCH;
-        payload[1] = OS_SWITCH;
-        payload[2] = active;
-        data[0] = 0xAB;
-        memcpy(&data[1], payload, 3);
-        for (uint8_t i=1; i<RAW_EPSIZE-3; i++ ) {
-            checksum += data[i];
-        }
-        data[RAW_EPSIZE-2] = checksum & 0xFF;
-        data[RAW_EPSIZE-1] = (checksum >> 8) & 0xFF;
-        raw_hid_send(data, RAW_EPSIZE);
-    }
-}
-
-bool dip_switch_update_user(uint8_t index, bool active) {
-    /* Send default layer state to host */
-    system_switch_state_report(index, active);
-    return true;
-}
+#endif // RGB_MATRIX_ENABLE

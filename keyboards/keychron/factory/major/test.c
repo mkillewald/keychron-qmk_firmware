@@ -189,7 +189,7 @@ void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     }
 }
 
-#endif
+#endif // LED_MATRIX_ENABLE
 
 #if RGB_MATRIX_ENABLE
 
@@ -226,7 +226,7 @@ void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     }
 }
 
-#endif
+#endif // RGB_MATRIX_ENABLE
 
 void raw_hid_receive_kb(uint8_t *data, uint8_t length) {
     if ( data[0] == 0xAB ) {
