@@ -15,7 +15,6 @@
  */
 
 #include QMK_KEYBOARD_H
-#include "test.h"
 
 // clang-format off
 
@@ -94,23 +93,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 // clang-format on
 
-uint16_t prev;
-bool siri;
+static uint32_t time;
 
 void matrix_scan_user(void) {
-    if (siri) {
-        if (timer_elapsed(prev) >= 500) {
-            siri = false;
-            unregister_code(KC_LCMD);
-            unregister_code(KC_SPACE);
-        }
+    if (time && sync_timer_elapsed32(time) >= 500) {
+        time = 0;
+        unregister_code(KC_LCMD);
+        unregister_code(KC_SPACE);
     }
-}
-
-bool dip_switch_update_user(uint8_t index, bool active) {
-    /* Send default layer state to host */
-    system_switch_state_report(index, active);
-    return true;
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -140,15 +130,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             }
             return false;  // Skip all further processing of this key
         case KC_SIRI:
-            if (record->event.pressed) {
+            if (record->event.pressed && time == 0) {
                 register_code(KC_LCMD);
                 register_code(KC_SPACE);
-                prev = timer_read() | 1;
-                siri = true;
+                time = sync_timer_read32();
             } else {
                 // Do something else when release
             }
-            return false;  // Skip all further processing of this key
+            return false; // Skip all further processing of this key
         case KC_TASK:
         case KC_FLXP:
         case KC_SNAP:
