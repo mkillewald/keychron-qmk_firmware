@@ -44,7 +44,6 @@
 /* Scan phase of led driver set as MSKPHASE_9CHANNEL(defined as 0x03 in CKLED2001.h) */
 #define PHASE_CHANNEL MSKPHASE_9CHANNEL
 
-/* Limit the maximum brigtness current of colour white to 500mA */
 #define CONSTANT_CURRENT_STEP \
     { 0xA6, 0xA6, 0x50, 0xA6, 0xA6, 0x50, 0xA6, 0xA6, 0x50, 0xA6, 0xA6, 0x50 }
 
@@ -53,6 +52,13 @@
 #define ENCODERS_PAD_B { A8 }
 #define ENCODER_RESOLUTION 4
 #define ENCODER_DEFAULT_POS 0x3
+
+/* We have 2KB EEPROM size on STM32L432 */
+#define DYNAMIC_KEYMAP_EEPROM_MAX_ADDR 2047
+
+/* EEPROM Driver Configuration */
+#define WEAR_LEVELING_LOGICAL_SIZE 2048
+#define WEAR_LEVELING_BACKING_SIZE (WEAR_LEVELING_LOGICAL_SIZE * 2)
 
 /* Enable caps-lock LED */
 #define CAPS_LOCK_LED_INDEX 44

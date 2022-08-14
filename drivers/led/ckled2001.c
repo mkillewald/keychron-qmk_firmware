@@ -219,14 +219,14 @@ void CKLED2001_update_led_control_registers(uint8_t addr, uint8_t index) {
     g_led_control_registers_update_required[index] = false;
 }
 
-void CKLED2001_return_normal(uint8_t addr) {
+void CKLED2001_sw_return_normal(uint8_t addr) {
     // Select to function page
     CKLED2001_write_register(addr, CONFIGURE_CMD_PAGE, FUNCTION_PAGE);
     // Setting LED driver to normal mode
     CKLED2001_write_register(addr, CONFIGURATION_REG, MSKSW_NORMAL_MODE);
 }
 
-void CKLED2001_shutdown(uint8_t addr) {
+void CKLED2001_sw_shutdown(uint8_t addr) {
     // Select to function page
     CKLED2001_write_register(addr, CONFIGURE_CMD_PAGE, FUNCTION_PAGE);
     // Setting LED driver to shutdown mode

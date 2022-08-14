@@ -151,4 +151,4 @@ led_config_t g_led_config = {
     }
 };
 
-#endif
+#endif // RGB_MATRIX_ENABLE

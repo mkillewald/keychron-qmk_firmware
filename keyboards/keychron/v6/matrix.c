@@ -22,9 +22,12 @@
 #include "debounce.h"
 #include "quantum.h"
 
-#define DS C15
-#define STCP A0
-#define SHCP A1
+// Pin connected to DS of 74HC595
+#define DATA_PIN C15
+// Pin connected to SH_CP of 74HC595
+#define CLOCK_PIN A1
+// Pin connected to ST_CP of 74HC595
+#define LATCH_PIN A0
 
 #ifdef MATRIX_ROW_PINS
 static pin_t row_pins[MATRIX_ROWS] = MATRIX_ROW_PINS;
@@ -33,8 +36,16 @@ static pin_t row_pins[MATRIX_ROWS] = MATRIX_ROW_PINS;
 static pin_t col_pins[MATRIX_COLS] = MATRIX_COL_PINS;
 #endif  // MATRIX_COL_PINS
 
-#ifndef PIN_OFFSET
-#    define PIN_OFFSET 0
+#ifndef NO_PIN_NUM
+#    define NO_PIN_NUM 8
+#endif
+
+#ifndef COL_OFFSET
+#    define COL_OFFSET 0
+#endif
+
+#ifndef CLR_VAL
+#    define CLR_VAL 0xFF
 #endif
 
 /* matrix state(1:on, 0:off) */
@@ -67,36 +78,29 @@ static inline uint8_t readMatrixPin(pin_t pin) {
     }
 }
 
-static void delay_nTime(uint8_t time) {
-    while(time--);
-}
-
-static void SendTo595(uint16_t byteData) {
+static void shiftOut(uint16_t dataOut) {
     for (uint8_t i = 0; i < NO_PIN_NUM; i++) {
-        if (byteData & 0x1) {
-            setPinOutput_writeHigh(DS);
+        if (dataOut & 0x1) {
+            setPinOutput_writeHigh(DATA_PIN);
         } else {
-            setPinOutput_writeLow(DS);
+            setPinOutput_writeLow(DATA_PIN);
         }
-        byteData = byteData>>1;
-
-        setPinOutput_writeHigh(SHCP);
-        delay_nTime(10);
-        setPinOutput_writeLow(SHCP);
+        dataOut = dataOut >> 1;
+        setPinOutput_writeHigh(CLOCK_PIN);
+        setPinOutput_writeLow(CLOCK_PIN);
     }
-    setPinOutput_writeHigh(STCP);
-    delay_nTime(10);
-    setPinOutput_writeLow(STCP);
+    setPinOutput_writeHigh(LATCH_PIN);
+    setPinOutput_writeLow(LATCH_PIN);
 }
 
 static bool select_col(uint8_t col) {
     pin_t pin = col_pins[col];
 
-    if (pin != NO_PIN) {
-        setPinOutput_writeLow(pin);
+    if (pin == NO_PIN) {
+        shiftOut(~(0x1 << ((MATRIX_COLS - COL_OFFSET) - col - 1)));
         return true;
     } else {
-        SendTo595(~(0x1<<((MATRIX_COLS - PIN_OFFSET) - col - 1)));
+        setPinOutput_writeLow(pin);
         return true;
     }
     return false;
@@ -105,16 +109,28 @@ static bool select_col(uint8_t col) {
 static void unselect_col(uint8_t col) {
     pin_t pin = col_pins[col];
 
-    if (pin != NO_PIN) {
-        setPinInputHigh_atomic(pin);
+    if (pin == NO_PIN) {
+        shiftOut(CLR_VAL);
     } else {
-        SendTo595(CLEAR_VAL);
+        setPinInputHigh_atomic(pin);
+    }
+}
+
+static void unselect_col_my(uint8_t col) {
+    pin_t pin = col_pins[col];
+
+    if (pin == NO_PIN) {
+        if (col == (MATRIX_COLS - COL_OFFSET - 1)) {
+            shiftOut(CLR_VAL);
+        }
+    } else {
+        setPinInputHigh_atomic(pin);
     }
 }
 
 static void unselect_cols(void) {
     for (uint8_t x = 0; x < MATRIX_COLS; x++) {
-            unselect_col(x);
+        unselect_col_my(x);
     }
 }
 

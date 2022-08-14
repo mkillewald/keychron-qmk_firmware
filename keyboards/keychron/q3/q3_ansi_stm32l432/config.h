@@ -18,7 +18,7 @@
 
 /* USB Device descriptor parameter */
 #define PRODUCT_ID 0x0120
-#define DEVICE_VER 0x0104
+#define DEVICE_VER 0x0105
 
 /* key matrix pins */
 #define MATRIX_ROW_PINS \
@@ -26,7 +26,7 @@
 #define MATRIX_COL_PINS \
     { C14, C15, A0, A1, A2, A3, A4, A5, A6, A7, B0, B1, A8, A9, A10, H3 }
 
-/* If uses PH3 with a stronger pull resistor then the following definition should be included */
+/* If PH3 used with a stronger pull resistor then the following definition needs be included */
 // #define MATRIX_UNSELECT_DRIVE_HIGH
 
 /* RGB Matrix Configuration */
@@ -34,6 +34,8 @@
 #define DRIVER_2_LED_TOTAL 39
 #define DRIVER_LED_TOTAL (DRIVER_1_LED_TOTAL + DRIVER_2_LED_TOTAL)
 
+#define CONSTANT_CURRENT_STEP \
+    { 0x9D, 0x9D, 0x44, 0x9D, 0x9D, 0x44, 0x9D, 0x9D, 0x44, 0x9D, 0x9D, 0x44 }
+
 /* Enable CapsLcok LED */
 #define CAPS_LOCK_LED_INDEX 50
-

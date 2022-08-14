@@ -18,7 +18,7 @@
 
 /* USB Device descriptor parameter */
 #define PRODUCT_ID 0x0121
-#define DEVICE_VER 0x0104
+#define DEVICE_VER 0x0105
 
 /* key matrix pins */
 #define MATRIX_ROW_PINS \
@@ -30,6 +30,9 @@
 #define DRIVER_1_LED_TOTAL 48
 #define DRIVER_2_LED_TOTAL 39
 #define DRIVER_LED_TOTAL (DRIVER_1_LED_TOTAL + DRIVER_2_LED_TOTAL)
+
+#define CONSTANT_CURRENT_STEP \
+    { 0x9D, 0x9D, 0x44, 0x9D, 0x9D, 0x44, 0x9D, 0x9D, 0x44, 0x9D, 0x9D, 0x44 }
 
 /* Encoder Configuration */
 #define ENCODERS_PAD_A { A10 }

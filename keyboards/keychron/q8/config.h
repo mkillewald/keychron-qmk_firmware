@@ -34,6 +34,9 @@
 #define MATRIX_COL_PINS \
     { C14, C15, A0, A1, A2, A3, A4, A5, A6, A7, B0, B1, A8, A9, H3 }
 
+/* If PH3 used with a stronger pull resistor then the following definition needs be included */
+// #define MATRIX_UNSELECT_DRIVE_HIGH
+
 /* Set 0 if debouncing isn't needed */
 #define DEBOUNCE 5
 
@@ -54,14 +57,16 @@
 /* Disable DIP switch in matrix data */
 #define MATRIX_MASKED
 
-/* NKRO */
-#define FORCE_NKRO
-
 /* Turn off effects when suspended */
 #define RGB_DISABLE_WHEN_USB_SUSPENDED
 
 /* We have 2KB EEPROM size on STM32L432 */
 #define DYNAMIC_KEYMAP_EEPROM_MAX_ADDR 2047
+#define DYNAMIC_KEYMAP_LAYER_COUNT 5
+
+/* EEPROM Driver Configuration */
+#define WEAR_LEVELING_LOGICAL_SIZE 2048
+#define WEAR_LEVELING_BACKING_SIZE (WEAR_LEVELING_LOGICAL_SIZE * 2)
 
 // RGB Matrix Animation modes. Explicitly enabled
 // For full list of effects, see:

@@ -37,64 +37,95 @@ bool dip_switch_update_kb(uint8_t index, bool active) {
     return true;
 }
 
-#endif
+#endif // DIP_SWITCH_ENABLE
 
 #if defined(RGB_MATRIX_ENABLE) && (defined(CAPS_LOCK_LED_INDEX) || defined(NUM_LOCK_LED_INDEX))
-    #if defined(CAPS_LOCK_LED_INDEX)
-        #define CAPS_LOCK_MAX_BRIGHTNESS 0xFF
-        #ifdef RGB_MATRIX_MAXIMUM_BRIGHTNESS
-            #undef CAPS_LOCK_MAX_BRIGHTNESS
-            #define CAPS_LOCK_MAX_BRIGHTNESS RGB_MATRIX_MAXIMUM_BRIGHTNESS
-        #endif
 
-        #define CAPS_LOCK_VAL_STEP 8
-        #ifdef RGB_MATRIX_VAL_STEP
-            #undef CAPS_LOCK_VAL_STEP
-            #define CAPS_LOCK_VAL_STEP RGB_MATRIX_VAL_STEP
-        #endif
-    #endif
+#    define CAPS_NUM_LOCK_MAX_BRIGHTNESS 0xFF
+#    ifdef RGB_MATRIX_MAXIMUM_BRIGHTNESS
+#        undef CAPS_NUM_LOCK_MAX_BRIGHTNESS
+#        define CAPS_NUM_LOCK_MAX_BRIGHTNESS RGB_MATRIX_MAXIMUM_BRIGHTNESS
+#    endif
 
-    #if defined(NUM_LOCK_LED_INDEX)
-        #define NUM_LOCK_MAX_BRIGHTNESS 0xFF
-        #ifdef RGB_MATRIX_MAXIMUM_BRIGHTNESS
-            #undef NUM_LOCK_MAX_BRIGHTNESS
-            #define NUM_LOCK_MAX_BRIGHTNESS RGB_MATRIX_MAXIMUM_BRIGHTNESS
-        #endif
+#    define CAPS_NUM_LOCK_VAL_STEP 8
+#    ifdef RGB_MATRIX_VAL_STEP
+#        undef CAPS_NUM_LOCK_VAL_STEP
+#        define CAPS_NUM_LOCK_VAL_STEP RGB_MATRIX_VAL_STEP
+#    endif
 
-        #define NUM_LOCK_VAL_STEP 8
-        #ifdef RGB_MATRIX_VAL_STEP
-            #undef NUM_LOCK_VAL_STEP
-            #define NUM_LOCK_VAL_STEP RGB_MATRIX_VAL_STEP
-        #endif
-    #endif
+extern void rgb_matrix_update_pwm_buffers(void);
 
-    void rgb_matrix_indicators_kb(void) {
-        #if defined(CAPS_LOCK_LED_INDEX)
-        if (host_keyboard_led_state().caps_lock) {
-            uint8_t b = rgb_matrix_get_val();
-            if (b < CAPS_LOCK_VAL_STEP) {
-                b = CAPS_LOCK_VAL_STEP;
-            } else if (b < (CAPS_LOCK_MAX_BRIGHTNESS - CAPS_LOCK_VAL_STEP)) {
-                b += CAPS_LOCK_VAL_STEP;  // one step more than current brightness
-            } else {
-                b = CAPS_LOCK_MAX_BRIGHTNESS;
-            }
-            rgb_matrix_set_color(CAPS_LOCK_LED_INDEX, b, b, b);  // white, with the adjusted brightness    }
-        }
-        #endif
-        #if defined(NUM_LOCK_LED_INDEX)
-        if (host_keyboard_led_state().num_lock) {
-            uint8_t v = rgb_matrix_get_val();
-            if (v < NUM_LOCK_VAL_STEP) {
-                v = NUM_LOCK_VAL_STEP;
-            } else if (v < (NUM_LOCK_MAX_BRIGHTNESS - NUM_LOCK_VAL_STEP)) {
-                v += NUM_LOCK_VAL_STEP;  // one step more than current brightness
-            } else {
-                v = NUM_LOCK_MAX_BRIGHTNESS;
-            }
-            rgb_matrix_set_color(NUM_LOCK_LED_INDEX, v, v, v);  // white, with the adjusted brightness    }
-        }
-        #endif
+static uint8_t light_brightness_get(void) {
+    uint8_t value = rgb_matrix_get_val();
+    if (value < CAPS_NUM_LOCK_VAL_STEP) {
+        value = CAPS_NUM_LOCK_VAL_STEP;
+    } else if (value < (CAPS_NUM_LOCK_MAX_BRIGHTNESS - CAPS_NUM_LOCK_VAL_STEP)) {
+        value += CAPS_NUM_LOCK_VAL_STEP; // one step more than current brightness
+    } else {
+        value = CAPS_NUM_LOCK_MAX_BRIGHTNESS;
     }
+
+    return value;
+}
+
+void rgb_matrix_indicators_kb(void) {
+#    if defined(CAPS_LOCK_LED_INDEX)
+    if (host_keyboard_led_state().caps_lock) {
+        uint8_t v = light_brightness_get();
+        rgb_matrix_set_color(CAPS_LOCK_LED_INDEX, v, v, v); // white, with the adjusted brightness
+    }
+#    endif
+#    if defined(NUM_LOCK_LED_INDEX)
+    if (host_keyboard_led_state().num_lock) {
+        uint8_t v = light_brightness_get();
+        rgb_matrix_set_color(NUM_LOCK_LED_INDEX, v, v, v); // white, with the adjusted brightness
+    }
+#    endif
+}
+
+void rgb_matrix_indicators_none_kb(void) {
+    rgb_matrix_indicators_kb();
+    rgb_matrix_update_pwm_buffers();
+}
+
+bool led_update_kb(led_t led_state) {
+    bool res = led_update_user(led_state);
+
+    if (rgb_matrix_is_enabled()
+#    if defined(ENABLE_RGB_MATRIX_RAINDROPS)
+        && (rgb_matrix_get_mode() != RGB_MATRIX_RAINDROPS)
+#    endif
+#    if defined(ENABLE_RGB_MATRIX_JELLYBEAN_RAINDROPS)
+        && (rgb_matrix_get_mode() != RGB_MATRIX_JELLYBEAN_RAINDROPS)
+#    endif
+#    if defined(ENABLE_RGB_MATRIX_PIXEL_RAIN)
+        && (rgb_matrix_get_mode() != RGB_MATRIX_PIXEL_RAIN)
+#    endif
+    ) {
+        return res;
+    }
+
+    if (res) {
+#    if defined(CAPS_LOCK_LED_INDEX)
+        if (led_state.caps_lock) {
+            uint8_t v = light_brightness_get();
+            rgb_matrix_set_color(CAPS_LOCK_LED_INDEX, v, v, v);
+        } else {
+            rgb_matrix_set_color(CAPS_LOCK_LED_INDEX, 0, 0, 0);
+        }
+#    endif
+#    if defined(NUM_LOCK_LED_INDEX)
+        if (led_state.num_lock) {
+            uint8_t v = light_brightness_get();
+            rgb_matrix_set_color(NUM_LOCK_LED_INDEX, v, v, v);
+        } else {
+            rgb_matrix_set_color(NUM_LOCK_LED_INDEX, 0, 0, 0);
+        }
+#    endif
+        rgb_matrix_update_pwm_buffers();
+    }
+
+    return res;
+}
 
 #endif  // CAPS_LOCK_LED_INDEX or CAPS_LOCK_LED_INDEX

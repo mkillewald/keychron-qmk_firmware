@@ -1,4 +1,4 @@
-/* Copyright 2021 @ Keychron (https://www.keychron.com)
+/* Copyright 2022 @ Keychron (https://www.keychron.com)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
 
 /* USB Device descriptor parameter */
 #define PRODUCT_ID 0x0350
-#define DEVICE_VER 0x0100
+#define DEVICE_VER 0x0101
 
 /* RGB Matrix Configuration */
 #define DRIVER_1_LED_TOTAL 55
@@ -27,3 +27,6 @@
 
 /* Enable caps-lock LED */
 #define CAPS_LOCK_LED_INDEX 54
+
+/* Enable num-lock LED */
+// #define NUM_LOCK_LED_INDEX 33

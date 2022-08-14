@@ -18,12 +18,15 @@
 
 /* USB Device descriptor parameter */
 #define PRODUCT_ID 0x0315
-#define DEVICE_VER 0x0100
+#define DEVICE_VER 0x0101
 
 /* RGB Matrix Configuration */
 #define DRIVER_1_LED_TOTAL 46
 #define DRIVER_2_LED_TOTAL 40
 #define DRIVER_LED_TOTAL (DRIVER_1_LED_TOTAL + DRIVER_2_LED_TOTAL)
+
+#define CONSTANT_CURRENT_STEP \
+    { 0xA0, 0xA0, 0x4D, 0xA0, 0xA0, 0x4D, 0xA0, 0xA0, 0x4D, 0xA0, 0xA0, 0x4D }
 
 /* Encoder Configuration */
 #define ENCODERS_PAD_A { A10 }

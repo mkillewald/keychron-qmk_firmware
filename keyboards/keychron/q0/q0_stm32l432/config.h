@@ -25,4 +25,4 @@
 #define DRIVER_LED_TOTAL DRIVER_1_LED_TOTAL
 
 /* Enable num-lock LED */
-// #define NUM_LOCK_LED_INDEX 4
+#define NUM_LOCK_LED_INDEX 4

@@ -55,6 +55,7 @@ static int8_t encoder_LUT[] = {0, -1, 1, 0, 1, 0, 0, -1, -1, 0, 0, 1, 0, 1, -1, 
 
 static uint8_t encoder_state[NUM_ENCODERS]  = {0};
 static int8_t  encoder_pulses[NUM_ENCODERS] = {0};
+static bool    encoder_external_update[NUM_ENCODERS] = {false};
 
 // encoder counts
 static uint8_t thisCount;
@@ -163,58 +164,57 @@ static bool encoder_update(uint8_t index, uint8_t state) {
     index += thisHand;
 #endif
     encoder_pulses[i] += encoder_LUT[state & 0xF];
+
+#ifdef ENCODER_DEFAULT_POS
+    if ((encoder_pulses[i] >= resolution) || (encoder_pulses[i] <= -resolution) || ((state & 0x3) == ENCODER_DEFAULT_POS)) {
+        if (encoder_pulses[i] >= 1) {
+#else
     if (encoder_pulses[i] >= resolution) {
-        encoder_value[index]++;
-        changed = true;
+#endif
+
+            encoder_value[index]++;
+            changed = true;
 #ifdef ENCODER_MAP_ENABLE
-        encoder_exec_mapping(index, ENCODER_COUNTER_CLOCKWISE);
+            encoder_exec_mapping(index, ENCODER_COUNTER_CLOCKWISE);
 #else  // ENCODER_MAP_ENABLE
         encoder_update_kb(index, ENCODER_COUNTER_CLOCKWISE);
 #endif // ENCODER_MAP_ENABLE
-    }
+        }
+
+#ifdef ENCODER_DEFAULT_POS
+        if (encoder_pulses[i] <= -1) {
+#else
     if (encoder_pulses[i] <= -resolution) { // direction is arbitrary here, but this clockwise
-        encoder_value[index]--;
-        changed = true;
+#endif
+            encoder_value[index]--;
+            changed = true;
 #ifdef ENCODER_MAP_ENABLE
-        encoder_exec_mapping(index, ENCODER_CLOCKWISE);
+            encoder_exec_mapping(index, ENCODER_CLOCKWISE);
 #else  // ENCODER_MAP_ENABLE
         encoder_update_kb(index, ENCODER_CLOCKWISE);
 #endif // ENCODER_MAP_ENABLE
-    }
-    encoder_pulses[i] %= resolution;
+        }
+        encoder_pulses[i] %= resolution;
 #ifdef ENCODER_DEFAULT_POS
-    if ((state & 0x3) == ENCODER_DEFAULT_POS) {
         encoder_pulses[i] = 0;
     }
 #endif
     return changed;
 }
 
-#if defined(PAL_USE_CALLBACKS) || defined(AVR_USE_INT)
 bool encoder_read(void) {
     bool changed = false;
     for (uint8_t i = 0; i < thisCount; i++) {
         uint8_t new_status = (readPin(encoders_pad_a[i]) << 0) | (readPin(encoders_pad_b[i]) << 1);
-        encoder_state[i] <<= 2;
-        encoder_state[i] |= new_status;
-        changed |= encoder_update(i, encoder_state[i]);
-    }
-    return changed;
-}
-#else
-bool encoder_read(void) {
-    bool changed = false;
-    for (uint8_t i = 0; i < thisCount; i++) {
-        uint8_t new_status = (readPin(encoders_pad_a[i]) << 0) | (readPin(encoders_pad_b[i]) << 1);
-        if ((encoder_state[i] & 0x3) != new_status) {
+        if ((encoder_state[i] & 0x3) != new_status || encoder_external_update[i]) {
             encoder_state[i] <<= 2;
             encoder_state[i] |= new_status;
             changed |= encoder_update(i, encoder_state[i]);
+            encoder_external_update[i] = false;
         }
     }
     return changed;
 }
-#endif
 
 #ifdef SPLIT_KEYBOARD
 void last_encoder_activity_trigger(void);
@@ -260,5 +260,6 @@ void encoder_insert_state(uint8_t index) {
     encoder_state[index] <<= 2;
     encoder_state[index] |= (readPin(encoders_pad_a[index]) << 0) | (readPin(encoders_pad_b[index]) << 1);
     encoder_pulses[index] += encoder_LUT[encoder_state[index] & 0xF];
+    encoder_external_update[index] = true;
 }
 #endif

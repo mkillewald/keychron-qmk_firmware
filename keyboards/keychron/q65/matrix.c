@@ -66,22 +66,12 @@ static inline uint8_t readMatrixPin(pin_t pin) {
     }
 }
 
-static void shiftOut(uint8_t dataOut, bool singleFlag) {
-    if (singleFlag) {
+static void shiftOutMultiple(uint8_t dataOut) {
+    for (uint8_t i = 0; i < 8; i++) {
         if (dataOut & 0x1) {
             setPinOutput_writeHigh(DATA_PIN);
         } else {
             setPinOutput_writeLow(DATA_PIN);
-        }
-        setPinOutput_writeHigh(CLOCK_PIN);
-        setPinOutput_writeLow(CLOCK_PIN);
-    } else {
-        for (uint8_t i = 0; i < 8; i++) {
-            if (dataOut & 0x1) {
-                setPinOutput_writeHigh(DATA_PIN);
-            } else {
-                setPinOutput_writeLow(DATA_PIN);
-            }
         }
         dataOut = dataOut>>1;
         setPinOutput_writeHigh(CLOCK_PIN);
@@ -91,14 +81,27 @@ static void shiftOut(uint8_t dataOut, bool singleFlag) {
     setPinOutput_writeLow(LATCH_PIN);
 }
 
+static void shiftOutSingle(uint8_t dataOut) {
+    if (dataOut & 0x1) {
+        setPinOutput_writeHigh(DATA_PIN);
+    } else {
+        setPinOutput_writeLow(DATA_PIN);
+    }
+    setPinOutput_writeHigh(CLOCK_PIN);
+    setPinOutput_writeLow(CLOCK_PIN);
+
+    setPinOutput_writeHigh(LATCH_PIN);
+    setPinOutput_writeLow(LATCH_PIN);
+}
+
 static bool select_col(uint8_t col) {
     pin_t pin = col_pins[col];
 
     if (pin == NO_PIN) {
         if (col == 0) {
-            shiftOut(0x00, true);
+            shiftOutSingle(0x0);
         } else {
-            shiftOut(0x01, true);
+            shiftOutSingle(0x01);
         }
         return true;
     } else {
@@ -112,7 +115,7 @@ static void unselect_col(uint8_t col) {
     pin_t pin = col_pins[col];
     if (pin == NO_PIN) {
         if (col == 7) {
-            shiftOut(0x01, true);
+            shiftOutSingle(0x01);
         }
     } else {
         setPinInputHigh_atomic(pin);
@@ -123,7 +126,7 @@ static void unselect_cols(void) {
     for (uint8_t x = 0; x < MATRIX_COLS; x++) {
             unselect_col(x);
     }
-    shiftOut(0xFF, false);
+    shiftOutMultiple(0xFF);
 }
 
 static void matrix_init_pins(void) {

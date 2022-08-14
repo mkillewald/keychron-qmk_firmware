@@ -18,16 +18,21 @@
 
 /* USB Device descriptor parameter */
 #define PRODUCT_ID 0x0125
-#define DEVICE_VER 0x0101
+#define DEVICE_VER 0x0102
 
 /* key matrix pins */
-#define MATRIX_ROW_PINS { B5, B4, B3, A15, A14, A13 }
-#define MATRIX_COL_PINS { C14, C15, A0, A1, A2, A3, A4, A5, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN }
+#define MATRIX_ROW_PINS \
+    { B5, B4, B3, A15, A14, A13 }
+#define MATRIX_COL_PINS \
+    { C14, C15, A0, A1, A2, A3, A4, A5, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN }
 
 /* RGB Matrix Configuration */
 #define DRIVER_1_LED_TOTAL 49
 #define DRIVER_2_LED_TOTAL 43
 #define DRIVER_LED_TOTAL (DRIVER_1_LED_TOTAL + DRIVER_2_LED_TOTAL)
+
+#define CONSTANT_CURRENT_STEP \
+    { 0x94, 0x94, 0x44, 0x94, 0x94, 0x44, 0x94, 0x94, 0x44, 0x94, 0x94, 0x44 }
 
 /* Encoder Configuration */
 #define ENCODERS_PAD_A { A10 }
