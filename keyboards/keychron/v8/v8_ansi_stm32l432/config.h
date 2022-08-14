@@ -28,6 +28,5 @@
 /* Enable caps-lock LED */
 #define CAPS_LOCK_LED_INDEX 30
 
-#define OLED_TIMEOUT 0
-// #define OLED_DISPLAY_HEIGHT 64
-#define OLED_DISPLAY_128X64
+// #define OLED_TIMEOUT 0
+// #define OLED_DISPLAY_128X64
