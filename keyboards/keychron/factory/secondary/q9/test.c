@@ -258,7 +258,7 @@ void raw_hid_receive_kb(uint8_t *data, uint8_t length) {
                     bootloader_jump();
                 break;
         }
-   }
+    }
 }
 
 void system_switch_state_report(uint8_t index, bool active) {
