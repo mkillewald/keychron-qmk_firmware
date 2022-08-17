@@ -23,6 +23,8 @@ RAW_ENABLE = yes
 LTO_ENABLE = yes
 EEPROM_DRIVER = wear_leveling
 WEAR_LEVELING_DRIVER = embedded_flash
+EEPROM_DRIVER = wear_leveling
+WEAR_LEVELING_DRIVER = embedded_flash
 # OLED_ENABLE = yes
 
 # Enter lower-power sleep mode when on the ChibiOS idle thread
