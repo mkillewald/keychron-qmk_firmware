@@ -1,7 +1,17 @@
 {
+<<<<<<< HEAD:keyboards/keychron/v2/v2_iso_stm32l432_ec11/info.json
     "keyboard_name": "Keychron V2",
+=======
+    "keyboard_name": "Q2",
+    "manufacturer": "Keychron",
+>>>>>>> upstream/develop:keyboards/keychron/q2/rev_0113/info.json
     "url": "https://github.com/Keychron",
     "maintainer": "lalalademaxiya1",
+    "usb": {
+        "vid": "0x3434",
+        "pid": "0x0113",
+        "device_version": "1.0.0"
+    },
     "layouts": {
         "LAYOUT_iso_68": {
             "layout": [

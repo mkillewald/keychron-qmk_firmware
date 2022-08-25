@@ -160,7 +160,7 @@ led_config_t g_led_config = {
 #endif
 
 #ifdef ENCODER_ENABLE
-
+#if 0
 bool encoder_update_kb(uint8_t index, bool clockwise) {
     if (!encoder_update_user(index, clockwise)) { return false; }
     if (index == 0) {
@@ -172,7 +172,7 @@ bool encoder_update_kb(uint8_t index, bool clockwise) {
     }
     return true;
 }
-
+#endif
 #    if defined(PAL_USE_CALLBACKS)
 
 void encoder0_pad_cb(void *param) {
