@@ -1,4 +1,4 @@
-/* Copyright 2022 @ Keychron (https://www.keychron.com)
+/* Copyright 2020 QMK
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,14 +16,7 @@
 
 #pragma once
 
-/* USB Device descriptor parameter */
-#define PRODUCT_ID 0x0410
-#define DEVICE_VER 0x0102
+#include_next <mcuconf.h>
 
-/* RGB Matrix Configuration */
-#define DRIVER_1_LED_TOTAL 46
-#define DRIVER_2_LED_TOTAL 38
-#define DRIVER_LED_TOTAL (DRIVER_1_LED_TOTAL + DRIVER_2_LED_TOTAL)
-
-/* Enable caps-lock LED */
-#define CAPS_LOCK_LED_INDEX 46
+#undef STM32_I2C_USE_I2C1
+#define STM32_I2C_USE_I2C1 TRUE

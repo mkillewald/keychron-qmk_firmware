@@ -1,4 +1,12 @@
-/* Copyright 2022 @ Keychron (https://www.keychron.com)
+/*
+ * @Author: lalalademaxiya1 66767061+lalalademaxiya1@users.noreply.github.com
+ * @Date: 2022-08-27 11:37:00
+ * @LastEditors: lalalademaxiya1 66767061+lalalademaxiya1@users.noreply.github.com
+ * @LastEditTime: 2022-08-30 11:33:38
+ * @FilePath: /qmk_firmware/keyboards/keychron/q60/q60_ansi_stm32l432/config.h
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ */
+/* Copyright 2021 @ Keychron (https://www.keychron.com)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,13 +25,12 @@
 #pragma once
 
 /* USB Device descriptor parameter */
-#define PRODUCT_ID 0x0410
-#define DEVICE_VER 0x0102
+#define PRODUCT_ID 0x01C0
+#define DEVICE_VER 0x0100
 
 /* RGB Matrix Configuration */
-#define DRIVER_1_LED_TOTAL 46
-#define DRIVER_2_LED_TOTAL 38
-#define DRIVER_LED_TOTAL (DRIVER_1_LED_TOTAL + DRIVER_2_LED_TOTAL)
+#define DRIVER_1_LED_TOTAL 60
+#define DRIVER_LED_TOTAL DRIVER_1_LED_TOTAL
 
-/* Enable caps-lock LED */
-#define CAPS_LOCK_LED_INDEX 46
+/* Enable CapsLcok LED*/
+#define CAPS_LOCK_LED_INDEX 29
