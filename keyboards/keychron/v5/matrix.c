@@ -15,14 +15,8 @@
  */
 
 #include "matrix.h"
-
-#include <stdbool.h>
-#include <stdint.h>
-#include <string.h>
-
-#include "debounce.h"
 #include "quantum.h"
-#include "util.h"
+
 
 // Pin connected to DS of 74HC595
 #define DATA_PIN C15
@@ -39,10 +33,6 @@ static pin_t col_pins[MATRIX_COLS] = MATRIX_COL_PINS;
 #endif // MATRIX_COL_PINS
 
 #define ROWS_PER_HAND (MATRIX_ROWS)
-
-/* matrix state(1:on, 0:off) */
-extern matrix_row_t raw_matrix[MATRIX_ROWS]; // raw values
-extern matrix_row_t matrix[MATRIX_ROWS];     // debounced values
 
 static inline void setPinOutput_writeLow(pin_t pin) {
     ATOMIC_BLOCK_FORCEON {
@@ -111,12 +101,6 @@ static void unselect_col(uint8_t col) {
         shiftOut(0xFF);
     }
 }
-
-// static void unselect_cols(void) {
-//     for (uint8_t x = 0; x < MATRIX_COLS; x++) {
-//         unselect_col(x);
-//     }
-// }
 
 static void unselect_cols(void) {
     // unselect column pins
