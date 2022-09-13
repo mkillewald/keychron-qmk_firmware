@@ -167,6 +167,8 @@ void        led_matrix_decrease_speed(void);
 void        led_matrix_decrease_speed_noeeprom(void);
 led_flags_t led_matrix_get_flags(void);
 void        led_matrix_set_flags(led_flags_t flags);
+void        led_matrix_set_flags_noeeprom(led_flags_t flags);
+
 #ifdef LED_DISABLE_TIMEOUT
 #   if LED_DISABLE_TIMEOUT > 0
 void        led_matrix_disable_timeout_set(uint32_t timeout);
@@ -179,7 +181,6 @@ void        led_matrix_driver_shutdown(void);
 bool        led_matrix_is_driver_shutdown(void);
 bool        led_matrix_driver_allow_shutdown(void);
 #endif
-
 
 typedef struct {
     /* Perform any initialisation required for the other driver functions to work. */
