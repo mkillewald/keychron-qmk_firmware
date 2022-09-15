@@ -14,6 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <stdbool.h>
 #include "quantum.h"
 #include "raw_hid.h"
 
@@ -119,7 +120,7 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
             }
             return true;
         default:
-            return process_record_user(keycode, record);
+            return true;
     }
 }
 
