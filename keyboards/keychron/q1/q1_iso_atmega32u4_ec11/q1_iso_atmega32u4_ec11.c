@@ -178,6 +178,9 @@ void keyboard_post_init_kb(void) {
     PCMSK0 |= (1 << 7);
     PCICR |= (1 << PCIE0);
     sei();
+
+    // allow user keymaps to do custom post_init
+    keyboard_post_init_user();
 }
 
 ISR(PCINT0_vect) {
