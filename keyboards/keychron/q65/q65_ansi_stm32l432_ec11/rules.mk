@@ -32,4 +32,4 @@ OPT_DEFS += -DCORTEX_ENABLE_WFI_IDLE=TRUE
 # custom matrix setup
 CUSTOM_MATRIX = lite
 
-SRC += matrix.c ./../factory/secondary/q2/test.c
+SRC += matrix.c
