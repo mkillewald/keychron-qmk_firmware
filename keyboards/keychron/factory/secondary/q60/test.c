@@ -15,6 +15,7 @@
  */
 
 #include <stdbool.h>
+#include "keycode.h"
 #include "quantum.h"
 #include "raw_hid.h"
 
@@ -88,15 +89,13 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
                 key_press_status |= KEY_PRESS_Z;
                 if (key_press_status == KEY_PRESS_FACTORY_RESET) {
                     timer_3s_buffer = sync_timer_read32();
-                } else {
-                    rgb_matrix_step_reverse();
                 }
             } else {
                 key_press_status &= ~KEY_PRESS_Z;
                 timer_3s_buffer = 0;
             }
-            return false; // Skip all further processing of this key
-        case KC_DOT:
+            return true;
+        case KC_B:
             if (record->event.pressed) {
                 key_press_status |= KEY_PRESS_RIGHT;
                 if (led_test_mode) {
@@ -111,7 +110,7 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
                 timer_3s_buffer = 0;
             }
             return true;
-        case KC_RBRC:
+        case KC_L:
             if (record->event.pressed) {
                 key_press_status |= KEY_PRESS_HOME;
                 if (led_test_mode) {
@@ -125,7 +124,7 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
             }
             return true;
         default:
-            return true;
+            return process_record_user(keycode, record);
     }
 }
 
