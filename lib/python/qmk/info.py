@@ -370,7 +370,7 @@ def _extract_split_right_pins(info_data, config_c):
     direct_pins = config_c.get('DIRECT_PINS_RIGHT', '').replace(' ', '')[1:-1]
 
     if row_pins or col_pins or direct_pins:
-        if info_data.get('split', {}).get('matrix_pins', {}).get('right') in info_data:
+        if info_data.get('split', {}).get('matrix_pins', {}).get('right', None):
             _log_warning(info_data, 'Right hand matrix data is specified in both info.json and config.h, the config.h values win.')
 
         if 'split' not in info_data:
@@ -479,7 +479,7 @@ def _config_to_json(key_type, config_value):
         return int(config_value)
 
     elif key_type == 'str':
-        return config_value.strip('"')
+        return config_value.strip('"').replace('\\"', '"').replace('\\\\', '\\')
 
     elif key_type == 'bcd_version':
         major = int(config_value[2:4])
@@ -755,9 +755,6 @@ def arm_processor_rules(info_data, rules):
     info_data['processor_type'] = 'arm'
     info_data['protocol'] = 'ChibiOS'
 
-    if 'bootloader' not in info_data:
-        info_data['bootloader'] = 'unknown'
-
     if 'STM32' in info_data['processor']:
         info_data['platform'] = 'STM32'
     elif 'MCU_SERIES' in rules:
@@ -774,9 +771,6 @@ def avr_processor_rules(info_data, rules):
     info_data['processor_type'] = 'avr'
     info_data['platform'] = rules['ARCH'] if 'ARCH' in rules else 'unknown'
     info_data['protocol'] = 'V-USB' if rules.get('MCU') in VUSB_PROCESSORS else 'LUFA'
-
-    if 'bootloader' not in info_data:
-        info_data['bootloader'] = 'atmel-dfu'
 
     # FIXME(fauxpark/anyone): Eventually we should detect the protocol by looking at PROTOCOL inherited from mcu_selection.mk:
     # info_data['protocol'] = 'V-USB' if rules.get('PROTOCOL') == 'VUSB' else 'LUFA'

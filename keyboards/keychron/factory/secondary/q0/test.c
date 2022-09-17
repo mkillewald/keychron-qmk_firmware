@@ -14,6 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <stdbool.h>
 #include "quantum.h"
 
 #define _FN1 1
@@ -39,6 +40,7 @@ enum {
     FACTORY_TEST_CMD_BACKLIGHT = 0x01,
     FACTORY_TEST_CMD_OS_SWITCH,
     FACTORY_TEST_CMD_JUMP_TO_BL,
+    FACTORY_TEST_CMD_EEPROM_CLEAR
 };
 
 enum {
@@ -120,26 +122,30 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
     }
 }
 
+static void factory_reset(void) {
+    timer_300ms_buffer = sync_timer_read32();
+    factory_reset_count++;
+    layer_state_t default_layer_tmp = default_layer_state;
+    eeconfig_init();
+    default_layer_set(default_layer_tmp);
+    led_test_mode = LED_TEST_MODE_OFF;
+#ifdef LED_MATRIX_ENABLE
+    if (!led_matrix_is_enabled()) led_matrix_enable();
+    led_matrix_init();
+#endif
+#ifdef RGB_MATRIX_ENABLE
+    if (!rgb_matrix_is_enabled()) {
+        rgb_matrix_enable();
+    }
+    rgb_matrix_init();
+#endif
+}
+
 static void timer_3s_task(void) {
     if (sync_timer_elapsed32(timer_3s_buffer) > 3000) {
         timer_3s_buffer = 0;
         if (key_press_status == KEY_PRESS_FACTORY_RESET) {
-            timer_300ms_buffer = sync_timer_read32();
-            factory_reset_count++;
-            layer_state_t default_layer_tmp = default_layer_state;
-            eeconfig_init();
-            default_layer_set(default_layer_tmp);
-            led_test_mode = LED_TEST_MODE_OFF;
-#ifdef LED_MATRIX_ENABLE
-            if (!led_matrix_is_enabled()) led_matrix_enable();
-            led_matrix_init();
-#endif
-#ifdef RGB_MATRIX_ENABLE
-            if (!rgb_matrix_is_enabled()) {
-                rgb_matrix_enable();
-            }
-            rgb_matrix_init();
-#endif
+            factory_reset();
         } else if (key_press_status == KEY_PRESS_LED_TEST) {
             led_test_mode = LED_TEST_MODE_WHITE;
 #ifdef RGB_MATRIX_ENABLE

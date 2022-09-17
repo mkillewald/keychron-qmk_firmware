@@ -14,6 +14,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <stdbool.h>
+#include "config.h"
 #include "quantum.h"
 #include "raw_hid.h"
 
@@ -47,6 +49,7 @@ enum {
     FACTORY_TEST_CMD_BACKLIGHT = 0x01,
     FACTORY_TEST_CMD_OS_SWITCH,
     FACTORY_TEST_CMD_JUMP_TO_BL,
+    FACTORY_TEST_CMD_EEPROM_CLEAR
 };
 
 enum {
@@ -139,26 +142,30 @@ void matrix_scan_kb(void) {
     matrix_scan_user();
 }
 
+static void factory_reset(void) {
+    timer_300ms_buffer = sync_timer_read32();
+    factory_reset_count++;
+    layer_state_t default_layer_tmp = default_layer_state;
+    eeconfig_init();
+    default_layer_set(default_layer_tmp);
+    led_test_mode = LED_TEST_MODE_OFF;
+#ifdef LED_MATRIX_ENABLE
+    if (!led_matrix_is_enabled()) led_matrix_enable();
+    led_matrix_init();
+#endif
+#ifdef RGB_MATRIX_ENABLE
+    if (!rgb_matrix_is_enabled()) {
+        rgb_matrix_enable();
+    }
+    rgb_matrix_init();
+#endif
+}
+
 static void timer_3s_task(void) {
     if (sync_timer_elapsed32(timer_3s_buffer) > 3000) {
         timer_3s_buffer = 0;
         if (key_press_status == KEY_PRESS_FACTORY_RESET) {
-            timer_300ms_buffer = sync_timer_read32();
-            factory_reset_count++;
-            layer_state_t default_layer_tmp = default_layer_state;
-            eeconfig_init();
-            default_layer_set(default_layer_tmp);
-            led_test_mode = LED_TEST_MODE_OFF;
-#ifdef LED_MATRIX_ENABLE
-            if (!led_matrix_is_enabled()) led_matrix_enable();
-            led_matrix_init();
-#endif
-#ifdef RGB_MATRIX_ENABLE
-            if (!rgb_matrix_is_enabled()) {
-                rgb_matrix_enable();
-            }
-            rgb_matrix_init();
-#endif
+            factory_reset();
         } else if (key_press_status == KEY_PRESS_LED_TEST) {
             led_test_mode = LED_TEST_MODE_WHITE;
 #ifdef RGB_MATRIX_ENABLE
@@ -231,6 +238,8 @@ void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
 
 #endif // RGB_MATRIX_ENABLE
 
+extern matrix_row_t matrix[MATRIX_ROWS];
+
 void raw_hid_receive_kb(uint8_t *data, uint8_t length) {
     if ( data[0] == 0xAB ) {
         uint16_t checksum = 0;
@@ -253,8 +262,17 @@ void raw_hid_receive_kb(uint8_t *data, uint8_t length) {
                 // }
                 break;
             case FACTORY_TEST_CMD_JUMP_TO_BL:
-                if (memcmp(&data[2], "JumpToBootloader", strlen("JumpToBootloader")) == 0)
-                    bootloader_jump();
+                if (matrix[0] & 0x1 && matrix[MATRIX_ROWS - 1] & (0x1 << (MATRIX_COLS - 1))) {
+                    if (memcmp(&data[2], "JumpToBootloader", strlen("JumpToBootloader")) == 0)
+                        bootloader_jump();
+                }
+                break;
+            case FACTORY_TEST_CMD_EEPROM_CLEAR:
+                if (matrix[0] & 0x1 && matrix[MATRIX_ROWS - 1] & (0x1 << (MATRIX_COLS - 1))) {
+                    if (data[2]) {
+                        factory_reset();
+                    }
+                }
                 break;
         }
     }

@@ -1,4 +1,4 @@
-/* Copyright 2021 @ Keychron (https://www.keychron.com)
+/* Copyright 2022 @ Keychron (https://www.keychron.com)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,8 +17,8 @@
 #pragma once
 
 /* USB Device descriptor parameter */
-#define PRODUCT_ID 0x0153
-#define DEVICE_VER 0x0103
+#define PRODUCT_ID 0x0353
+#define DEVICE_VER 0x0100
 
 /* RGB Matrix Configuration */
 #define DRIVER_1_LED_TOTAL 53
