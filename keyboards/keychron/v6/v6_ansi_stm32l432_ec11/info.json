@@ -1,7 +1,13 @@
 {
     "keyboard_name": "Keychron V6",
+    "manufacturer": "Keychron",
     "url": "https://github.com/Keychron",
     "maintainer": "lalalademaxiya1",
+    "usb": {
+        "vid": "0x3434",
+        "pid": "0x0361",
+        "device_version": "1.0.1"
+    },
     "layouts": {
         "LAYOUT_ansi_109": {
             "layout": [

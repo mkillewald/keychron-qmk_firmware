@@ -1,11 +1,3 @@
-/*
- * @Author: lalalademaxiya1 66767061+lalalademaxiya1@users.noreply.github.com
- * @Date: 2022-08-23 23:29:21
- * @LastEditors: lalalademaxiya1 66767061+lalalademaxiya1@users.noreply.github.com
- * @LastEditTime: 2022-08-29 16:40:23
- * @FilePath: /qmk_firmware/keyboards/keychron/v8/v8_ansi_stm32l432_ec11/config.h
- * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
- */
 /* Copyright 2021 @ Keychron (https://www.keychron.com)
  *
  * This program is free software: you can redistribute it and/or modify
@@ -23,10 +15,6 @@
  */
 
 #pragma once
-
-/* USB Device descriptor parameter */
-#define PRODUCT_ID 0x0381
-#define DEVICE_VER 0x0100
 
 /* RGB Matrix Configuration */
 #define DRIVER_1_LED_TOTAL 35

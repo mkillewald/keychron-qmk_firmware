@@ -15,14 +15,7 @@
  */
 
 #include "matrix.h"
-
-#include <stdbool.h>
-#include <stdint.h>
-#include <string.h>
-
-#include "debounce.h"
 #include "quantum.h"
-#include "util.h"
 
 // Pin connected to DS of 74HC595
 #define DATA_PIN A7
@@ -111,12 +104,6 @@ static void unselect_col(uint8_t col) {
         shiftOut(0xFF);
     }
 }
-
-// static void unselect_cols(void) {
-//     for (uint8_t x = 0; x < MATRIX_COLS; x++) {
-//         unselect_col(x);
-//     }
-// }
 
 static void unselect_cols(void) {
     // unselect column pins

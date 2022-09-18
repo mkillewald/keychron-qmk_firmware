@@ -16,11 +16,6 @@
 
 #pragma once
 
-/* USB Device descriptor parameter */
-#define VENDOR_ID       0x3434
-#define MANUFACTURER    Keychron
-#define PRODUCT         Keychron Q1
-
 /* COL2ROW or ROW2COL */
 #define DIODE_DIRECTION ROW2COL
 

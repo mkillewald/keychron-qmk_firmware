@@ -1,7 +1,13 @@
 {
     "keyboard_name": "Keychron V7",
+    "manufacturer": "Keychron",
     "url": "https://github.com/Keychron",
     "maintainer": "lalalademaxiya1",
+    "usb": {
+        "vid": "0x3434",
+        "pid": "0x0370",
+        "device_version": "1.0.2"
+    },
     "layouts": {
         "LAYOUT_ansi_72": {
             "layout": [

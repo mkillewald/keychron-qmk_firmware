@@ -15,7 +15,6 @@
  */
 
 #include "ckled2001.h"
-
 #include "i2c_master.h"
 #include "wait.h"
 
@@ -31,8 +30,8 @@
 #    define PHASE_CHANNEL MSKPHASE_12CHANNEL
 #endif
 
-#ifndef CONSTANT_CURRENT_STEP
-#    define CONSTANT_CURRENT_STEP \
+#ifndef CKLED2001_CURRENT_TUNE
+#    define CKLED2001_CURRENT_TUNE \
         { 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF }
 #endif
 
@@ -102,8 +101,6 @@ bool CKLED2001_write_pwm_buffer(uint8_t addr, uint8_t *pwm_buffer) {
 }
 
 void CKLED2001_init(uint8_t addr) {
-    uint8_t led_current_tune[LED_CURRENT_TUNE_LENGTH] = CONSTANT_CURRENT_STEP;
-
     // Select to function page
     CKLED2001_write_register(addr, CONFIGURE_CMD_PAGE, FUNCTION_PAGE);
     // Setting LED driver to shutdown mode
@@ -131,9 +128,10 @@ void CKLED2001_init(uint8_t addr) {
     }
 
     // Set CURRENT PAGE (Page 4)
+    uint8_t current_tuen_reg_list[LED_CURRENT_TUNE_LENGTH] = CKLED2001_CURRENT_TUNE;
     CKLED2001_write_register(addr, CONFIGURE_CMD_PAGE, CURRENT_TUNE_PAGE);
     for (int i = 0; i < LED_CURRENT_TUNE_LENGTH; i++) {
-        CKLED2001_write_register(addr, i, led_current_tune[i]);
+        CKLED2001_write_register(addr, i, current_tuen_reg_list[i]);
     }
 
     // Enable LEDs ON/OFF

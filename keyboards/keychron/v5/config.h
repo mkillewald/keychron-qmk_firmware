@@ -16,11 +16,6 @@
 
 #pragma once
 
-/* USB Device descriptor parameter */
-#define VENDOR_ID       0x3434
-#define MANUFACTURER    Keychron
-#define PRODUCT         Keychron V5
-
 /* Key matrix size */
 #define MATRIX_ROWS 6
 #define MATRIX_COLS 18
@@ -42,7 +37,7 @@
 #define DRIVER_ADDR_1 0b1110111
 #define DRIVER_ADDR_2 0b1110100
 
-#define CONSTANT_CURRENT_STEP \
+#define CONSTANT_CURRENT_TUNE \
     { 0xB6, 0xB6, 0x56, 0xB6, 0xB6, 0x56, 0xB6, 0xB6, 0x56, 0xB6, 0xB6, 0x56 }
 
 /* DIP switch */

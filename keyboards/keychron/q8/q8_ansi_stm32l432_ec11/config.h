@@ -16,10 +16,6 @@
 
 #pragma once
 
-/* USB Device descriptor parameter */
-#define PRODUCT_ID 0x0181
-#define DEVICE_VER 0x0105
-
 /* RGB Matrix Configuration */
 #define DRIVER_1_LED_TOTAL 35
 #define DRIVER_2_LED_TOTAL 34

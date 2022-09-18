@@ -16,10 +16,6 @@
 
 #pragma once
 
-/* USB Device descriptor parameter */
-#define PRODUCT_ID 0x0142
-#define DEVICE_VER 0x0103
-
 /* RGB Matrix Driver Configuration */
 #define DRIVER_COUNT 1
 #define DRIVER_ADDR_1 0b1110100
@@ -28,7 +24,7 @@
 #define DRIVER_1_LED_TOTAL 62
 #define DRIVER_LED_TOTAL DRIVER_1_LED_TOTAL
 
-#define CONSTANT_CURRENT_STEP \
+#define CONSTANT_CURRENT_TUNE \
     { 0xCA, 0xCA, 0x60, 0xCA, 0xCA, 0x60, 0xCA, 0xCA, 0x60, 0xCA, 0xCA, 0x60 }
 
 /* Enable CapsLcok LED*/

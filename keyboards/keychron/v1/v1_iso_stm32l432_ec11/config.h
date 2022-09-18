@@ -16,14 +16,13 @@
 
 #pragma once
 
-/* USB Device descriptor parameter */
-#define PRODUCT_ID 0x0313
-#define DEVICE_VER 0x0102
-
 /* RGB Matrix Configuration */
 #define DRIVER_1_LED_TOTAL 45
 #define DRIVER_2_LED_TOTAL 38
 #define DRIVER_LED_TOTAL (DRIVER_1_LED_TOTAL + DRIVER_2_LED_TOTAL)
+
+#define CKLED2001_CURRENT_TUNE \
+    { 0xA6, 0xA6, 0x50, 0xA6, 0xA6, 0x50, 0xA6, 0xA6, 0x50, 0xA6, 0xA6, 0x50 }
 
 /* Encoder Configuration */
 #define ENCODERS_PAD_A { A10 }

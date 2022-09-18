@@ -16,10 +16,6 @@
 
 #pragma once
 
-/* USB Device descriptor parameter */
-#define PRODUCT_ID 0x0101
-#define DEVICE_VER 0x0102
-
 /* key matrix size */
 #define MATRIX_ROWS 6
 #define MATRIX_COLS 15

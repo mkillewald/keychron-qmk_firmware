@@ -14,12 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <stdint.h>
-#include <stdbool.h>
-#include <string.h>
-#include "util.h"
 #include "matrix.h"
-#include "debounce.h"
 #include "quantum.h"
 
 // Pin connected to DS of 74HC595
@@ -109,12 +104,6 @@ static void unselect_col(uint8_t col) {
         shiftOut(0xFF);
     }
 }
-
-// static void unselect_cols(void) {
-//     for (uint8_t x = 0; x < MATRIX_COLS; x++) {
-//         unselect_col(x);
-//     }
-// }
 
 static void unselect_cols(void) {
     // unselect column pins
