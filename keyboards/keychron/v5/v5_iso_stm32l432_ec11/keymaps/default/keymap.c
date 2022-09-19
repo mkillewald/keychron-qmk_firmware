@@ -28,10 +28,6 @@ enum layers{
 enum custom_keycodes {
     KC_MISSION_CONTROL = SAFE_RANGE,
     KC_LAUNCHPAD,
-    KC_LOPTN,
-    KC_ROPTN,
-    KC_LCMMD,
-    KC_RCMMD,
     KC_TASK_VIEW,
     KC_FILE_EXPLORER
 };

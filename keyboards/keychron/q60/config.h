@@ -36,7 +36,7 @@
 #define DRIVER_COUNT 1
 #define DRIVER_ADDR_1 0b1110100
 
-#define CONSTANT_CURRENT_STEP \
+#define CKLED2001_CURRENT_TUNE \
     { 0xE0, 0xE0, 0x60, 0xE0, 0xE0, 0x60, 0xE0, 0xE0, 0x60, 0xE0, 0xE0, 0x60 }
 
 /* DIP switch */

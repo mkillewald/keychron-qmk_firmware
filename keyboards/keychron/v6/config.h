@@ -32,7 +32,7 @@
 #define DRIVER_ADDR_2 0b1110100
 
 /* Limit the maximum brigtness current of colour white to 500mA */
-#define CONSTANT_CURRENT_TUNE \
+#define CKLED2001_CURRENT_TUNE \
     { 0xA8, 0xA8, 0x48, 0xA8, 0xA8, 0x48, 0xA8, 0xA8, 0x48, 0xA8, 0xA8, 0x48 }
 
 /* DIP switch */
