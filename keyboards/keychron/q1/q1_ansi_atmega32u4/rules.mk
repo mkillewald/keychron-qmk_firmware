@@ -22,4 +22,3 @@ RGB_MATRIX_DRIVER = IS31FL3733
 RAW_ENABLE = yes
 LTO_ENABLE = yes
 
-SRC += ./../factory/major/test.c
