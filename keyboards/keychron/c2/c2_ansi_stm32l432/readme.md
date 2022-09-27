@@ -1,1 +1,1 @@
-# The ANSI variant of the Keychron Q6
+# The ANSI variant of the Keychron C2

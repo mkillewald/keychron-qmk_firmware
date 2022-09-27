@@ -1,18 +1,18 @@
-# Keychron Q6
+# Keychron C2
 
 A customizable 100% keyboard.
 
 * Keyboard Maintainer: [Keychron](https://github.com/keychron)
-* Hardware Supported: Keychron Q6
+* Hardware Supported: Keychron C2
 * Hardware Availability: [Keychron](https://www.keychron.com)
 
 Make example for this keyboard (after setting up your build environment):
 
-    make keychron/q6/q6_ansi_stm32l432:default
+    make keychron/c2/c2_ansi_stm32l432:default
 
 Flashing example for this keyboard:
 
-    make keychron/q6/q6_ansi_stm32l432:flash
+    make keychron/c2/c2_ansi_stm32l432:flash
 
 **Reset Key**: Hold down the key located at *K00*, commonly programmed as *Esc* while plugging in the keyboard.
 

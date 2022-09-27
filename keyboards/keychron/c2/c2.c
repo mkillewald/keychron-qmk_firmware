@@ -39,93 +39,37 @@ bool dip_switch_update_kb(uint8_t index, bool active) {
 
 #endif // DIP_SWITCH_ENABLE
 
-#if defined(RGB_MATRIX_ENABLE) && (defined(CAPS_LOCK_LED_INDEX) || defined(NUM_LOCK_LED_INDEX))
-
-#    define CAPS_NUM_LOCK_MAX_BRIGHTNESS 0xFF
-#    ifdef RGB_MATRIX_MAXIMUM_BRIGHTNESS
-#        undef CAPS_NUM_LOCK_MAX_BRIGHTNESS
-#        define CAPS_NUM_LOCK_MAX_BRIGHTNESS RGB_MATRIX_MAXIMUM_BRIGHTNESS
-#    endif
-
-#    define CAPS_NUM_LOCK_VAL_STEP 8
-#    ifdef RGB_MATRIX_VAL_STEP
-#        undef CAPS_NUM_LOCK_VAL_STEP
-#        define CAPS_NUM_LOCK_VAL_STEP RGB_MATRIX_VAL_STEP
-#    endif
-
-extern void rgb_matrix_update_pwm_buffers(void);
-
-static uint8_t light_brightness_get(void) {
-    uint8_t value = rgb_matrix_get_val();
-    if (value < CAPS_NUM_LOCK_VAL_STEP) {
-        value = CAPS_NUM_LOCK_VAL_STEP;
-    } else if (value < (CAPS_NUM_LOCK_MAX_BRIGHTNESS - CAPS_NUM_LOCK_VAL_STEP)) {
-        value += CAPS_NUM_LOCK_VAL_STEP; // one step more than current brightness
-    } else {
-        value = CAPS_NUM_LOCK_MAX_BRIGHTNESS;
-    }
-
-    return value;
-}
+#if defined(RGB_MATRIX_ENABLE) && (defined(NUM_LOCK_LED_INDEX) || defined(CAPS_LOCK_LED_INDEX) || defined(MAC_OS_LED_INDEX) || defined(WIN_OS_LED_INDEX))
 
 void rgb_matrix_indicators_kb(void) {
 #    if defined(CAPS_LOCK_LED_INDEX)
     if (host_keyboard_led_state().caps_lock) {
-        uint8_t v = light_brightness_get();
-        rgb_matrix_set_color(CAPS_LOCK_LED_INDEX, v, v, v); // white, with the adjusted brightness
+        rgb_matrix_set_color(CAPS_LOCK_LED_INDEX, 255, 255, 255);
+    } else {
+        rgb_matrix_set_color(CAPS_LOCK_LED_INDEX, 0, 0, 0);
     }
-#    endif
+#    endif // CAPS_LOCK_LED_INDEX
 #    if defined(NUM_LOCK_LED_INDEX)
     if (host_keyboard_led_state().num_lock) {
-        uint8_t v = light_brightness_get();
-        rgb_matrix_set_color(NUM_LOCK_LED_INDEX, v, v, v); // white, with the adjusted brightness
+        rgb_matrix_set_color(NUM_LOCK_LED_INDEX, 255, 255, 255);
+    } else {
+        rgb_matrix_set_color(NUM_LOCK_LED_INDEX, 0, 0, 0);
     }
-#    endif
+#    endif // NUM_LOCK_LED_INDEX
+#    if defined(MAC_OS_LED_INDEX)
+    if (default_layer_state == (1 << 0)) {
+        rgb_matrix_set_color(MAC_OS_LED_INDEX, 255, 255, 255);
+    } else {
+        rgb_matrix_set_color(MAC_OS_LED_INDEX, 0, 0, 0);
+    }
+#    endif // MAC_OS_LED_INDEX
+#    if defined(WIN_OS_LED_INDEX)
+    if (default_layer_state == (1 << 2)) {
+        rgb_matrix_set_color(WIN_OS_LED_INDEX, 255, 255, 255);
+    } else {
+        rgb_matrix_set_color(WIN_OS_LED_INDEX, 0, 0, 0);
+    }
+#    endif // WIN_OS_LED_INDEX
 }
 
-void rgb_matrix_indicators_none_kb(void) {
-    rgb_matrix_indicators_kb();
-    rgb_matrix_update_pwm_buffers();
-}
-
-bool led_update_kb(led_t led_state) {
-    bool res = led_update_user(led_state);
-
-    if (rgb_matrix_is_enabled()
-#    if defined(ENABLE_RGB_MATRIX_RAINDROPS)
-        && (rgb_matrix_get_mode() != RGB_MATRIX_RAINDROPS)
-#    endif
-#    if defined(ENABLE_RGB_MATRIX_JELLYBEAN_RAINDROPS)
-        && (rgb_matrix_get_mode() != RGB_MATRIX_JELLYBEAN_RAINDROPS)
-#    endif
-#    if defined(ENABLE_RGB_MATRIX_PIXEL_RAIN)
-        && (rgb_matrix_get_mode() != RGB_MATRIX_PIXEL_RAIN)
-#    endif
-    ) {
-        return res;
-    }
-
-    if (res) {
-#    if defined(CAPS_LOCK_LED_INDEX)
-        if (led_state.caps_lock) {
-            uint8_t v = light_brightness_get();
-            rgb_matrix_set_color(CAPS_LOCK_LED_INDEX, v, v, v);
-        } else {
-            rgb_matrix_set_color(CAPS_LOCK_LED_INDEX, 0, 0, 0);
-        }
-#    endif
-#    if defined(NUM_LOCK_LED_INDEX)
-        if (led_state.num_lock) {
-            uint8_t v = light_brightness_get();
-            rgb_matrix_set_color(NUM_LOCK_LED_INDEX, v, v, v);
-        } else {
-            rgb_matrix_set_color(NUM_LOCK_LED_INDEX, 0, 0, 0);
-        }
-#    endif
-        rgb_matrix_update_pwm_buffers();
-    }
-
-    return res;
-}
-
-#endif  // CAPS_LOCK_LED_INDEX
+#endif // RGB_MATRIX_ENABLE && CAPS_LOCK_LED_INDEX...
