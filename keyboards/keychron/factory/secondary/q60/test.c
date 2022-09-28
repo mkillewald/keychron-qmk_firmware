@@ -192,7 +192,7 @@ static void timer_300ms_task(void) {
 
 #if LED_MATRIX_ENABLE
 
-void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
+void led_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     if (factory_reset_count) {
         for (uint8_t i = led_min; i <= led_max; i++) {
             led_matrix_set_value(i, factory_reset_count % 2 ? 0 : UINT8_MAX);
