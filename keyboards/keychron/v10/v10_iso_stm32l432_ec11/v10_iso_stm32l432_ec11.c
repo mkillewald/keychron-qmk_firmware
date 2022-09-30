@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "quantum.h"
+#include "v10_iso_stm32l432_ec11.h"
 
 #ifdef RGB_MATRIX_ENABLE
 
@@ -137,7 +137,7 @@ led_config_t g_led_config = {
     },
     {
         // LED Index to Physical Position
-                {0,0},    {19,0},  {34,0},  {60,1},  {72,3},   {87,6},   {99,8},  {120,8},  {132,6},  {147,3},  {159,1},  {173,0},  {185,0},  {201,1},            {219,1},
+                {0,0},    {19,0}, {34,0},  {60,1},  {72,3},   {87,6},   {99,8},  {120,8},  {132,6},  {147,3},  {159,1},  {173,0},  {185,0},  {201,1},            {219,1},
         {5,14}, {24,14}, {36,14}, {48,13}, {62,15}, {74,17},  {86,20},  {98,22}, {115,22}, {127,20}, {139,17}, {151,15}, {165,13}, {177,14}, {195,14},           {220,15},
         {4,24}, {24,24}, {40,24}, {53,24}, {65,27}, {77,29},  {89,31}, {112,33}, {124,31}, {136,29}, {148,27}, {160,24}, {176,24}, {189,24},                     {222,25},
         {2,34}, {23,34}, {40,34}, {54,35}, {66,37}, {78,39},  {90,42}, {118,43}, {130,40}, {142,38}, {154,36}, {167,35}, {179,35}, {192,35}, {208,31},           {224,36},
@@ -149,7 +149,7 @@ led_config_t g_led_config = {
            1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,    1,
         1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1,    1,
         1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,       1,
-        1, 9, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1,    1,
+        1, 8, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1,    1,
         1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 1,
         1, 1, 1,    1, 4, 1,       4,    1,       1, 1, 1,
     }
@@ -157,22 +157,9 @@ led_config_t g_led_config = {
 
 // clang-format on
 
-#endif
+#endif // RGB_MATRIX_ENABLE
 
 #ifdef ENCODER_ENABLE
-#if 0
-bool encoder_update_kb(uint8_t index, bool clockwise) {
-    if (!encoder_update_user(index, clockwise)) { return false; }
-    if (index == 0) {
-        if (clockwise) {
-            tap_code_delay(KC_VOLU, TAP_CODE_DELAY);
-        } else {
-            tap_code_delay(KC_VOLD, TAP_CODE_DELAY);
-        }
-    }
-    return true;
-}
-#endif
 #    if defined(PAL_USE_CALLBACKS)
 
 void encoder0_pad_cb(void *param) {

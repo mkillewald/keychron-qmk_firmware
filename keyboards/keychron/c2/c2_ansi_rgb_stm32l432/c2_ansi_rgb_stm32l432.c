@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "quantum.h"
+#include "c2_ansi_rgb_stm32l432.h"
 
 #ifdef RGB_MATRIX_ENABLE
 

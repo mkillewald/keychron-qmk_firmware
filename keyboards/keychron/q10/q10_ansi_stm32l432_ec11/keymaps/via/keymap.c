@@ -97,51 +97,51 @@ const uint16_t PROGMEM encoder_map[][1][2] = {
     [WIN_FN]   = { ENCODER_CCW_CW(RGB_VAD, RGB_VAI) }
 };
 
-#endif
+#endif // ENCODER_MAP_ENABLE
 
 // clang-format on
 
-#if defined(VIA_ENABLE) && defined(ENCODER_ENABLE)
+// #if defined(VIA_ENABLE) && defined(ENCODER_ENABLE)
 
-#define ENCODERS 1
-static uint8_t  encoder_state[ENCODERS] = {0};
-static keypos_t encoder_cw[ENCODERS]    = {{ 11, 5 }};
-static keypos_t encoder_ccw[ENCODERS]   = {{ 10, 5 }};
+// #define ENCODERS 1
+// static uint8_t  encoder_state[ENCODERS] = {0};
+// static keypos_t encoder_cw[ENCODERS]    = {{ 11, 5 }};
+// static keypos_t encoder_ccw[ENCODERS]   = {{ 10, 5 }};
 
-void encoder_action_unregister(void) {
-    for (int index = 0; index < ENCODERS; ++index) {
-        if (encoder_state[index]) {
-            keyevent_t encoder_event = (keyevent_t) {
-                .key = encoder_state[index] >> 1 ? encoder_cw[index] : encoder_ccw[index],
-                .pressed = false,
-                .time = (timer_read() | 1)
-            };
-            encoder_state[index] = 0;
-            action_exec(encoder_event);
-        }
-    }
-}
+// void encoder_action_unregister(void) {
+//     for (int index = 0; index < ENCODERS; ++index) {
+//         if (encoder_state[index]) {
+//             keyevent_t encoder_event = (keyevent_t) {
+//                 .key = encoder_state[index] >> 1 ? encoder_cw[index] : encoder_ccw[index],
+//                 .pressed = false,
+//                 .time = (timer_read() | 1)
+//             };
+//             encoder_state[index] = 0;
+//             action_exec(encoder_event);
+//         }
+//     }
+// }
 
-void encoder_action_register(uint8_t index, bool clockwise) {
-    keyevent_t encoder_event = (keyevent_t) {
-        .key = clockwise ? encoder_cw[index] : encoder_ccw[index],
-        .pressed = true,
-        .time = (timer_read() | 1)
-    };
-    encoder_state[index] = (clockwise ^ 1) | (clockwise << 1);
-    action_exec(encoder_event);
-}
+// void encoder_action_register(uint8_t index, bool clockwise) {
+//     keyevent_t encoder_event = (keyevent_t) {
+//         .key = clockwise ? encoder_cw[index] : encoder_ccw[index],
+//         .pressed = true,
+//         .time = (timer_read() | 1)
+//     };
+//     encoder_state[index] = (clockwise ^ 1) | (clockwise << 1);
+//     action_exec(encoder_event);
+// }
 
-void matrix_scan_user(void) {
-    encoder_action_unregister();
-}
+// void matrix_scan_user(void) {
+//     encoder_action_unregister();
+// }
 
-bool encoder_update_user(uint8_t index, bool clockwise) {
-    encoder_action_register(index, clockwise);
-    return false;
-};
+// bool encoder_update_user(uint8_t index, bool clockwise) {
+//     encoder_action_register(index, clockwise);
+//     return false;
+// };
 
-#endif
+// #endif
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {

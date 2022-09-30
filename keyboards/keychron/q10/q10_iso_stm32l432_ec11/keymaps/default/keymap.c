@@ -91,7 +91,7 @@ const uint16_t PROGMEM encoder_map[][1][2] = {
     [WIN_FN]   = { ENCODER_CCW_CW(RGB_VAD, RGB_VAI) }
 };
 
-#endif
+#endif // ENCODER_MAP_ENABLE
 
 // clang-format on
 

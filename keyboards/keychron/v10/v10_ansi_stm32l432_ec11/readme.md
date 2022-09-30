@@ -1,4 +1,4 @@
-# The ANSI variant of the Keychron Q10
+# The ANSI variant of the Keychron V10
 
 - Enable EC11 rotary encoder.
 - Turn clockkwise to increase volume and turn anti-clockkwise to decrease volume.

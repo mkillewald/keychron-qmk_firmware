@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "quantum.h"
+#include "v10_ansi_stm32l432_ec11.h"
 
 #ifdef RGB_MATRIX_ENABLE
 
@@ -156,7 +156,7 @@ led_config_t g_led_config = {
 
 // clang-format on
 
-#endif
+#endif // RGB_MATRIX_ENABLE
 
 #ifdef ENCODER_ENABLE
 #    ifdef PAL_USE_CALLBACKS
