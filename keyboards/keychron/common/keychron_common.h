@@ -14,11 +14,34 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#pragma once
+#include "stdint.h"
+#include "quantum_keycodes.h"
 
-#include "quantum.h"
-#include "keychron_factory_test.h"
+enum custom_keycodes {
+    KC_MISSION_CONTROL = USER00,
+    KC_LAUNCHPAD,
+    KC_LOPTN,
+    KC_ROPTN,
+    KC_LCMMD,
+    KC_RCMMD,
+    KC_SIRI,
+    KC_TASK_VIEW,
+    KC_FILE_EXPLORER,
+    KC_SCREEN_SHOT,
+    KC_CORTANA
+};
 
-#if defined(KEYBOARD_keychron_c2_c2_ansi_rgb_stm32l432)
-#    include "c2_ansi_rgb_stm32l432.h"
-#endif
+#define KC_MCTL KC_MISSION_CONTROL
+#define KC_LPAD KC_LAUNCHPAD
+#define KC_TASK KC_TASK_VIEW
+#define KC_FLXP KC_FILE_EXPLORER
+#define KC_SNAP KC_SCREEN_SHOT
+#define KC_CRTA KC_CORTANA
+
+typedef struct PACKED {
+    uint8_t len;
+    uint8_t keycode[3];
+} key_combination_t;
+
+void housekeeping_task_keychron(void);
+bool process_record_keychron(uint16_t keycode, keyrecord_t *record);

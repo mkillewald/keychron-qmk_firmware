@@ -27,8 +27,8 @@ const matrix_row_t matrix_mask[] = {
 
 #ifdef DIP_SWITCH_ENABLE
 
-bool dip_switch_update_kb(uint8_t index, bool active) {
-    if (!dip_switch_update_user(index, active)) {
+bool dip_switch_update_user(uint8_t index, bool active) {
+    if (!dip_switch_update_ft(index, active)) {
         return false;
     }
     if (index == 0) {
@@ -40,6 +40,12 @@ bool dip_switch_update_kb(uint8_t index, bool active) {
 #endif // DIP_SWITCH_ENABLE
 
 #if defined(RGB_MATRIX_ENABLE) && (defined(NUM_LOCK_LED_INDEX) || defined(CAPS_LOCK_LED_INDEX) || defined(MAC_OS_LED_INDEX) || defined(WIN_OS_LED_INDEX))
+
+extern void rgb_matrix_update_pwm_buffers(void);
+
+void rgb_matrix_indicators_advanced_kb(uint8_t led_min, uint8_t led_max) {
+    rgb_matrix_indicators_advanced_ft(led_min, led_max);
+}
 
 void rgb_matrix_indicators_kb(void) {
 #    if defined(CAPS_LOCK_LED_INDEX)
@@ -72,4 +78,56 @@ void rgb_matrix_indicators_kb(void) {
 #    endif // WIN_OS_LED_INDEX
 }
 
+void rgb_matrix_indicators_none_kb(void) {
+    rgb_matrix_indicators_kb();
+    rgb_matrix_update_pwm_buffers();
+}
+
+bool led_update_kb(led_t led_state) {
+    bool res = led_update_user(led_state);
+
+    if (rgb_matrix_is_enabled()
+#    if defined(ENABLE_RGB_MATRIX_RAINDROPS)
+        && (rgb_matrix_get_mode() != RGB_MATRIX_RAINDROPS)
+#    endif
+#    if defined(ENABLE_RGB_MATRIX_JELLYBEAN_RAINDROPS)
+        && (rgb_matrix_get_mode() != RGB_MATRIX_JELLYBEAN_RAINDROPS)
+#    endif
+#    if defined(ENABLE_RGB_MATRIX_PIXEL_RAIN)
+        && (rgb_matrix_get_mode() != RGB_MATRIX_PIXEL_RAIN)
+#    endif
+    ) {
+        return res;
+    }
+
+    if (res) {
+#    if defined(NUM_LOCK_LED_INDEX)
+        if (led_state.num_lock) {
+            rgb_matrix_set_color(NUM_LOCK_LED_INDEX, 255, 255, 255);
+        } else {
+            rgb_matrix_set_color(NUM_LOCK_LED_INDEX, 0, 0, 0);
+        }
+#    endif // NUM_LOCK_LED_INDEX
+#    if defined(CAPS_LOCK_LED_INDEX)
+		if (led_state.caps_lock) {
+			rgb_matrix_set_color(CAPS_LOCK_LED_INDEX, 255, 255, 255);
+		} else {
+			rgb_matrix_set_color(CAPS_LOCK_LED_INDEX, 0, 0, 0);
+		}
+#    endif // CAPS_LOCK_LED_INDEX
+
+        rgb_matrix_update_pwm_buffers();
+    }
+
+    return res;
+}
+
 #endif // RGB_MATRIX_ENABLE && CAPS_LOCK_LED_INDEX...
+
+#ifdef RAW_ENABLE
+
+void raw_hid_receive_kb(uint8_t *data, uint8_t length) {
+    raw_hid_receive_ft(data, length);
+}
+
+#endif // RAW_ENABLE

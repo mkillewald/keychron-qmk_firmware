@@ -14,11 +14,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#pragma once
+#include "stdint.h"
 
-#include "quantum.h"
-#include "keychron_factory_test.h"
-
-#if defined(KEYBOARD_keychron_c2_c2_ansi_rgb_stm32l432)
-#    include "c2_ansi_rgb_stm32l432.h"
-#endif
+bool process_record_ft(uint16_t keycode, keyrecord_t *record);
+void housekeeping_task_ft(void);
+#if LED_MATRIX_ENABLE
+void led_matrix_indicators_advanced_ft(uint8_t led_min, uint8_t led_max);
+#endif // LED_MATRIX_ENABLE
+#if RGB_MATRIX_ENABLE
+void rgb_matrix_indicators_advanced_ft(uint8_t led_min, uint8_t led_max);
+#endif // RGB_MATRIX_ENABLE
+void raw_hid_receive_ft(uint8_t *data, uint8_t length);
+bool dip_switch_update_ft(uint8_t index, bool active);
