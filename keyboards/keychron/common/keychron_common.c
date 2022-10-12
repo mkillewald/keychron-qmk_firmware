@@ -16,6 +16,7 @@
 
 #include QMK_KEYBOARD_H
 #include "keychron_common.h"
+#include "keychron_factory_test.h"
 
 bool is_siri_active = false;
 uint32_t siri_timer = 0;
@@ -30,6 +31,7 @@ key_combination_t key_comb_list[4] = {
 static uint8_t mac_keycode[4] = { KC_LOPT, KC_ROPT, KC_LCMD, KC_RCMD };
 
 void housekeeping_task_keychron(void) {
+    housekeeping_task_ft();
     if (is_siri_active) {
         if (sync_timer_elapsed32(siri_timer) >= 500) {
             unregister_code(KC_LCMD);
@@ -40,6 +42,9 @@ void housekeeping_task_keychron(void) {
 }
 
 bool process_record_keychron(uint16_t keycode, keyrecord_t *record) {
+    if (!process_record_ft(keycode, record)) {
+        return false;
+    }
     switch (keycode) {
         case KC_MISSION_CONTROL:
             if (record->event.pressed) {
@@ -95,3 +100,23 @@ bool process_record_keychron(uint16_t keycode, keyrecord_t *record) {
             return true;  // Process all other keycodes normally
     }
 }
+
+bool dip_switch_update_keychron(uint8_t index, bool active) {
+    if (!dip_switch_update_ft(index, active)) {
+        return false;
+    }
+
+    return true;
+}
+
+#ifdef RGB_MATRIX_ENABLE
+void rgb_matrix_indicators_advanced_keychron(uint8_t led_min, uint8_t led_max) {
+    rgb_matrix_indicators_advanced_ft(led_min, led_max);
+}
+#endif // RGB_MATRIX_ENABLE
+
+#ifdef LED_MATRIX_ENABLE
+void led_matrix_indicators_advanced_keychron(uint8_t led_min, uint8_t led_max) {
+    led_matrix_indicators_advanced_ft(led_min, led_max);
+}
+#endif // LED_MATRIX_ENABLE

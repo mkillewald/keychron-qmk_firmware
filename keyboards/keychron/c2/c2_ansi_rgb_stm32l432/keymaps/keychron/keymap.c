@@ -16,7 +16,6 @@
 
 #include QMK_KEYBOARD_H
 #include "keychron_common.h"
-#include "keychron_factory_test.h"
 
 enum layers{
     MAC_BASE,
@@ -64,7 +63,6 @@ extern void rgb_matrix_update_pwm_buffers(void);
 
 void housekeeping_task_user(void) {
     housekeeping_task_keychron();
-    housekeeping_task_ft();
 
 #if defined(RGB_MATRIX_ENABLE)
     if (!rgb_matrix_is_enabled()) {
@@ -88,11 +86,21 @@ void housekeeping_task_user(void) {
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    process_record_ft(keycode, record);
-
     if (!process_record_keychron(keycode, record)) {
         return false;
     }
 
     return true;
+}
+
+bool dip_switch_update_user(uint8_t index, bool active) {
+    if (!dip_switch_update_keychron(index, active)) {
+        return false;
+    }
+
+    return true;
+}
+
+void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
+    rgb_matrix_indicators_advanced_keychron(led_min, led_max);
 }

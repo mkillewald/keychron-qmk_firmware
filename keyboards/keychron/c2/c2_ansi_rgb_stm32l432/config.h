@@ -29,7 +29,7 @@
 #define DRIVER_ADDR_1 0b1110111
 #define DRIVER_ADDR_2 0b1110100
 #define CKLED2001_CURRENT_TUNE \
-    { 0xA4, 0xA4, 0x52, 0xA4, 0xA4, 0x52, 0xA4, 0xA4, 0x52, 0xA4, 0xA4, 0x52 }
+    { 0xAA, 0xAA, 0x56, 0xAA, 0xAA, 0x56, 0xAA, 0xAA, 0x56, 0xAA, 0xAA, 0x56 }
 
 /* RGB Matrix Configuration */
 #define DRIVER_1_LED_TOTAL 60
@@ -42,6 +42,9 @@
 #define CAPS_LOCK_LED_INDEX 17
 #define MAC_OS_LED_INDEX 18
 #define WIN_OS_LED_INDEX 19
+
+/* turn off effects when suspended */
+#define RGB_DISABLE_WHEN_USB_SUSPENDED
 
 // RGB Matrix Animation modes. Explicitly enabled
 // For full list of effects, see:

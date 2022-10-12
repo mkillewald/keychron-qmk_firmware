@@ -56,7 +56,7 @@ uint8_t factory_reset_count = 0;
 bool report_os_sw_state = false;
 extern matrix_row_t matrix[MATRIX_ROWS];
 
-bool process_record_ft(uint16_t keycode, keyrecord_t *record) {
+__attribute__((weak))bool process_record_ft(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case MO(MAC_FN):
         case MO(WIN_FN):
@@ -169,7 +169,7 @@ static void timer_300ms_task(void) {
     }
 }
 
-#if LED_MATRIX_ENABLE
+#ifdef LED_MATRIX_ENABLE
 
 void led_matrix_indicators_advanced_ft(uint8_t led_min, uint8_t led_max) {
     if (factory_reset_count) {
@@ -181,7 +181,7 @@ void led_matrix_indicators_advanced_ft(uint8_t led_min, uint8_t led_max) {
 
 #endif // LED_MATRIX_ENABLE
 
-#if RGB_MATRIX_ENABLE
+#ifdef RGB_MATRIX_ENABLE
 
 void rgb_matrix_indicators_advanced_ft(uint8_t led_min, uint8_t led_max) {
     if (factory_reset_count) {
@@ -227,45 +227,9 @@ void housekeeping_task_ft(void) {
     }
 }
 
-void raw_hid_receive_ft(uint8_t *data, uint8_t length) {
-    if ( data[0] == 0xAB ) {
-        uint16_t checksum = 0;
-        for (uint8_t i  = 1; i < RAW_EPSIZE-3; i++) {
-            checksum += data[i];
-        }
-        /* Verify checksum */
-        if ((checksum & 0xFF) != data[RAW_EPSIZE-2] || checksum >> 8 != data[RAW_EPSIZE-1]) {
-            return;
-        }
-        switch (data[1]) {
-            case FACTORY_TEST_CMD_BACKLIGHT:
-                led_test_mode = data[2];
-                timer_3s_buffer = 0;
-                break;
-            case FACTORY_TEST_CMD_OS_SWITCH:
-                report_os_sw_state = data[2];
-                // if (report_os_sw_state) {
-                //     dip_switch_read(true);
-                // }
-                break;
-            case FACTORY_TEST_CMD_JUMP_TO_BL:
-                if (matrix[0] & 0x1 && matrix[MATRIX_ROWS - 1] & (0x1 << (MATRIX_COLS - 1))) {
-                    if (memcmp(&data[2], "JumpToBootloader", strlen("JumpToBootloader")) == 0)
-                        bootloader_jump();
-                }
-                break;
-            case FACTORY_TEST_CMD_EEPROM_CLEAR:
-                if (matrix[0] & 0x1 && matrix[MATRIX_ROWS - 1] & (0x1 << (MATRIX_COLS - 1))) {
-                    if (data[2]) {
-                        factory_reset();
-                    }
-                }
-                break;
-        }
-    }
-}
+#ifdef RAW_ENABLE
 
-void system_switch_state_report(uint8_t index, bool active) {
+static void system_switch_state_report(uint8_t index, bool active) {
     uint16_t checksum = 0;
     uint8_t data[RAW_EPSIZE] = {0};
     uint8_t payload[3] = { 0 };
@@ -294,3 +258,42 @@ bool dip_switch_update_ft(uint8_t index, bool active) {
     system_switch_state_report(index, active);
     return true;
 }
+
+void raw_hid_receive_kb(uint8_t *data, uint8_t length) {
+    if (data[0] == 0xAB) {
+        uint16_t checksum = 0;
+        for (uint8_t i = 1; i < RAW_EPSIZE - 3; i++) {
+            checksum += data[i];
+        }
+        /* Verify checksum */
+        if ((checksum & 0xFF) != data[RAW_EPSIZE - 2] || checksum >> 8 != data[RAW_EPSIZE - 1]) {
+            return;
+        }
+        switch (data[1]) {
+            case FACTORY_TEST_CMD_BACKLIGHT:
+                led_test_mode   = data[2];
+                timer_3s_buffer = 0;
+                break;
+            case FACTORY_TEST_CMD_OS_SWITCH:
+                report_os_sw_state = data[2];
+                // if (report_os_sw_state) {
+                //     dip_switch_read(true);
+                // }
+                break;
+            case FACTORY_TEST_CMD_JUMP_TO_BL:
+                if (matrix[0] & 0x1 && matrix[MATRIX_ROWS - 1] & (0x1 << (MATRIX_COLS - 1))) {
+                    if (memcmp(&data[2], "JumpToBootloader", strlen("JumpToBootloader")) == 0) bootloader_jump();
+                }
+                break;
+            case FACTORY_TEST_CMD_EEPROM_CLEAR:
+                if (matrix[0] & 0x1 && matrix[MATRIX_ROWS - 1] & (0x1 << (MATRIX_COLS - 1))) {
+                    if (data[2]) {
+                        factory_reset();
+                    }
+                }
+                break;
+        }
+    }
+}
+
+#endif // RAW_ENABLE

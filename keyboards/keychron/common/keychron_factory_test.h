@@ -16,13 +16,14 @@
 
 #include "stdint.h"
 
-bool process_record_ft(uint16_t keycode, keyrecord_t *record);
+__attribute__((weak)) bool process_record_ft(uint16_t keycode, keyrecord_t *record);
 void housekeeping_task_ft(void);
-#if LED_MATRIX_ENABLE
+#ifdef LED_MATRIX_ENABLE
 void led_matrix_indicators_advanced_ft(uint8_t led_min, uint8_t led_max);
 #endif // LED_MATRIX_ENABLE
-#if RGB_MATRIX_ENABLE
+#ifdef RGB_MATRIX_ENABLE
 void rgb_matrix_indicators_advanced_ft(uint8_t led_min, uint8_t led_max);
 #endif // RGB_MATRIX_ENABLE
-void raw_hid_receive_ft(uint8_t *data, uint8_t length);
+#ifdef RAW_ENABLE
 bool dip_switch_update_ft(uint8_t index, bool active);
+#endif // RAW_ENABLE

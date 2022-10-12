@@ -15,7 +15,6 @@
  */
 
 #include "stdint.h"
-#include "quantum_keycodes.h"
 
 enum custom_keycodes {
     KC_MISSION_CONTROL = USER00,
@@ -45,3 +44,10 @@ typedef struct PACKED {
 
 void housekeeping_task_keychron(void);
 bool process_record_keychron(uint16_t keycode, keyrecord_t *record);
+bool dip_switch_update_keychron(uint8_t index, bool active);
+#ifdef RGB_MATRIX_ENABLE
+void rgb_matrix_indicators_advanced_keychron(uint8_t led_min, uint8_t led_max);
+#endif // RGB_MATRIX_ENABLE
+#ifdef LED_MATRIX_ENABLE
+void led_matrix_indicators_advanced_keychron(uint8_t led_min, uint8_t led_max);
+#endif // LED_MATRIX_ENABLE

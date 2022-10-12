@@ -1,12 +1,12 @@
 {
-    "keyboard_name": "Keychron C2",
+    "keyboard_name": "Keychron C2 Pro",
     "manufacturer": "Keychron",
     "url": "https://github.com/Keychron",
     "maintainer": "lalalademaxiya1",
     "usb": {
         "vid": "0x3434",
         "pid": "0x0520",
-        "device_version": "1.0.0"
+        "device_version": "1.0.1"
     },
     "layouts": {
         "LAYOUT_ansi_104": {

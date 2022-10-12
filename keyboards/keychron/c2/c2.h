@@ -17,7 +17,6 @@
 #pragma once
 
 #include "quantum.h"
-#include "keychron_factory_test.h"
 
 #if defined(KEYBOARD_keychron_c2_c2_ansi_rgb_stm32l432)
 #    include "c2_ansi_rgb_stm32l432.h"

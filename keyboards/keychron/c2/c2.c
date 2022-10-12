@@ -27,8 +27,8 @@ const matrix_row_t matrix_mask[] = {
 
 #ifdef DIP_SWITCH_ENABLE
 
-bool dip_switch_update_user(uint8_t index, bool active) {
-    if (!dip_switch_update_ft(index, active)) {
+bool dip_switch_update_kb(uint8_t index, bool active) {
+    if (!dip_switch_update_user(index, active)) {
         return false;
     }
     if (index == 0) {
@@ -42,10 +42,6 @@ bool dip_switch_update_user(uint8_t index, bool active) {
 #if defined(RGB_MATRIX_ENABLE) && (defined(NUM_LOCK_LED_INDEX) || defined(CAPS_LOCK_LED_INDEX) || defined(MAC_OS_LED_INDEX) || defined(WIN_OS_LED_INDEX))
 
 extern void rgb_matrix_update_pwm_buffers(void);
-
-void rgb_matrix_indicators_advanced_kb(uint8_t led_min, uint8_t led_max) {
-    rgb_matrix_indicators_advanced_ft(led_min, led_max);
-}
 
 void rgb_matrix_indicators_kb(void) {
 #    if defined(CAPS_LOCK_LED_INDEX)
@@ -109,11 +105,11 @@ bool led_update_kb(led_t led_state) {
         }
 #    endif // NUM_LOCK_LED_INDEX
 #    if defined(CAPS_LOCK_LED_INDEX)
-		if (led_state.caps_lock) {
-			rgb_matrix_set_color(CAPS_LOCK_LED_INDEX, 255, 255, 255);
-		} else {
-			rgb_matrix_set_color(CAPS_LOCK_LED_INDEX, 0, 0, 0);
-		}
+        if (led_state.caps_lock) {
+            rgb_matrix_set_color(CAPS_LOCK_LED_INDEX, 255, 255, 255);
+        } else {
+            rgb_matrix_set_color(CAPS_LOCK_LED_INDEX, 0, 0, 0);
+        }
 #    endif // CAPS_LOCK_LED_INDEX
 
         rgb_matrix_update_pwm_buffers();
@@ -123,11 +119,3 @@ bool led_update_kb(led_t led_state) {
 }
 
 #endif // RGB_MATRIX_ENABLE && CAPS_LOCK_LED_INDEX...
-
-#ifdef RAW_ENABLE
-
-void raw_hid_receive_kb(uint8_t *data, uint8_t length) {
-    raw_hid_receive_ft(data, length);
-}
-
-#endif // RAW_ENABLE
