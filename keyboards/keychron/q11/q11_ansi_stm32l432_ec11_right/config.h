@@ -22,16 +22,14 @@
 // #define DRIVER_LED_TOTAL (DRIVER_1_LED_TOTAL + DRIVER_2_LED_TOTAL)
 // #define RGB_MATRIX_LED_COUNT DRIVER_LED_TOTAL
 
-/* Encoder Configuration */
-#define ENCODERS_PAD_A { B0 }
-#define ENCODERS_PAD_B { B1 }
-#define ENCODER_RESOLUTIONS { 4 }
-#define ENCODERS_PAD_A_RIGHT { C14 }
-#define ENCODERS_PAD_B_RIGHT { C15 }
-#define ENCODER_RESOLUTIONS_RIGHT { 4 }
-#define ENCODER_DEFAULT_POS 0x3
 
 /* Enable caps-lock LED */
 // #define CAPS_LOCK_LED_INDEX 47
 
+#define BOOTMAGIC_LITE_ROW 0
+#define BOOTMAGIC_LITE_COLUMN 15
+// #define MASTER_RIGHT
+
+// #define ADC_COUNT 2
+#define ADC_SAMPLING_RATE ADC_SMPR_SMP_2P5
 // #define ADC_NUM_CHANNELS 2

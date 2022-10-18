@@ -70,9 +70,20 @@
 #define SERIAL_USART_TX_PIN A9   // USART TX pin
 #define SERIAL_USART_RX_PIN A10  // USART RX pin
 
-/* Specify (0,1) which is "ESC" key on this keyboard as bootmagic key */
-//#define BOOTMAGIC_LITE_ROW 0
-//#define BOOTMAGIC_LITE_COLUMN 1
+/* Encoder Configuration */
+#define ENCODERS_PAD_A \
+    { B0 }
+#define ENCODERS_PAD_B \
+    { B1 }
+#define ENCODER_RESOLUTIONS \
+    { 4 }
+#define ENCODERS_PAD_A_RIGHT \
+    { C14 }
+#define ENCODERS_PAD_B_RIGHT \
+    { C15 }
+#define ENCODER_RESOLUTIONS_RIGHT \
+    { 4 }
+#define ENCODER_DEFAULT_POS 0x3
 
 // RGB Matrix Animation modes. Explicitly enabled
 // For full list of effects, see:

@@ -14,10 +14,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "q11_ansi_stm32l432_ec11.h"
-#include <stdint.h>
-#include "analog.h"
-#include "sync_timer.h"
+#include "q11_ansi_stm32l432_ec11_right.h"
+#include "hal.h"
 
 #ifdef RGB_MATRIX_ENABLE
 
@@ -160,29 +158,32 @@ led_config_t g_led_config = {
 
 // clang-format on
 
-#endif
+#endif // RGB_MATRIX_ENABLE
 
-uint32_t time;
-
-void board_init(void) {
-    // setPinInputHigh(B0);
-    // setPinInputHigh(B1);
-}
+uint32_t time_adc;
+static ADCConfig adcCfg = {};
+static adcsample_t sampleBuffer[2 * 2];
+static ADCConversionGroup adcConversionGroup = {
+    .circular     = FALSE,
+    .num_channels = (uint16_t)(2),
+    .cfgr         = ADC_CFGR_CONT | ADC_CFGR_RES_10BITS,
+    .smpr         = {ADC_SMPR1_SMP_AN8(ADC_SAMPLING_RATE) | ADC_SMPR1_SMP_AN9(ADC_SAMPLING_RATE)},
+};
 
 void keyboard_post_init_kb(void) {
-    // time = sync_timer_read32();
-    // if (readPin(B0) == 0 || readPin(B1) == 0) {
-    setPinInput(A9);
-    setPinInput(A10);
-    // }
-    // // allow user keymaps to do custom post_init
-    // keyboard_post_init_user();
+
+    // setPinInput(B0);
+    // setPinInput(B1);
+    adcStart(&ADC1, &adcCfg);
+    time_adc = timer_read32();
+
+    keyboard_post_init_user();
 }
 
-void matrix_scan_user(void) {
-    // if (sync_timer_elapsed32(time) > 1000) {
-    //     uprintf("adc0: %ld\r\n", readPin(B0));
-    //     uprintf("adc1: %ld\r\n", readPin(B1));
-    //     time = sync_timer_read32();
-    // }
+void housekeeping_task_kb(void) {
+    if (timer_elapsed32(time_adc) > 2000) {
+        // uprintf("ADC0 = %d\r\n", analogReadPin(B0));
+        // uprintf("ADC1 = %d\r\n", analogReadPin(B1));
+        time_adc = timer_read32();
+    }
 }
