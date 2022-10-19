@@ -50,6 +50,7 @@ void rgb_matrix_indicators_kb(void) {
         uint8_t v = light_brightness_get();
         rgb_matrix_set_color(NUM_LOCK_LED_INDEX, v, v, v); // white, with the adjusted brightness
     }
+    return true;
 }
 
 void rgb_matrix_indicators_none_kb(void) {

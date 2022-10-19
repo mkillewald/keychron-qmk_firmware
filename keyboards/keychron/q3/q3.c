@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /* Copyright 2021 @ Keychron (https://www.keychron.com)
+=======
+/* Copyright 2022 @ Keychron (https://www.keychron.com)
+>>>>>>> develop
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -36,7 +40,6 @@ bool dip_switch_update_kb(uint8_t index, bool active) {
         return false;
     }
     if (index == 0) {
-        layer_state_set(1UL << (active ? 2 : 0));
         default_layer_set(1UL << (active ? 2 : 0));
     }
     return true;
@@ -113,6 +116,5 @@ bool led_update_kb(led_t led_state) {
     }
 
     return res;
-}
 
 #endif // CAPS_LOCK_LED_INDEX

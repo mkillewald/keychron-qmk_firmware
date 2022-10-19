@@ -45,6 +45,7 @@ bool process_record_keychron(uint16_t keycode, keyrecord_t *record) {
     if (!process_record_ft(keycode, record)) {
         return false;
     }
+
     switch (keycode) {
         case KC_MISSION_CONTROL:
             if (record->event.pressed) {
