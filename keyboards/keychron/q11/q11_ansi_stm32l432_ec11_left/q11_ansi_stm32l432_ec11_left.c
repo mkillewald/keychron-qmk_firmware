@@ -162,19 +162,13 @@ led_config_t g_led_config = {
 
 #endif // RGB_MATRIX_ENABLE
 
-uint32_t time_toggle_pin;
-
 void keyboard_post_init_kb(void) {
     setPinOutput(A0);
-    writePinLow(A0);
-    time_toggle_pin = timer_read32();
+    writePinHigh(A0);
 
     keyboard_post_init_user();
 }
 
 void housekeeping_task_kb(void) {
-    if (timer_elapsed32(time_toggle_pin) > 200) {
-        time_toggle_pin = timer_read32();
-        togglePin(A0);
-    }
+
 }

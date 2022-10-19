@@ -15,7 +15,10 @@
  */
 
 #include "q11_ansi_stm32l432_ec11_right.h"
-#include "hal.h"
+#include "analog.h"
+#include <ch.h>
+#include <hal.h>
+
 
 #ifdef RGB_MATRIX_ENABLE
 
@@ -160,30 +163,63 @@ led_config_t g_led_config = {
 
 #endif // RGB_MATRIX_ENABLE
 
+#define ADC_BUFFER_DEPTH 1
+#define ADC_NUM_CHANNELS 1
+#define ADC_SAMPLING_RATE ADC_SMPR_SMP_12P5
+#define ADC_RESOLUTION ADC_CFGR_RES_10BITS
+
 uint32_t time_adc;
-static ADCConfig adcCfg = {};
-static adcsample_t sampleBuffer[2 * 2];
-static ADCConversionGroup adcConversionGroup = {
-    .circular     = FALSE,
-    .num_channels = (uint16_t)(2),
-    .cfgr         = ADC_CFGR_CONT | ADC_CFGR_RES_10BITS,
-    .smpr         = {ADC_SMPR1_SMP_AN8(ADC_SAMPLING_RATE) | ADC_SMPR1_SMP_AN9(ADC_SAMPLING_RATE)},
-};
+
+static int16_t analogReadPin_my(pin_t pin) {
+    ADCConfig adcCfg = {};
+    adcsample_t sampleBuffer[ADC_NUM_CHANNELS*ADC_BUFFER_DEPTH];
+    ADCDriver* targetDriver = &ADCD1;
+    ADCConversionGroup adcConversionGroup = {
+        .circular = FALSE,
+        .num_channels = (uint16_t)(ADC_NUM_CHANNELS),
+        .cfgr = ADC_RESOLUTION,
+    };
+
+    palSetLineMode(pin, PAL_MODE_INPUT_ANALOG);
+    switch (pin) {
+        case B0:
+            adcConversionGroup.smpr[2] = ADC_SMPR2_SMP_AN15(ADC_SAMPLING_RATE);
+            adcConversionGroup.sqr[0] = ADC_SQR1_SQ1_N(ADC_CHANNEL_IN15);
+            sampleBuffer[0] = 0;
+            break;
+        case B1:
+            adcConversionGroup.smpr[2] = ADC_SMPR2_SMP_AN16(ADC_SAMPLING_RATE);
+            adcConversionGroup.sqr[0] = ADC_SQR1_SQ1_N(ADC_CHANNEL_IN16);
+            sampleBuffer[0] = 0;
+            break;
+        default:
+             return 0;
+    }
+    adcStart(targetDriver, &adcCfg);
+    if (adcConvert(targetDriver, &adcConversionGroup, &sampleBuffer[0], ADC_BUFFER_DEPTH) != MSG_OK) {
+        return 0;
+    }
+
+    return *sampleBuffer;
+}
 
 void keyboard_post_init_kb(void) {
-
-    // setPinInput(B0);
-    // setPinInput(B1);
-    adcStart(&ADC1, &adcCfg);
     time_adc = timer_read32();
 
+    if ((analogReadPin_my(B0) > 1000) || (analogReadPin_my(B1) > 1000)) {
+        uprintf("Work on uart.\r\n");
+    } else {
+        setPinInput(A10);
+        setPinInput(A9);
+    }
     keyboard_post_init_user();
 }
 
 void housekeeping_task_kb(void) {
     if (timer_elapsed32(time_adc) > 2000) {
-        // uprintf("ADC0 = %d\r\n", analogReadPin(B0));
-        // uprintf("ADC1 = %d\r\n", analogReadPin(B1));
+        uprintf("ADC1 = %d\r\n", analogReadPin_my(B0));
+        uprintf("ADC2 = %d\r\n", analogReadPin_my(B1));
         time_adc = timer_read32();
     }
 }
+
