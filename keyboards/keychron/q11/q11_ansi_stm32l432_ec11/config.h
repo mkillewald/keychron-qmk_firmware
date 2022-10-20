@@ -16,21 +16,12 @@
 
 #pragma once
 
-/* RGB Matrix Configuration */
-// #define DRIVER_1_LED_TOTAL 47
-// #define DRIVER_2_LED_TOTAL 42
-// #define DRIVER_LED_TOTAL (DRIVER_1_LED_TOTAL + DRIVER_2_LED_TOTAL)
-// #define RGB_MATRIX_LED_COUNT DRIVER_LED_TOTAL
-
-
 /* Enable caps-lock LED */
 // #define CAPS_LOCK_LED_INDEX 47
 
 #define BOOTMAGIC_LITE_ROW 0
-#define BOOTMAGIC_LITE_COLUMN 15
-// #define MASTER_RIGHT
+#define BOOTMAGIC_LITE_COLUMN 1
 
-// #define ADC_COUNT 2
-//#define ADC_SAMPLING_RATE ADC_SMPR_SMP_2P5
-//#define ADC_NUM_CHANNELS 1
-//#define ADC_BUFFER_DEPTH 1
+// #define MASTER_RIGHT
+// #define MASTER_LEFT
+#define EE_HANDS

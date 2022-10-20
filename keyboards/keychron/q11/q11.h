@@ -18,8 +18,6 @@
 
 #include "quantum.h"
 
-#if   defined(KEYBOARD_keychron_q11_q11_ansi_stm32l432_ec11_left)
-#    include "q11_ansi_stm32l432_ec11_left.h"
-#elif defined(KEYBOARD_keychron_q11_q11_ansi_stm32l432_ec11_right)
-#    include "q11_ansi_stm32l432_ec11_right.h"
+#if defined(KEYBOARD_keychron_q11_q11_ansi_stm32l432_ec11)
+#include "q11_ansi_stm32l432_ec11.h"
 #endif

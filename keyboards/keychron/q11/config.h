@@ -37,35 +37,25 @@
 /* Set 0 if debouncing isn't needed */
 #define DEBOUNCE 5
 
-/* RGB Matrix Driver Configuration */
-//#define DRIVER_COUNT 1
-//#define DRIVER_ADDR_2 0b1110100
+// Connects each switch in the dip switch to the GPIO pin of the MCU
+#define DIP_SWITCH_PINS { A8 }
 
-/* DIP switch */
-// #define DIP_SWITCH_PINS { A8 }
-//#define DIP_SWITCH_MATRIX_GRID  { {5,5} }
-//#define SCAN_COUNT_MAX 100
-
-/* Disable DIP switch in matrix data */
-//#define MATRIX_MASKED
-
-/* Disable RGB lighting when PC is in suspend */
-//#define RGB_DISABLE_WHEN_USB_SUSPENDED
-
+/* RGB Matrix Configuration */
+#define DRIVER_COUNT 1
+#define DRIVER_ADDR_1 0b1110100
+#define DRIVER_1_LED_TOTAL 89
+#define RGB_MATRIX_LED_COUNT DRIVER_1_LED_TOTAL
+#define RGB_MATRIX_SPLIT { 42, 47 }
 /* EEPROM Driver Configuration */
 #define WEAR_LEVELING_LOGICAL_SIZE 2048
 #define WEAR_LEVELING_BACKING_SIZE (WEAR_LEVELING_LOGICAL_SIZE * 2)
 
 /* handedness */
 // #define SPLIT_HAND_MATRIX_GRID D0, F1
-#define EE_HANDS
+// #define EE_HANDS
 
-/*
- * Split Keyboard specific options, make sure you have 'SPLIT_KEYBOARD = yes' in your rules.mk, and define SOFT_SERIAL_PIN.
- */
 // #define SOFT_SERIAL_PIN A10
 #define USE_SERIAL
-
 #define SERIAL_USART_FULL_DUPLEX // Enable full duplex operation mode.
 #define SERIAL_USART_TX_PIN A9   // USART TX pin
 #define SERIAL_USART_RX_PIN A10  // USART RX pin
@@ -84,6 +74,9 @@
 #define ENCODER_RESOLUTIONS_RIGHT \
     { 4 }
 #define ENCODER_DEFAULT_POS 0x3
+
+/* Disable RGB lighting when PC is in suspend */
+#define RGB_DISABLE_WHEN_USB_SUSPENDED
 
 // RGB Matrix Animation modes. Explicitly enabled
 // For full list of effects, see:
