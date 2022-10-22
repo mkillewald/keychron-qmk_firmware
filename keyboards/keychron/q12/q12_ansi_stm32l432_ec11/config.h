@@ -1,4 +1,4 @@
-/* Copyright 2022 @ Keychron (https://www.keychron.com)
+/* Copyright 2021 @ Keychron (https://www.keychron.com)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,16 +14,21 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "stdint.h"
+#pragma once
 
-bool process_record_ft(uint16_t keycode, keyrecord_t *record);
-void housekeeping_task_ft(void);
-#ifdef LED_MATRIX_ENABLE
-bool led_matrix_indicators_advanced_ft(uint8_t led_min, uint8_t led_max);
-#endif // LED_MATRIX_ENABLE
-#ifdef RGB_MATRIX_ENABLE
-bool rgb_matrix_indicators_advanced_ft(uint8_t led_min, uint8_t led_max);
-#endif // RGB_MATRIX_ENABLE
-#ifdef RAW_ENABLE
-bool dip_switch_update_ft(uint8_t index, bool active);
-#endif // RAW_ENABLE
+/* RGB Matrix Configuration */
+#define DRIVER_1_LED_TOTAL 56
+#define DRIVER_2_LED_TOTAL 46
+#define RGB_MATRIX_LED_COUNT (DRIVER_1_LED_TOTAL + DRIVER_2_LED_TOTAL)
+
+/* Encoder Configuration */
+#define ENCODERS_PAD_A { C14 }
+#define ENCODERS_PAD_B { A2 }
+#define ENCODER_RESOLUTION 4
+#define ENCODER_DEFAULT_POS 0x3
+
+/* Enable caps-lock LED */
+#define CAPS_LOCK_LED_INDEX 59
+
+/* Enable num-lock LED */
+// #define NUM_LOCK_LED_INDEX 18

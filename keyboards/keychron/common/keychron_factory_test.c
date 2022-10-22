@@ -171,7 +171,7 @@ static void timer_300ms_task(void) {
 
 #ifdef LED_MATRIX_ENABLE
 
-void led_matrix_indicators_advanced_ft(uint8_t led_min, uint8_t led_max) {
+bool led_matrix_indicators_advanced_ft(uint8_t led_min, uint8_t led_max) {
     if (factory_reset_count) {
         for (uint8_t i = led_min; i <= led_max; i++) {
             led_matrix_set_value(i, factory_reset_count % 2 ? 0 : UINT8_MAX);
@@ -183,7 +183,7 @@ void led_matrix_indicators_advanced_ft(uint8_t led_min, uint8_t led_max) {
 
 #ifdef RGB_MATRIX_ENABLE
 
-void rgb_matrix_indicators_advanced_ft(uint8_t led_min, uint8_t led_max) {
+bool rgb_matrix_indicators_advanced_ft(uint8_t led_min, uint8_t led_max) {
     if (factory_reset_count) {
         for (uint8_t i = led_min; i <= led_max; i++) {
             rgb_matrix_set_color(i, factory_reset_count % 2 ? 0 : RGB_RED);
@@ -214,6 +214,7 @@ void rgb_matrix_indicators_advanced_ft(uint8_t led_min, uint8_t led_max) {
                 break;
         }
     }
+    return true;
 }
 
 #endif // RGB_MATRIX_ENABLE

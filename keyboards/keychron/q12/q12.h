@@ -14,16 +14,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "stdint.h"
+#pragma once
 
-bool process_record_ft(uint16_t keycode, keyrecord_t *record);
-void housekeeping_task_ft(void);
-#ifdef LED_MATRIX_ENABLE
-bool led_matrix_indicators_advanced_ft(uint8_t led_min, uint8_t led_max);
-#endif // LED_MATRIX_ENABLE
-#ifdef RGB_MATRIX_ENABLE
-bool rgb_matrix_indicators_advanced_ft(uint8_t led_min, uint8_t led_max);
-#endif // RGB_MATRIX_ENABLE
-#ifdef RAW_ENABLE
-bool dip_switch_update_ft(uint8_t index, bool active);
-#endif // RAW_ENABLE
+#include "quantum.h"
+
+#if defined(KEYBOARD_keychron_q12_q12_ansi_stm32l432_ec11)
+#include "q12_ansi_stm32l432_ec11.h"
+#endif

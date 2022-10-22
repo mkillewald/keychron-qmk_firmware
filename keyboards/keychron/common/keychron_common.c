@@ -111,13 +111,21 @@ bool dip_switch_update_keychron(uint8_t index, bool active) {
 }
 
 #ifdef RGB_MATRIX_ENABLE
-void rgb_matrix_indicators_advanced_keychron(uint8_t led_min, uint8_t led_max) {
-    rgb_matrix_indicators_advanced_ft(led_min, led_max);
+bool rgb_matrix_indicators_advanced_keychron(uint8_t led_min, uint8_t led_max) {
+    if (!rgb_matrix_indicators_advanced_ft(led_min, led_max)) {
+        return false;
+    }
+
+    return true;
 }
 #endif // RGB_MATRIX_ENABLE
 
 #ifdef LED_MATRIX_ENABLE
-void led_matrix_indicators_advanced_keychron(uint8_t led_min, uint8_t led_max) {
-    led_matrix_indicators_advanced_ft(led_min, led_max);
+bool led_matrix_indicators_advanced_keychron(uint8_t led_min, uint8_t led_max) {
+    if (!led_matrix_indicators_advanced_ft(led_min, led_max)) {
+        return false;
+    }
+
+    return true;
 }
 #endif // LED_MATRIX_ENABLE
