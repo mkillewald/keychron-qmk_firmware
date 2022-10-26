@@ -23,23 +23,23 @@
 // clang-format off
 
 #define LAYOUT_ansi_91( \
-    K00, K01, K02, K03, K04, K05, K06, K07,      K08, K09, K0A, K0B, K0C, K0D, K0E, K0F, K0G, \
-    K10, K11, K12, K13, K14, K15, K16, K17,      K18, K19, K1A, K1B, K1C, K1D, K1E,      K1G, \
-    K20, K21, K22, K23, K24, K25, K26,           K28, K29, K2A, K2B, K2C, K2D, K2E, K2F, K2G, \
-    K30, K31, K32, K33, K34, K35, K36,           K38, K39, K3A, K3B, K3C, K3D,      K3F, K3G, \
-    K40, K42,      K43, K44, K45, K46, K47,      K48, K49, K4A, K4B, K4C,      K4D, K4F,      \
-    K50, K51, K52, K53, K54,      K56,                K59,      K5A, K5B, K5C, K5E, K5F, K5G  \
+    L00, L01, L02, L03, L04, L05, L06, L07, R00, R01, R02, R03, R04, R05, R06, R07, R08, \
+    L10, L11, L12, L13, L14, L15, L16, L17, R10, R11, R12, R13, R14, R15, R16,      R18, \
+    L20, L21, L22, L23, L24, L25, L26, R20, R21, R22, R23, R24, R25, R26, R27,      R28, \
+    L30, L31, L32, L33, L34, L35, L36, R30, R31, R32, R33, R34, R35,      R37,      R38, \
+    L40, L42,      L43, L44, L45, L46, L47, R40, R41, R42, R43, R44,      R45, R47,      \
+    L50, L51, L52, L53, L54,      L56,           R51,      R52, R53, R54, R56, R57, R58  \
 ) { \
-    { K00, K01, K02, K03, K04, K05, K06, K07, XXX }, \
-    { K10, K11, K12, K13, K14, K15, K16, K17, XXX }, \
-    { K20, K21, K22, K23, K24, K25, K26, XXX, XXX }, \
-    { K30, K31, K32, K33, K34, K35, K36, XXX, XXX }, \
-    { K40, XXX, K42, K43, K44, K45, K46, K47, XXX }, \
-    { K50, K51, K52, K53, K54, XXX, K56, XXX, XXX }, \
-    { K08, K09, K0A, K0B, K0C, K0D, K0E, K0F, K0G }, \
-    { K18, K19, K1A, K1B, K1C, K1D, K1E, XXX, K1G }, \
-    { K28, K29, K2A, K2B, K2C, K2D, K2E, K2F, K2G }, \
-    { K38, K39, K3A, K3B, K3C, K3D, XXX, K3F, K3G }, \
-    { K48, K49, K4A, K4B, K4C, K4D, XXX, K4F, XXX }, \
-    { XXX, K59, K5A, K5B, K5C, XXX, K5E, K5F, K5G }  \
+    { L00, L01, L02, L03, L04, L05, L06, L07, XXX }, \
+    { L10, L11, L12, L13, L14, L15, L16, L17, XXX }, \
+    { L20, L21, L22, L23, L24, L25, L26, XXX, XXX }, \
+    { L30, L31, L32, L33, L34, L35, L36, XXX, XXX }, \
+    { L40, XXX, L42, L43, L44, L45, L46, L47, XXX }, \
+    { L50, L51, L52, L53, L54, XXX, L56, XXX, XXX }, \
+    { R00, R01, R02, R03, R04, R05, R06, R07, R08 }, \
+    { R10, R11, R12, R13, R14, R15, R16, XXX, R18 }, \
+    { R20, R21, R22, R23, R24, R25, R26, R27, R28 }, \
+    { R30, R31, R32, R33, R34, R35, XXX, R37, R38 }, \
+    { R40, R41, R42, R43, R44, R45, XXX, R47, XXX }, \
+    { XXX, R51, R52, R53, R54, XXX, R56, R57, R58 }  \
 }

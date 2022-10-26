@@ -16,7 +16,7 @@
 
 #include QMK_KEYBOARD_H
 #include "keychron_common.h"
-#include "keychron_factory_test.h"
+#include "keychron_factory_test_common.h"
 
 bool is_siri_active = false;
 uint32_t siri_timer = 0;
@@ -106,7 +106,6 @@ bool dip_switch_update_keychron(uint8_t index, bool active) {
     if (!dip_switch_update_ft(index, active)) {
         return false;
     }
-
     return true;
 }
 
@@ -115,7 +114,6 @@ bool rgb_matrix_indicators_advanced_keychron(uint8_t led_min, uint8_t led_max) {
     if (!rgb_matrix_indicators_advanced_ft(led_min, led_max)) {
         return false;
     }
-
     return true;
 }
 #endif // RGB_MATRIX_ENABLE
@@ -125,7 +123,6 @@ bool led_matrix_indicators_advanced_keychron(uint8_t led_min, uint8_t led_max) {
     if (!led_matrix_indicators_advanced_ft(led_min, led_max)) {
         return false;
     }
-
     return true;
 }
 #endif // LED_MATRIX_ENABLE

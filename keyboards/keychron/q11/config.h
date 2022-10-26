@@ -40,21 +40,29 @@
 // Connects each switch in the dip switch to the GPIO pin of the MCU
 #define DIP_SWITCH_PINS { A8 }
 
+/* handedness */
+// #define SPLIT_HAND_MATRIX_GRID D0, F1
+#define EE_HANDS
+// #define MASTER_LEFT
+
 /* RGB Matrix Configuration */
 #define DRIVER_COUNT 1
 #define DRIVER_ADDR_1 0b1110100
 #define DRIVER_1_LED_TOTAL 89
+
+// #define RGB_MATRIX_LED_COUNT (DRIVER_1_LED_TOTAL + DRIVER_2_LED_TOTAL)
 #define RGB_MATRIX_LED_COUNT DRIVER_1_LED_TOTAL
 #define RGB_MATRIX_SPLIT { 42, 47 }
+#define SPLIT_TRANSPORT_MIRROR
+
+#define CKLED2001_CURRENT_TUNE \
+    { 0x80, 0xFF, 0xFF, 0x80, 0xFF, 0xFF, 0x80, 0xFF, 0xFF, 0x80, 0xFF, 0xFF } // 300mA
+
 /* EEPROM Driver Configuration */
 #define WEAR_LEVELING_LOGICAL_SIZE 2048
 #define WEAR_LEVELING_BACKING_SIZE (WEAR_LEVELING_LOGICAL_SIZE * 2)
 
-/* handedness */
-// #define SPLIT_HAND_MATRIX_GRID D0, F1
-// #define EE_HANDS
-
-// #define SOFT_SERIAL_PIN A10
+/* Split Keyboard specific options. */
 #define USE_SERIAL
 #define SERIAL_USART_FULL_DUPLEX // Enable full duplex operation mode.
 #define SERIAL_USART_TX_PIN A9   // USART TX pin
@@ -77,6 +85,9 @@
 
 /* Disable RGB lighting when PC is in suspend */
 #define RGB_DISABLE_WHEN_USB_SUSPENDED
+
+#define BOOTMAGIC_LITE_ROW 0
+#define BOOTMAGIC_LITE_COLUMN 1
 
 // RGB Matrix Animation modes. Explicitly enabled
 // For full list of effects, see:

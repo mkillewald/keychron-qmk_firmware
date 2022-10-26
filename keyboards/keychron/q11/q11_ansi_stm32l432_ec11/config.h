@@ -17,11 +17,4 @@
 #pragma once
 
 /* Enable caps-lock LED */
-// #define CAPS_LOCK_LED_INDEX 47
-
-#define BOOTMAGIC_LITE_ROW 0
-#define BOOTMAGIC_LITE_COLUMN 1
-
-// #define MASTER_RIGHT
-// #define MASTER_LEFT
-#define EE_HANDS
+#define CAPS_LOCK_LED_INDEX 23

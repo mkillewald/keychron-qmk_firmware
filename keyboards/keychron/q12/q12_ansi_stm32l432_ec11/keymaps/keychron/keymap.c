@@ -76,7 +76,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (!process_record_keychron(keycode, record)) {
         return false;
     }
-
     return true;
 }
 
@@ -84,7 +83,6 @@ bool dip_switch_update_user(uint8_t index, bool active) {
     if (!dip_switch_update_keychron(index, active)) {
         return false;
     }
-
     return true;
 }
 
@@ -93,7 +91,6 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     if (!rgb_matrix_indicators_advanced_keychron(led_min, led_max)) {
         return false;
     }
-
     return true;
 }
 #endif // RGB_MATRIX_ENABLE

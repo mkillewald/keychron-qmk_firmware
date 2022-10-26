@@ -5,7 +5,7 @@
     "maintainer": "lalalademaxiya1",
     "usb": {
         "vid": "0x3434",
-        "pid": "0x01A3",
+        "pid": "0x01C3",
         "device_version": "1.0.0"
     },
     "layouts": {
