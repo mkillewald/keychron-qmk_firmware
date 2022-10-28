@@ -359,7 +359,7 @@ qmk_dict = {
     # Basic Keycodes missing from Print Screen onwards, included as fallback
     # random Keycodes
     "RGui": "KC_RGUI", "LGui": "KC_LGUI", "LAlt": "KC_LALT", "RLAlt": "LALT_T(KC_RALT)", "RAlt": "KC_RALT", "LShift": "KC_LSFT", "LCtrl": "KC_LCTL", "LCtTBsp": "LCTL_T(KC_BSPC)", "LCtTEsc": "LCTL_T(KC_ESC)", "RCtrl": "KC_RCTL",
-    "LShift(": "KC_LSPO", "RShift)": "KC_RSPC",
+    "LShift(": "SC_LSPO", "RShift)": "SC_RSPC",
     # "LShift(": "LSFT_T(KC_9)", "RShift)": "RSFT_T(RSFT(KC_0))",
     "LCtrl[": "LCTL_T(KC_LBRC)", "RCtrl]": "RCTL_T(KC_RBRC)",
     "L1_ENT": "LT(1, KC_ENT)", "LT2_BSP":  "LT(2,KC_BSPC)", "LT4_DEL":  "LT(4,KC_DEL)", "LT4_ENT":  "LT(4,KC_ENT)", "LT6_SPC": "LT(6,KC_SPC)",
@@ -370,7 +370,7 @@ qmk_dict = {
     ">>|": "KC_MNXT", "|<<": "KC_MPRV", "play/ps": "KC_MPLY",
     "Bri +": "KC_BRIU", "Bri -": "KC_BRID",
     # Quantum Keycodes
-    "_reset": "QK_BOOT", "_debug": "DEBUG", "_eep_re": "EEP_RST",
+    "_reset": "QK_BOOT", "_debug": "DB_TOGG", "_eep_re": "EE_CLR",
     # Audio Keys missing
     # Backlighting
     "Led 0": "BL_TOGG", "Led +": "BL_INC", "Led -": "BL_DEC", "Led ~": "BL_BRTG",
