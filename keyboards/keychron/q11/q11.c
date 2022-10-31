@@ -15,7 +15,6 @@
  */
 
 #include "q11.h"
-#include "rgb_matrix.h"
 
 #ifdef DIP_SWITCH_ENABLE
 

@@ -18,3 +18,7 @@
 
 /* Enable caps-lock LED */
 #define CAPS_LOCK_LED_INDEX 23
+
+/* Handedness */
+#define SPLIT_HAND_MATRIX_GRID A2, A15
+#define SPLIT_HAND_MATRIX_GRID_LOW_IS_RIGHT

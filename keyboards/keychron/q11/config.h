@@ -42,7 +42,7 @@
 
 /* handedness */
 // #define SPLIT_HAND_MATRIX_GRID D0, F1
-#define EE_HANDS
+// #define EE_HANDS
 // #define MASTER_LEFT
 
 /* RGB Matrix Configuration */
@@ -53,7 +53,7 @@
 // #define RGB_MATRIX_LED_COUNT (DRIVER_1_LED_TOTAL + DRIVER_2_LED_TOTAL)
 #define RGB_MATRIX_LED_COUNT DRIVER_1_LED_TOTAL
 #define RGB_MATRIX_SPLIT { 42, 47 }
-#define SPLIT_TRANSPORT_MIRROR
+// #define SPLIT_TRANSPORT_MIRROR
 
 #define CKLED2001_CURRENT_TUNE \
     { 0x80, 0xFF, 0xFF, 0x80, 0xFF, 0xFF, 0x80, 0xFF, 0xFF, 0x80, 0xFF, 0xFF } // 300mA
