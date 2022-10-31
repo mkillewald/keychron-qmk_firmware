@@ -155,7 +155,6 @@ led_config_t g_led_config = {
         {0,40}, {22,40}, {41,40}, {55,40}, {69,40}, {83,40}, {97,40},
         {0,52}, {26,52},          {48,52}, {61,52}, {76,52}, {90,52}, {102,52},
         {0,64}, {19,64}, {36,64}, {53,64}, {70,64},          {94,64},
-
                   {110,0},  {124,0},  {138,0},  {152,0},  {165,0},  {179,0},  {193,0},  {207,0},
                   {110,15}, {124,15}, {138,15}, {152,15}, {165,15}, {179,15}, {200,15},           {224,15},
         {104,27}, {117,27}, {131,27}, {145,27}, {158,27}, {172,27}, {186,27}, {203,27},           {224,27},
@@ -184,10 +183,10 @@ led_config_t g_led_config = {
 
 #endif // RGB_MATRIX_ENABLE
 
-#    define ADC_BUFFER_DEPTH 1
-#    define ADC_NUM_CHANNELS 1
-#    define ADC_SAMPLING_RATE ADC_SMPR_SMP_12P5
-#    define ADC_RESOLUTION ADC_CFGR_RES_10BITS
+#define ADC_BUFFER_DEPTH 1
+#define ADC_NUM_CHANNELS 1
+#define ADC_SAMPLING_RATE ADC_SMPR_SMP_12P5
+#define ADC_RESOLUTION ADC_CFGR_RES_10BITS
 
 static int16_t analogReadPin_my(pin_t pin) {
     ADCConfig adcCfg = {};

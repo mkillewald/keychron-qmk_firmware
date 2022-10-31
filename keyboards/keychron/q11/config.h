@@ -49,11 +49,8 @@
 #define DRIVER_COUNT 1
 #define DRIVER_ADDR_1 0b1110100
 #define DRIVER_1_LED_TOTAL 89
-
-// #define RGB_MATRIX_LED_COUNT (DRIVER_1_LED_TOTAL + DRIVER_2_LED_TOTAL)
 #define RGB_MATRIX_LED_COUNT DRIVER_1_LED_TOTAL
 #define RGB_MATRIX_SPLIT { 42, 47 }
-// #define SPLIT_TRANSPORT_MIRROR
 
 #define CKLED2001_CURRENT_TUNE \
     { 0x80, 0xFF, 0xFF, 0x80, 0xFF, 0xFF, 0x80, 0xFF, 0xFF, 0x80, 0xFF, 0xFF } // 300mA
@@ -64,9 +61,9 @@
 
 /* Split Keyboard specific options. */
 #define USE_SERIAL
-#define SERIAL_USART_FULL_DUPLEX // Enable full duplex operation mode.
+// #define SERIAL_USART_FULL_DUPLEX // Enable full duplex operation mode.
 #define SERIAL_USART_TX_PIN A9   // USART TX pin
-#define SERIAL_USART_RX_PIN A10  // USART RX pin
+// #define SERIAL_USART_RX_PIN A10  // USART RX pin
 
 /* Encoder Configuration */
 #define ENCODERS_PAD_A \

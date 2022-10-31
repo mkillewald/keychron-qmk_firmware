@@ -37,22 +37,19 @@
 #    define KC_STEP_3 KC_B
 #    define KC_STEP_4 KC_L
 #elif defined(KEYBOARD_keychron_q11_q11_ansi_stm32l432_ec11)
-#    ifndef MASTER_RIGHT
-#        define KC_STEP_1 KC_ESC
-#        define KC_STEP_2 KC_6
-#        define KC_STEP_3 KC_TAB
-#        define KC_STEP_4 KC_5
-#    else
-#        define KC_STEP_1 KC_J
-#        define KC_STEP_2 KC_Z
-#        define KC_STEP_3 KC_RIGHT
-#        define KC_STEP_4 KC_LEFT
-#    endif // !MASTER_RIGHT
+#    define KC_STEP_1 KC_ESC
+#    define KC_STEP_2 KC_6
+#    define KC_STEP_3 KC_TAB
+#    define KC_STEP_4 KC_5
+#    define KC_STEP_5 KC_EQL
+#    define KC_STEP_6 KC_M
+#    define KC_STEP_7 KC_RIGHT
+#    define KC_STEP_8 KC_HOME
 #else
 #    define KC_STEP_1 KC_J
 #    define KC_STEP_2 KC_Z
 #    define KC_STEP_3 KC_RIGHT
-#    define KC_STEP_4 KC_LEFT
+#    define KC_STEP_4 KC_HOME
 #endif
 
 enum {
@@ -94,6 +91,9 @@ __attribute__((weak))bool process_record_ft(uint16_t keycode, keyrecord_t *recor
             }
             return true;
         case KC_STEP_1:
+#if defined(KEYBOARD_keychron_q11_q11_ansi_stm32l432_ec11)
+        case KC_STEP_5:
+#endif // KEYBOARD_keychron_q11_q11_ansi_stm32l432_ec11
             if (record->event.pressed) {
                 key_press_status |= KEY_PRESS_STEP_1;
                 if (key_press_status == KEY_PRESS_FACTORY_RESET) {
@@ -105,6 +105,9 @@ __attribute__((weak))bool process_record_ft(uint16_t keycode, keyrecord_t *recor
             }
             return true;
         case KC_STEP_2:
+#if defined(KEYBOARD_keychron_q11_q11_ansi_stm32l432_ec11)
+        case KC_STEP_6:
+#endif // KEYBOARD_keychron_q11_q11_ansi_stm32l432_ec11
             if (record->event.pressed) {
                 key_press_status |= KEY_PRESS_STEP_2;
                 if (key_press_status == KEY_PRESS_FACTORY_RESET) {
@@ -116,6 +119,9 @@ __attribute__((weak))bool process_record_ft(uint16_t keycode, keyrecord_t *recor
             }
             return true;
         case KC_STEP_3:
+#if defined(KEYBOARD_keychron_q11_q11_ansi_stm32l432_ec11)
+        case KC_STEP_7:
+#endif // KEYBOARD_keychron_q11_q11_ansi_stm32l432_ec11
             if (record->event.pressed) {
                 key_press_status |= KEY_PRESS_STEP_3;
                 if (led_test_mode) {
@@ -131,6 +137,9 @@ __attribute__((weak))bool process_record_ft(uint16_t keycode, keyrecord_t *recor
             }
             return true;
         case KC_STEP_4:
+#if defined(KEYBOARD_keychron_q11_q11_ansi_stm32l432_ec11)
+        case KC_STEP_8:
+#endif // KEYBOARD_keychron_q11_q11_ansi_stm32l432_ec11
             if (record->event.pressed) {
                 key_press_status |= KEY_PRESS_STEP_4;
                 if (led_test_mode) {
