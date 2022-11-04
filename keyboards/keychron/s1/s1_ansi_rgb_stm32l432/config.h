@@ -22,13 +22,15 @@
 #define DRIVER_ADDR_2 0b1110100
 #define DRIVER_1_LED_TOTAL 46
 #define DRIVER_2_LED_TOTAL 38
-#define DRIVER_LED_TOTAL (DRIVER_1_LED_TOTAL + DRIVER_2_LED_TOTAL)
-#define RGB_MATRIX_LED_COUNT DRIVER_LED_TOTAL
+#define RGB_MATRIX_LED_COUNT (DRIVER_1_LED_TOTAL + DRIVER_2_LED_TOTAL)
 
 /* Scan phase of led driver set as MSKPHASE_9CHANNEL(defined as 0x03 in CKLED2001.h) */
 #define PHASE_CHANNEL MSKPHASE_9CHANNEL
 #define CKLED2001_CURRENT_TUNE \
     { 0xA0, 0xA0, 0x48, 0xA0, 0xA0, 0x48, 0xA0, 0xA0, 0x48, 0xA0, 0xA0, 0x48 }
+
+/* Disable RGB lighting when PC is in suspend */
+#define RGB_DISABLE_WHEN_USB_SUSPENDED
 
 /* Enable caps-lock LED */
 #define CAPS_LOCK_LED_INDEX 46

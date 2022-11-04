@@ -85,6 +85,15 @@ void housekeeping_task_user(void) {
     housekeeping_task_keychron();
 }
 
+#ifdef RAW_ENABLE
+bool dip_switch_update_user(uint8_t index, bool active) {
+    if (!dip_switch_update_keychron(index, active)) {
+        return false;
+    }
+    return true;
+}
+#endif // RAW_ENABLE
+
 #ifdef RGB_MATRIX_ENABLE
 bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     if (!rgb_matrix_indicators_advanced_keychron(led_min, led_max)) {

@@ -20,4 +20,6 @@
 
 #if defined(KEYBOARD_keychron_c1_c1_ansi_rgb_stm32l432)
 #    include "c1_ansi_rgb_stm32l432.h"
+#elif defined(KEYBOARD_keychron_c1_c1_ansi_white_stm32l432)
+#    include "c1_ansi_white_stm32l432.h"
 #endif

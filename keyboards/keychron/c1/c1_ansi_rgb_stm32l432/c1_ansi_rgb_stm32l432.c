@@ -14,14 +14,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "c1_ansi_rgb_stm32l432.h"
+#include "quantum.h"
 
 #ifdef RGB_MATRIX_ENABLE
 
 // clang-format off
 
-const ckled2001_led PROGMEM g_ckled2001_leds[DRIVER_LED_TOTAL] = {
-/* Refer to IS31 manual for these locations
+const ckled2001_led PROGMEM g_ckled2001_leds[RGB_MATRIX_LED_COUNT] = {
+/* Refer to CKLED2001 manual for these locations
  *   driver
  *   |  R location
  *   |  |       G location
@@ -119,6 +119,7 @@ const ckled2001_led PROGMEM g_ckled2001_leds[DRIVER_LED_TOTAL] = {
     {1, F_15,   D_15,   E_15},
     {1, F_16,   D_16,   E_16},
     {1, C_15,   A_15,   B_15},
+
     {0, I_14,   G_14,   H_14},
 };
 

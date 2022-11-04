@@ -20,9 +20,6 @@
 #include "via.h"
 #include "raw_hid.h"
 
-#define MAC_FN 1
-#define WIN_FN 3
-
 #define KEY_PRESS_FN     (0x1<<0)
 #define KEY_PRESS_STEP_1 (0x1<<1)
 #define KEY_PRESS_STEP_2 (0x1<<2)
@@ -32,11 +29,15 @@
 #define KEY_PRESS_LED_TEST (KEY_PRESS_FN | KEY_PRESS_STEP_3 | KEY_PRESS_STEP_4)
 
 #if defined(KEYBOARD_keychron_q60_q60_ansi_stm32l432)
+#    define FN1 1
+#    define FN2 2
 #    define KC_STEP_1 KC_J
 #    define KC_STEP_2 KC_Z
 #    define KC_STEP_3 KC_B
 #    define KC_STEP_4 KC_L
 #elif defined(KEYBOARD_keychron_q11_q11_ansi_stm32l432_ec11)
+#    define FN1 1
+#    define FN2 3
 #    define KC_STEP_1 KC_ESC
 #    define KC_STEP_2 KC_6
 #    define KC_STEP_3 KC_TAB
@@ -46,6 +47,8 @@
 #    define KC_STEP_7 KC_RIGHT
 #    define KC_STEP_8 KC_HOME
 #else
+#    define FN1 1
+#    define FN2 3
 #    define KC_STEP_1 KC_J
 #    define KC_STEP_2 KC_Z
 #    define KC_STEP_3 KC_RIGHT
@@ -81,8 +84,8 @@ extern matrix_row_t matrix[MATRIX_ROWS];
 
 __attribute__((weak))bool process_record_ft(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case MO(MAC_FN):
-        case MO(WIN_FN):
+        case MO(FN1):
+        case MO(FN2):
             if (record->event.pressed) {
                 key_press_status |= KEY_PRESS_FN;
             } else {
@@ -164,16 +167,18 @@ static void factory_reset(void) {
     eeconfig_init();
     default_layer_set(default_layer_tmp);
     led_test_mode = LED_TEST_MODE_OFF;
-#    ifdef LED_MATRIX_ENABLE
-    if (!led_matrix_is_enabled()) led_matrix_enable();
+#ifdef LED_MATRIX_ENABLE
+    if (!led_matrix_is_enabled()) {
+        led_matrix_enable();
+    }
     led_matrix_init();
-#    endif
-#    ifdef RGB_MATRIX_ENABLE
+#endif
+#ifdef RGB_MATRIX_ENABLE
     if (!rgb_matrix_is_enabled()) {
         rgb_matrix_enable();
     }
     rgb_matrix_init();
-#    endif
+#endif
 }
 
 static void timer_3s_task(void) {
@@ -183,11 +188,16 @@ static void timer_3s_task(void) {
             factory_reset();
         } else if (key_press_status == KEY_PRESS_LED_TEST) {
             led_test_mode = LED_TEST_MODE_WHITE;
-#    ifdef RGB_MATRIX_ENABLE
+#ifdef LED_MATRIX_ENABLE
+            if (!led_matrix_is_enabled()) {
+                led_matrix_enable();
+            }
+#endif // LED_MATRIX_ENABLE
+#ifdef RGB_MATRIX_ENABLE
             if (!rgb_matrix_is_enabled()) {
                 rgb_matrix_enable();
             }
-#    endif
+#endif // RGB_MATRIX_ENABLE
         }
         key_press_status = 0;
     }
@@ -204,20 +214,18 @@ static void timer_300ms_task(void) {
     }
 }
 
-#    ifdef LED_MATRIX_ENABLE
-
+#ifdef LED_MATRIX_ENABLE
 bool led_matrix_indicators_advanced_ft(uint8_t led_min, uint8_t led_max) {
     if (factory_reset_count) {
         for (uint8_t i = led_min; i <= led_max; i++) {
             led_matrix_set_value(i, factory_reset_count % 2 ? 0 : UINT8_MAX);
         }
     }
+    return true;
 }
+#endif // LED_MATRIX_ENABLE
 
-#    endif // LED_MATRIX_ENABLE
-
-#    ifdef RGB_MATRIX_ENABLE
-
+#ifdef RGB_MATRIX_ENABLE
 bool rgb_matrix_indicators_advanced_ft(uint8_t led_min, uint8_t led_max) {
     if (factory_reset_count) {
         for (uint8_t i = led_min; i <= led_max; i++) {
@@ -251,8 +259,7 @@ bool rgb_matrix_indicators_advanced_ft(uint8_t led_min, uint8_t led_max) {
     }
     return true;
 }
-
-#    endif // RGB_MATRIX_ENABLE
+#endif // RGB_MATRIX_ENABLE
 
 void housekeeping_task_ft(void) {
     if (timer_3s_buffer) {
@@ -263,8 +270,6 @@ void housekeeping_task_ft(void) {
     }
 }
 
-#    ifdef RAW_ENABLE
-
 static void system_switch_state_report(uint8_t index, bool active) {
     uint16_t checksum = 0;
     uint8_t data[RAW_EPSIZE] = {0};
@@ -273,11 +278,11 @@ static void system_switch_state_report(uint8_t index, bool active) {
     if (report_os_sw_state) {
         payload[0] = FACTORY_TEST_CMD_OS_SWITCH;
         payload[1] = OS_SWITCH;
-#        if defined(OS_SWITCH_REVERSE)
+#if defined(OS_SWITCH_REVERSE)
         payload[2] = !active;
-#        else
+#else
         payload[2] = active;
-#        endif
+#endif
         data[0] = 0xAB;
         memcpy(&data[1], payload, 3);
         for (uint8_t i=1; i<RAW_EPSIZE-3; i++ ) {
@@ -289,6 +294,7 @@ static void system_switch_state_report(uint8_t index, bool active) {
     }
 }
 
+#ifdef RAW_ENABLE
 bool dip_switch_update_ft(uint8_t index, bool active) {
     /* Send default layer state to host */
     system_switch_state_report(index, active);
@@ -331,5 +337,4 @@ void raw_hid_receive_kb(uint8_t *data, uint8_t length) {
         }
     }
 }
-
-#    endif // RAW_ENABLE
+#endif // RAW_ENABLE
