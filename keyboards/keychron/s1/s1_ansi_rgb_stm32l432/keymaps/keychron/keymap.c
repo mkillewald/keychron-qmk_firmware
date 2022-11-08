@@ -83,7 +83,10 @@ bool dip_switch_update_user(uint8_t index, bool active) {
 #endif // RAW_ENABLE
 
 #ifdef RGB_MATRIX_ENABLE
-void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
-    rgb_matrix_indicators_advanced_keychron(led_min, led_max);
+bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
+    if(!rgb_matrix_indicators_advanced_keychron(led_min, led_max)) {
+        return false;
+    }
+    return true;
 }
 #endif // RGB_MATRIX_ENABLE

@@ -22,7 +22,7 @@ const matrix_row_t matrix_mask[] = {
     0b111111111111111,
     0b111111111111111,
     0b111111111111111,
-    0b111111111110111,
+    0b111111111101111,
 };
 
 #ifdef DIP_SWITCH_ENABLE
