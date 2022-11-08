@@ -1,2 +1,2 @@
 VIA_ENABLE = yes
-SRC += factory/major/test.c
+ENCODER_MAP_ENABLE = yes

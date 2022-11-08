@@ -63,16 +63,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 // clang-format on
 
-#if defined(LED_MATRIX_ENABLE)
+#if defined(LED_MATRIX_ENABLE) && defined(CAPS_LOCK_LED_INDEX) && defined(MAC_LOCK_LED_INDEX) && defined(WIN_LOCK_LED_INDEX)
 extern void led_matrix_update_pwm_buffers(void);
 #endif // LED_MATRIX_ENABLE
 
 void housekeeping_task_user(void) {
     housekeeping_task_keychron();
 
-#if defined(LED_MATRIX_ENABLE)
+#if defined(LED_MATRIX_ENABLE) && defined(CAPS_LOCK_LED_INDEX) && defined(MAC_LOCK_LED_INDEX) && defined(WIN_LOCK_LED_INDEX)
     if (!led_matrix_is_enabled()) {
-#    if defined(CAPS_LOCK_LED_INDEX) && defined(MAC_LOCK_LED_INDEX) && defined(WIN_LOCK_LED_INDEX)
         if ((host_keyboard_led_state().caps_lock) && (default_layer_state == (1 << 0))) {
             led_matrix_set_value(CAPS_LOCK_LED_INDEX, 255);
             led_matrix_set_value(MAC_LOCK_LED_INDEX, 255);
@@ -90,7 +89,6 @@ void housekeeping_task_user(void) {
             led_matrix_set_value(MAC_LOCK_LED_INDEX, 0);
             led_matrix_set_value(WIN_LOCK_LED_INDEX, 255);
         }
-#    endif // SYSTEM_LED_INDEX
         led_matrix_update_pwm_buffers();
     }
 #endif // LED_MATRIX_ENABLE

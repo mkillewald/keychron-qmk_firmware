@@ -1,9 +1,9 @@
-# Keychron C2
+# Keychron C2 Pro
 
 A customizable 100% keyboard.
 
 * Keyboard Maintainer: [Keychron](https://github.com/keychron)
-* Hardware Supported: Keychron C2
+* Hardware Supported: Keychron C2 Pro
 * Hardware Availability: [Keychron](https://www.keychron.com)
 
 Make example for this keyboard (after setting up your build environment):

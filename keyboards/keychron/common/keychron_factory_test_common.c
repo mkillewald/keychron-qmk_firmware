@@ -28,7 +28,13 @@
 #define KEY_PRESS_FACTORY_RESET (KEY_PRESS_FN | KEY_PRESS_STEP_1 | KEY_PRESS_STEP_2)
 #define KEY_PRESS_LED_TEST (KEY_PRESS_FN | KEY_PRESS_STEP_3 | KEY_PRESS_STEP_4)
 
-#if defined(KEYBOARD_keychron_q60_q60_ansi_stm32l432)
+#if defined(KEYBOARD_keychron_q0_q0_stm32l432)
+#    define FN1 1
+#    define KC_STEP_1 RGB_SAD
+#    define KC_STEP_2 RGB_HUD
+#    define KC_STEP_3 KC_MPLY
+#    define KC_STEP_4 KC_DEL
+#elif defined(KEYBOARD_keychron_q60_q60_ansi_stm32l432)
 #    define FN1 1
 #    define FN2 2
 #    define KC_STEP_1 KC_J
@@ -82,7 +88,77 @@ uint8_t factory_reset_count = 0;
 bool report_os_sw_state = false;
 extern matrix_row_t matrix[MATRIX_ROWS];
 
-__attribute__((weak))bool process_record_ft(uint16_t keycode, keyrecord_t *record) {
+#if defined(KEYBOARD_keychron_q0_q0_stm32l432)
+bool process_record_ft(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case MO(FN1):
+            if (record->event.pressed) {
+                key_press_status |= KEY_PRESS_FN;
+            } else {
+                key_press_status &= ~KEY_PRESS_FN;
+                timer_3s_buffer = 0;
+            }
+            return true;
+        case KC_STEP_1:
+            if (record->event.pressed) {
+                key_press_status |= KEY_PRESS_STEP_1;
+                if (key_press_status == KEY_PRESS_FACTORY_RESET) {
+                    timer_3s_buffer = sync_timer_read32();
+                } else {
+                }
+            } else {
+                rgb_matrix_decrease_sat_noeeprom();
+                key_press_status &= ~KEY_PRESS_STEP_1;
+                timer_3s_buffer = 0;
+            }
+            return false; // Skip all further processing of this key
+        case KC_STEP_2:
+            if (record->event.pressed) {
+                key_press_status |= KEY_PRESS_STEP_2;
+                if (key_press_status == KEY_PRESS_FACTORY_RESET) {
+                    timer_3s_buffer = sync_timer_read32();
+                } else {
+                }
+            } else {
+                rgb_matrix_decrease_hue_noeeprom();
+                key_press_status &= ~KEY_PRESS_STEP_2;
+                timer_3s_buffer = 0;
+            }
+            return false; // Skip all further processing of this key
+        case KC_STEP_3:
+            if (record->event.pressed) {
+                key_press_status |= KEY_PRESS_STEP_3;
+                if (led_test_mode) {
+                    if (++led_test_mode >= LED_TEST_MODE_MAX) {
+                        led_test_mode = LED_TEST_MODE_WHITE;
+                    }
+                } else if (key_press_status == KEY_PRESS_LED_TEST) {
+                    timer_3s_buffer = sync_timer_read32();
+                }
+            } else {
+                key_press_status &= ~KEY_PRESS_STEP_3;
+                timer_3s_buffer = 0;
+            }
+            return true;
+        case KC_STEP_4:
+            if (record->event.pressed) {
+                key_press_status |= KEY_PRESS_STEP_4;
+                if (led_test_mode) {
+                    led_test_mode = LED_TEST_MODE_OFF;
+                } else if (key_press_status == KEY_PRESS_LED_TEST) {
+                    timer_3s_buffer = sync_timer_read32();
+                }
+            } else {
+                key_press_status &= ~KEY_PRESS_STEP_4;
+                timer_3s_buffer = 0;
+            }
+            return true;
+        default:
+            return true;
+    }
+}
+#else
+bool process_record_ft(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case MO(FN1):
         case MO(FN2):
@@ -159,6 +235,7 @@ __attribute__((weak))bool process_record_ft(uint16_t keycode, keyrecord_t *recor
             return true;
     }
 }
+#endif
 
 static void factory_reset(void) {
     timer_300ms_buffer = sync_timer_read32();

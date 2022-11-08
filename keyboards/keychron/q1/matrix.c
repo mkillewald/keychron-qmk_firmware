@@ -1,4 +1,4 @@
-/* Copyright 2021 @ Keychron (https://www.keychron.com)
+/* Copyright 2022 @ Keychron (https://www.keychron.com)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,14 +15,15 @@
  */
 
 #include "matrix.h"
+#include "config.h"
 #include "quantum.h"
 
 // Pin connected to DS of 74HC595
-#define DATA_PIN A7
+#define DATA_PIN C15
 // Pin connected to SH_CP of 74HC595
-#define CLOCK_PIN B1
+#define CLOCK_PIN A1
 // Pin connected to ST_CP of 74HC595
-#define LATCH_PIN B0
+#define LATCH_PIN A0
 
 #ifdef MATRIX_ROW_PINS
 static pin_t row_pins[MATRIX_ROWS] = MATRIX_ROW_PINS;
@@ -31,11 +32,7 @@ static pin_t row_pins[MATRIX_ROWS] = MATRIX_ROW_PINS;
 static pin_t col_pins[MATRIX_COLS] = MATRIX_COL_PINS;
 #endif // MATRIX_COL_PINS
 
-#define ROWS_PER_HAND (MATRIX_ROWS)
-
-/* matrix state(1:on, 0:off) */
-extern matrix_row_t raw_matrix[MATRIX_ROWS]; // raw values
-extern matrix_row_t matrix[MATRIX_ROWS];     // debounced values
+#define ROWS_PER_HAND MATRIX_ROWS
 
 static inline void setPinOutput_writeLow(pin_t pin) {
     ATOMIC_BLOCK_FORCEON {
@@ -65,8 +62,8 @@ static inline uint8_t readMatrixPin(pin_t pin) {
     }
 }
 
-static void shiftOut(uint8_t dataOut) {
-    for (uint8_t i = 0; i < 8; i++) {
+static void shiftOut(uint16_t dataOut) {
+    for (uint8_t i = 0; i < NO_PIN_NUM; i++) {
         if (dataOut & 0x1) {
             setPinOutput_writeHigh(DATA_PIN);
         } else {
@@ -80,13 +77,31 @@ static void shiftOut(uint8_t dataOut) {
     setPinOutput_writeLow(LATCH_PIN);
 }
 
+static void shiftout_single(uint8_t data) {
+    if (data & 0x1) {
+        setPinOutput_writeHigh(DATA_PIN);
+    } else {
+        setPinOutput_writeLow(DATA_PIN);
+    }
+    setPinOutput_writeHigh(CLOCK_PIN);
+    setPinOutput_writeLow(CLOCK_PIN);
+
+    setPinOutput_writeHigh(LATCH_PIN);
+    setPinOutput_writeLow(LATCH_PIN);
+}
+
 static bool select_col(uint8_t col) {
     pin_t pin = col_pins[col];
+
     if (pin != NO_PIN) {
         setPinOutput_writeLow(pin);
         return true;
     } else {
-        shiftOut(~(0x1 << (MATRIX_COLS - col - 1)));
+        if (col == 8) {
+            shiftout_single(0x00);
+        } else {
+            shiftout_single(0x01);
+        }
         return true;
     }
     return false;
@@ -94,6 +109,7 @@ static bool select_col(uint8_t col) {
 
 static void unselect_col(uint8_t col) {
     pin_t pin = col_pins[col];
+
     if (pin != NO_PIN) {
 #ifdef MATRIX_UNSELECT_DRIVE_HIGH
         setPinOutput_writeHigh(pin);
@@ -101,12 +117,16 @@ static void unselect_col(uint8_t col) {
         setPinInputHigh_atomic(pin);
 #endif
     } else {
-        shiftOut(0xFF);
+        if (col == 15) {
+            setPinOutput_writeHigh(CLOCK_PIN);
+            setPinOutput_writeLow(CLOCK_PIN);
+            setPinOutput_writeHigh(LATCH_PIN);
+            setPinOutput_writeLow(LATCH_PIN);
+        }
     }
 }
 
 static void unselect_cols(void) {
-    // unselect column pins
     for (uint8_t x = 0; x < MATRIX_COLS; x++) {
         pin_t pin = col_pins[x];
         if (pin != NO_PIN) {
@@ -116,10 +136,10 @@ static void unselect_cols(void) {
             setPinInputHigh_atomic(pin);
 #endif
         }
+        if (x == (MATRIX_COLS - NO_PIN_OFFSET - 1))
+            // unselect shift Register
+            shiftOut(0xFF);
     }
-
-    // unselect Shift Register
-    shiftOut(0xFF);
 }
 
 static void matrix_init_pins(void) {
@@ -138,7 +158,17 @@ static void matrix_read_rows_on_col(matrix_row_t current_matrix[], uint8_t curre
     if (!select_col(current_col)) { // select col
         return;                     // skip NO_PIN col
     }
-    matrix_output_select_delay();
+
+    if (current_col >= 8) {
+        for (int8_t cycle = 4; cycle > 0; cycle--) {
+            matrix_output_select_delay(); // 0.25us
+            matrix_output_select_delay();
+            matrix_output_select_delay();
+            matrix_output_select_delay();
+        }
+    } else {
+        matrix_output_select_delay();
+    }
 
     // For each row...
     for (uint8_t row_index = 0; row_index < ROWS_PER_HAND; row_index++) {

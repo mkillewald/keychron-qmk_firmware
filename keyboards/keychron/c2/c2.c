@@ -39,11 +39,14 @@ bool dip_switch_update_kb(uint8_t index, bool active) {
 
 #endif // DIP_SWITCH_ENABLE
 
-#if defined(RGB_MATRIX_ENABLE) && (defined(NUM_LOCK_LED_INDEX) || defined(CAPS_LOCK_LED_INDEX) || defined(MAC_OS_LED_INDEX) || defined(WIN_OS_LED_INDEX))
+#if defined(RGB_MATRIX_ENABLE) && defined(NUM_LOCK_LED_INDEX) && defined(CAPS_LOCK_LED_INDEX) && defined(MAC_OS_LED_INDEX) && defined(WIN_OS_LED_INDEX)
 
 extern void rgb_matrix_update_pwm_buffers(void);
 
-void rgb_matrix_indicators_kb(void) {
+bool rgb_matrix_indicators_kb(void) {
+    if (!rgb_matrix_indicators_user()) {
+        return false;
+    }
 #    if defined(CAPS_LOCK_LED_INDEX)
     if (host_keyboard_led_state().caps_lock) {
         rgb_matrix_set_color(CAPS_LOCK_LED_INDEX, 255, 255, 255);
@@ -72,6 +75,7 @@ void rgb_matrix_indicators_kb(void) {
         rgb_matrix_set_color(WIN_OS_LED_INDEX, 0, 0, 0);
     }
 #    endif // WIN_OS_LED_INDEX
+    return true;
 }
 
 void rgb_matrix_indicators_none_kb(void) {
@@ -118,4 +122,4 @@ bool led_update_kb(led_t led_state) {
     return res;
 }
 
-#endif // RGB_MATRIX_ENABLE && CAPS_LOCK_LED_INDEX...
+#endif // RGB_MATRIX_ENABLE

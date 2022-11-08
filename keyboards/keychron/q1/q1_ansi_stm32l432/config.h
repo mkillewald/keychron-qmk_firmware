@@ -26,6 +26,7 @@
 
 /* DIP switch */
 #define DIP_SWITCH_MATRIX_GRID  { {5,4} }
+#define SCAN_COUNT_MAX 100
 
 /* RGB Matrix Driver Configuration */
 #define DRIVER_COUNT 2
@@ -35,7 +36,7 @@
 /* RGB Matrix Configuration */
 #define DRIVER_1_LED_TOTAL 45
 #define DRIVER_2_LED_TOTAL 37
-#define DRIVER_LED_TOTAL (DRIVER_1_LED_TOTAL + DRIVER_2_LED_TOTAL)
+#define RGB_MATRIX_LED_COUNT (DRIVER_1_LED_TOTAL + DRIVER_2_LED_TOTAL)
 
 /* Scan phase of led driver set as MSKPHASE_9CHANNEL(defined as 0x03 in CKLED2001.h) */
 #define PHASE_CHANNEL MSKPHASE_9CHANNEL

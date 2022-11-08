@@ -15,7 +15,6 @@
  */
 
 #include "c1.h"
-#include "stm32l432xx.h"
 
 // clang-format off
 
@@ -44,7 +43,7 @@ bool dip_switch_update_kb(uint8_t index, bool active) {
 
 #endif // DIP_SWITCH_ENABLE
 
-#if defined(RGB_MATRIX_ENABLE) && defined(CAPS_SYSTEM_LOCK_LED_INDEX)
+#if defined(RGB_MATRIX_ENABLE) && defined(CAPS_MAC_WIN_LOCK_LED_INDEX)
 
 extern void rgb_matrix_update_pwm_buffers(void);
 
@@ -53,13 +52,13 @@ bool rgb_matrix_indicators_kb(void) {
         return false;
     }
     if ((host_keyboard_led_state().caps_lock) && (default_layer_state == (1 << 0))) {
-        rgb_matrix_set_color(CAPS_SYSTEM_LOCK_LED_INDEX, 0, 255, 255);
+        rgb_matrix_set_color(CAPS_MAC_WIN_LOCK_LED_INDEX, 0, 255, 255);
     } else if ((!host_keyboard_led_state().caps_lock) && (default_layer_state == (1 << 0))) {
-        rgb_matrix_set_color(CAPS_SYSTEM_LOCK_LED_INDEX, 0, 0, 255);
+        rgb_matrix_set_color(CAPS_MAC_WIN_LOCK_LED_INDEX, 0, 0, 255);
     } else if ((host_keyboard_led_state().caps_lock) && (default_layer_state == (1 << 2))) {
-        rgb_matrix_set_color(CAPS_SYSTEM_LOCK_LED_INDEX, 255, 255, 0);
+        rgb_matrix_set_color(CAPS_MAC_WIN_LOCK_LED_INDEX, 255, 255, 0);
     } else if ((!host_keyboard_led_state().caps_lock) && (default_layer_state == (1 << 2))) {
-        rgb_matrix_set_color(CAPS_SYSTEM_LOCK_LED_INDEX, 255, 0, 0);
+        rgb_matrix_set_color(CAPS_MAC_WIN_LOCK_LED_INDEX, 255, 0, 0);
     }
     return true;
 }
@@ -87,15 +86,15 @@ bool led_update_kb(led_t led_state) {
     }
 
     if (res) {
-#    if defined(CAPS_SYSTEM_LOCK_LED_INDEX)
+#    if defined(CAPS_MAC_WIN_LOCK_LED_INDEX)
         if ((led_state.caps_lock) && (default_layer_state == (1 << 0))) {
-            rgb_matrix_set_color(CAPS_SYSTEM_LOCK_LED_INDEX, 0, 255, 255);
+            rgb_matrix_set_color(CAPS_MAC_WIN_LOCK_LED_INDEX, 0, 255, 255);
         } else if ((!led_state.caps_lock) && (default_layer_state == (1 << 0))) {
-            rgb_matrix_set_color(CAPS_SYSTEM_LOCK_LED_INDEX, 0, 0, 255);
+            rgb_matrix_set_color(CAPS_MAC_WIN_LOCK_LED_INDEX, 0, 0, 255);
         } else if ((led_state.caps_lock) && (default_layer_state == (1 << 2))) {
-            rgb_matrix_set_color(CAPS_SYSTEM_LOCK_LED_INDEX, 255, 255, 0);
+            rgb_matrix_set_color(CAPS_MAC_WIN_LOCK_LED_INDEX, 255, 255, 0);
         } else if ((!led_state.caps_lock) && (default_layer_state == (1 << 2))) {
-            rgb_matrix_set_color(CAPS_SYSTEM_LOCK_LED_INDEX, 255, 0, 0);
+            rgb_matrix_set_color(CAPS_MAC_WIN_LOCK_LED_INDEX, 255, 0, 0);
         }
 #    endif // CAPS_LOCK_LED_INDEX
         rgb_matrix_update_pwm_buffers();
@@ -104,7 +103,7 @@ bool led_update_kb(led_t led_state) {
     return res;
 }
 
-#endif // CAPS_SYSTEM_LOCK_LED_INDEX
+#endif // CAPS_MAC_WIN_LOCK_LED_INDEX
 
 #if defined(LED_MATRIX_ENABLE) && defined(CAPS_LOCK_LED_INDEX) && defined(MAC_LOCK_LED_INDEX) && defined(WIN_LOCK_LED_INDEX)
 
@@ -168,4 +167,4 @@ bool led_update_kb(led_t led_state) {
     return res;
 }
 
-#endif
+#endif // LED_MATRIX_ENABLE

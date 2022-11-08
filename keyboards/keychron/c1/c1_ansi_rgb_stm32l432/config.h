@@ -43,7 +43,7 @@
 /* turn off effects when suspended */
 #define RGB_DISABLE_WHEN_USB_SUSPENDED
 
-#define CAPS_SYSTEM_LOCK_LED_INDEX 87
+#define CAPS_MAC_WIN_LOCK_LED_INDEX 87
 
 // RGB Matrix Animation modes. Explicitly enabled
 // For full list of effects, see:
