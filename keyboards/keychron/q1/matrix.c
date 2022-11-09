@@ -63,7 +63,7 @@ static inline uint8_t readMatrixPin(pin_t pin) {
 }
 
 static void shiftOut(uint16_t dataOut) {
-    for (uint8_t i = 0; i < NO_PIN_NUM; i++) {
+    for (uint8_t i = 0; i < 8; i++) {
         if (dataOut & 0x1) {
             setPinOutput_writeHigh(DATA_PIN);
         } else {
@@ -136,7 +136,7 @@ static void unselect_cols(void) {
             setPinInputHigh_atomic(pin);
 #endif
         }
-        if (x == (MATRIX_COLS - NO_PIN_OFFSET - 1))
+        if (x == 15)
             // unselect shift Register
             shiftOut(0xFF);
     }

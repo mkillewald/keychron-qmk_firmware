@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 /* Copyright 2021 @ Keychron (https://www.keychron.com)
-=======
-/* Copyright 2022 @ Keychron (https://www.keychron.com)
->>>>>>> develop
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -76,11 +72,15 @@ static uint8_t light_brightness_get(void) {
     return value;
 }
 
-void rgb_matrix_indicators_kb(void) {
+bool rgb_matrix_indicators_kb(void) {
+    if(!rgb_matrix_indicators_user()) {
+        return false;
+    }
     if (host_keyboard_led_state().caps_lock) {
         uint8_t v = light_brightness_get();
         rgb_matrix_set_color(CAPS_LOCK_LED_INDEX, v, v, v); // white, with the adjusted brightness
     }
+    return true;
 }
 
 void rgb_matrix_indicators_none_kb(void) {
