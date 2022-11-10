@@ -34,12 +34,15 @@
 #    define KC_STEP_2 RGB_HUD
 #    define KC_STEP_3 KC_MPLY
 #    define KC_STEP_4 KC_DEL
-#elif defined(KEYBOARD_keychron_q2_q2_ansi_stm32l432)
-#elif defined(KEYBOARD_keychron_q2_q2_ansi_stm32l432_ec11)
-#elif defined(KEYBOARD_keychron_q2_q2_iso_stm32l432)
-#elif defined(KEYBOARD_keychron_q2_q2_iso_stm32l432_ec11)
-#elif defined(KEYBOARD_keychron_q2_q2_jis_stm32l432)
-#elif defined(KEYBOARD_keychron_q2_q2_jis_stm32l432_ec11)
+#elif (defined(KEYBOARD_keychron_q2_q2_ansi_stm32l432)       || \
+    defined(KEYBOARD_keychron_q2_q2_ansi_stm32l432_ec11)    || \
+    defined(KEYBOARD_keychron_q2_q2_iso_stm32l432)          || \
+    defined(KEYBOARD_keychron_q2_q2_iso_stm32l432_ec11)     || \
+    defined(KEYBOARD_keychron_q2_q2_jis_stm32l432)          || \
+    defined(KEYBOARD_keychron_q2_q2_jis_stm32l432_ec11)     || \
+    defined(KEYBOARD_keychron_q4_q4_iso_stm32l432)          || \
+    defined(KEYBOARD_keychron_q4_q4_rev1_ansi_stm32l432)    || \
+    defined(KEYBOARD_keychron_q4_q4_rev2_ansi_stm32l432) )
 #    define FN1 2
 #    define FN2 3
 #    define KC_STEP_1 KC_J

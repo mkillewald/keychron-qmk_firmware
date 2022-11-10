@@ -15,7 +15,7 @@
  */
 
 #include QMK_KEYBOARD_H
-#include "keymap_common.h"
+#include "keychron_common.h"
 
 
 enum layers{

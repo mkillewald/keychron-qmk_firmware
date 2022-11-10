@@ -62,7 +62,7 @@ static inline uint8_t readMatrixPin(pin_t pin) {
     }
 }
 
-static void shiftOut(uint16_t dataOut) {
+static void shiftOutMultiple(uint8_t dataOut) {
     for (uint8_t i = 0; i < 8; i++) {
         if (dataOut & 0x1) {
             setPinOutput_writeHigh(DATA_PIN);
@@ -77,12 +77,13 @@ static void shiftOut(uint16_t dataOut) {
     setPinOutput_writeLow(LATCH_PIN);
 }
 
-static void shiftout_single(uint8_t data) {
-    if (data & 0x1) {
+static void shiftOut_single(uint8_t dataOut) {
+    if (dataOut & 0x1) {
         setPinOutput_writeHigh(DATA_PIN);
     } else {
         setPinOutput_writeLow(DATA_PIN);
     }
+
     setPinOutput_writeHigh(CLOCK_PIN);
     setPinOutput_writeLow(CLOCK_PIN);
 
@@ -98,9 +99,9 @@ static bool select_col(uint8_t col) {
         return true;
     } else {
         if (col == 8) {
-            shiftout_single(0x00);
+            shiftOut_single(0x00);
         } else {
-            shiftout_single(0x01);
+            shiftOut_single(0x01);
         }
         return true;
     }
@@ -138,7 +139,7 @@ static void unselect_cols(void) {
         }
         if (x == 15)
             // unselect shift Register
-            shiftOut(0xFF);
+            shiftOutMultiple(0xFF);
     }
 }
 

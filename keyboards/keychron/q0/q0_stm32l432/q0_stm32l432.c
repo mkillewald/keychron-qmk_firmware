@@ -79,7 +79,7 @@ led_config_t g_led_config = {
     {
         // LED Index to Flag
         1, 1, 1, 1,
-        9, 4, 4, 4,
+        8, 4, 4, 4,
         4, 4, 4,
         4, 4, 4, 4,
         4, 4, 4,
