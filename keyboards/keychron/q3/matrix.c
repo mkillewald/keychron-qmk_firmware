@@ -118,7 +118,7 @@ static void unselect_col(uint8_t col) {
         setPinInputHigh_atomic(pin);
 #endif
     } else {
-        if (col == 15)
+        if (col == (MATRIX_COLS - 1))
         {
             setPinOutput_writeHigh(CLOCK_PIN);
             setPinOutput_writeLow(CLOCK_PIN);
@@ -139,10 +139,11 @@ static void unselect_cols(void) {
 #else
             setPinInputHigh_atomic(pin);
 #endif
+        } else {
+            if (x == (MATRIX_COLS - 1))
+                // unselect Shift Register
+                shiftOutMultiple(0xFF);
         }
-        if (x == 15)
-            // unselect Shift Register
-            shiftOutMultiple(0xFF);
     }
 }
 
@@ -163,15 +164,15 @@ static void matrix_read_rows_on_col(matrix_row_t current_matrix[], uint8_t curre
         return;                     // skip NO_PIN col
     }
 
-    if (current_col >= 8) {
+    if (current_col < ((MATRIX_COLS - 8))) {
+        matrix_output_select_delay();
+    } else {
         for (int8_t cycle = 4; cycle > 0; cycle--) {
             matrix_output_select_delay(); // 0.25us
             matrix_output_select_delay();
             matrix_output_select_delay();
             matrix_output_select_delay();
         }
-    } else {
-        matrix_output_select_delay();
     }
 
     // For each row...
