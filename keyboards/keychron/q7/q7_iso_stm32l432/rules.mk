@@ -5,7 +5,7 @@ MCU = STM32L432
 BOOTLOADER = stm32-dfu
 
 # Build Options
-#   change yes to no to disable.
+#   change yes to no to disable
 #
 BOOTMAGIC_ENABLE = yes      # Enable Bootmagic Lite
 MOUSEKEY_ENABLE = yes       # Mouse keys
@@ -20,10 +20,8 @@ DIP_SWITCH_ENABLE = yes
 RGB_MATRIX_ENABLE = yes
 RGB_MATRIX_DRIVER = CKLED2001
 RAW_ENABLE = yes
-LTO_ENABLE = yes
 EEPROM_DRIVER = wear_leveling
 WEAR_LEVELING_DRIVER = embedded_flash
 
 # Enter lower-power sleep mode when on the ChibiOS idle thread
 OPT_DEFS += -DCORTEX_ENABLE_WFI_IDLE=TRUE
-
