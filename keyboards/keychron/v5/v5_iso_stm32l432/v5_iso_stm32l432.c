@@ -1,4 +1,4 @@
-/* Copyright 2022 @ Keychron (https://www.keychron.com)
+/* Copyright 2021 @ Keychron (https://www.keychron.com)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,7 +18,9 @@
 
 #ifdef RGB_MATRIX_ENABLE
 
-const ckled2001_led PROGMEM g_ckled2001_leds[DRIVER_LED_TOTAL] = {
+// clang-format off
+
+const ckled2001_led PROGMEM g_ckled2001_leds[RGB_MATRIX_LED_COUNT] = {
 /* Refer to IS31 manual for these locations
  *   driver
  *   |  R location
@@ -135,16 +137,14 @@ const ckled2001_led PROGMEM g_ckled2001_leds[DRIVER_LED_TOTAL] = {
 
 #define __ NO_LED
 
-// clang-format off
-
 led_config_t g_led_config = {
     {
         // Key Matrix to LED Index
-        {  0,  1,  2,  3,  4,   5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16, 17 },
-        { 19, 20, 21, 22, 23,  24, 25, 26, 27, 28, 29, 30, 31, 32, __, 33, 34, 35 },
-        { 37, 38, 39, 40, 41,  42, 43, 44, 45, 46, 47, 48, 49, 66, 70, 50, 51, 52 },
-        { 53, 54, 55, 56, 57,  58, 59, 60, 61, 62, 63, 64, 18, 65, 36, 67, 68, 69 },
-        { 71, 72, 73, 74, 75,  76, 77, 78, 79, 80, 81, 82, __, 83, 84, 85, 86, 87 },
+        {  0,  1,  2,  3,  4,  5,   6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16, 17 },
+        { 19, 20, 21, 22, 23, 24,  25, 26, 27, 28, 29, 30, 31, 32, __, 33, 34, 35 },
+        { 37, 38, 39, 40, 41, 42,  43, 44, 45, 46, 47, 48, 49, 66, 70, 50, 51, 52 },
+        { 53, 54, 55, 56, 57, 58,  59, 60, 61, 62, 63, 64, 18, 65, 36, 67, 68, 69 },
+        { 71, 72, 73, 74, 75, 76,  77, 78, 79, 80, 81, 82, __, 83, 84, 85, 86, 87 },
         { 88, 89, 90, __, __, 100, 91, __, __, __, 92, 93, 94, 95, 96, 97, 98, 99 },
     },
     {
@@ -159,12 +159,12 @@ led_config_t g_led_config = {
     {
         // RGB LED Index to Flag
         1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-        1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,    9, 4, 4, 4,
+        1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1,    8, 4, 4, 4,
         1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,       4, 4, 4,
-        9, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1,    4, 4, 4, 4,
+        8, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1,    4, 4, 4, 4,
         1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,    1, 1, 4, 4, 4,
         1, 1, 1,          4,          1, 1, 1, 1, 1, 1, 4, 4, 1,
     }
 };
 
-#endif // RGB_MATRIX_ENABLE
+#endif

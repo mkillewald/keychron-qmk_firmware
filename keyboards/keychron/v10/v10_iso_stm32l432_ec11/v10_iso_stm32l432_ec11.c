@@ -14,13 +14,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "v10_iso_stm32l432_ec11.h"
+#include "quantum.h"
 
 #ifdef RGB_MATRIX_ENABLE
 
 // clang-format off
 
-const ckled2001_led PROGMEM g_ckled2001_leds[DRIVER_LED_TOTAL] = {
+const ckled2001_led PROGMEM g_ckled2001_leds[RGB_MATRIX_LED_COUNT] = {
 /* Refer to IS31 manual for these locations
  *   driver
  *   |  R location
@@ -137,7 +137,7 @@ led_config_t g_led_config = {
     },
     {
         // LED Index to Physical Position
-                {0,0},    {19,0}, {34,0},  {60,1},  {72,3},   {87,6},   {99,8},  {120,8},  {132,6},  {147,3},  {159,1},  {173,0},  {185,0},  {201,1},            {219,1},
+                {0,0},    {19,0},  {34,0},  {60,1},  {72,3},   {87,6},   {99,8},  {120,8},  {132,6},  {147,3},  {159,1},  {173,0},  {185,0},  {201,1},            {219,1},
         {5,14}, {24,14}, {36,14}, {48,13}, {62,15}, {74,17},  {86,20},  {98,22}, {115,22}, {127,20}, {139,17}, {151,15}, {165,13}, {177,14}, {195,14},           {220,15},
         {4,24}, {24,24}, {40,24}, {53,24}, {65,27}, {77,29},  {89,31}, {112,33}, {124,31}, {136,29}, {148,27}, {160,24}, {176,24}, {189,24},                     {222,25},
         {2,34}, {23,34}, {40,34}, {54,35}, {66,37}, {78,39},  {90,42}, {118,43}, {130,40}, {142,38}, {154,36}, {167,35}, {179,35}, {192,35}, {208,31},           {224,36},
@@ -157,7 +157,7 @@ led_config_t g_led_config = {
 
 // clang-format on
 
-#endif // RGB_MATRIX_ENABLE
+#endif
 
 #ifdef ENCODER_ENABLE
 #    if defined(PAL_USE_CALLBACKS)
@@ -175,6 +175,9 @@ void keyboard_post_init_kb(void) {
     palEnableLineEvent(encoders_pad_b[0], PAL_EVENT_MODE_BOTH_EDGES);
     palSetLineCallback(encoders_pad_a[0], encoder0_pad_cb, NULL);
     palSetLineCallback(encoders_pad_b[0], encoder0_pad_cb, NULL);
+
+    // allow user keymaps to do custom post_init
+    keyboard_post_init_user();
 }
 
 #    endif // ENCODER_ENABLE

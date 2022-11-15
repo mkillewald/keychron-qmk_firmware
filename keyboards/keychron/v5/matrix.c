@@ -17,7 +17,6 @@
 #include "matrix.h"
 #include "quantum.h"
 
-
 // Pin connected to DS of 74HC595
 #define DATA_PIN C15
 // Pin connected to SH_CP of 74HC595
@@ -62,7 +61,7 @@ static inline uint8_t readMatrixPin(pin_t pin) {
     }
 }
 
-static void shiftOut(uint8_t dataOut) {
+static void shiftOutMultiple(uint8_t dataOut) {
     for (uint8_t i = 0; i < 8; i++) {
         if (dataOut & 0x1) {
             setPinOutput_writeHigh(DATA_PIN);
@@ -77,13 +76,31 @@ static void shiftOut(uint8_t dataOut) {
     setPinOutput_writeLow(LATCH_PIN);
 }
 
+static void shiftOut_single(uint8_t dataOut) {
+    if (dataOut & 0x1) {
+        setPinOutput_writeHigh(DATA_PIN);
+    } else {
+        setPinOutput_writeLow(DATA_PIN);
+    }
+
+    setPinOutput_writeHigh(CLOCK_PIN);
+    setPinOutput_writeLow(CLOCK_PIN);
+
+    setPinOutput_writeHigh(LATCH_PIN);
+    setPinOutput_writeLow(LATCH_PIN);
+}
+
 static bool select_col(uint8_t col) {
     pin_t pin = col_pins[col];
     if (pin != NO_PIN) {
         setPinOutput_writeLow(pin);
         return true;
     } else {
-        shiftOut(~(0x1 << (MATRIX_COLS - col - 1)));
+        if (col == 10) {
+            shiftOut_single(0x00);
+        } else {
+            shiftOut_single(0x01);
+        }
         return true;
     }
     return false;
@@ -98,7 +115,12 @@ static void unselect_col(uint8_t col) {
         setPinInputHigh_atomic(pin);
 #endif
     } else {
-        shiftOut(0xFF);
+        if (col == (MATRIX_COLS - 1)) {
+            setPinOutput_writeHigh(CLOCK_PIN);
+            setPinOutput_writeLow(CLOCK_PIN);
+            setPinOutput_writeHigh(LATCH_PIN);
+            setPinOutput_writeLow(LATCH_PIN);
+        }
     }
 }
 
@@ -112,11 +134,12 @@ static void unselect_cols(void) {
 #else
             setPinInputHigh_atomic(pin);
 #endif
+        } else {
+            if (x == (MATRIX_COLS - 1))
+                // unselect shift Register
+                shiftOutMultiple(0xFF);
         }
     }
-
-    // unselect Shift Register
-    shiftOut(0xFF);
 }
 
 static void matrix_init_pins(void) {
@@ -135,7 +158,17 @@ static void matrix_read_rows_on_col(matrix_row_t current_matrix[], uint8_t curre
     if (!select_col(current_col)) { // select col
         return;                     // skip NO_PIN col
     }
-    matrix_output_select_delay();
+
+    if (current_col < (MATRIX_COLS - 8)) {
+        matrix_output_select_delay();
+    } else {
+        for (int8_t cycle = 4; cycle > 0; cycle--) {
+            matrix_output_select_delay(); // 0.25us
+            matrix_output_select_delay();
+            matrix_output_select_delay();
+            matrix_output_select_delay();
+        }
+    }
 
     // For each row...
     for (uint8_t row_index = 0; row_index < ROWS_PER_HAND; row_index++) {

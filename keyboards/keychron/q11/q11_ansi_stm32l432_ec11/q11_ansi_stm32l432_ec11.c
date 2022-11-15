@@ -227,7 +227,7 @@ void keyboard_post_init_kb(void) {
         writePinHigh(A0);
     } else {
         if ((analogReadPin_my(B0) > 1000) || (analogReadPin_my(B1) > 1000)) {
-            uprintf("Work on uart.\r\n");
+            // Do nothing here
         } else {
             setPinInput(A10);
             setPinInput(A9);

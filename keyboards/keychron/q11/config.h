@@ -53,11 +53,11 @@
 #define RGB_MATRIX_SPLIT { 42, 47 }
 
 /* Increase I2C speed to 1000 KHz */
-#define I2C1_TIMINGR_PRESC 0U  // prescale i2c clock
-#define I2C1_TIMINGR_SCLDEL 3U // data setup time
-#define I2C1_TIMINGR_SDADEL 0U // data hold time
-#define I2C1_TIMINGR_SCLH 15U  // high period
-#define I2C1_TIMINGR_SCLL 30U  // low period
+#define I2C1_TIMINGR_PRESC 0U
+#define I2C1_TIMINGR_SCLDEL 3U
+#define I2C1_TIMINGR_SDADEL 0U
+#define I2C1_TIMINGR_SCLH 15U
+#define I2C1_TIMINGR_SCLL 51U
 
 #define CKLED2001_CURRENT_TUNE \
     { 0x80, 0xFF, 0xFF, 0x80, 0xFF, 0xFF, 0x80, 0xFF, 0xFF, 0x80, 0xFF, 0xFF } // 300mA

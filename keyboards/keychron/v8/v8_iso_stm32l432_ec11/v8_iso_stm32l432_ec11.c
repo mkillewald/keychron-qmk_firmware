@@ -18,7 +18,9 @@
 
 #ifdef RGB_MATRIX_ENABLE
 
-const ckled2001_led PROGMEM g_ckled2001_leds[DRIVER_LED_TOTAL] = {
+// clang-format off
+
+const ckled2001_led PROGMEM g_ckled2001_leds[RGB_MATRIX_LED_COUNT] = {
 /* Refer to CKLED manual for these locations
  *   driver
  *   |  R location
@@ -124,7 +126,7 @@ led_config_t g_led_config = {
         // RGB LED Index to Flag
         1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1,    1,
         1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,       1,
-        9, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1,    1,
+        8, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1,    1,
         1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 1,
         1, 1, 1,    1,    1,    1, 1,    1,    1, 1, 1,
     }
@@ -133,19 +135,7 @@ led_config_t g_led_config = {
 #endif // RGB_MATRIX_ENABLE
 
 #ifdef ENCODER_ENABLE
-
-bool encoder_update_kb(uint8_t index, bool clockwise) {
-    if (!encoder_update_user(index, clockwise)) { return false; }
-    if (index == 0) {
-        if (clockwise) {
-            tap_code_delay(KC_VOLU, TAP_CODE_DELAY);
-        } else {
-            tap_code_delay(KC_VOLD, TAP_CODE_DELAY);
-        }
-    }
-    return true;
-}
-#    if defined(PAL_USE_CALLBACKS)
+#    ifdef PAL_USE_CALLBACKS
 
 void encoder0_pad_cb(void *param) {
     (void)param;
@@ -164,5 +154,6 @@ void keyboard_post_init_kb(void) {
     // allow user keymaps to do custom post_init
     keyboard_post_init_user();
 }
+
 #    endif // PAL_USE_CALLBACKS
 #endif     // ENCODER_ENABLE

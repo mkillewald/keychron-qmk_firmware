@@ -1,1 +1,1 @@
-SRC += factory/secondary/q2/test.c
+ENCODER_MAP_ENABLE = yes

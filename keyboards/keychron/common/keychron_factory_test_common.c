@@ -28,13 +28,15 @@
 #define KEY_PRESS_FACTORY_RESET (KEY_PRESS_FN | KEY_PRESS_STEP_1 | KEY_PRESS_STEP_2)
 #define KEY_PRESS_LED_TEST (KEY_PRESS_FN | KEY_PRESS_STEP_3 | KEY_PRESS_STEP_4)
 
+// clang-format off
+
 #if defined(KEYBOARD_keychron_q0_q0_stm32l432)
 #    define FN1 1
 #    define KC_STEP_1 RGB_SAD
 #    define KC_STEP_2 RGB_HUD
 #    define KC_STEP_3 KC_MPLY
 #    define KC_STEP_4 KC_DEL
-#elif (defined(KEYBOARD_keychron_q2_q2_ansi_stm32l432)       || \
+#elif (defined(KEYBOARD_keychron_q2_q2_ansi_stm32l432)      || \
     defined(KEYBOARD_keychron_q2_q2_ansi_stm32l432_ec11)    || \
     defined(KEYBOARD_keychron_q2_q2_iso_stm32l432)          || \
     defined(KEYBOARD_keychron_q2_q2_iso_stm32l432_ec11)     || \
@@ -42,20 +44,29 @@
     defined(KEYBOARD_keychron_q2_q2_jis_stm32l432_ec11)     || \
     defined(KEYBOARD_keychron_q4_q4_iso_stm32l432)          || \
     defined(KEYBOARD_keychron_q4_q4_rev1_ansi_stm32l432)    || \
-    defined(KEYBOARD_keychron_q4_q4_rev2_ansi_stm32l432) )
+    defined(KEYBOARD_keychron_q4_q4_rev2_ansi_stm32l432)    || \
+    defined(KEYBOARD_keychron_q7_q7_ansi_stm32l432)         || \
+    defined(KEYBOARD_keychron_q7_q7_iso_stm32l432)          || \
+    defined(KEYBOARD_keychron_q8_q8_ansi_stm32l432)         || \
+    defined(KEYBOARD_keychron_q8_q8_ansi_stm32l432_ec11)    || \
+    defined(KEYBOARD_keychron_q8_q8_iso_stm32l432)          || \
+    defined(KEYBOARD_keychron_q8_q8_iso_stm32l432_ec11))
 #    define FN1 2
 #    define FN2 3
 #    define KC_STEP_1 KC_J
 #    define KC_STEP_2 KC_Z
 #    define KC_STEP_3 KC_RIGHT
 #    define KC_STEP_4 KC_HOME
-#elif defined(KEYBOARD_keychron_q60_q60_ansi_stm32l432)
-#    define FN1 1
-#    define FN2 2
+#elif (defined(KEYBOARD_keychron_q9_q9_ansi_stm32l432)       || \
+    defined(KEYBOARD_keychron_q9_q9_ansi_stm32l432_ec11)     || \
+    defined(KEYBOARD_keychron_q9_q9_iso_stm32l432)           || \
+    defined(KEYBOARD_keychron_q9_q9_iso_stm32l432_ec11))
+#    define FN1 2
+#    define FN2 3
 #    define KC_STEP_1 KC_J
-#    define KC_STEP_2 KC_Z
-#    define KC_STEP_3 KC_B
-#    define KC_STEP_4 KC_L
+#    define KC_STEP_2 RGB_RMOD
+#    define KC_STEP_3 KC_RIGHT
+#    define KC_STEP_4 KC_HOME
 #elif defined(KEYBOARD_keychron_q11_q11_ansi_stm32l432_ec11)
 #    define FN1 1
 #    define FN2 3
@@ -67,6 +78,13 @@
 #    define KC_STEP_6 KC_M
 #    define KC_STEP_7 KC_RIGHT
 #    define KC_STEP_8 KC_HOME
+#elif defined(KEYBOARD_keychron_q60_q60_ansi_stm32l432)
+#    define FN1 1
+#    define FN2 2
+#    define KC_STEP_1 KC_J
+#    define KC_STEP_2 KC_Z
+#    define KC_STEP_3 KC_B
+#    define KC_STEP_4 KC_L
 #else
 #    define FN1 1
 #    define FN2 3
@@ -75,6 +93,8 @@
 #    define KC_STEP_3 KC_RIGHT
 #    define KC_STEP_4 KC_HOME
 #endif
+
+// clang-format on
 
 enum {
     LED_TEST_MODE_OFF,
@@ -136,6 +156,77 @@ bool process_record_ft(uint16_t keycode, keyrecord_t *record) {
                 }
             } else {
                 rgb_matrix_decrease_hue_noeeprom();
+                key_press_status &= ~KEY_PRESS_STEP_2;
+                timer_3s_buffer = 0;
+            }
+            return false; // Skip all further processing of this key
+        case KC_STEP_3:
+            if (record->event.pressed) {
+                key_press_status |= KEY_PRESS_STEP_3;
+                if (led_test_mode) {
+                    if (++led_test_mode >= LED_TEST_MODE_MAX) {
+                        led_test_mode = LED_TEST_MODE_WHITE;
+                    }
+                } else if (key_press_status == KEY_PRESS_LED_TEST) {
+                    timer_3s_buffer = sync_timer_read32();
+                }
+            } else {
+                key_press_status &= ~KEY_PRESS_STEP_3;
+                timer_3s_buffer = 0;
+            }
+            return true;
+        case KC_STEP_4:
+            if (record->event.pressed) {
+                key_press_status |= KEY_PRESS_STEP_4;
+                if (led_test_mode) {
+                    led_test_mode = LED_TEST_MODE_OFF;
+                } else if (key_press_status == KEY_PRESS_LED_TEST) {
+                    timer_3s_buffer = sync_timer_read32();
+                }
+            } else {
+                key_press_status &= ~KEY_PRESS_STEP_4;
+                timer_3s_buffer = 0;
+            }
+            return true;
+        default:
+            return true;
+    }
+}
+#elif (defined(KEYBOARD_keychron_q9_q9_ansi_stm32l432)       || \
+    defined(KEYBOARD_keychron_q9_q9_ansi_stm32l432_ec11)     || \
+    defined(KEYBOARD_keychron_q9_q9_iso_stm32l432)           || \
+    defined(KEYBOARD_keychron_q9_q9_iso_stm32l432_ec11))
+bool process_record_ft(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case MO(FN1):
+        case MO(FN2):
+            if (record->event.pressed) {
+                key_press_status |= KEY_PRESS_FN;
+            } else {
+                key_press_status &= ~KEY_PRESS_FN;
+                timer_3s_buffer = 0;
+            }
+            return true;
+        case KC_STEP_1:
+            if (record->event.pressed) {
+                key_press_status |= KEY_PRESS_STEP_1;
+                if (key_press_status == KEY_PRESS_FACTORY_RESET) {
+                    timer_3s_buffer = sync_timer_read32();
+                }
+            } else {
+                key_press_status &= ~KEY_PRESS_STEP_1;
+                timer_3s_buffer = 0;
+            }
+            return true;
+        case KC_STEP_2:
+            if (record->event.pressed) {
+                key_press_status |= KEY_PRESS_STEP_2;
+                if (key_press_status == KEY_PRESS_FACTORY_RESET) {
+                    timer_3s_buffer = sync_timer_read32();
+                } else {
+                    rgb_matrix_step_reverse();
+                }
+            } else {
                 key_press_status &= ~KEY_PRESS_STEP_2;
                 timer_3s_buffer = 0;
             }
