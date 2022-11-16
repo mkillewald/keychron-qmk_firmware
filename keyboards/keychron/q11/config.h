@@ -68,8 +68,8 @@
 
 /* Split Keyboard specific options. */
 #define USE_SERIAL
-// #define SERIAL_USART_FULL_DUPLEX // Enable full duplex operation mode.
 #define SERIAL_USART_TX_PIN A9   // USART TX pin
+// #define SERIAL_USART_FULL_DUPLEX // Enable full duplex operation mode.
 // #define SERIAL_USART_RX_PIN A10  // USART RX pin
 
 /* Encoder Configuration */
@@ -90,6 +90,7 @@
 /* Disable RGB lighting when PC is in suspend */
 #define RGB_DISABLE_WHEN_USB_SUSPENDED
 
+/* Specifed (0,1) which programmed "ESC" key on this keyboard as bootmagic key */
 #define BOOTMAGIC_LITE_ROW 0
 #define BOOTMAGIC_LITE_COLUMN 1
 
