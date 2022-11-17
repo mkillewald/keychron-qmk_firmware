@@ -41,9 +41,12 @@
 #define DIP_SWITCH_PINS { A8 }
 
 /* handedness */
-// #define SPLIT_HAND_MATRIX_GRID D0, F1
+#define SPLIT_HAND_MATRIX_GRID A2, A15
+#define SPLIT_HAND_MATRIX_GRID_LOW_IS_RIGHT
+#define MATRIX_MASKED // actual mask is defined by `matrix_mask` in `q11.c`
 // #define EE_HANDS
 // #define MASTER_LEFT
+// #define SPLIT_USB_TIMEOUT 2000
 
 /* RGB Matrix Configuration */
 #define DRIVER_COUNT 1
