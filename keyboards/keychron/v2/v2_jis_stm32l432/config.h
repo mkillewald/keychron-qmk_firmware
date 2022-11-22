@@ -16,18 +16,13 @@
 
 #pragma once
 
-#include "quantum.h"
+/* RGB Matrix Configuration */
+#define DRIVER_1_LED_TOTAL 35
+#define DRIVER_2_LED_TOTAL 36
+#define RGB_MATRIX_LED_COUNT (DRIVER_1_LED_TOTAL + DRIVER_2_LED_TOTAL)
 
-#if defined(KEYBOARD_keychron_v2_v2_ansi_stm32l432)
-#    include "v2_ansi_stm32l432.h"
-#elif defined(KEYBOARD_keychron_v2_v2_ansi_stm32l432_ec11)
-#    include "v2_ansi_stm32l432_ec11.h"
-#elif defined(KEYBOARD_keychron_v2_v2_iso_stm32l432)
-#    include "v2_iso_stm32l432.h"
-#elif defined(KEYBOARD_keychron_v2_v2_iso_stm32l432_ec11)
-#    include "v2_iso_stm32l432_ec11.h"
-#elif defined(KEYBOARD_keychron_v2_v2_jis_stm32l432)
-#    include "v2_jis_stm32l432.h"
-#elif defined(KEYBOARD_keychron_v2_v2_jis_stm32l432_ec11)
-#    include "v2_jis_stm32l432_ec11.h"
-#endif
+#define CKLED2001_CURRENT_TUNE \
+    { 0xBD, 0xBD, 0x5D, 0xBD, 0xBD, 0x5D, 0xBD, 0xBD, 0x5D, 0xBD, 0xBD, 0x5D }
+
+/* Enable caps-lock LED */
+#define CAPS_LOCK_LED_INDEX 30

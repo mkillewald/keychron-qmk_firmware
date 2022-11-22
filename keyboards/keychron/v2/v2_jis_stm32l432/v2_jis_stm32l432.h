@@ -17,17 +17,3 @@
 #pragma once
 
 #include "quantum.h"
-
-#if defined(KEYBOARD_keychron_v2_v2_ansi_stm32l432)
-#    include "v2_ansi_stm32l432.h"
-#elif defined(KEYBOARD_keychron_v2_v2_ansi_stm32l432_ec11)
-#    include "v2_ansi_stm32l432_ec11.h"
-#elif defined(KEYBOARD_keychron_v2_v2_iso_stm32l432)
-#    include "v2_iso_stm32l432.h"
-#elif defined(KEYBOARD_keychron_v2_v2_iso_stm32l432_ec11)
-#    include "v2_iso_stm32l432_ec11.h"
-#elif defined(KEYBOARD_keychron_v2_v2_jis_stm32l432)
-#    include "v2_jis_stm32l432.h"
-#elif defined(KEYBOARD_keychron_v2_v2_jis_stm32l432_ec11)
-#    include "v2_jis_stm32l432_ec11.h"
-#endif

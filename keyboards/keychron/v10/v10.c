@@ -114,4 +114,4 @@ bool led_update_kb(led_t led_state) {
     return res;
 }
 
-#endif // CAPS_LOCK_LED_INDEX
+#endif

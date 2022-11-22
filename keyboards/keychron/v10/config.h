@@ -63,7 +63,7 @@
 #define WEAR_LEVELING_LOGICAL_SIZE 2048
 #define WEAR_LEVELING_BACKING_SIZE (WEAR_LEVELING_LOGICAL_SIZE * 2)
 
-/* Specify (0,1) which is "ESC" key on this keyboard as bootmagic key */
+/* Specify (0,1) which programmed as "ESC" key on this keyboard as bootmagic key */
 #define BOOTMAGIC_LITE_ROW 0
 #define BOOTMAGIC_LITE_COLUMN 1
 

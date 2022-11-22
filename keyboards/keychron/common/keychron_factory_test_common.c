@@ -42,6 +42,8 @@
     defined(KEYBOARD_keychron_q2_q2_iso_stm32l432_ec11)     || \
     defined(KEYBOARD_keychron_q2_q2_jis_stm32l432)          || \
     defined(KEYBOARD_keychron_q2_q2_jis_stm32l432_ec11)     || \
+    defined(KEYBOARD_keychron_v2_v2_jis_stm32l432)          || \
+    defined(KEYBOARD_keychron_v2_v2_jis_stm32l432_ec11)     || \
     defined(KEYBOARD_keychron_q4_q4_iso_stm32l432)          || \
     defined(KEYBOARD_keychron_q4_q4_rev1_ansi_stm32l432)    || \
     defined(KEYBOARD_keychron_q4_q4_rev2_ansi_stm32l432)    || \
