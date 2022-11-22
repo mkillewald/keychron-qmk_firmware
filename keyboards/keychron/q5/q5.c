@@ -64,12 +64,11 @@ static uint8_t light_brightness_get(void) {
     } else {
         value = CAPS_NUM_LOCK_MAX_BRIGHTNESS;
     }
-
     return value;
 }
 
 bool rgb_matrix_indicators_kb(void) {
-    if (rgb_matrix_indicators_user()) {
+    if (!rgb_matrix_indicators_user()) {
         return false;
     }
 #    if defined(CAPS_LOCK_LED_INDEX)
@@ -128,8 +127,7 @@ bool led_update_kb(led_t led_state) {
 #    endif
         rgb_matrix_update_pwm_buffers();
     }
-
     return res;
 }
 
-#endif // CAPS_LOCK_LED_INDEX
+#endif

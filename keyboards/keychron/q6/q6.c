@@ -64,7 +64,6 @@ static uint8_t light_brightness_get(void) {
     } else {
         value = CAPS_NUM_LOCK_MAX_BRIGHTNESS;
     }
-
     return value;
 }
 
@@ -128,8 +127,7 @@ bool led_update_kb(led_t led_state) {
 #    endif
         rgb_matrix_update_pwm_buffers();
     }
-
     return res;
 }
 
-#endif  // CAPS_LOCK_LED_INDEX
+#endif

@@ -33,6 +33,18 @@ static pin_t col_pins[MATRIX_COLS] = MATRIX_COL_PINS;
 
 #define ROWS_PER_HAND (MATRIX_ROWS)
 
+#ifndef NO_PIN_NUM
+#    define NO_PIN_NUM 8
+#endif
+
+#ifndef NO_PIN_OFFSET
+#    define NO_PIN_OFFSET 0
+#endif
+
+#ifndef SHIFT_REGISTOR_VAL
+#    define SHIFT_REGISTOR_VAL 0xFF
+#endif
+
 static inline void setPinOutput_writeLow(pin_t pin) {
     ATOMIC_BLOCK_FORCEON {
         setPinOutput(pin);
@@ -62,11 +74,7 @@ static inline uint8_t readMatrixPin(pin_t pin) {
 }
 
 static void shiftOutMultiple(uint16_t dataOut) {
-#if defined(KEYBOARD_keychron_q6_q6_ansi_stm32l432) || defined(KEYBOARD_keychron_q6_q6_iso_stm32l432)
-    for (uint8_t i = 0; i < 8; i++) {
-#else
-    for (uint8_t i = 0; i < 10; i++) {
-#endif
+    for (uint8_t i = 0; i < NO_PIN_NUM; i++) {
         if (dataOut & 0x1) {
             setPinOutput_writeHigh(DATA_PIN);
         } else {
@@ -101,11 +109,7 @@ static bool select_col(uint8_t col) {
         setPinOutput_writeLow(pin);
         return true;
     } else {
-#if defined(KEYBOARD_keychron_q6_q6_ansi_stm32l432) || defined(KEYBOARD_keychron_q6_q6_iso_stm32l432)
-        if (col == (MATRIX_COLS - 8 - 1)) {
-#else
-        if (col == (MATRIX_COLS - 10)) {
-#endif
+        if (col == (MATRIX_COLS - NO_PIN_NUM - NO_PIN_OFFSET)) {
             shiftOut_single(0x00);
         } else {
             shiftOut_single(0x01);
@@ -125,11 +129,7 @@ static void unselect_col(uint8_t col) {
         setPinInputHigh_atomic(pin);
 #endif
     } else {
-#if defined(KEYBOARD_keychron_q6_q6_ansi_stm32l432) || defined(KEYBOARD_keychron_q6_q6_iso_stm32l432)
-        if (col == (MATRIX_COLS - 1 - 1)) {
-#else
-        if (col == (MATRIX_COLS - 1)) {
-#endif
+        if (col == (MATRIX_COLS - 1 - NO_PIN_OFFSET)) {
             setPinOutput_writeHigh(CLOCK_PIN);
             setPinOutput_writeLow(CLOCK_PIN);
             setPinOutput_writeHigh(LATCH_PIN);
@@ -148,15 +148,9 @@ static void unselect_cols(void) {
             setPinInputHigh_atomic(pin);
 #endif
         } else {
-#if defined(KEYBOARD_keychron_q6_q6_ansi_stm32l432) || defined(KEYBOARD_keychron_q6_q6_iso_stm32l432)
-            if (x == (MATRIX_COLS - 1 - 1))
-                // unselect shift Register
-                shiftOutMultiple(0xFF);
-#else
-            if (x == (MATRIX_COLS - 1))
-                // unselect shift Register
-                shiftOutMultiple(0x3FF);
-#endif
+            if (x == (MATRIX_COLS - 1 - NO_PIN_OFFSET)) {
+                shiftOutMultiple(SHIFT_REGISTOR_VAL);
+            }
         }
     }
 }
@@ -177,7 +171,7 @@ static void matrix_read_rows_on_col(matrix_row_t current_matrix[], uint8_t curre
     if (!select_col(current_col)) { // select col
         return;                     // skip NO_PIN col
     }
-#if defined(KEYBOARD_keychron_q6_q6_ansi_stm32l432) || defined(KEYBOARD_keychron_q6_q6_iso_stm32l432)
+#if NO_PIN_OFFSET > 0
     if ((current_col < 10) || (current_col == (MATRIX_COLS - 1))) {
 #else
     if (current_col < 10) {

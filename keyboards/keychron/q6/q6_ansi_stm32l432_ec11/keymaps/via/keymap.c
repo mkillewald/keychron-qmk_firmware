@@ -18,10 +18,6 @@
 
 // clang-format off
 
-#include QMK_KEYBOARD_H
-
-// clang-format off
-
 enum layers{
   MAC_BASE,
   MAC_FN,
@@ -71,5 +67,3 @@ const uint16_t PROGMEM encoder_map[][1][2] = {
     [WIN_FN]   = {ENCODER_CCW_CW(RGB_VAD, RGB_VAI) }
 };
 #endif // ENCODER_MAP_ENABLE
-
-// clang-format on
