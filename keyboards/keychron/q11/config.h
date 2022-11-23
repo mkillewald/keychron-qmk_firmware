@@ -47,6 +47,7 @@
 // #define EE_HANDS
 // #define MASTER_LEFT
 // #define SPLIT_USB_TIMEOUT 2000
+#define SPLIT_WATCHDOG_ENABLE
 
 /* RGB Matrix Configuration */
 #define DRIVER_COUNT 1
