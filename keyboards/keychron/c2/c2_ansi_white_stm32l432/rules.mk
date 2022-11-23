@@ -17,8 +17,8 @@ BACKLIGHT_ENABLE = no       # Enable keyboard backlight functionality
 RGBLIGHT_ENABLE = no        # Enable keyboard RGB underglow
 AUDIO_ENABLE = no           # Audio output
 DIP_SWITCH_ENABLE = yes
-RGB_MATRIX_ENABLE = yes
-RGB_MATRIX_DRIVER = CKLED2001
+LED_MATRIX_ENABLE = yes
+LED_MATRIX_DRIVER = CKLED2001
 EEPROM_DRIVER = wear_leveling
 WEAR_LEVELING_DRIVER = embedded_flash
 

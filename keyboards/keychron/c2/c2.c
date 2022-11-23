@@ -49,30 +49,30 @@ bool rgb_matrix_indicators_kb(void) {
     }
 #    if defined(CAPS_LOCK_LED_INDEX)
     if (host_keyboard_led_state().caps_lock) {
-        rgb_matrix_set_color(CAPS_LOCK_LED_INDEX, 255, 255, 255);
+        led_matrix_set_value(CAPS_LOCK_LED_INDEX, 255, 255, 255);
     } else {
-        rgb_matrix_set_color(CAPS_LOCK_LED_INDEX, 0, 0, 0);
+        led_matrix_set_value(CAPS_LOCK_LED_INDEX, 0, 0, 0);
     }
 #    endif // CAPS_LOCK_LED_INDEX
 #    if defined(NUM_LOCK_LED_INDEX)
     if (host_keyboard_led_state().num_lock) {
-        rgb_matrix_set_color(NUM_LOCK_LED_INDEX, 255, 255, 255);
+        led_matrix_set_value(NUM_LOCK_LED_INDEX, 255, 255, 255);
     } else {
-        rgb_matrix_set_color(NUM_LOCK_LED_INDEX, 0, 0, 0);
+        led_matrix_set_value(NUM_LOCK_LED_INDEX, 0, 0, 0);
     }
 #    endif // NUM_LOCK_LED_INDEX
 #    if defined(MAC_OS_LED_INDEX)
     if (default_layer_state == (1 << 0)) {
-        rgb_matrix_set_color(MAC_OS_LED_INDEX, 255, 255, 255);
+        led_matrix_set_value(MAC_OS_LED_INDEX, 255, 255, 255);
     } else {
-        rgb_matrix_set_color(MAC_OS_LED_INDEX, 0, 0, 0);
+        led_matrix_set_value(MAC_OS_LED_INDEX, 0, 0, 0);
     }
 #    endif // MAC_OS_LED_INDEX
 #    if defined(WIN_OS_LED_INDEX)
     if (default_layer_state == (1 << 2)) {
-        rgb_matrix_set_color(WIN_OS_LED_INDEX, 255, 255, 255);
+        led_matrix_set_value(WIN_OS_LED_INDEX, 255, 255, 255);
     } else {
-        rgb_matrix_set_color(WIN_OS_LED_INDEX, 0, 0, 0);
+        led_matrix_set_value(WIN_OS_LED_INDEX, 0, 0, 0);
     }
 #    endif // WIN_OS_LED_INDEX
     return true;
@@ -103,20 +103,91 @@ bool led_update_kb(led_t led_state) {
     if (res) {
 #    if defined(NUM_LOCK_LED_INDEX)
         if (led_state.num_lock) {
-            rgb_matrix_set_color(NUM_LOCK_LED_INDEX, 255, 255, 255);
+            led_matrix_set_value(NUM_LOCK_LED_INDEX, 255, 255, 255);
         } else {
-            rgb_matrix_set_color(NUM_LOCK_LED_INDEX, 0, 0, 0);
+            led_matrix_set_value(NUM_LOCK_LED_INDEX, 0, 0, 0);
         }
 #    endif // NUM_LOCK_LED_INDEX
 #    if defined(CAPS_LOCK_LED_INDEX)
         if (led_state.caps_lock) {
-            rgb_matrix_set_color(CAPS_LOCK_LED_INDEX, 255, 255, 255);
+            led_matrix_set_value(CAPS_LOCK_LED_INDEX, 255, 255, 255);
         } else {
-            rgb_matrix_set_color(CAPS_LOCK_LED_INDEX, 0, 0, 0);
+            led_matrix_set_value(CAPS_LOCK_LED_INDEX, 0, 0, 0);
         }
 #    endif // CAPS_LOCK_LED_INDEX
 
         rgb_matrix_update_pwm_buffers();
+    }
+
+    return res;
+}
+
+#endif // RGB_MATRIX_ENABLE
+
+#if defined(LED_MATRIX_ENABLE) && defined(NUM_LOCK_LED_INDEX) && defined(CAPS_LOCK_LED_INDEX) && defined(MAC_OS_LED_INDEX) && defined(WIN_OS_LED_INDEX)
+
+extern void led_matrix_update_pwm_buffers(void);
+
+bool led_matrix_indicators_kb(void) {
+    if (!led_matrix_indicators_user()) {
+        return false;
+    }
+#    if defined(CAPS_LOCK_LED_INDEX)
+    if (host_keyboard_led_state().caps_lock) {
+        led_matrix_set_value(CAPS_LOCK_LED_INDEX, 255);
+    } else {
+        led_matrix_set_value(CAPS_LOCK_LED_INDEX, 0);
+    }
+#    endif // CAPS_LOCK_LED_INDEX
+#    if defined(NUM_LOCK_LED_INDEX)
+    if (host_keyboard_led_state().num_lock) {
+        led_matrix_set_value(NUM_LOCK_LED_INDEX, 255);
+    } else {
+        led_matrix_set_value(NUM_LOCK_LED_INDEX, 0);
+    }
+#    endif // NUM_LOCK_LED_INDEX
+#    if defined(MAC_OS_LED_INDEX)
+    if (default_layer_state == (1 << 0)) {
+        led_matrix_set_value(MAC_OS_LED_INDEX, 255);
+    } else {
+        led_matrix_set_value(MAC_OS_LED_INDEX, 0);
+    }
+#    endif // MAC_OS_LED_INDEX
+#    if defined(WIN_OS_LED_INDEX)
+    if (default_layer_state == (1 << 2)) {
+        led_matrix_set_value(WIN_OS_LED_INDEX, 255);
+    } else {
+        led_matrix_set_value(WIN_OS_LED_INDEX, 0);
+    }
+#    endif // WIN_OS_LED_INDEX
+    return true;
+}
+
+void led_matrix_indicators_none_kb(void) {
+    led_matrix_indicators_kb();
+    led_matrix_update_pwm_buffers();
+}
+
+bool led_update_kb(led_t led_state) {
+    bool res = led_update_user(led_state);
+
+    if (res) {
+#    if defined(NUM_LOCK_LED_INDEX)
+        if (led_state.num_lock) {
+            led_matrix_set_value(NUM_LOCK_LED_INDEX, 255);
+        } else {
+            led_matrix_set_value(NUM_LOCK_LED_INDEX, 0);
+        }
+#    endif // NUM_LOCK_LED_INDEX
+#    if defined(CAPS_LOCK_LED_INDEX)
+        if (led_state.caps_lock) {
+            led_matrix_set_value(CAPS_LOCK_LED_INDEX, 255);
+        } else {
+            led_matrix_set_value(CAPS_LOCK_LED_INDEX, 0);
+        }
+#    endif // CAPS_LOCK_LED_INDEX
+
+        led_matrix_update_pwm_buffers();
     }
 
     return res;
