@@ -25,6 +25,7 @@ enum custom_keycodes {
     KC_MISSION_CONTROL = SAFE_RANGE,
 #endif
     KC_LAUNCHPAD,
+    // KC_DO_NOT_DISTURB,
     KC_LOPTN,
     KC_ROPTN,
     KC_LCMMD,
@@ -38,6 +39,7 @@ enum custom_keycodes {
 
 #define KC_MCTL KC_MISSION_CONTROL
 #define KC_LPAD KC_LAUNCHPAD
+// #define KC_DND  KC_DO_NOT_DISTURB
 #define KC_TASK KC_TASK_VIEW
 #define KC_FLXP KC_FILE_EXPLORER
 #define KC_SNAP KC_SCREEN_SHOT

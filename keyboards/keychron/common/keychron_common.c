@@ -61,6 +61,13 @@ bool process_record_keychron(uint16_t keycode, keyrecord_t *record) {
                 host_consumer_send(0);
             }
             return false;  // Skip all further processing of this key
+        // case KC_DND:
+        //     if (record->event.pressed) {
+        //         host_system_send(0x9B);
+        //     } else {
+        //         host_system_send(0);
+        //     }
+        //     return false; // Skip all further processing of this key
         case KC_LOPTN:
         case KC_ROPTN:
         case KC_LCMMD:

@@ -189,14 +189,8 @@ void encoder0_pad_cb(void *param) {
 void keyboard_post_init_kb(void) {
     pin_t encoders_pad_a[NUM_ENCODERS] = ENCODERS_PAD_A;
     pin_t encoders_pad_b[NUM_ENCODERS] = ENCODERS_PAD_B;
-#    ifdef SPLIT_KEYBOARD
-    thisHand  = isLeftHand ? 0 : NUM_ENCODERS_LEFT;
-    thatHand  = NUM_ENCODERS_LEFT - thisHand;
-    thisCount = isLeftHand ? NUM_ENCODERS_LEFT : NUM_ENCODERS_RIGHT;
-    thatCount = isLeftHand ? NUM_ENCODERS_RIGHT : NUM_ENCODERS_LEFT;
-#    else // SPLIT_KEYBOARD
     thisCount = NUM_ENCODERS;
-#    endif
+
     for (uint8_t i = 0; i < thisCount; i++) {
         palEnableLineEvent(encoders_pad_a[i], PAL_EVENT_MODE_BOTH_EDGES);
         palEnableLineEvent(encoders_pad_b[i], PAL_EVENT_MODE_BOTH_EDGES);
