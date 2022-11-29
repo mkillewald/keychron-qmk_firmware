@@ -221,16 +221,42 @@ static int16_t analogReadPin_my(pin_t pin) {
     return *sampleBuffer;
 }
 
+#if defined(ENCODER_ENABLE) && defined(PAL_USE_CALLBACKS)
+
+void encoder0_pad_cb(void* param) {
+    (void)param;
+
+    encoder_insert_state();
+}
+#endif
+
 void keyboard_post_init_kb(void) {
     if (is_keyboard_left()) {
+#if defined(ENCODER_ENABLE) && defined(PAL_USE_CALLBACKS)
+        pin_t encoders_pad_a[NUM_ENCODERS_LEFT] = ENCODERS_PAD_A;
+        pin_t encoders_pad_b[NUM_ENCODERS_LEFT] = ENCODERS_PAD_B;
+        pin_t encoders_pad_a_right[]            = ENCODERS_PAD_A_RIGHT;
+        pin_t encoders_pad_b_right[]            = ENCODERS_PAD_B_RIGHT;
+        for (uint8_t i = 0; i < NUM_ENCODERS; i++) {
+            if (i >= (NUM_ENCODERS - NUM_ENCODERS_LEFT)) {
+                palEnableLineEvent(encoders_pad_a_right[i], PAL_EVENT_MODE_BOTH_EDGES);
+                palEnableLineEvent(encoders_pad_b_right[i], PAL_EVENT_MODE_BOTH_EDGES);
+                palSetLineCallback(encoders_pad_a_right[i], encoder0_pad_cb, NULL);
+                palSetLineCallback(encoders_pad_b_right[i], encoder0_pad_cb, NULL);
+            } else {
+                palEnableLineEvent(encoders_pad_a[i], PAL_EVENT_MODE_BOTH_EDGES);
+                palEnableLineEvent(encoders_pad_b[i], PAL_EVENT_MODE_BOTH_EDGES);
+                palSetLineCallback(encoders_pad_a[i], encoder0_pad_cb, NULL);
+                palSetLineCallback(encoders_pad_b[i], encoder0_pad_cb, NULL);
+            }
+        }
+#endif
         setPinOutput(A0);
         writePinHigh(A0);
     } else {
         if ((analogReadPin_my(B0) > 1000) || (analogReadPin_my(B1) > 1000)) {
-            // Do nothing here
-        } else {
-            setPinInput(A10);
-            setPinInput(A9);
+            setPinInput(A11);
+            setPinInput(A12);
         }
     }
     keyboard_post_init_user();
