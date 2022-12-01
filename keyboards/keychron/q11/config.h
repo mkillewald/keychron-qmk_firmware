@@ -44,10 +44,10 @@
 #define SPLIT_HAND_MATRIX_GRID A2, A15
 #define SPLIT_HAND_MATRIX_GRID_LOW_IS_RIGHT
 #define MATRIX_MASKED // actual mask is defined by `matrix_mask` in `q11.c`
+#define SPLIT_WATCHDOG_ENABLE
 // #define EE_HANDS
 // #define MASTER_LEFT
 // #define SPLIT_USB_TIMEOUT 2000
-// #define SPLIT_WATCHDOG_ENABLE
 // #define WAIT_FOR_USB
 
 /* RGB Matrix Configuration */
