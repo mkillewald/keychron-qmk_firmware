@@ -140,7 +140,7 @@ led_config_t g_led_config = {
 void encoder0_pad_cb(void *param) {
     (void)param;
 
-    encoder_insert_state(0);
+    encoder_insert_state();
 }
 
 void keyboard_post_init_kb(void) {
