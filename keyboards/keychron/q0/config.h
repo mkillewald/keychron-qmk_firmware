@@ -44,8 +44,8 @@
 #define CKLED2001_CURRENT_TUNE \
     { 0xFF, 0xFF, 0x70, 0xFF, 0xFF, 0x70, 0xFF, 0xFF, 0x70, 0xFF, 0xFF, 0x70 }
 
-#define RGB_MATRIX_CENTER \
-    { 56, 16 }
+// #define RGB_MATRIX_CENTER { 56, 16 }
+// #define DEBUG_MATRIX_SCAN_RATE
 
 /* NKRO */
 #define FORCE_NKRO

@@ -32,10 +32,10 @@
 
 #if defined(KEYBOARD_keychron_q0_q0_stm32l432)
 #    define FN1 1
-#    define KC_STEP_1 RGB_SAD
-#    define KC_STEP_2 RGB_HUD
-#    define KC_STEP_3 KC_MPLY
-#    define KC_STEP_4 KC_DEL
+#    define KC_STEP_1 RGB_SAD // 1
+#    define KC_STEP_2 RGB_HUD // 9
+#    define KC_STEP_3 KC_MPLY // 3
+#    define KC_STEP_4 KC_DEL  // -
 #elif (defined(KEYBOARD_keychron_q2_q2_ansi_stm32l432)      || \
     defined(KEYBOARD_keychron_q2_q2_ansi_stm32l432_ec11)    || \
     defined(KEYBOARD_keychron_q2_q2_iso_stm32l432)          || \
