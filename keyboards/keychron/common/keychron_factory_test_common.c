@@ -42,17 +42,29 @@
     defined(KEYBOARD_keychron_q2_q2_iso_stm32l432_ec11)     || \
     defined(KEYBOARD_keychron_q2_q2_jis_stm32l432)          || \
     defined(KEYBOARD_keychron_q2_q2_jis_stm32l432_ec11)     || \
+    defined(KEYBOARD_keychron_v2_v2_ansi_stm32l432)         || \
+    defined(KEYBOARD_keychron_v2_v2_ansi_stm32l432_ec11)    || \
+    defined(KEYBOARD_keychron_v2_v2_iso_stm32l432)          || \
+    defined(KEYBOARD_keychron_v2_v2_iso_stm32l432_ec11)     || \
     defined(KEYBOARD_keychron_v2_v2_jis_stm32l432)          || \
     defined(KEYBOARD_keychron_v2_v2_jis_stm32l432_ec11)     || \
     defined(KEYBOARD_keychron_q4_q4_iso_stm32l432)          || \
     defined(KEYBOARD_keychron_q4_q4_rev1_ansi_stm32l432)    || \
     defined(KEYBOARD_keychron_q4_q4_rev2_ansi_stm32l432)    || \
+    defined(KEYBOARD_keychron_v4_v4_ansi_stm32l432)         || \
+    defined(KEYBOARD_keychron_v4_v4_iso_stm32l432)          || \
     defined(KEYBOARD_keychron_q7_q7_ansi_stm32l432)         || \
     defined(KEYBOARD_keychron_q7_q7_iso_stm32l432)          || \
+    defined(KEYBOARD_keychron_v7_v7_ansi_stm32l432)         || \
+    defined(KEYBOARD_keychron_v7_v7_iso_stm32l432)          || \
     defined(KEYBOARD_keychron_q8_q8_ansi_stm32l432)         || \
     defined(KEYBOARD_keychron_q8_q8_ansi_stm32l432_ec11)    || \
     defined(KEYBOARD_keychron_q8_q8_iso_stm32l432)          || \
-    defined(KEYBOARD_keychron_q8_q8_iso_stm32l432_ec11))
+    defined(KEYBOARD_keychron_q8_q8_iso_stm32l432_ec11))    || \
+    defined(KEYBOARD_keychron_v8_v8_ansi_stm32l432)         || \
+    defined(KEYBOARD_keychron_v8_v8_ansi_stm32l432_ec11)    || \
+    defined(KEYBOARD_keychron_v8_v8_iso_stm32l432)          || \
+    defined(KEYBOARD_keychron_v8_v8_iso_stm32l432_ec11)
 #    define FN1 2
 #    define FN2 3
 #    define KC_STEP_1 KC_J

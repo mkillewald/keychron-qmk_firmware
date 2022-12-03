@@ -157,22 +157,3 @@ led_config_t g_led_config = {
 };
 
 #endif
-
-#ifdef ENCODER_ENABLE
-#    if defined(AVR_USE_INT)
-
-void keyboard_post_init_kb(void) {
-    PCMSK0 |= (1 << 7);
-    PCICR |= (1 << PCIE0);
-    sei();
-
-    // allow user keymaps to do custom post_init
-    keyboard_post_init_user();
-}
-
-ISR(PCINT0_vect) {
-    encoder_insert_state(0);
-}
-
-#    endif
-#endif
