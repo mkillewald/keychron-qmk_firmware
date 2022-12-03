@@ -18,7 +18,9 @@
 
 #ifdef RGB_MATRIX_ENABLE
 
-const ckled2001_led PROGMEM g_ckled2001_leds[DRIVER_LED_TOTAL] = {
+// clang-format off
+
+const ckled2001_led PROGMEM g_ckled2001_leds[RGB_MATRIX_LED_COUNT] = {
 /* Refer to IS31 manual for these locations
  *   driver
  *   |  R location
@@ -136,6 +138,7 @@ const ckled2001_led PROGMEM g_ckled2001_leds[DRIVER_LED_TOTAL] = {
 
 led_config_t g_led_config = {
     {
+        // Key Matrix to LED Index
         {  0, __,  1,  2,  3,  4, __,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15 },
         { 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, __, 31, 32, 33 },
         { 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 68, 49, 50, 51 },
@@ -144,6 +147,7 @@ led_config_t g_led_config = {
         { 85, 86, 87, __, __, 97, 88, __, __, __, 89, 90, 91, 92, 93, 94, 95, 96 }
     },
     {
+        // LED Index to Physical Position
         {0,0},           {24,0},  {36,0},  {48,0},  {60,0},  {78,0},  {90,0},  {103,0},  {115,0},  {133,0},  {145,0},  {157,0},  {169,0},            {184,0},  {196,0},  {208,0},  {224,0},
         {0,15}, {12,15}, {24,15}, {36,15}, {48,15}, {60,15}, {72,15}, {85,15}, {97,15},  {109,15}, {121,15}, {133,15}, {145,15}, {163,15},           {188,15}, {200,15}, {212,15}, {224,15},
         {3,26}, {18,26}, {30,26}, {42,26}, {54,26}, {66,26}, {78,26}, {91,26}, {103,26}, {115,26}, {127,26}, {139,26}, {151,26}, {166,26},           {188,26}, {200,26}, {212,26},
@@ -152,10 +156,11 @@ led_config_t g_led_config = {
         {1,61}, {17,61}, {32,61},                            {77,61},                              {121,61}, {133,61}, {145,61}, {160,64}, {172,64}, {184,64}, {200,61}, {212,61}, {224,55},
     },
     {
+        // RGB LED Index to Flag
         1,    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,    1, 1, 1, 1,
-        1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1,    9, 4, 4, 4,
+        1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1,    8, 4, 4, 4,
         1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,    4, 4, 4,
-        9, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,    1,    4, 4, 4, 4,
+        8, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,    1,    4, 4, 4, 4,
         1,    4, 4, 4, 4, 4, 4, 4, 4, 4, 4,    1, 1, 4, 4, 4,
         1, 1, 1,          4,          1, 1, 1, 1, 1, 4, 4, 4, 1
     }
@@ -163,39 +168,30 @@ led_config_t g_led_config = {
 
 #endif
 
-#ifdef ENCODER_ENABLE
+#if defined(ENCODER_ENABLE) && defined(PAL_USE_CALLBACKS)
 
-bool encoder_update_kb(uint8_t index, bool clockwise) {
-    if (!encoder_update_user(index, clockwise)) { return false; }
-    if (index == 0) {
-        if (clockwise) {
-            tap_code_delay(KC_VOLU, TAP_CODE_DELAY);
-        } else {
-            tap_code_delay(KC_VOLD, TAP_CODE_DELAY);
-        }
-    }
-    return true;
-}
-
-#    ifdef PAL_USE_CALLBACKS
+static uint8_t thisCount;
 
 void encoder0_pad_cb(void *param) {
     (void)param;
 
-    encoder_insert_state(0);
+    encoder_insert_state();
 }
 
 void keyboard_post_init_kb(void) {
-    pin_t encoders_pad_a[] = ENCODERS_PAD_A;
-    pin_t encoders_pad_b[] = ENCODERS_PAD_B;
-    palEnableLineEvent(encoders_pad_a[0], PAL_EVENT_MODE_BOTH_EDGES);
-    palEnableLineEvent(encoders_pad_b[0], PAL_EVENT_MODE_BOTH_EDGES);
-    palSetLineCallback(encoders_pad_a[0], encoder0_pad_cb, NULL);
-    palSetLineCallback(encoders_pad_b[0], encoder0_pad_cb, NULL);
+    pin_t encoders_pad_a[NUM_ENCODERS] = ENCODERS_PAD_A;
+    pin_t encoders_pad_b[NUM_ENCODERS] = ENCODERS_PAD_B;
+    thisCount = NUM_ENCODERS;
+
+    for (uint8_t i = 0; i < thisCount; i++) {
+        palEnableLineEvent(encoders_pad_a[i], PAL_EVENT_MODE_BOTH_EDGES);
+        palEnableLineEvent(encoders_pad_b[i], PAL_EVENT_MODE_BOTH_EDGES);
+        palSetLineCallback(encoders_pad_a[i], encoder0_pad_cb, NULL);
+        palSetLineCallback(encoders_pad_b[i], encoder0_pad_cb, NULL);
+    }
 
     // allow user keymaps to do custom post_init
     keyboard_post_init_user();
 }
 
-#    endif // PAL_USE_CALLBACKS
-#endif     // ENCODER_ENABLE
+#endif

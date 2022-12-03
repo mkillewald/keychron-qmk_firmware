@@ -20,7 +20,7 @@
 
 // clang-format off
 
-const ckled2001_led PROGMEM g_ckled2001_leds[DRIVER_LED_TOTAL] = {
+const ckled2001_led PROGMEM g_ckled2001_leds[RGB_MATRIX_LED_COUNT] = {
 /* Refer to IS31 manual for these locations
  *   driver
  *   |  R location
@@ -148,7 +148,7 @@ led_config_t g_led_config = {
            1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,    1,
         1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1,    1,
         1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,    1,
-        1, 9, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,    1,    1,
+        1, 8, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,    1,    1,
         1, 1,    4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 1,
         1, 1, 1,    1, 4, 1,       4,    1,       1, 1, 1,
     }
@@ -158,26 +158,26 @@ led_config_t g_led_config = {
 
 #endif
 
-#ifdef ENCODER_ENABLE
-#    if defined(PAL_USE_CALLBACKS)
+#if defined(ENCODER_ENABLE) && defined(PAL_USE_CALLBACKS)
 
 void encoder0_pad_cb(void *param) {
     (void)param;
 
-    encoder_insert_state(0);
+    encoder_insert_state();
 }
 
 void keyboard_post_init_kb(void) {
-    pin_t encoders_pad_a[] = ENCODERS_PAD_A;
-    pin_t encoders_pad_b[] = ENCODERS_PAD_B;
-    palEnableLineEvent(encoders_pad_a[0], PAL_EVENT_MODE_BOTH_EDGES);
-    palEnableLineEvent(encoders_pad_b[0], PAL_EVENT_MODE_BOTH_EDGES);
-    palSetLineCallback(encoders_pad_a[0], encoder0_pad_cb, NULL);
-    palSetLineCallback(encoders_pad_b[0], encoder0_pad_cb, NULL);
+    pin_t encoders_pad_a[NUM_ENCODERS] = ENCODERS_PAD_A;
+    pin_t encoders_pad_b[NUM_ENCODERS] = ENCODERS_PAD_B;
+    for (uint8_t i = 0; i < NUM_ENCODERS; i++) {
+        palEnableLineEvent(encoders_pad_a[i], PAL_EVENT_MODE_BOTH_EDGES);
+        palEnableLineEvent(encoders_pad_b[i], PAL_EVENT_MODE_BOTH_EDGES);
+        palSetLineCallback(encoders_pad_a[i], encoder0_pad_cb, NULL);
+        palSetLineCallback(encoders_pad_b[i], encoder0_pad_cb, NULL);
+    }
 
     // allow user keymaps to do custom post_init
     keyboard_post_init_user();
 }
 
-#    endif // ENCODER_ENABLE
-#endif     // PAL_USE_CALLBACKS
+#endif

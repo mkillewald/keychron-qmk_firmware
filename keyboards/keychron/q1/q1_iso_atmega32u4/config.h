@@ -26,6 +26,7 @@
 
 /* DIP switch */
 #define DIP_SWITCH_MATRIX_GRID  { {0,1} }
+#define SCAN_COUNT_MAX 100
 
 /* RGB Matrix Driver Configuration */
 #define DRIVER_COUNT 2
@@ -35,7 +36,7 @@
 /* RGB Matrix Configuration */
 #define DRIVER_1_LED_TOTAL 59
 #define DRIVER_2_LED_TOTAL 24
-#define DRIVER_LED_TOTAL (DRIVER_1_LED_TOTAL + DRIVER_2_LED_TOTAL)
+#define RGB_MATRIX_LED_COUNT (DRIVER_1_LED_TOTAL + DRIVER_2_LED_TOTAL)
 
 /* Enable caps-lock LED */
 #define CAPS_LOCK_LED_INDEX 44

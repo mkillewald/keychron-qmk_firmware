@@ -18,7 +18,7 @@
 
 #ifdef RGB_MATRIX_ENABLE
 
-const ckled2001_led PROGMEM g_ckled2001_leds[DRIVER_LED_TOTAL] = {
+const ckled2001_led PROGMEM g_ckled2001_leds[RGB_MATRIX_LED_COUNT] = {
 /* Refer to CKLED manual for these locations
  *   driver
  *   |  R location
@@ -134,40 +134,29 @@ led_config_t g_led_config = {
 
 #endif
 
-#ifdef ENCODER_ENABLE
+#if defined(ENCODER_ENABLE) && defined(PAL_USE_CALLBACKS)
 
-bool encoder_update_kb(uint8_t index, bool clockwise) {
-    if (!encoder_update_user(index, clockwise)) {
-        return false;
-    }
-    if (index == 0) {
-        if (clockwise) {
-            tap_code_delay(KC_VOLU, TAP_CODE_DELAY);
-        } else {
-            tap_code_delay(KC_VOLD, TAP_CODE_DELAY);
-        }
-    }
-    return true;
-}
-#    if defined(PAL_USE_CALLBACKS)
+static uint8_t thisCount;
 
 void encoder0_pad_cb(void *param) {
     (void)param;
 
-    encoder_insert_state(0);
+    encoder_insert_state();
 }
 
 void keyboard_post_init_kb(void) {
-    pin_t encoders_pad_a[] = ENCODERS_PAD_A;
-    pin_t encoders_pad_b[] = ENCODERS_PAD_B;
-    palEnableLineEvent(encoders_pad_a[0], PAL_EVENT_MODE_BOTH_EDGES);
-    palEnableLineEvent(encoders_pad_b[0], PAL_EVENT_MODE_BOTH_EDGES);
-    palSetLineCallback(encoders_pad_a[0], encoder0_pad_cb, NULL);
-    palSetLineCallback(encoders_pad_b[0], encoder0_pad_cb, NULL);
+    pin_t encoders_pad_a[NUM_ENCODERS] = ENCODERS_PAD_A;
+    pin_t encoders_pad_b[NUM_ENCODERS] = ENCODERS_PAD_B;
+    thisCount                          = NUM_ENCODERS;
+    for (uint8_t i = 0; i < thisCount; i++) {
+        palEnableLineEvent(encoders_pad_a[i], PAL_EVENT_MODE_BOTH_EDGES);
+        palEnableLineEvent(encoders_pad_b[i], PAL_EVENT_MODE_BOTH_EDGES);
+        palSetLineCallback(encoders_pad_a[i], encoder0_pad_cb, NULL);
+        palSetLineCallback(encoders_pad_b[i], encoder0_pad_cb, NULL);
+    }
 
     // allow user keymaps to do custom post_init
     keyboard_post_init_user();
 }
 
-#    endif
 #endif

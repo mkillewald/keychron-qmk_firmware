@@ -23,9 +23,12 @@
 #include "host.h"
 #include "keycode.h"
 #include "wait.h"
-#include "audio.h"
 #include "send_string.h"
 #include "utf8.h"
+
+#if defined(AUDIO_ENABLE)
+#    include "audio.h"
+#endif
 
 #if defined(UNICODE_ENABLE) + defined(UNICODEMAP_ENABLE) + defined(UCIS_ENABLE) > 1
 #    error "Cannot enable more than one Unicode method (UNICODE, UNICODEMAP, UCIS) at the same time"
@@ -324,19 +327,26 @@ void register_hex(uint16_t hex) {
 }
 
 void register_hex32(uint32_t hex) {
-    bool onzerostart = true;
+    bool first_digit        = true;
+    bool needs_leading_zero = (unicode_config.input_mode == UC_WINC);
     for (int i = 7; i >= 0; i--) {
-        if (i <= 3) {
-            onzerostart = false;
-        }
+        // Work out the digit we're going to transmit
         uint8_t digit = ((hex >> (i * 4)) & 0xF);
-        if (digit == 0) {
-            if (!onzerostart) {
-                send_nibble_wrapper(digit);
-            }
-        } else {
+
+        // If we're still searching for the first digit, and found one
+        // that needs a leading zero sent out, send the zero.
+        if (first_digit && needs_leading_zero && digit > 9) {
+            send_nibble_wrapper(0);
+        }
+
+        // Always send digits (including zero) if we're down to the last
+        // two bytes of nibbles.
+        bool must_send = i < 4;
+
+        // If we've found a digit worth transmitting, do so.
+        if (digit != 0 || !first_digit || must_send) {
             send_nibble_wrapper(digit);
-            onzerostart = false;
+            first_digit = false;
         }
     }
 }

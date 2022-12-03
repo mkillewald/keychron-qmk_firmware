@@ -18,6 +18,8 @@
 
 #include "quantum.h"
 
-#if defined(KEYBOARD_keychron_s1_s1_ansi_stm32l432)
-#    include "s1_ansi_stm32l432.h"
+#if   defined(KEYBOARD_keychron_s1_s1_ansi_rgb_stm32l432)
+#    include "s1_ansi_rgb_stm32l432.h"
+#elif defined(KEYBOARD_keychron_s1_s1_ansi_white_stm32l432)
+#    include "s1_ansi_white_stm32l432.h"
 #endif

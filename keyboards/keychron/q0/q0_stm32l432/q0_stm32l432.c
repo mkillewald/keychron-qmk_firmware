@@ -18,7 +18,9 @@
 
 #ifdef RGB_MATRIX_ENABLE
 
-const ckled2001_led PROGMEM g_ckled2001_leds[DRIVER_LED_TOTAL] = {
+// clang-format off
+
+const ckled2001_led PROGMEM g_ckled2001_leds[RGB_MATRIX_LED_COUNT] = {
 /* Refer to CKLED manual for these locations
  *   driver
  *   |  R location
@@ -77,7 +79,7 @@ led_config_t g_led_config = {
     {
         // LED Index to Flag
         1, 1, 1, 1,
-        9, 4, 4, 4,
+        8, 4, 4, 4,
         4, 4, 4,
         4, 4, 4, 4,
         4, 4, 4,

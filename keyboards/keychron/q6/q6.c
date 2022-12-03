@@ -64,11 +64,13 @@ static uint8_t light_brightness_get(void) {
     } else {
         value = CAPS_NUM_LOCK_MAX_BRIGHTNESS;
     }
-
     return value;
 }
 
-void rgb_matrix_indicators_kb(void) {
+bool rgb_matrix_indicators_kb(void) {
+    if (!rgb_matrix_indicators_user()) {
+        return false;
+    }
 #    if defined(CAPS_LOCK_LED_INDEX)
     if (host_keyboard_led_state().caps_lock) {
         uint8_t v = light_brightness_get();
@@ -81,6 +83,7 @@ void rgb_matrix_indicators_kb(void) {
         rgb_matrix_set_color(NUM_LOCK_LED_INDEX, v, v, v); // white, with the adjusted brightness
     }
 #    endif
+    return true;
 }
 
 void rgb_matrix_indicators_none_kb(void) {
@@ -124,8 +127,7 @@ bool led_update_kb(led_t led_state) {
 #    endif
         rgb_matrix_update_pwm_buffers();
     }
-
     return res;
 }
 
-#endif  // CAPS_LOCK_LED_INDEX or CAPS_LOCK_LED_INDEX
+#endif

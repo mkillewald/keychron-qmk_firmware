@@ -1,2 +1,2 @@
 VIA_ENABLE = yes
-SRC += factory/secondary/q9/test.c
+ENCODER_MAP_ENABLE = yes

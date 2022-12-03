@@ -22,7 +22,7 @@ const matrix_row_t matrix_mask[] = {
     0b111111111111111,
     0b111111111111111,
     0b111111111111111,
-    0b111111111110111,
+    0b111111111101111,
 };
 
 #ifdef DIP_SWITCH_ENABLE
@@ -35,7 +35,7 @@ bool dip_switch_update_kb(uint8_t index, bool active) {
     return true;
 }
 
-#endif
+#endif // DIP_SWITCH_ENABLE
 
 #if defined(RGB_MATRIX_ENABLE) && defined(CAPS_LOCK_LED_INDEX)
 
@@ -66,11 +66,15 @@ static uint8_t light_brightness_get(void) {
     return value;
 }
 
-void rgb_matrix_indicators_kb(void) {
+bool rgb_matrix_indicators_kb(void) {
+    if (!rgb_matrix_indicators_user()) {
+        return false;
+    }
     if (host_keyboard_led_state().caps_lock) {
         uint8_t v = light_brightness_get();
         rgb_matrix_set_color(CAPS_LOCK_LED_INDEX, v, v, v); // white, with the adjusted brightness
     }
+    return true;
 }
 
 void rgb_matrix_indicators_none_kb(void) {

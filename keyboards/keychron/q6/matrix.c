@@ -1,4 +1,4 @@
-/* Copyright 2021 @ Keychron (https://www.keychron.com)
+/* Copyright 2022 @ Keychron (https://www.keychron.com)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -33,22 +33,6 @@ static pin_t col_pins[MATRIX_COLS] = MATRIX_COL_PINS;
 
 #define ROWS_PER_HAND (MATRIX_ROWS)
 
-#ifndef NO_PIN_NUM
-#    define NO_PIN_NUM 8
-#endif
-
-#ifndef COL_OFFSET
-#    define COL_OFFSET 0
-#endif
-
-#ifndef CLR_VAL
-#    define CLR_VAL 0xFF
-#endif
-
-/* matrix state(1:on, 0:off) */
-extern matrix_row_t raw_matrix[MATRIX_ROWS]; // raw values
-extern matrix_row_t matrix[MATRIX_ROWS];     // debounced values
-
 static inline void setPinOutput_writeLow(pin_t pin) {
     ATOMIC_BLOCK_FORCEON {
         setPinOutput(pin);
@@ -77,8 +61,12 @@ static inline uint8_t readMatrixPin(pin_t pin) {
     }
 }
 
-static void shiftOut(uint16_t dataOut) {
-    for (uint8_t i = 0; i < NO_PIN_NUM; i++) {
+static void shiftOutMultiple(uint16_t dataOut) {
+#if defined(KEYBOARD_keychron_q6_q6_ansi_stm32l432) || defined(KEYBOARD_keychron_q6_q6_iso_stm32l432)
+    for (uint8_t i = 0; i < 8; i++) {
+#else
+    for (uint8_t i = 0; i < 10; i++) {
+#endif
         if (dataOut & 0x1) {
             setPinOutput_writeHigh(DATA_PIN);
         } else {
@@ -92,14 +80,36 @@ static void shiftOut(uint16_t dataOut) {
     setPinOutput_writeLow(LATCH_PIN);
 }
 
+static void shiftOut_single(uint8_t dataOut) {
+    if (dataOut & 0x1) {
+        setPinOutput_writeHigh(DATA_PIN);
+    } else {
+        setPinOutput_writeLow(DATA_PIN);
+    }
+
+    setPinOutput_writeHigh(CLOCK_PIN);
+    setPinOutput_writeLow(CLOCK_PIN);
+
+    setPinOutput_writeHigh(LATCH_PIN);
+    setPinOutput_writeLow(LATCH_PIN);
+}
+
 static bool select_col(uint8_t col) {
     pin_t pin = col_pins[col];
 
-    if (pin == NO_PIN) {
-        shiftOut(~(0x1 << ((MATRIX_COLS - COL_OFFSET) - col - 1)));
+    if (pin != NO_PIN) {
+        setPinOutput_writeLow(pin);
         return true;
     } else {
-        setPinOutput_writeLow(pin);
+#if defined(KEYBOARD_keychron_q6_q6_ansi_stm32l432) || defined(KEYBOARD_keychron_q6_q6_iso_stm32l432)
+        if (col == (MATRIX_COLS - 8 - 1)) {
+#else
+        if (col == (MATRIX_COLS - 10)) {
+#endif
+            shiftOut_single(0x00);
+        } else {
+            shiftOut_single(0x01);
+        }
         return true;
     }
     return false;
@@ -108,28 +118,46 @@ static bool select_col(uint8_t col) {
 static void unselect_col(uint8_t col) {
     pin_t pin = col_pins[col];
 
-    if (pin == NO_PIN) {
-        shiftOut(CLR_VAL);
-    } else {
+    if (pin != NO_PIN) {
+#ifdef MATRIX_UNSELECT_DRIVE_HIGH
+        setPinOutput_writeHigh(pin);
+#else
         setPinInputHigh_atomic(pin);
-    }
-}
-
-static void unselect_col_my(uint8_t col) {
-    pin_t pin = col_pins[col];
-
-    if (pin == NO_PIN) {
-        if (col == (MATRIX_COLS - COL_OFFSET - 1)) {
-            shiftOut(CLR_VAL);
+#endif
+    } else {
+#if defined(KEYBOARD_keychron_q6_q6_ansi_stm32l432) || defined(KEYBOARD_keychron_q6_q6_iso_stm32l432)
+        if (col == (MATRIX_COLS - 1 - 1)) {
+#else
+        if (col == (MATRIX_COLS - 1)) {
+#endif
+            setPinOutput_writeHigh(CLOCK_PIN);
+            setPinOutput_writeLow(CLOCK_PIN);
+            setPinOutput_writeHigh(LATCH_PIN);
+            setPinOutput_writeLow(LATCH_PIN);
         }
-    } else {
-        setPinInputHigh_atomic(pin);
     }
 }
 
 static void unselect_cols(void) {
     for (uint8_t x = 0; x < MATRIX_COLS; x++) {
-        unselect_col_my(x);
+        pin_t pin = col_pins[x];
+        if (pin != NO_PIN) {
+#ifdef MATRIX_UNSELECT_DRIVE_HIGH
+            setPinOutput_writeHigh(pin);
+#else
+            setPinInputHigh_atomic(pin);
+#endif
+        } else {
+#if defined(KEYBOARD_keychron_q6_q6_ansi_stm32l432) || defined(KEYBOARD_keychron_q6_q6_iso_stm32l432)
+            if (x == (MATRIX_COLS - 1 - 1))
+                // unselect shift Register
+                shiftOutMultiple(0xFF);
+#else
+            if (x == (MATRIX_COLS - 1))
+                // unselect shift Register
+                shiftOutMultiple(0x3FF);
+#endif
+        }
     }
 }
 
@@ -149,7 +177,20 @@ static void matrix_read_rows_on_col(matrix_row_t current_matrix[], uint8_t curre
     if (!select_col(current_col)) { // select col
         return;                     // skip NO_PIN col
     }
-    matrix_output_select_delay();
+#if defined(KEYBOARD_keychron_q6_q6_ansi_stm32l432) || defined(KEYBOARD_keychron_q6_q6_iso_stm32l432)
+    if ((current_col < 10) || (current_col == (MATRIX_COLS - 1))) {
+#else
+    if (current_col < 10) {
+#endif
+        matrix_output_select_delay();
+    } else {
+        for (int8_t cycle = 4; cycle > 0; cycle--) {
+            matrix_output_select_delay(); // 0.25us
+            matrix_output_select_delay();
+            matrix_output_select_delay();
+            matrix_output_select_delay();
+        }
+    }
 
     // For each row...
     for (uint8_t row_index = 0; row_index < ROWS_PER_HAND; row_index++) {
