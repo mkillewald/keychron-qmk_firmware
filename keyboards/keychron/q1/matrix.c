@@ -19,11 +19,11 @@
 #include "quantum.h"
 
 // Pin connected to DS of 74HC595
-#define DATA_PIN C15
+#define DATA_PIN A7
 // Pin connected to SH_CP of 74HC595
-#define CLOCK_PIN A1
+#define CLOCK_PIN B1
 // Pin connected to ST_CP of 74HC595
-#define LATCH_PIN A0
+#define LATCH_PIN B0
 
 #ifdef MATRIX_ROW_PINS
 static pin_t row_pins[MATRIX_ROWS] = MATRIX_ROW_PINS;
