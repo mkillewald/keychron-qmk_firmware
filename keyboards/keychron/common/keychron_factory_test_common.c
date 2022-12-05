@@ -64,7 +64,8 @@
     defined(KEYBOARD_keychron_v8_v8_ansi_stm32l432)         || \
     defined(KEYBOARD_keychron_v8_v8_ansi_stm32l432_ec11)    || \
     defined(KEYBOARD_keychron_v8_v8_iso_stm32l432)          || \
-    defined(KEYBOARD_keychron_v8_v8_iso_stm32l432_ec11)
+    defined(KEYBOARD_keychron_v8_v8_iso_stm32l432_ec11)     || \
+    defined(KEYBOARD_keychron_q65_q65_ansi_stm32l432_ec11)
 #    define FN1 2
 #    define FN2 3
 #    define KC_STEP_1 KC_J
