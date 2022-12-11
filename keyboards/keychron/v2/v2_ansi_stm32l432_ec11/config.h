@@ -26,6 +26,9 @@
 #define ENCODERS_PAD_B { B5 }
 #define ENCODER_RESOLUTION 4
 #define ENCODER_DEFAULT_POS 0x3
+<<<<<<<< HEAD:keyboards/keychron/v2/v2_ansi_stm32l432_ec11/config.h
 
 /* Enable caps-lock LED */
 #define CAPS_LOCK_LED_INDEX 30
+========
+>>>>>>>> temp:keyboards/keychron/q2/ansi_encoder/config.h

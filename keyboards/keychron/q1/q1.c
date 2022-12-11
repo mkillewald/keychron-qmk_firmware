@@ -103,4 +103,4 @@ bool led_update_kb(led_t led_state) {
     return res;
 }
 
-#endif // RGB_MATRIX_ENABLE
+#endif
