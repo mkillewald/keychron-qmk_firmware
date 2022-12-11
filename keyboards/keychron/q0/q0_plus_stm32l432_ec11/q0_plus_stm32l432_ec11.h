@@ -1,4 +1,4 @@
-/* Copyright 2022 @ Keychron (https://www.keychron.com)
+/* Copyright 2021 @ Keychron (https://www.keychron.com)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,9 +17,3 @@
 #pragma once
 
 #include "quantum.h"
-
-#if   defined(KEYBOARD_keychron_q0_q0_stm32l432)
-#    include "q0_stm32l432.h"
-#elif defined(KEYBOARD_keychron_q0_q0_plus_stm32l432_ec11)
-#    include "q0_plus_stm32l432_ec11.h"
-#endif
