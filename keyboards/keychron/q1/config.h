@@ -75,7 +75,6 @@
 #define ENABLE_RGB_MATRIX_SPLASH
 // #define ENABLE_RGB_MATRIX_MULTISPLASH
 #define ENABLE_RGB_MATRIX_SOLID_SPLASH
-<<<<<<< HEAD
 // #define ENABLE_RGB_MATRIX_SOLID_MULTISPLASH
 
 #define RGB_MATRIX_FRAMEBUFFER_EFFECTS
@@ -83,6 +82,3 @@
 
 /* Enable receive custom command from host */
 #define RAW_HID_CMD 0xAB
-=======
-#define ENABLE_RGB_MATRIX_SOLID_MULTISPLASH
->>>>>>> temp
