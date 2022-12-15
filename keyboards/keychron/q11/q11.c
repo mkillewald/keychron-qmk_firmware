@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "q11.h"
+#include "quantum.h"
 
 // Mask out handedness diode to prevent it
 // from keeping the keyboard awake

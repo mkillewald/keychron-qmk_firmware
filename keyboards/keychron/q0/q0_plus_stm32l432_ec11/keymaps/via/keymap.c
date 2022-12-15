@@ -27,7 +27,7 @@ enum layers {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_BASE] = LAYOUT_numpad_6x5(
-        KC_MUTE, MO(_FN1), KC_ESC,  KC_BSPC,  KC_TAB,
+        KC_MUTE,   MO(_FN1), KC_ESC,  KC_BSPC,  KC_TAB,
         MACRO01,   KC_NUM,   KC_PSLS, KC_PAST,  KC_PMNS,
         MACRO02,   KC_P7,    KC_P8,   KC_P9,    KC_PPLS,
         MACRO03,   KC_P4,    KC_P5,   KC_P6,
@@ -35,11 +35,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         MACRO05,   KC_P0,             KC_PDOT),
 
     [_FN1] = LAYOUT_numpad_6x5(
-        RGB_TOG, KC_NO,    KC_MUTE, KC_VOLD,  KC_VOLU,
+        RGB_TOG,   _______,  KC_MUTE, KC_VOLD,  KC_VOLU,
         MACRO01,   RGB_MOD,  RGB_VAI, RGB_HUI,  KC_DEL,
-        MACRO02,   RGB_RMOD, RGB_VAD, RGB_HUD,  KC_NO,
+        MACRO02,   RGB_RMOD, RGB_VAD, RGB_HUD,  _______,
         MACRO03,   RGB_SAI,  RGB_SPI, KC_MPRV,
-        MACRO04,   RGB_SAD,  RGB_SPD, KC_MPLY,  KC_NO,
+        MACRO04,   RGB_SAD,  RGB_SPD, KC_MPLY,  _______,
         MACRO05,   RGB_TOG,           KC_MNXT),
 
     [_RESERVED1] = LAYOUT_numpad_6x5(

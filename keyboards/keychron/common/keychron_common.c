@@ -109,14 +109,12 @@ bool process_record_keychron(uint16_t keycode, keyrecord_t *record) {
     }
 }
 
-#ifdef RAW_ENABLE
 bool dip_switch_update_keychron(uint8_t index, bool active) {
     if (!dip_switch_update_ft(index, active)) {
         return false;
     }
     return true;
 }
-#endif // RAW_ENABLE
 
 #ifdef RGB_MATRIX_ENABLE
 bool rgb_matrix_indicators_advanced_keychron(uint8_t led_min, uint8_t led_max) {

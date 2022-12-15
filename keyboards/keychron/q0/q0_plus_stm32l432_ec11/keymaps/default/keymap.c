@@ -28,19 +28,19 @@ enum layers {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_BASE] = LAYOUT_numpad_6x5(
         KC_MUTE, MO(_FN1), KC_ESC,  KC_BSPC,  KC_TAB,
-        KC_NO,   KC_NUM,   KC_PSLS, KC_PAST,  KC_PMNS,
-        KC_NO,   KC_P7,    KC_P8,   KC_P9,    KC_PPLS,
-        KC_NO,   KC_P4,    KC_P5,   KC_P6,
-        KC_NO,   KC_P1,    KC_P2,   KC_P3,    KC_PENT,
-        KC_NO,   KC_P0,             KC_PDOT),
+        _______, KC_NUM,   KC_PSLS, KC_PAST,  KC_PMNS,
+        _______, KC_P7,    KC_P8,   KC_P9,    KC_PPLS,
+        _______, KC_P4,    KC_P5,   KC_P6,
+        _______, KC_P1,    KC_P2,   KC_P3,    KC_PENT,
+        _______, KC_P0,             KC_PDOT),
 
     [_FN1] = LAYOUT_numpad_6x5(
-        RGB_TOG, KC_NO,    KC_MUTE, KC_VOLD,  KC_VOLU,
-        KC_NO,   RGB_MOD,  RGB_VAI, RGB_HUI,  KC_DEL,
-        KC_NO,   RGB_RMOD, RGB_VAD, RGB_HUD,  KC_NO,
-        KC_NO,   RGB_SAI,  RGB_SPI, KC_MPRV,
-        KC_NO,   RGB_SAD,  RGB_SPD, KC_MPLY,  KC_NO,
-        KC_NO,   RGB_TOG,           KC_MNXT),
+        RGB_TOG, _______,  KC_MUTE, KC_VOLD,  KC_VOLU,
+        _______, RGB_MOD,  RGB_VAI, RGB_HUI,  KC_DEL,
+        _______, RGB_RMOD, RGB_VAD, RGB_HUD,  _______,
+        _______, RGB_SAI,  RGB_SPI, KC_MPRV,
+        _______, RGB_SAD,  RGB_SPD, KC_MPLY,  _______,
+        _______, RGB_TOG,           KC_MNXT),
 
     [_RESERVED1] = LAYOUT_numpad_6x5(
         _______, _______,  _______, _______,  _______,
