@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "v3.h"
+#include "quantum.h"
 
 // clang-format off
 
@@ -121,4 +121,4 @@ bool led_update_kb(led_t led_state) {
     return res;
 }
 
-#endif
+#endif // CAPS_LOCK_LED_INDEX

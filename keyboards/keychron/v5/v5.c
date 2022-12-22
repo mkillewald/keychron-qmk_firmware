@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "v5.h"
+#include "quantum.h"
 
 const matrix_row_t matrix_mask[] = {
     0b111111111111111111,
@@ -69,7 +69,7 @@ static uint8_t light_brightness_get(void) {
 }
 
 bool rgb_matrix_indicators_kb(void) {
-    if (rgb_matrix_indicators_user()) {
+    if (!rgb_matrix_indicators_user()) {
         return false;
     }
 #    if defined(CAPS_LOCK_LED_INDEX)
@@ -132,4 +132,4 @@ bool led_update_kb(led_t led_state) {
     return res;
 }
 
-#endif // CAPS_LOCK_LED_INDEX
+#endif // CAPS_LOCK_LED_INDEX or NUM_LOCK_LED_INDEX

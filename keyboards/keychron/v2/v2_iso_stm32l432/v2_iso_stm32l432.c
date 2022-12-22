@@ -1,4 +1,4 @@
-/* Copyright 2021 @ Keychron (https://www.keychron.com)
+/* Copyright 2022 @ Keychron (https://www.keychron.com)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "iso_encoder.h"
+#include "quantum.h"
 
 #ifdef RGB_MATRIX_ENABLE
 
@@ -124,11 +124,7 @@ led_config_t g_led_config = {
         // RGB LED Index to Flag
         1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1,    1,
         1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,       1,
-<<<<<<<< HEAD:keyboards/keychron/v2/v2_iso_stm32l432/v2_iso_stm32l432.c
         8, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1,    1,
-========
-        1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1,    1,
->>>>>>>> temp:keyboards/keychron/q2/iso_encoder/iso_encoder.c
         1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,    1, 1,
         1, 1, 1,          4,          1, 1, 1, 1, 1, 1
     }

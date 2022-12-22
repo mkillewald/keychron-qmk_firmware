@@ -1,4 +1,4 @@
-/* Copyright 2021 @ Keychron (https://www.keychron.com)
+/* Copyright 2 @ Keychron (https://www.keychron.com)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,15 +16,9 @@
 
 #pragma once
 
-/* key matrix size */
-#define MATRIX_ROWS 5
-#define MATRIX_COLS 14
-
 /* key matrix pins */
-#define MATRIX_ROW_PINS \
-    { B4, B3, A15, A14, A13 }
-#define MATRIX_COL_PINS \
-    { C14, C15, A0, A1, A2, A3, A4, A5, A6, A7, B0, B1, A8, A9 }
+#define MATRIX_ROW_PINS { B4, B3, A15, A14, A13 }
+#define MATRIX_COL_PINS { C14, C15, A0, A1, A2, A3, A4, A5, A6, A7, B0, B1, A8, A9 }
 
 /* COL2ROW or ROW2COL */
 #define DIODE_DIRECTION ROW2COL
@@ -43,8 +37,7 @@
 #define I2C1_TIMINGR_SCLH 15U
 #define I2C1_TIMINGR_SCLL 51U
 
-#define CKLED2001_CURRENT_TUNE \
-    { 0xD0, 0xD0, 0x60, 0xD0, 0xD0, 0x60, 0xD0, 0xD0, 0x60, 0xD0, 0xD0, 0x60 }
+#define CKLED2001_CURRENT_TUNE { 0xD0, 0xD0, 0x60, 0xD0, 0xD0, 0x60, 0xD0, 0xD0, 0x60, 0xD0, 0xD0, 0x60 }
 
 /* DIP switch */
 #define DIP_SWITCH_MATRIX_GRID  { {4,4} }
