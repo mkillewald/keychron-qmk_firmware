@@ -13,7 +13,7 @@ enum {
 };
 
 //Tap Dance Definitions
-qk_tap_dance_action_t tap_dance_actions[] = {
+tap_dance_action_t tap_dance_actions[] = {
   //Tap once for ;, twice for ' -not using this currently
   [TD_SEMI_QUOT]  = ACTION_TAP_DANCE_DOUBLE(KC_SCLN, KC_QUOT),
   //Tap once for , twice for -
@@ -65,7 +65,7 @@ void matrix_scan_user(void) {
     }
     //tableflip (LEADER - TF)
     SEQ_TWO_KEYS(KC_T, KC_F) {
-        set_unicode_input_mode(UC_MAC);
+        set_unicode_input_mode(UNICODE_MODE_MACOS);
         send_unicode_string("(ノಠ痊ಠ)ノ彡┻━┻");
     }
     //screencap (LEADER - SC)
@@ -74,7 +74,7 @@ void matrix_scan_user(void) {
     }
     //screencap (LEADER - TM)
     SEQ_TWO_KEYS(KC_T, KC_M) {
-        set_unicode_input_mode(UC_MAC);
+        set_unicode_input_mode(UNICODE_MODE_MACOS);
         register_unicode(0x2122); // ™
     }
     /*

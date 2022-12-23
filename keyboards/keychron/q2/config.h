@@ -53,11 +53,15 @@
 /* Disable DIP switch in matrix data */
 #define MATRIX_MASKED
 
+<<<<<<< HEAD
 /* DIP switch */
 #define DIP_SWITCH_MATRIX_GRID  { {4,4} }
 #define SCAN_COUNT_MAX 100
 
 /* Turn off effects when suspended */
+=======
+/* turn off effects when suspended */
+>>>>>>> temp
 #define RGB_DISABLE_WHEN_USB_SUSPENDED
 
 #define DYNAMIC_KEYMAP_LAYER_COUNT 5
@@ -113,6 +117,7 @@
 #define ENABLE_RGB_MATRIX_SPLASH
 // #define ENABLE_RGB_MATRIX_MULTISPLASH
 #define ENABLE_RGB_MATRIX_SOLID_SPLASH
+<<<<<<< HEAD
 // #define ENABLE_RGB_MATRIX_SOLID_MULTISPLASH
 
 #define RGB_MATRIX_FRAMEBUFFER_EFFECTS
@@ -120,3 +125,6 @@
 
 /* Enable receive custom command from host */
 #define RAW_HID_CMD 0xAB
+=======
+#define ENABLE_RGB_MATRIX_SOLID_MULTISPLASH
+>>>>>>> temp

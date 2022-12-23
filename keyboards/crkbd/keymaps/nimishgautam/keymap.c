@@ -137,7 +137,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_TEXT_NAV] = LAYOUT_split_3x6_3( //text nav and special navigation (lock screen, adjust layer, etc)
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      LOCK_SCREEN, KC_PSCR, SELECT_LEFT_LINE, KC_UP, SELECT_RIGHT_LINE, TD(TD_MOVE_BEGIN_LINE),                    TD(TD_MOVE_END_LINE), KC_MS_WH_UP, EMOJI_KBD, KC_TRANSPARENT, KC_TRANSPARENT, RESET,
+      LOCK_SCREEN, KC_PSCR, SELECT_LEFT_LINE, KC_UP, SELECT_RIGHT_LINE, TD(TD_MOVE_BEGIN_LINE),                    TD(TD_MOVE_END_LINE), KC_MS_WH_UP, EMOJI_KBD, KC_TRANSPARENT, KC_TRANSPARENT, QK_BOOT,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       TO(_BASE), SELECT_LEFT_WD, KC_LEFT, KC_DOWN, KC_RIGHT,SELECT_RIGHT_WD,              KC_MS_WH_LEFT, KC_RGUI, KC_RSFT, KC_RALT,KC_RCTL, KC_CAPS,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
@@ -375,7 +375,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   return true;
 }
 
-void dance_left_finished (qk_tap_dance_state_t *state, void *user_data) {
+void dance_left_finished (tap_dance_state_t *state, void *user_data) {
   if (state->count == 1) { //1 tap, move to line left
     keymap_config.raw = eeconfig_read_keymap();
     if(keymap_config.swap_lctl_lgui){ //Linux
@@ -388,7 +388,7 @@ void dance_left_finished (qk_tap_dance_state_t *state, void *user_data) {
   }
 }
 
-void dance_right_finished (qk_tap_dance_state_t *state, void *user_data) {
+void dance_right_finished (tap_dance_state_t *state, void *user_data) {
   if (state->count == 1) { // 1 tap, move line right
        keymap_config.raw = eeconfig_read_keymap();
     if(keymap_config.swap_lctl_lgui){ //Linux
@@ -402,7 +402,7 @@ void dance_right_finished (qk_tap_dance_state_t *state, void *user_data) {
 }
 
 //Tap Dance Definitions
-qk_tap_dance_action_t tap_dance_actions[] = {
+tap_dance_action_t tap_dance_actions[] = {
   [TD_MOVE_BEGIN_LINE]  = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_left_finished, NULL),
   [TD_MOVE_END_LINE]  = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_right_finished, NULL),
   [TD_PERIOD_COMMA] = ACTION_TAP_DANCE_DOUBLE(KC_DOT, KC_COMMA),

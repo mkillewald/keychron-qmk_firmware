@@ -86,7 +86,6 @@ static void shiftOut_single(uint8_t dataOut) {
     } else {
         setPinOutput_writeLow(DATA_PIN);
     }
-
     setPinOutput_writeHigh(CLOCK_PIN);
     setPinOutput_writeLow(CLOCK_PIN);
 

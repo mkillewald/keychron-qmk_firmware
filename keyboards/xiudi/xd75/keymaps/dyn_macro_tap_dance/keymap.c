@@ -34,23 +34,23 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   return true;
 };
 
-void macro_tog_key( qk_tap_dance_state_t *state, void *user_data ) {
+void macro_tog_key( tap_dance_state_t *state, void *user_data ) {
   if ( state->count > 3 )
     return;
 
   keyrecord_t kr;
   kr.event.pressed = false;
-  uint16_t action = DYN_REC_STOP;
+  uint16_t action = QK_DYNAMIC_MACRO_RECORD_STOP;
 
   if ( state->count == 1 ) {
-    action = DYN_MACRO_PLAY1;
+    action = QK_DYNAMIC_MACRO_PLAY_1;
   }
   else if ( state->count == 2 ) {
-    action = DYN_REC_STOP;
+    action = QK_DYNAMIC_MACRO_RECORD_STOP;
     kr.event.pressed = true;
   }
   else if ( state->count == 3 ) {
-    action = DYN_REC_START1;
+    action = QK_DYNAMIC_MACRO_RECORD_START_1;
   }
 
   process_record_dynamic_macro( action, &kr );
@@ -60,7 +60,7 @@ enum {
   MCROTOG_ = 0
 };
 
-qk_tap_dance_action_t tap_dance_actions[] = {
+tap_dance_action_t tap_dance_actions[] = {
     [MCROTOG_]  = ACTION_TAP_DANCE_FN( macro_tog_key )
 };
 

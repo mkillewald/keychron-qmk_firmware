@@ -30,7 +30,8 @@
 
 // clang-format off
 
-#if defined(KEYBOARD_keychron_q0_q0_stm32l432)
+#if defined(KEYBOARD_keychron_q0_q0_stm32l432) || \
+    defined(KEYBOARD_keychron_q0_q0_plus_stm32l432_ec11)
 #    define FN1 1
 #    define KC_STEP_1 RGB_SAD // 1
 #    define KC_STEP_2 RGB_HUD // 9
@@ -138,7 +139,7 @@ uint8_t factory_reset_count = 0;
 bool report_os_sw_state = false;
 extern matrix_row_t matrix[MATRIX_ROWS];
 
-#if defined(KEYBOARD_keychron_q0_q0_stm32l432)
+#if defined(KEYBOARD_keychron_q0_q0_stm32l432) || defined(KEYBOARD_keychron_q0_q0_plus_stm32l432_ec11)
 bool process_record_ft(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case MO(FN1):
@@ -492,14 +493,13 @@ static void system_switch_state_report(uint8_t index, bool active) {
     }
 }
 
-#ifdef RAW_ENABLE
 bool dip_switch_update_ft(uint8_t index, bool active) {
     /* Send default layer state to host */
     system_switch_state_report(index, active);
     return true;
 }
 
-void raw_hid_receive_kb(uint8_t *data, uint8_t length) {
+void via_custom_value_command_kb(uint8_t *data, uint8_t length) {
     if (data[0] == 0xAB) {
         uint16_t checksum = 0;
         for (uint8_t i = 1; i < RAW_EPSIZE - 3; i++) {
@@ -535,4 +535,3 @@ void raw_hid_receive_kb(uint8_t *data, uint8_t length) {
         }
     }
 }
-#endif // RAW_ENABLE

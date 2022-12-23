@@ -543,7 +543,7 @@ void matrix_scan_user(void) {
 
 #ifdef UCIS_ENABLE
     SEQ_ONE_KEY(KC_U) {
-      qk_ucis_start();
+      ucis_start();
     }
 #endif
     SEQ_ONE_KEY(KC_H) {
@@ -560,13 +560,13 @@ void matrix_scan_user(void) {
     }
     // tableflip (LEADER - TF)
     SEQ_TWO_KEYS(KC_T, KC_F) {
-      //set_unicode_input_mode(UC_LNX);
+      //set_unicode_input_mode(UNICODE_MODE_LINUX);
       //send_unicode_hex_string("0028 30CE 0CA0 75CA 0CA0 0029 30CE 5F61 253B 2501 253B");
       send_unicode_string("(╯°□°）╯︵ ┻━┻");
     }
     // untableflip
     SEQ_THREE_KEYS(KC_U, KC_T, KC_F) {
-      //set_unicode_input_mode(UC_LNX);
+      //set_unicode_input_mode(UNICODE_MODE_LINUX);
       //send_unicode_hex_string("0028 30CE 0CA0 75CA 0CA0 0029 30CE 5F61 253B 2501 253B");
       send_unicode_string("┬─┬ノ( º _ ºノ)");
     }
@@ -576,7 +576,7 @@ void matrix_scan_user(void) {
 
 #ifdef UCIS_ENABLE
 // 3 codepoints at most, otherwise increase UCIS_MAX_CODE_POINTS
-const qk_ucis_symbol_t ucis_symbol_table[] = UCIS_TABLE(
+const ucis_symbol_t ucis_symbol_table[] = UCIS_TABLE(
     UCIS_SYM("poop", 0x1F4A9),                // 💩
     UCIS_SYM("rofl", 0x1F923),                // 🤣
     UCIS_SYM("look", 0x0CA0, 0x005F, 0x0CA0)  // ಠ_ಠ

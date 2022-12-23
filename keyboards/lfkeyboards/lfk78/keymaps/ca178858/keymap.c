@@ -97,7 +97,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * `---------'  `------------------------------------------------------'  `--------------'
      */
     [SETTINGS] = LAYOUT_split_rshift(
-        XXXXXXX, XXXXXXX, XXXXXXX,         XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, BL_DEC,  BL_INC,       BL_TOGG,            RGB_TOG,     RGB_VAI,
+        XXXXXXX, XXXXXXX, XXXXXXX,         XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, BL_DOWN, BL_UP,        BL_TOGG,            RGB_TOG,     RGB_VAI,
         XXXXXXX, XXXXXXX, DB_TOGG,         XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,      XXXXXXX,            RGB_MOD,     RGB_VAD,
         XXXXXXX, XXXXXXX, XXXXXXX,         XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,               QK_BOOT,
         XXXXXXX, XXXXXXX, XXXXXXX,         XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX,      XXXXXXX,            RGB_HUI,
@@ -105,7 +105,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     )
 };
 
-void tap_space_spam_finished(qk_tap_dance_state_t *state, void *user_data) {
+void tap_space_spam_finished(tap_dance_state_t *state, void *user_data) {
     if (get_mods() & (MOD_BIT(KC_LGUI))) {
       return;
     }
@@ -115,12 +115,12 @@ void tap_space_spam_finished(qk_tap_dance_state_t *state, void *user_data) {
     tap_code(KC_SPC);
 }
 
-void tap_space_spam_reset(qk_tap_dance_state_t *state, void *user_data) {
+void tap_space_spam_reset(tap_dance_state_t *state, void *user_data) {
     spam_space = false;
     unregister_code(KC_SPC);
 }
 
-void tap_esc_func_finished(qk_tap_dance_state_t *state, void *user_data) {
+void tap_esc_func_finished(tap_dance_state_t *state, void *user_data) {
     if (state->pressed) {
         layer_on(FUNC);
     } else {
@@ -128,11 +128,11 @@ void tap_esc_func_finished(qk_tap_dance_state_t *state, void *user_data) {
     }
 }
 
-void tap_esc_func_reset(qk_tap_dance_state_t *state, void *user_data) {
+void tap_esc_func_reset(tap_dance_state_t *state, void *user_data) {
     layer_off(FUNC);
 }
 
-qk_tap_dance_action_t tap_dance_actions[] = {
+tap_dance_action_t tap_dance_actions[] = {
     [TD_ESC_FUNC] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, tap_esc_func_finished, tap_esc_func_reset),
     [TD_SPC_SPAM] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, tap_space_spam_finished, tap_space_spam_reset),
 };

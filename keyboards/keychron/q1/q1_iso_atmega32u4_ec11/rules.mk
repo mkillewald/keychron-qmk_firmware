@@ -21,4 +21,7 @@ DIP_SWITCH_ENABLE = yes
 RGB_MATRIX_ENABLE = yes
 RGB_MATRIX_DRIVER = IS31FL3733
 LTO_ENABLE = yes
+<<<<<<<< HEAD:keyboards/keychron/q1/q1_iso_atmega32u4_ec11/rules.mk
 
+========
+>>>>>>>> temp:keyboards/keychron/q1/ansi_encoder/rules.mk

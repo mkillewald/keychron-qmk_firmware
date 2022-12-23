@@ -26,7 +26,6 @@ const matrix_row_t matrix_mask[] = {
 };
 
 #ifdef RGB_MATRIX_ENABLE
-
 const is31_led PROGMEM g_is31_leds[RGB_MATRIX_LED_COUNT] = {
 /* Refer to IS31 manual for these locations
  *   driver
@@ -121,7 +120,6 @@ const is31_led PROGMEM g_is31_leds[RGB_MATRIX_LED_COUNT] = {
     {1, F_14,   D_14,   E_14},
     {1, F_15,   D_15,   E_15},
     {1, F_16,   D_16,   E_16}
-
 };
 
 #define __ NO_LED

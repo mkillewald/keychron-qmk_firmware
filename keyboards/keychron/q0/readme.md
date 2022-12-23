@@ -1,6 +1,6 @@
 # Keychron Q0
 
-A customizable number keypad.
+A customizable number pad.
 
 * Keyboard Maintainer: [Keychron](https://github.com/keychron)
 * Hardware Supported: Keychron Q0

@@ -16,10 +16,6 @@
 
 #pragma once
 
-/* Key matrix size */
-#define MATRIX_ROWS 6
-#define MATRIX_COLS 20
-
 /* COL2ROW or ROW2COL */
 #define DIODE_DIRECTION ROW2COL
 
@@ -39,8 +35,7 @@
 #define I2C1_TIMINGR_SCLL 51U
 
 /* Limit the maximum brigtness current of colour white to 500mA */
-#define CKLED2001_CURRENT_TUNE \
-    { 0xA8, 0xA8, 0x48, 0xA8, 0xA8, 0x48, 0xA8, 0xA8, 0x48, 0xA8, 0xA8, 0x48 }
+#define CKLED2001_CURRENT_TUNE { 0xA8, 0xA8, 0x48, 0xA8, 0xA8, 0x48, 0xA8, 0xA8, 0x48, 0xA8, 0xA8, 0x48 }
 
 /* DIP switch */
 #define DIP_SWITCH_MATRIX_GRID  { {5, 4} }

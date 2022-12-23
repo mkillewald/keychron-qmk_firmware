@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "quantum.h"
+#include "iso_encoder.h"
 
 const matrix_row_t matrix_mask[] = {
     0b111111111111101,
@@ -150,10 +150,18 @@ led_config_t g_led_config = {
         1,    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
         1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1,    1,
         1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,       1,
+<<<<<<<< HEAD:keyboards/keychron/q1/q1_iso_atmega32u4_ec11/q1_iso_atmega32u4_ec11.c
         8, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1,    1,
+========
+        9, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1,    1,
+>>>>>>>> temp:keyboards/keychron/q1/iso_encoder/iso_encoder.c
         1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,    1, 1,
         1, 1, 1,           4,         1, 1, 1, 1, 1, 1
     }
 };
 
+<<<<<<<< HEAD:keyboards/keychron/q1/q1_iso_atmega32u4_ec11/q1_iso_atmega32u4_ec11.c
 #endif
+========
+#endif // RGB_MATRIX_ENABLE
+>>>>>>>> temp:keyboards/keychron/q1/iso_encoder/iso_encoder.c

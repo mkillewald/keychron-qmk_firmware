@@ -66,7 +66,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______, KC_F1 ,KC_F2, KC_F3, KC_F4, KC_F5, KC_F6, KC_F7, KC_F8, KC_F9, KC_F10, KC_F11, KC_F12, _______, KC_INS ,  \
   _______,_______, KC_UP,_______,_______, _______,_______,_______,_______,_______,_______,_______,_______, _______,KC_HOME, \
   KC_CAPS,KC_LEFT,KC_DOWN,KC_RIGHT,_______,_______,_______,_______,_______,_______,_______,_______,        _______,KC_END, \
-  _______,_______,_______,BL_DEC, BL_TOGG,BL_INC, _______,KC_VOLD,KC_VOLU,KC_MUTE,_______,_______, _______, _______, \
+  _______,_______,_______,BL_DOWN,BL_TOGG,BL_UP,  _______,KC_VOLD,KC_VOLU,KC_MUTE,_______,_______, _______, _______, \
   _______,_______,_______,                 TG(_GM),               _______,_______,_______,KC_MPRV,KC_MPLY, KC_MNXT),
 
   /* Keymap _GL: Gaming Layer. Basically makes Caps Lock behave normally. I know there is a better way to do this but copy and paste was my friend
@@ -92,7 +92,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 // Tapdance definitions. Tap Dance F Keys.
-qk_tap_dance_action_t tap_dance_actions[] = {
+tap_dance_action_t tap_dance_actions[] = {
   [TD_F1] = ACTION_TAP_DANCE_DOUBLE(KC_1, KC_F1),
   [TD_F2] = ACTION_TAP_DANCE_DOUBLE(KC_2, KC_F2),
   [TD_F3] = ACTION_TAP_DANCE_DOUBLE(KC_3, KC_F3),

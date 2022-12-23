@@ -15,6 +15,9 @@
  */
 
 #include "stdint.h"
+#ifdef VIA_ENABLE
+#    include "via.h"
+#endif
 #include "quantum_keycodes.h"
 #include "via.h"
 

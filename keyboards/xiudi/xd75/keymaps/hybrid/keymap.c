@@ -39,7 +39,7 @@ enum {
 
 
 
-void dance_a_accent (qk_tap_dance_state_t *state, void *user_data) {
+void dance_a_accent (tap_dance_state_t *state, void *user_data) {
   if (state->count == 2) {
     tap_code (KC_0);
   }
@@ -47,7 +47,7 @@ void dance_a_accent (qk_tap_dance_state_t *state, void *user_data) {
     tap_code (KC_Q);
   }
 }
-void dance_e_accent (qk_tap_dance_state_t *state, void *user_data) {
+void dance_e_accent (tap_dance_state_t *state, void *user_data) {
   if (state->count == 2) {
     tap_code (KC_2);
   }
@@ -58,7 +58,7 @@ void dance_e_accent (qk_tap_dance_state_t *state, void *user_data) {
     tap_code (KC_E);
   }
 }
-void dance_i_accent (qk_tap_dance_state_t *state, void *user_data) {
+void dance_i_accent (tap_dance_state_t *state, void *user_data) {
   if (state->count == 2) {
     tap_code (KC_NUM_LOCK);
     register_code (KC_LALT);
@@ -74,7 +74,7 @@ void dance_i_accent (qk_tap_dance_state_t *state, void *user_data) {
 
   }
 }
-void dance_o_accent (qk_tap_dance_state_t *state, void *user_data) {
+void dance_o_accent (tap_dance_state_t *state, void *user_data) {
   if (state->count == 2) {
     tap_code (KC_NUM_LOCK);
     register_code (KC_LALT);
@@ -89,7 +89,7 @@ void dance_o_accent (qk_tap_dance_state_t *state, void *user_data) {
     tap_code (KC_O);
   }
 }
-void dance_u_accent (qk_tap_dance_state_t *state, void *user_data) {
+void dance_u_accent (tap_dance_state_t *state, void *user_data) {
   if (state->count == 2) {
     tap_code (KC_NUM_LOCK);
     register_code (KC_LALT);
@@ -105,7 +105,7 @@ void dance_u_accent (qk_tap_dance_state_t *state, void *user_data) {
   }
 
 }
-void dance_slash (qk_tap_dance_state_t *state, void *user_data) {
+void dance_slash (tap_dance_state_t *state, void *user_data) {
   if (state->count == 2) {
     tap_code (KC_NUM_LOCK);
     register_code (KC_LALT);
@@ -119,7 +119,7 @@ void dance_slash (qk_tap_dance_state_t *state, void *user_data) {
     tap_code (KC_PSLS);
   }
 }
-void dance_under (qk_tap_dance_state_t *state, void *user_data) {
+void dance_under (tap_dance_state_t *state, void *user_data) {
   if (state->count == 2) {
     tap_code (KC_NUM_LOCK);
     register_code (KC_LALT);
@@ -133,7 +133,7 @@ void dance_under (qk_tap_dance_state_t *state, void *user_data) {
     tap_code (KC_6);
   }
 }
-void dance_open_accol (qk_tap_dance_state_t *state, void *user_data) {
+void dance_open_accol (tap_dance_state_t *state, void *user_data) {
   if (state->count == 2) {
     tap_code (KC_NUM_LOCK);
     register_code (KC_LALT);
@@ -157,7 +157,7 @@ void dance_open_accol (qk_tap_dance_state_t *state, void *user_data) {
     tap_code (KC_5);
   }
 }
-void dance_close_accol (qk_tap_dance_state_t *state, void *user_data) {
+void dance_close_accol (tap_dance_state_t *state, void *user_data) {
   if (state->count == 2) {
     tap_code (KC_NUM_LOCK);
     register_code (KC_LALT);
@@ -182,7 +182,7 @@ void dance_close_accol (qk_tap_dance_state_t *state, void *user_data) {
     tap_code (KC_MINS);
   }
 }
-void dance_question (qk_tap_dance_state_t *state, void *user_data) {
+void dance_question (tap_dance_state_t *state, void *user_data) {
   if (state->count == 2) {
     tap_code (KC_NUM_LOCK);
     register_code (KC_LALT);
@@ -206,7 +206,7 @@ void dance_question (qk_tap_dance_state_t *state, void *user_data) {
 
   }
 }
-void dance_cedille (qk_tap_dance_state_t *state, void *user_data) {
+void dance_cedille (tap_dance_state_t *state, void *user_data) {
   if (state->count == 2) {
     tap_code (KC_9);
   }
@@ -214,7 +214,7 @@ void dance_cedille (qk_tap_dance_state_t *state, void *user_data) {
     tap_code (KC_C);
   }
 }
-void dance_dot (qk_tap_dance_state_t *state, void *user_data) {
+void dance_dot (tap_dance_state_t *state, void *user_data) {
   if (state->count == 2) {
     tap_code (KC_NUM_LOCK);
     register_code (KC_LALT);
@@ -234,7 +234,7 @@ void dance_dot (qk_tap_dance_state_t *state, void *user_data) {
     tap_code (KC_NUM_LOCK);
   }
 }
-qk_tap_dance_action_t tap_dance_actions[] = {
+tap_dance_action_t tap_dance_actions[] = {
   [TD_A] = ACTION_TAP_DANCE_FN(dance_a_accent),
   [TD_E] = ACTION_TAP_DANCE_FN(dance_e_accent),
   [TD_I] = ACTION_TAP_DANCE_FN(dance_i_accent),
@@ -273,7 +273,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_LY2] = LAYOUT_ortho_5x15(
     KC_MPRV, KC_MNXT, KC_NO, KC_NO, KC_NO, BL_ON, BL_OFF, KC_NO, KC_NO, KC_NO, RGB_TOG, RGB_RMOD, RGB_MOD, KC_NO, DF(_LY1),
     KC_VOLD, KC_VOLU, KC_NO, KC_NO, KC_NO, BL_TOGG, BL_STEP, KC_NO, KC_NO, KC_NO, KC_NO, RGB_HUD, RGB_HUI, RGB_M_P, RGB_M_B,
-    KC_MPLY, KC_MSTP, KC_MUTE, KC_NO, KC_NO, BL_DEC, BL_INC, KC_NO, KC_NO, KC_NO, KC_NO, RGB_SAD, RGB_SAI, RGB_M_R, RGB_M_SW,
+    KC_MPLY, KC_MSTP, KC_MUTE, KC_NO, KC_NO, BL_DOWN,BL_UP,  KC_NO, KC_NO, KC_NO, KC_NO, RGB_SAD, RGB_SAI, RGB_M_R, RGB_M_SW,
     KC_MRWD, KC_MFFD, KC_NO, KC_NO, KC_NO, BL_BRTG, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, RGB_VAD, RGB_VAI, RGB_M_SN, RGB_M_K,
     KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_TRNS, KC_TRNS, KC_TRNS, KC_NO, KC_NO, RGB_SPD, RGB_SPI, RGB_M_X, RGB_M_G
     )

@@ -48,7 +48,7 @@ enum {
 };
 
 //Tap Dance Definitions
-qk_tap_dance_action_t tap_dance_actions[] = {
+tap_dance_action_t tap_dance_actions[] = {
   //Tap once for Esc, twice for Caps Lock
   [TD_LOCK_SLEEP]  = ACTION_TAP_DANCE_DOUBLE(LGUI(KC_L), KC_SLEP),
   [TD_ABK] = ACTION_TAP_DANCE_DOUBLE(KC_LABK,KC_RABK),
@@ -155,7 +155,7 @@ LT(_LYMD,KC_ESC),  KC_A  ,  KC_R  ,  KC_S  ,  KC_T  ,  KC_D  ,________  ,_______
      ________,________,________,________,________,________,___XX___,___XX___,___XX___,___XX___,___XX___,___XX___,___XX___,___XX___,___XX___,
      KC_LYDEF,________,________,________,________,________,___XX___,___XX___,___XX___,RGB_HUD ,RGB_HUI ,RGB_SAD ,RGB_SAI ,RGB_VAD ,RGB_VAI,
      ________,________,________,________,________,________,___XX___,___XX___,___XX___,RGB_TOG ,RGB_RMOD,RGB_MOD ,___XX___,___XX___,___XX___,
-     ________,________,________,________,________,________,___XX___,___XX___,___XX___,BL_TOGG ,BL_DEC  ,BL_INC  ,BL_BRTG ,___XX___,___XX___,
+     ________,________,________,________,________,________,___XX___,___XX___,___XX___,BL_TOGG ,BL_DOWN ,BL_UP   ,BL_BRTG ,___XX___,___XX___,
      ________,________,________,________,________,________,________,________,________,________,___XX___,___XX___,___XX___,___XX___,___XX___
   )
 };
