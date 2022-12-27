@@ -26,7 +26,7 @@
 #define CLOCK_PIN_74HC595 A1
 /* Pin connected to ST_CP of 74HC595 */
 #define LATCH_PIN_74HC595 A0
-/* Pin used start of 74HC595 */
+/* Pin used index start of 74HC595 */
 #define PIN_START_74HC595 11
 
 /* RGB Matrix Configuration */

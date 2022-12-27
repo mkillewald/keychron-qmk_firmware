@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "s1_ansi_white_stm32l432.h"
+#include "quantum.h"
 
 #ifdef LED_MATRIX_ENABLE
 

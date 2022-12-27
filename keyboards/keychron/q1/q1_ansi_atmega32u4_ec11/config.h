@@ -1,4 +1,4 @@
-/* Copyright 2021 @ Keychron (https://www.keychron.com)
+/* Copyright 2022 @ Keychron (https://www.keychron.com)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,10 +21,8 @@
 #define MATRIX_COLS 15
 
 /* key matrix pins */
-#define MATRIX_ROW_PINS \
-    { D3, D2, B3, B2, B1, B0 }
-#define MATRIX_COL_PINS \
-    { D5, D4, D6, D7, B4, B5, B6, C6, C7, F7, F6, F5, F4, F1, F0 }
+#define MATRIX_ROW_PINS { D3, D2, B3, B2, B1, B0 }
+#define MATRIX_COL_PINS { D5, D4, D6, D7, B4, B5, B6, C6, C7, F7, F6, F5, F4, F1, F0 }
 
 /* DIP switch */
 #define DIP_SWITCH_MATRIX_GRID  { {0,1} }

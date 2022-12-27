@@ -157,7 +157,7 @@ led_config_t g_led_config = {
 
 // clang-format on
 
-#endif
+#endif // RGB_MATRIX_ENABLE
 
 #if defined(ENCODER_ENABLE) && defined(PAL_USE_CALLBACKS)
 

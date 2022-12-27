@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "c1.h"
+#include "quantum.h"
 
 // clang-format off
 

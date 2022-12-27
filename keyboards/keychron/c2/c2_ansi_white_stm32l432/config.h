@@ -17,16 +17,22 @@
 #pragma once
 
 /* Key matrix pins */
-#define MATRIX_ROW_PINS \
-    { B5, B4, B3, A15, A14, A13 }
-#define MATRIX_COL_PINS \
-    { A10, A9, A8, B1, B0, A7, A6, A5, A4, A3, A2, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, C14 }
+#define MATRIX_ROW_PINS { B5, B4, B3, A15, A14, A13 }
+#define MATRIX_COL_PINS { A10, A9, A8, B1, B0, A7, A6, A5, A4, A3, A2, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, C14 }
+
+/* Pin connected to DS of 74HC595 */
+#define DATA_PIN_74HC595 C15
+/* Pin connected to SH_CP of 74HC595 */
+#define CLOCK_PIN_74HC595 A1
+/* Pin connected to ST_CP of 74HC595 */
+#define LATCH_PIN_74HC595 A0
+/* Pin used index start of 74HC595 */
+#define PIN_START_74HC595 11
 
 /* RGB Matrix Driver Configuration */
 #define DRIVER_COUNT 1
 #define DRIVER_ADDR_1 0b1110100
-#define CKLED2001_CURRENT_TUNE \
-    { 0xA0, 0xA0, 0xA0, 0xA0, 0xA0, 0xA0, 0xA0, 0xA0, 0xA0, 0xA0, 0xA0, 0xA0 }
+#define CKLED2001_CURRENT_TUNE { 0xA0, 0xA0, 0xA0, 0xA0, 0xA0, 0xA0, 0xA0, 0xA0, 0xA0, 0xA0, 0xA0, 0xA0 }
 
 /* RGB Matrix Configuration */
 #define DRIVER_1_LED_TOTAL 108
