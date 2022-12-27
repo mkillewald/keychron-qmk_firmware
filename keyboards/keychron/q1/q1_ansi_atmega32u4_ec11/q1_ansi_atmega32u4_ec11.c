@@ -1,4 +1,4 @@
-/* Copyright 2021 @ Keychron (https://www.keychron.com)
+/* Copyright 2022 @ Keychron (https://www.keychron.com)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,8 +14,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <avr/interrupt.h>
-#include <avr/io.h>
 #include "quantum.h"
 
 const matrix_row_t matrix_mask[] = {
@@ -156,5 +154,22 @@ led_config_t g_led_config = {
         1, 1, 1,          4,          1, 1, 1, 1, 1, 1,
     }
 };
+
+#endif // RGB_MATRIX_ENABLE
+
+#ifdef ENCODER_ENABLE
+
+void keyboard_post_init_kb(void) {
+    PCMSK0 |= (1 << 7);
+    PCICR |= (1 << PCIE0);
+    sei();
+
+    // allow user keymaps to do custom post_init
+    keyboard_post_init_user();
+}
+
+ISR(PCINT0_vect) {
+    encoder_insert_state();
+}
 
 #endif

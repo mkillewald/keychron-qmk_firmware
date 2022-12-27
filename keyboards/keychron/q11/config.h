@@ -17,15 +17,11 @@
 #pragma once
 
 /* left side matrix pins */
-#define MATRIX_ROW_PINS \
-    { A13, A14, A15, B3, B4, B5 }
-#define MATRIX_COL_PINS \
-    { A7, A6, A5, A4, A3, A2, A1, C15, NO_PIN }
+#define MATRIX_ROW_PINS { A13, A14, A15, B3, B4, B5 }
+#define MATRIX_COL_PINS { A7, A6, A5, A4, A3, A2, A1, C15, NO_PIN }
 /* right side matrix pins */
-#define MATRIX_ROW_PINS_RIGHT \
-    { B5, B4, B3, A15, A14, A13 }
-#define MATRIX_COL_PINS_RIGHT \
-    { A8, A7, A6, A5, A4, A3, A2, A1, A0 }
+#define MATRIX_ROW_PINS_RIGHT { B5, B4, B3, A15, A14, A13 }
+#define MATRIX_COL_PINS_RIGHT { A8, A7, A6, A5, A4, A3, A2, A1, A0 }
 
 /* COL2ROW or ROW2COL */
 #define DIODE_DIRECTION ROW2COL
@@ -60,8 +56,7 @@
 #define I2C1_TIMINGR_SCLH 15U
 #define I2C1_TIMINGR_SCLL 51U
 
-#define CKLED2001_CURRENT_TUNE \
-    { 0x80, 0xFF, 0xFF, 0x80, 0xFF, 0xFF, 0x80, 0xFF, 0xFF, 0x80, 0xFF, 0xFF } // 300mA
+#define CKLED2001_CURRENT_TUNE { 0x80, 0xFF, 0xFF, 0x80, 0xFF, 0xFF, 0x80, 0xFF, 0xFF, 0x80, 0xFF, 0xFF } // 300mA
 
 /* EEPROM Driver Configuration */
 #define WEAR_LEVELING_LOGICAL_SIZE 2048
@@ -74,18 +69,12 @@
 // #define SERIAL_USART_RX_PIN A10  // USART RX pin
 
 /* Encoder Configuration */
-#define ENCODERS_PAD_A \
-    { B0 }
-#define ENCODERS_PAD_B \
-    { B1 }
-#define ENCODER_RESOLUTIONS \
-    { 4 }
-#define ENCODERS_PAD_A_RIGHT \
-    { C14 }
-#define ENCODERS_PAD_B_RIGHT \
-    { C15 }
-#define ENCODER_RESOLUTIONS_RIGHT \
-    { 4 }
+#define ENCODERS_PAD_A { B0 }
+#define ENCODERS_PAD_B { B1 }
+#define ENCODER_RESOLUTIONS { 4 }
+#define ENCODERS_PAD_A_RIGHT { C14 }
+#define ENCODERS_PAD_B_RIGHT { C15 }
+#define ENCODER_RESOLUTIONS_RIGHT { 4 }
 #define ENCODER_DEFAULT_POS 0x3
 
 /* Disable RGB lighting when PC is in suspend */
@@ -149,3 +138,5 @@
 
 /* Enable receive custom command from host */
 #define RAW_HID_CMD 0xAB
+
+#define HOLD_ON_OTHER_KEY_PRESS

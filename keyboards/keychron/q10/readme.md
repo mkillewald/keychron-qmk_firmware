@@ -8,11 +8,15 @@ A customizable 75% ergonomic keyboard.
 
 Make example for this keyboard (after setting up your build environment):
 
-    make keychron/q10/q10_ansi_stm32l432:default
+```bash
+make keychron/q10/q10_ansi_stm32l432:default
+```
 
 Flashing example for this keyboard:
 
-    make keychron/q10/q10_ansi_stm32l432:default:flash
+```bash
+make keychron/q10/q10_ansi_stm32l432:default:flash
+```
 
 **Reset Key**: Hold down the key located at *K01*, which programmed as *Esc* while plugging in the keyboard.
 

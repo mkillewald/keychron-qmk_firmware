@@ -1,4 +1,4 @@
-/* Copyright 2021 @ Keychron (https://www.keychron.com)
+/* Copyright 2022 @ Keychron (https://www.keychron.com)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "iso_encoder.h"
+#include "quantum.h"
 
 const matrix_row_t matrix_mask[] = {
     0b111111111111101,
@@ -150,18 +150,28 @@ led_config_t g_led_config = {
         1,    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
         1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1,    1,
         1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,       1,
-<<<<<<<< HEAD:keyboards/keychron/q1/q1_iso_atmega32u4_ec11/q1_iso_atmega32u4_ec11.c
         8, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1,    1,
-========
-        9, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1,    1,
->>>>>>>> temp:keyboards/keychron/q1/iso_encoder/iso_encoder.c
         1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,    1, 1,
         1, 1, 1,           4,         1, 1, 1, 1, 1, 1
     }
 };
 
-<<<<<<<< HEAD:keyboards/keychron/q1/q1_iso_atmega32u4_ec11/q1_iso_atmega32u4_ec11.c
-#endif
-========
 #endif // RGB_MATRIX_ENABLE
->>>>>>>> temp:keyboards/keychron/q1/iso_encoder/iso_encoder.c
+
+#ifdef ENCODER_ENABLE
+
+void keyboard_post_init_kb(void) {
+    PCMSK0 |= (1 << 7);
+    PCICR |= (1 << PCIE0);
+    sei();
+
+    // allow user keymaps to do custom post_init
+    keyboard_post_init_user();
+}
+
+ISR(PCINT0_vect) {
+    encoder_insert_state();
+}
+
+#endif
+

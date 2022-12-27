@@ -1,4 +1,4 @@
-/* Copyright 2021 @ Keychron (https://www.keychron.com)
+/* Copyright 2022 @ Keychron (https://www.keychron.com)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,13 +16,16 @@
 
 #pragma once
 
-/* key matrix size */
-#define MATRIX_ROWS 6
-#define MATRIX_COLS 16
-
 /* key matrix pins */
 #define MATRIX_ROW_PINS { B5, B4, B3, A15, A14, A13 }
 #define MATRIX_COL_PINS { C14, C15, A0, A1, A2, A3, A4, A5, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN }
+
+/* Pin connected to DS of 74HC595 */
+#define DATA_PIN_74HC595 A7
+/* Pin connected to SH_CP of 74HC595 */
+#define CLOCK_PIN_74HC595 B1
+/* Pin connected to ST_CP of 74HC595 */
+#define LATCH_PIN_74HC595 B0
 
 /* DIP switch */
 #define DIP_SWITCH_MATRIX_GRID  { {5,4} }
@@ -48,8 +51,7 @@
 /* Scan phase of led driver set as MSKPHASE_9CHANNEL(defined as 0x03 in CKLED2001.h) */
 #define PHASE_CHANNEL MSKPHASE_9CHANNEL
 
-#define CKLED2001_CURRENT_TUNE \
-    { 0xA0, 0xA0, 0x4D, 0xA0, 0xA0, 0x4D, 0xA0, 0xA0, 0x4D, 0xA0, 0xA0, 0x4D }
+#define CKLED2001_CURRENT_TUNE { 0xA0, 0xA0, 0x4D, 0xA0, 0xA0, 0x4D, 0xA0, 0xA0, 0x4D, 0xA0, 0xA0, 0x4D }
 
 /* EEPROM Driver Configuration */
 #define WEAR_LEVELING_LOGICAL_SIZE 2048

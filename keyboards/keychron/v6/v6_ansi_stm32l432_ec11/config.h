@@ -28,7 +28,7 @@
 #define LATCH_PIN_74HC595 A0
 /* Pin used number of 74HC595 */
 #define PIN_USED_74HC595 10
-/* Pin used start of 74HC595 */
+/* Pin used index start of 74HC595 */
 #define PIN_START_74HC595 10
 
 /* RGB Matrix Configuration */

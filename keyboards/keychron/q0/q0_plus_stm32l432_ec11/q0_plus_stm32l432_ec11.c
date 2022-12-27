@@ -1,4 +1,4 @@
-/* Copyright 2021 @ Keychron (https://www.keychron.com)
+/* Copyright 2022 @ Keychron (https://www.keychron.com)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -111,6 +111,7 @@ void encoder0_pad_cb(void *param) {
 void keyboard_post_init_kb(void) {
     pin_t encoders_pad_a[NUM_ENCODERS] = ENCODERS_PAD_A;
     pin_t encoders_pad_b[NUM_ENCODERS] = ENCODERS_PAD_B;
+
     for (uint8_t i = 0; i < NUM_ENCODERS; i++) {
         palEnableLineEvent(encoders_pad_a[i], PAL_EVENT_MODE_BOTH_EDGES);
         palEnableLineEvent(encoders_pad_b[i], PAL_EVENT_MODE_BOTH_EDGES);

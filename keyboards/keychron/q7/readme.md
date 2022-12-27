@@ -1,6 +1,6 @@
 # Keychron Q7
 
-A customizable 65% keyboard.
+A customizable 70% keyboard.
 
 * Keyboard Maintainer: [Keychron](https://github.com/keychron)
 * Hardware Supported: Keychron Q7
@@ -8,11 +8,15 @@ A customizable 65% keyboard.
 
 Make example for this keyboard (after setting up your build environment):
 
-    make keychron/q7/q7_ansi_stm32l432:default
+```bash
+make keychron/q7/q7_ansi_stm32l432:default
+```
 
 Flashing example for this keyboard ([after setting up the bootloadHID flashing environment](https://docs.qmk.fm/#/flashing_bootloadhid))
 
-    make keychron/q7/q7_ansi_stm32l432:default:flash
+```bash
+make keychron/q7/q7_ansi_stm32l432:default:flash
+```
 
 **Reset Key**: Hold down the key located at *K00*, commonly programmed as *Esc* while plugging in the keyboard.
 

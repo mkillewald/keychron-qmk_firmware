@@ -16,15 +16,9 @@
 
 #pragma once
 
-/* key matrix size */
-#define MATRIX_ROWS 6
-#define MATRIX_COLS 15
-
 /* key matrix pins */
-#define MATRIX_ROW_PINS \
-    { B5, B4, B3, A15, A14, A13 }
-#define MATRIX_COL_PINS \
-    { A10, A9, A8, B1, B0, A7, A6, A5, A4, A3, A2, A1, A0, C15, C14 }
+#define MATRIX_ROW_PINS { B5, B4, B3, A15, A14, A13 }
+#define MATRIX_COL_PINS { A10, A9, A8, B1, B0, A7, A6, A5, A4, A3, A2, A1, A0, C15, C14 }
 
 /* COL2ROW or ROW2COL */
 #define DIODE_DIRECTION ROW2COL
@@ -52,3 +46,5 @@
 
 /* Enable receive custom command from host */
 #define RAW_HID_CMD 0xAB
+
+#define HOLD_ON_OTHER_KEY_PRESS

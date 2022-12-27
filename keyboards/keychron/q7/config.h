@@ -1,4 +1,4 @@
-/* Copyright 2021 @ Keychron (https://www.keychron.com)
+/* Copyright 2022 @ Keychron (https://www.keychron.com)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,10 +15,6 @@
  */
 
 #pragma once
-
-/* key matrix size */
-#define MATRIX_ROWS 5
-#define MATRIX_COLS 16
 
 /* key matrix pins */
 #define MATRIX_ROW_PINS { B4, B3, A15, A14, A13 }
@@ -44,8 +40,7 @@
 
 /* Scan phase of led driver set as MSKPHASE_9CHANNEL(defined as 0x03 in CKLED2001.h) */
 #define SCAN_PHASE_CHANNEL MSKPHASE_9CHANNEL
-#define CKLED2001_CURRENT_TUNE \
-    { 0xF8, 0xF8, 0x80, 0xF8, 0xF8, 0x80, 0xF8, 0xF8, 0x80, 0xF8, 0xF8, 0x80 }
+#define CKLED2001_CURRENT_TUNE { 0xF8, 0xF8, 0x80, 0xF8, 0xF8, 0x80, 0xF8, 0xF8, 0x80, 0xF8, 0xF8, 0x80 }
 
 /* DIP switch */
 #define DIP_SWITCH_MATRIX_GRID  { {4,4} }
@@ -117,3 +112,4 @@
 /* Enable receive custom command from host */
 #define RAW_HID_CMD 0xAB
 
+#define HOLD_ON_OTHER_KEY_PRESS

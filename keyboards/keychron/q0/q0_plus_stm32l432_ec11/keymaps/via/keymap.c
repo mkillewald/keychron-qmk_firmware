@@ -1,4 +1,4 @@
-/* Copyright 2021 @ Keychron (https://www.keychron.com)
+/* Copyright 2022 @ Keychron (https://www.keychron.com)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,22 +19,22 @@
  // clang-format off
 
 enum layers {
-    _BASE,
-    _FN1,
-    _RESERVED1,
-    _RESERVED2
+    BASE,
+    FUNC,
+    L2,
+    L3
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-    [_BASE] = LAYOUT_numpad_6x5(
-        KC_MUTE,   MO(_FN1), KC_ESC,  KC_BSPC,  KC_TAB,
+    [BASE] = LAYOUT_numpad_6x5(
+        KC_MUTE,   MO(FUNC), KC_ESC,  KC_BSPC,  KC_TAB,
         MACRO01,   KC_NUM,   KC_PSLS, KC_PAST,  KC_PMNS,
         MACRO02,   KC_P7,    KC_P8,   KC_P9,    KC_PPLS,
         MACRO03,   KC_P4,    KC_P5,   KC_P6,
         MACRO04,   KC_P1,    KC_P2,   KC_P3,    KC_PENT,
         MACRO05,   KC_P0,             KC_PDOT),
 
-    [_FN1] = LAYOUT_numpad_6x5(
+    [FUNC] = LAYOUT_numpad_6x5(
         RGB_TOG,   _______,  KC_MUTE, KC_VOLD,  KC_VOLU,
         MACRO01,   RGB_MOD,  RGB_VAI, RGB_HUI,  KC_DEL,
         MACRO02,   RGB_RMOD, RGB_VAD, RGB_HUD,  _______,
@@ -42,7 +42,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         MACRO04,   RGB_SAD,  RGB_SPD, KC_MPLY,  _______,
         MACRO05,   RGB_TOG,           KC_MNXT),
 
-    [_RESERVED1] = LAYOUT_numpad_6x5(
+    [L2] = LAYOUT_numpad_6x5(
         _______, _______,  _______, _______,  _______,
         _______, _______,  _______, _______,  _______,
         _______, _______,  _______, _______,  _______,
@@ -50,7 +50,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, _______,  _______, _______,  _______,
         _______, _______,           _______),
 
-    [_RESERVED2] = LAYOUT_numpad_6x5(
+    [L3] = LAYOUT_numpad_6x5(
         _______, _______,  _______, _______,   _______,
         _______, _______,  _______, _______,   _______,
         _______, _______,  _______, _______,   _______,
@@ -61,9 +61,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 #if defined(ENCODER_MAP_ENABLE)
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][2] = {
-    [_BASE]      = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
-    [_FN1]       = { ENCODER_CCW_CW(RGB_VAD, RGB_VAI) },
-    [_RESERVED1] = { ENCODER_CCW_CW(_______, _______) },
-    [_RESERVED2] = { ENCODER_CCW_CW(_______, _______) }
+    [BASE]      = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
+    [FUNC]       = { ENCODER_CCW_CW(RGB_VAD, RGB_VAI) },
+    [L2] = { ENCODER_CCW_CW(_______, _______) },
+    [L3] = { ENCODER_CCW_CW(_______, _______) }
 };
 #endif // ENCODER_MAP_ENABLE

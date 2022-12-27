@@ -16,15 +16,16 @@
 
 #pragma once
 
-/* Key matrix size */
-#define MATRIX_ROWS 6
-#define MATRIX_COLS 18
-
 /* Key matrix pins */
-#define MATRIX_ROW_PINS \
-    { B5, B4, B3, A15, A14, A13 }
-#define MATRIX_COL_PINS \
-    { A10, A9, A8, B1, B0, A7, A6, A5, A4, A3, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN }
+#define MATRIX_ROW_PINS { B5, B4, B3, A15, A14, A13 }
+#define MATRIX_COL_PINS { A10, A9, A8, B1, B0, A7, A6, A5, A4, A3, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN }
+
+/* Pin connected to DS of 74HC595 */
+#define DATA_PIN_74HC595 C15
+/* Pin connected to SH_CP of 74HC595 */
+#define CLOCK_PIN_74HC595 A1
+/* Pin connected to ST_CP of 74HC595 */
+#define LATCH_PIN_74HC595 A0
 
 /* COL2ROW or ROW2COL */
 #define DIODE_DIRECTION ROW2COL
@@ -44,8 +45,7 @@
 #define I2C1_TIMINGR_SCLH 15U
 #define I2C1_TIMINGR_SCLL 51U
 
-#define CKLED2001_CURRENT_TUNE \
-    { 0xAD, 0xAD, 0x55, 0xAD, 0xAD, 0x55, 0xAD, 0xAD, 0x55, 0xAD, 0xAD, 0x55 }
+#define CKLED2001_CURRENT_TUNE { 0xAD, 0xAD, 0x55, 0xAD, 0xAD, 0x55, 0xAD, 0xAD, 0x55, 0xAD, 0xAD, 0x55 }
 
 /* DIP switch */
 #define DIP_SWITCH_MATRIX_GRID  { {5, 4} }
@@ -115,3 +115,5 @@
 
 /* Enable receive custom command from host */
 #define RAW_HID_CMD 0xAB
+
+#define HOLD_ON_OTHER_KEY_PRESS
