@@ -92,9 +92,10 @@
 #    define KC_STEP_6 KC_M
 #    define KC_STEP_7 KC_RIGHT
 #    define KC_STEP_8 KC_HOME
-
-static uint8_t led_state = 0;
-HSV hsv;
+#    ifdef RGB_MATRIX_ENABLE
+        static uint8_t led_state = 0;
+        HSV hsv;
+#    endif
 #elif defined(KEYBOARD_keychron_q60_q60_ansi_stm32l432)
 #    define FN1 1
 #    define FN2 2
@@ -346,12 +347,12 @@ bool process_record_ft(uint16_t keycode, keyrecord_t *record) {
                 key_press_status |= KEY_PRESS_STEP_4;
                 if (led_test_mode) {
                     led_test_mode = LED_TEST_MODE_OFF;
-#if defined(KEYBOARD_keychron_q11_q11_ansi_stm32l432_ec11)
+#if defined(KEYBOARD_keychron_q11_q11_ansi_stm32l432_ec11) && defined(RGB_MATRIX_ENABLE)
                     rgb_matrix_mode_noeeprom(led_state);
                     rgb_matrix_sethsv_noeeprom(hsv.h, hsv.s, hsv.v);
 #endif
                 } else if (key_press_status == KEY_PRESS_LED_TEST) {
-#if defined(KEYBOARD_keychron_q11_q11_ansi_stm32l432_ec11)
+#if defined(KEYBOARD_keychron_q11_q11_ansi_stm32l432_ec11) && defined(RGB_MATRIX_ENABLE)
                     led_state = rgb_matrix_get_mode();
                     hsv = rgb_matrix_get_hsv();
 #endif
@@ -386,7 +387,7 @@ static void factory_reset(void) {
         rgb_matrix_enable();
     }
     rgb_matrix_init();
-#    if defined(KEYBOARD_keychron_q11_q11_ansi_stm32l432_ec11)
+#    if defined(KEYBOARD_keychron_q11_q11_ansi_stm32l432_ec11)  && defined(RGB_MATRIX_ENABLE)
     led_state = rgb_matrix_get_mode();
     hsv = rgb_matrix_get_hsv();
     rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
@@ -400,7 +401,7 @@ static void timer_3s_task(void) {
         if (key_press_status == KEY_PRESS_FACTORY_RESET) {
             factory_reset();
         } else if (key_press_status == KEY_PRESS_LED_TEST) {
-#if defined(KEYBOARD_keychron_q11_q11_ansi_stm32l432_ec11)
+#if defined(KEYBOARD_keychron_q11_q11_ansi_stm32l432_ec11) && defined(RGB_MATRIX_ENABLE)
             rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
 #endif
             led_test_mode = LED_TEST_MODE_WHITE;
@@ -424,7 +425,7 @@ static void timer_300ms_task(void) {
         if (factory_reset_count++ > 6) {
             timer_300ms_buffer = 0;
             factory_reset_count = 0;
-#if defined(KEYBOARD_keychron_q11_q11_ansi_stm32l432_ec11)
+#if defined(KEYBOARD_keychron_q11_q11_ansi_stm32l432_ec11) && defined(RGB_MATRIX_ENABLE)
             rgb_matrix_mode_noeeprom(led_state);
             rgb_matrix_sethsv_noeeprom(hsv.h, hsv.s, hsv.v);
 #endif
