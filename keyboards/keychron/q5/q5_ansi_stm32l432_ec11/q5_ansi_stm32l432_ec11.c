@@ -166,9 +166,9 @@ led_config_t g_led_config = {
     }
 };
 
-#endif
+#endif // RGB_MATRIX_ENABLE
 
-#if defined(ENCODER_ENABLE) && defined(PAL_USE_CALLBACKS)
+#ifdef ENCODER_ENABLE
 
 void encoder0_pad_cb(void *param) {
     (void)param;
