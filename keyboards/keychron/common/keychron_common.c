@@ -18,6 +18,30 @@
 #include "keychron_common.h"
 #include "keychron_factory_test_common.h"
 
+#ifdef LED_MATRIX_ENABLE
+__attribute__((weak)) bool led_matrix_indicators_advanced_ft(uint8_t led_min, uint8_t led_max) {
+    return true;
+};
+#endif // LED_MATRIX_ENABLE
+
+#ifdef RGB_MATRIX_ENABLE
+__attribute__((weak)) bool rgb_matrix_indicators_advanced_ft(uint8_t led_min, uint8_t led_max) {
+    return true;
+};
+#endif // RGB_MATRIX_ENABLE
+
+#ifdef DIP_SWITCH_ENABLE
+__attribute__((weak)) bool dip_switch_update_ft(uint8_t index, bool active) {
+    return true;
+};
+#endif // DIP_SWITCH_ENABLE
+
+__attribute__((weak)) bool process_record_ft(uint16_t keycode, keyrecord_t *record) {
+    return true;
+};
+
+__attribute__((weak)) void housekeeping_task_ft(void) {};
+
 bool is_siri_active = false;
 uint32_t siri_timer = 0;
 
@@ -109,12 +133,14 @@ bool process_record_keychron(uint16_t keycode, keyrecord_t *record) {
     }
 }
 
+#ifdef DIP_SWITCH_ENABLE
 bool dip_switch_update_keychron(uint8_t index, bool active) {
     if (!dip_switch_update_ft(index, active)) {
         return false;
     }
     return true;
 }
+#endif // DIP_SWITCH_ENABLE
 
 #ifdef RGB_MATRIX_ENABLE
 bool rgb_matrix_indicators_advanced_keychron(uint8_t led_min, uint8_t led_max) {

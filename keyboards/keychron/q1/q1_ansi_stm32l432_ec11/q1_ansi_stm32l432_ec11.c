@@ -147,7 +147,7 @@ led_config_t g_led_config = {
     {
         // RGB LED Index to Flag
         1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,    1,
-        1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1,    1,
+        4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1,    1,
         1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,    1,
         8, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,    1,    1,
         1,    4, 4, 4, 4, 4, 4, 4, 4, 4, 4,    1, 1,
@@ -157,7 +157,7 @@ led_config_t g_led_config = {
 
 #endif // RGB_MATRIX_ENABLE
 
-#if defined(ENCODER_ENABLE) && defined(PAL_USE_CALLBACKS)
+#ifdef ENCODER_ENABLE
 
 void encoder0_pad_cb(void *param) {
     (void)param;
@@ -180,4 +180,4 @@ void keyboard_post_init_kb(void) {
     keyboard_post_init_user();
 }
 
-#endif
+#endif // ENCODER_ENABLE

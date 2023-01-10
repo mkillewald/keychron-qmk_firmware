@@ -11,6 +11,7 @@ Make example for this keyboard (after setting up your build environment):
 ```bash
 make keychron/q6/q6_ansi_stm32l432:default
 ```
+
 Flashing example for this keyboard:
 
 ```bash

@@ -19,8 +19,6 @@
 enum layers {
     BASE,
     FUNC,
-    L2,
-    L3
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -38,21 +36,5 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         RGB_RMOD,   RGB_VAD, RGB_HUD,
         RGB_SAI,    RGB_SPI, KC_MPRV,   _______,
         RGB_SAD,    RGB_SPD, KC_MPLY,
-        RGB_TOG,             KC_MNXT,   _______),
-
-    [L2] = LAYOUT_numpad_6x4(
-        _______,    _______, _______,   _______,
-        _______,    _______, _______,   _______,
-        _______,    _______, _______,
-        _______,    _______, _______,   _______,
-        _______,    _______, _______,
-        _______,             _______,   _______),
-
-    [L3] = LAYOUT_numpad_6x4(
-        _______,    _______, _______,   _______,
-        _______,    _______, _______,   _______,
-        _______,    _______, _______,
-        _______,    _______, _______,   _______,
-        _______,    _______, _______,
-        _______,             _______,   _______)
+        RGB_TOG,             KC_MNXT,   _______)
 };
