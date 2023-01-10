@@ -31,7 +31,6 @@
 /* Scan phase of led driver set as MSKPHASE_9CHANNEL(defined as 0x03 in CKLED2001.h) */
 #define PHASE_CHANNEL MSKPHASE_9CHANNEL
 #define CKLED2001_CURRENT_TUNE { 0xFF, 0xFF, 0x70, 0xFF, 0xFF, 0x70, 0xFF, 0xFF, 0x70, 0xFF, 0xFF, 0x70 }
-#define RGB_MATRIX_CENTER { 56, 16 }
 
 /* Enable num-lock LED */
 #define NUM_LOCK_LED_INDEX 5

@@ -515,6 +515,7 @@ void housekeeping_task_ft(void) {
     }
 }
 
+#ifdef DIP_SWITCH_ENABLE
 static void system_switch_state_report(uint8_t index, bool active) {
     uint16_t checksum = 0;
     uint8_t data[RAW_EPSIZE] = {0};
@@ -544,6 +545,7 @@ bool dip_switch_update_ft(uint8_t index, bool active) {
     system_switch_state_report(index, active);
     return true;
 }
+#endif // DIP_SWITCH_ENABLE
 
 void via_custom_value_command_kb(uint8_t *data, uint8_t length) {
     if (data[0] == 0xAB) {

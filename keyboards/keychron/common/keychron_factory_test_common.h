@@ -27,6 +27,6 @@ bool led_matrix_indicators_advanced_ft(uint8_t led_min, uint8_t led_max);
 bool rgb_matrix_indicators_advanced_ft(uint8_t led_min, uint8_t led_max);
 #endif // RGB_MATRIX_ENABLE
 
-#ifdef RAW_ENABLE
+#ifdef DIP_SWITCH_ENABLE
 bool dip_switch_update_ft(uint8_t index, bool active);
-#endif // RAW_ENABLE
+#endif // DIP_SWITCH_ENABLE

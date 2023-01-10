@@ -141,7 +141,7 @@ led_config_t g_led_config = {
     {
         // RGB LED Index to Flag
         1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,    1,
-        1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1,    1,
+        4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1,    1,
         1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,       1,
         8, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1,    1,
         1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,    1, 1,
@@ -151,7 +151,7 @@ led_config_t g_led_config = {
 
 #endif // RGB_MATRIX_ENABLE
 
-#if defined(ENCODER_ENABLE) && defined(PAL_USE_CALLBACKS)
+#ifdef ENCODER_ENABLE
 
 void encoder0_pad_cb(void *param) {
     (void)param;
@@ -162,6 +162,7 @@ void encoder0_pad_cb(void *param) {
 void keyboard_post_init_kb(void) {
     pin_t encoders_pad_a[NUM_ENCODERS] = ENCODERS_PAD_A;
     pin_t encoders_pad_b[NUM_ENCODERS] = ENCODERS_PAD_B;
+
     for (uint8_t i = 0; i < NUM_ENCODERS; i++) {
         palEnableLineEvent(encoders_pad_a[i], PAL_EVENT_MODE_BOTH_EDGES);
         palEnableLineEvent(encoders_pad_b[i], PAL_EVENT_MODE_BOTH_EDGES);
@@ -174,4 +175,3 @@ void keyboard_post_init_kb(void) {
 }
 
 #endif
-

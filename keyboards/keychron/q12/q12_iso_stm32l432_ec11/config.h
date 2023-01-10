@@ -31,4 +31,4 @@
 #define CAPS_LOCK_LED_INDEX 58
 
 /* Enable num-lock LED */
-// #define NUM_LOCK_LED_INDEX 18
+#define NUM_LOCK_LED_INDEX 18
