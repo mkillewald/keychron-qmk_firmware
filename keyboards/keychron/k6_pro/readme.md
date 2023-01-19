@@ -2,7 +2,7 @@
 
 ![Keychron K6 Pro](https://cdn.shopify.com/s/files/1/0059/0630/1017/t/5/assets/keychronk6pr0qmkviawirelesscustommechanicalkeyboard-1659094228146.jpg?v=1659094230)
 
-A customizable 87 keys TKL keyboard.
+A customizable 68 keys TKL keyboard.
 
 * Keyboard Maintainer: [Keychron](https://github.com/keychron)
 * Hardware Supported: Keychron K6 Pro
