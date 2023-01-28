@@ -693,6 +693,8 @@ static bool usb_request_hook_cb(USBDriver *usbp) {
                         if ((usbp->setup[4] == KEYBOARD_INTERFACE) && (usbp->setup[5] == 0)) { /* wIndex */
                             keyboard_protocol = ((usbp->setup[2]) != 0x00);                    /* LSB(wValue) */
 #ifdef NKRO_ENABLE
+                            // keymap_config.nkro = !!keyboard_protocol;
+                            // if (!keymap_config.nkro && keyboard_idle) {
                             if (!keyboard_protocol && keyboard_idle) {
 #else  /* NKRO_ENABLE */
                             if (keyboard_idle) {
@@ -799,6 +801,8 @@ void init_usb_driver(USBDriver *usbp) {
 }
 
 __attribute__((weak)) void restart_usb_driver(USBDriver *usbp) {
+#if 0
+    usbStop(usbp);
     usbDisconnectBus(usbp);
     usbStop(usbp);
 
@@ -814,6 +818,7 @@ __attribute__((weak)) void restart_usb_driver(USBDriver *usbp) {
 
     usbStart(usbp, &usbcfg);
     usbConnectBus(usbp);
+#endif
 }
 
 /* ---------------------------------------------------------
