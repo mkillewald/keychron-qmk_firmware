@@ -8,15 +8,11 @@ A customizable 96% keyboard.
 
 Make example for this keyboard (after setting up your build environment):
 
-```bash
-make keychron/q5/q5_ansi_stm32l432:default
-```
+    make keychron/q5/q5_ansi_stm32l432:default
 
 Flashing example for this keyboard:
 
-```bash
-make keychron/q5/q5_ansi_stm32l432:default:flash
-```
+    make keychron/q5/q5_ansi_stm32l432:default:flash
 
 **Reset Key**: Hold down the key located at *K00*, commonly programmed as *Esc* while plugging in the keyboard.
 
