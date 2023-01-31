@@ -159,3 +159,9 @@ bool led_matrix_indicators_advanced_keychron(uint8_t led_min, uint8_t led_max) {
     return true;
 }
 #endif // LED_MATRIX_ENABLE
+
+restart_usb_driver
+
+void restart_usb_driver(USBDriver *usbp) {
+    (void)usbp;
+}

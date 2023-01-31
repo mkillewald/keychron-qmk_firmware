@@ -801,8 +801,6 @@ void init_usb_driver(USBDriver *usbp) {
 }
 
 __attribute__((weak)) void restart_usb_driver(USBDriver *usbp) {
-#if 0
-    usbStop(usbp);
     usbDisconnectBus(usbp);
     usbStop(usbp);
 
@@ -818,7 +816,6 @@ __attribute__((weak)) void restart_usb_driver(USBDriver *usbp) {
 
     usbStart(usbp, &usbcfg);
     usbConnectBus(usbp);
-#endif
 }
 
 /* ---------------------------------------------------------
