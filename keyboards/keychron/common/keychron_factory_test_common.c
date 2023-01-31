@@ -583,3 +583,9 @@ void via_custom_value_command_kb(uint8_t *data, uint8_t length) {
         }
     }
 }
+
+#if defined(MCU) && (MCU == STM32L432)
+void restart_usb_driver(USBDriver *usbp) {
+    (void)usbp;
+}
+#endif
