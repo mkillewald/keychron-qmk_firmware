@@ -62,49 +62,41 @@ static inline uint8_t readMatrixPin(pin_t pin) {
 }
 
 // At 3.6V input, three nops (37.5ns) should be enough for all signals
-#define small_delay() __asm__ __volatile__("nop;nop;nop;\n\t" ::: "memory")
-#define compiler_barrier() __asm__ __volatile__("" ::: "memory")
+#define small_delay() __asm__ __volatile__("nop;nop;nop;\n\t" ::: "memory") // 1 nop will delay 26-28ns
+// #define compiler_barrier() __asm__ __volatile__("" ::: "memory")
 
 static void shiftOut(uint16_t dataOut) {
     ATOMIC_BLOCK_FORCEON {
         for (uint8_t i = 0; i < PIN_USED_74HC595; i++) {
-            compiler_barrier();
             if (dataOut & 0x1) {
                 writePinHigh(DATA_PIN_74HC595);
             } else {
                 writePinLow(DATA_PIN_74HC595);
             }
             dataOut = dataOut >> 1;
-            compiler_barrier();
             writePinHigh(CLOCK_PIN_74HC595);
             small_delay();
             writePinLow(CLOCK_PIN_74HC595);
         }
-        compiler_barrier();
         writePinHigh(LATCH_PIN_74HC595);
         small_delay();
         writePinLow(LATCH_PIN_74HC595);
-        compiler_barrier();
     }
 }
 
 static void shiftOut_single(uint8_t data) {
     ATOMIC_BLOCK_FORCEON {
-        compiler_barrier();
         if (data & 0x1) {
             writePinHigh(DATA_PIN_74HC595);
         } else {
             writePinLow(DATA_PIN_74HC595);
         }
-        compiler_barrier();
         writePinHigh(CLOCK_PIN_74HC595);
         small_delay();
         writePinLow(CLOCK_PIN_74HC595);
-        compiler_barrier();
         writePinHigh(LATCH_PIN_74HC595);
         small_delay();
         writePinLow(LATCH_PIN_74HC595);
-        compiler_barrier();
     }
 }
 

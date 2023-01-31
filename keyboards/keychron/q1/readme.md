@@ -10,15 +10,11 @@ A customizable 75% keyboard.
 
 Make example for this keyboard (after setting up your build environment):
 
-```bash
-make keychron/q1/q1_ansi_atmega32u4:default
-```
+    make keychron/q1/q1_ansi_atmega32u4:default
 
 Flashing example for this keyboard:
 
-```bash
-make keychron/q1/q1_ansi_atmega32u4:default:flash
-```
+    make keychron/q1/q1_ansi_atmega32u4:default:flash
 
 **Reset Key**: Hold down the key located at *K00*, commonly programmed as *Esc* while plugging in the keyboard.
 

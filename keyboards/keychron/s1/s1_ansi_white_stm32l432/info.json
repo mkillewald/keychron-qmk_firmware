@@ -8,6 +8,10 @@
         "pid": "0x0411",
         "device_version": "1.0.3"
     },
+    "layout_aliases": {
+        "LAYOUT_ansi_84": "LAYOUT_75_ansi"
+    },
+    "community_layouts": ["75_ansi"],
     "layouts": {
         "LAYOUT_75_ansi": {
             "layout": [
