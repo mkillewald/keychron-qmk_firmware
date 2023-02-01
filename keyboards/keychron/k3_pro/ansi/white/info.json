@@ -1,11 +1,11 @@
 {
-    "keyboard_name": "Keychron K3 Pro",
+    "keyboard_name": "Keychron K4 Pro",
     "manufacturer": "Keychron",
     "url": "https://github.com/Keychron",
     "maintainer": "lokher",
     "usb": {
     	"vid": "0x3434",
-    	"pid": "0x0233",
+    	"pid": "0x0243",
     	"device_version": "1.0.0"
     },
     "layouts": {
@@ -76,7 +76,7 @@
                 {"matrix":[3,15], "x":15, "y":3},
 
                 {"matrix":[4, 0], "x":0, "y":4, "w":2.25},
-      
+
                 {"matrix":[4, 2], "x":2.25, "y":4},
                 {"matrix":[4, 3], "x":3.25, "y":4},
                 {"matrix":[4, 4], "x":4.25, "y":4},
