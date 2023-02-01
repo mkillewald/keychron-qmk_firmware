@@ -17,6 +17,9 @@
 #include QMK_KEYBOARD_H
 
 #include "raw_hid.h"
+#if defined(KEYBOARD_keychron_q11_q11_ansi_stm32l432_ec11)
+#    include "split_util.h"
+#endif
 
 #define KEY_PRESS_FN     (0x1<<0)
 #define KEY_PRESS_STEP_1 (0x1<<1)
@@ -92,11 +95,14 @@
 #    define KC_STEP_6 KC_M
 #    define KC_STEP_7 KC_RIGHT
 #    define KC_STEP_8 KC_HOME
+#    define KC_STEP_9 KC_J
+#    define KC_STEP_A KC_Z
 #    ifdef RGB_MATRIX_ENABLE
         static uint8_t led_state = 0;
         static uint8_t light_test_state = 0;
         HSV hsv;
 #    endif
+static bool skip_next_step = false;
 #elif defined(KEYBOARD_keychron_q60_q60_ansi_stm32l432)
 #    define FN1 1
 #    define FN2 2
@@ -296,7 +302,22 @@ bool process_record_ft(uint16_t keycode, keyrecord_t *record) {
             return true;
         case KC_STEP_1:
 #if defined(KEYBOARD_keychron_q11_q11_ansi_stm32l432_ec11)
+            if (is_transport_connected() || !is_keyboard_left()) {
+                return true;
+            } else {
+                skip_next_step = true;
+            }
         case KC_STEP_5:
+            if ((is_transport_connected() || is_keyboard_left()) && !skip_next_step) {
+                return true;
+            } else {
+                skip_next_step = true;
+            }
+        case KC_STEP_9:
+            if (!is_transport_connected() && !skip_next_step) {
+                return true;
+            }
+            skip_next_step = false;
 #endif // KEYBOARD_keychron_q11_q11_ansi_stm32l432_ec11
             if (record->event.pressed) {
                 key_press_status |= KEY_PRESS_STEP_1;
@@ -310,7 +331,22 @@ bool process_record_ft(uint16_t keycode, keyrecord_t *record) {
             return true;
         case KC_STEP_2:
 #if defined(KEYBOARD_keychron_q11_q11_ansi_stm32l432_ec11)
+            if (is_transport_connected() || !is_keyboard_left()) {
+                return true;
+            } else {
+                skip_next_step = true;
+            }
         case KC_STEP_6:
+            if ((is_transport_connected() || is_keyboard_left()) && !skip_next_step) {
+                return true;
+            } else {
+                skip_next_step = true;
+            }
+        case KC_STEP_A:
+            if (!is_transport_connected() && !skip_next_step) {
+                return true;
+            }
+            skip_next_step = false;
 #endif // KEYBOARD_keychron_q11_q11_ansi_stm32l432_ec11
             if (record->event.pressed) {
                 key_press_status |= KEY_PRESS_STEP_2;
