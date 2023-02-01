@@ -94,6 +94,7 @@
 #    define KC_STEP_8 KC_HOME
 #    ifdef RGB_MATRIX_ENABLE
         static uint8_t led_state = 0;
+        static uint8_t light_test_state = 0;
         HSV hsv;
 #    endif
 #elif defined(KEYBOARD_keychron_q60_q60_ansi_stm32l432)
@@ -547,7 +548,7 @@ bool dip_switch_update_ft(uint8_t index, bool active) {
 }
 #endif // DIP_SWITCH_ENABLE
 
-void via_custom_value_command_kb(uint8_t *data, uint8_t length) {
+bool via_command_kb(uint8_t *data, uint8_t length) {
     if (data[0] == 0xAB) {
         uint16_t checksum = 0;
         for (uint8_t i = 1; i < RAW_EPSIZE - 3; i++) {
@@ -555,11 +556,27 @@ void via_custom_value_command_kb(uint8_t *data, uint8_t length) {
         }
         /* Verify checksum */
         if ((checksum & 0xFF) != data[RAW_EPSIZE - 2] || checksum >> 8 != data[RAW_EPSIZE - 1]) {
-            return;
+            return true;
         }
         switch (data[1]) {
             case FACTORY_TEST_CMD_BACKLIGHT:
-                led_test_mode   = data[2];
+                led_test_mode = data[2];
+#if defined(KEYBOARD_keychron_q11_q11_ansi_stm32l432_ec11) && defined(RGB_MATRIX_ENABLE)
+                if (led_test_mode) {
+                    light_test_state += 1;
+                    if (light_test_state == 1) {
+                        led_state = rgb_matrix_get_mode();
+                        hsv = rgb_matrix_get_hsv();
+                    }
+                    rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
+                } else {
+                    if (light_test_state) {
+                        light_test_state = 0;
+                        rgb_matrix_mode_noeeprom(led_state);
+                        rgb_matrix_sethsv_noeeprom(hsv.h, hsv.s, hsv.v);
+                    }
+                }
+#endif
                 timer_3s_buffer = 0;
                 break;
             case FACTORY_TEST_CMD_OS_SWITCH:
@@ -581,7 +598,9 @@ void via_custom_value_command_kb(uint8_t *data, uint8_t length) {
                 }
                 break;
         }
+        return true;
     }
+    return false;
 }
 
 #if defined(MCU) && (MCU == STM32L432)
