@@ -48,6 +48,7 @@ enum {
     BT_HST3,
 #endif
     BAT_LVL,
+	NEW_SAFE_RANGE,
 };
 
 #define LAYOUT_ansi_68( \
