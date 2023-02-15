@@ -1,4 +1,4 @@
-/* Copyright 2022 @ Keychron (https://www.keychron.com)
+/* Copyright 2023 @ Mike Killewald
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,16 +15,40 @@
  */
 
 #include QMK_KEYBOARD_H
+#include "keymap_user.h"
+#ifdef RGB_MATRIX_ENABLE
+#    include "rgb_matrix_user.h"
+#endif
 
 // clang-format off
 
-enum layers{
-    MAC_BASE,
-    MAC_FN,
-    WIN_BASE,
-    WIN_FN
+typedef union {
+  uint32_t raw;
+  struct {
+    bool caps_lock_light_tab :1;
+    bool caps_lock_light_alphas :1;
+    bool fn_layer_transparent_keys_off :1;
+    bool fn_layer_color_enable :1;
+  };
+} user_config_t;
+
+user_config_t user_config;
+
+enum custom_keycodes {
+#ifdef VIA_ENABLE
+    KC_LIGHT_TAB_TOGGLE = USER02,
+#else
+    KC_LIGHT_TAB_TOGGLE = SAFE_RANGE,
+#endif
+    KC_LIGHT_ALPHAS_TOGGLE,
+    KC_FN_LAYER_TRANSPARENT_KEYS_TOGGLE,
+    KC_FN_LAYER_COLOR_TOGGLE
 };
 
+#define KC_LTTOG KC_LIGHT_TAB_TOGGLE
+#define KC_LATOG KC_LIGHT_ALPHAS_TOGGLE
+#define KC_TKTOG KC_FN_LAYER_TRANSPARENT_KEYS_TOGGLE
+#define KC_FCTOG KC_FN_LAYER_COLOR_TOGGLE
 #define KC_TASK LGUI(KC_TAB)
 #define KC_FLXP LGUI(KC_E)
 
@@ -42,7 +66,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,    _______,  _______,            _______,
         RGB_TOG,  RGB_MOD,  RGB_VAI,  RGB_HUI,  RGB_SAI,  RGB_SPI,  _______,  _______,  _______,  _______,  _______,  _______,    _______,  _______,            _______,
         _______,  RGB_RMOD, RGB_VAD,  RGB_HUD,  RGB_SAD,  RGB_SPD,  _______,  _______,  _______,  _______,  _______,  _______,              _______,            _______,
-        _______,            _______,  _______,  _______,  _______,  _______,  NK_TOGG,  _______,  _______,  _______,  _______,              _______,  _______,
+        _______,            KC_LTTOG, KC_LATOG, KC_TKTOG, KC_FCTOG,  _______,  NK_TOGG,  _______,  _______,  _______,  _______,              _______,  _______,
         _______,  _______,  _______,                                _______,                                _______,  _______,    _______,  _______,  _______,  _______),
 
     [WIN_BASE] = LAYOUT_ansi_82(
@@ -62,6 +86,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______,  _______,  _______,                                _______,                                _______,  _______,    _______,  _______,  _______,  _______),
 };
 
+// clang-format on
+
 #if defined(ENCODER_MAP_ENABLE)
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][2] = {
     [MAC_BASE] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU)},
@@ -70,3 +96,69 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][2] = {
     [WIN_FN]   = { ENCODER_CCW_CW(RGB_VAD, RGB_VAI)}
 };
 #endif // ENCODER_MAP_ENABLE
+
+void matrix_init_user(void) {
+#ifdef RGB_MATRIX_ENABLE
+    rgb_matrix_init_user();
+#endif
+}
+
+void keyboard_post_init_user(void) {
+    user_config.raw = eeconfig_read_user();
+}
+
+void eeconfig_init_user(void) {
+    user_config.raw = 0;
+    user_config.caps_lock_light_tab = false;
+    user_config.caps_lock_light_alphas = false;
+    user_config.fn_layer_transparent_keys_off = true;
+    user_config.fn_layer_color_enable = false;
+    eeconfig_update_user(user_config.raw);
+}
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case KC_LIGHT_TAB_TOGGLE:
+            if (record->event.pressed) {
+                user_config.caps_lock_light_tab ^= 1; // bitwise xor to toggle status bit
+                eeconfig_update_user(user_config.raw);
+            } 
+            return false;  // Skip all further processing of this key
+        case KC_LIGHT_ALPHAS_TOGGLE:
+            if (record->event.pressed) {
+                user_config.caps_lock_light_alphas ^= 1;
+                eeconfig_update_user(user_config.raw);
+            }
+            return false;  // Skip all further processing of this key
+        case KC_FN_LAYER_TRANSPARENT_KEYS_TOGGLE:
+            if (record->event.pressed) {
+                user_config.fn_layer_transparent_keys_off ^= 1;
+                eeconfig_update_user(user_config.raw);
+            }
+            return false;  // Skip all further processing of this key
+        case KC_FN_LAYER_COLOR_TOGGLE:
+            if (record->event.pressed) {
+                user_config.fn_layer_color_enable ^= 1;
+                eeconfig_update_user(user_config.raw);
+            }
+            return false;  // Skip all further processing of this key
+        default:
+            return true;  // Process all other keycodes normally
+    }
+}
+
+bool get_caps_lock_light_tab(void) {
+    return user_config.caps_lock_light_tab;
+}
+
+bool get_caps_lock_light_alphas(void) {
+    return user_config.caps_lock_light_alphas;
+}
+
+bool get_fn_layer_transparent_keys_off(void) {
+    return user_config.fn_layer_transparent_keys_off;
+}
+
+bool get_fn_layer_color_enable(void) {
+    return user_config.fn_layer_color_enable;
+}
