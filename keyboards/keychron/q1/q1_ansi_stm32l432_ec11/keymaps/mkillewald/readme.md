@@ -1,4 +1,4 @@
-## mkillewald's Keychron Q1V2 ANSI STM32L432 ENC11 (with knob) Keymap v2.0.0
+## mkillewald's Keychron Q1V2 ANSI STM32L432 ENC11 (with knob) Keymap v2.0.1
 ### This is my custom devlopment branch (mkillewald_custom).
 
 ## Features:
