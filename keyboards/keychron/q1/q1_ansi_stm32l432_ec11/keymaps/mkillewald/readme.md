@@ -1,6 +1,8 @@
 ## mkillewald's Keychron Q1V2 ANSI STM32L432 ENC11 (with knob) Keymap v2.0.0
+### This is my custom devlopment branch (mkillewald_custom).
 
 ## Features:
+- Hardcoded accent and modifier key lighting (custom feature)
 - Fn+Home enters DFU mode for flashing (saves you from removing the space bar) 
 - On macOS, F3 opens Mission Control and F4 opens Launchpad without needing to configure shortcuts in System Preferences
 - RGB lighting turns off when the computer sleeps
@@ -31,6 +33,8 @@ Please make sure to save any customizations you have made in VIA to a .json file
 #### USE AT YOUR OWN RISK
 
 ## Changelog:
+v2.0.1  February 16, 2023
+- Added hardcoded accent and modifier key lighting
 
 v2.0.0  February 15, 2023 
 - Carried over all features from my original Q1V1 keymap.
