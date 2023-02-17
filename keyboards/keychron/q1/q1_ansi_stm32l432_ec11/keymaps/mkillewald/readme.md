@@ -1,4 +1,4 @@
-## mkillewald's Keychron Q1V2 ANSI STM32L432 ENC11 (with knob) Keymap v2.0.0
+## Keychron Q1V2 ANSI STM32L432 ENC11 (with knob) Keymap v2.0.0
 
 ## Features:
 - Fn+Home enters DFU mode for flashing (saves you from removing the space bar) 
