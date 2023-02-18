@@ -1,4 +1,4 @@
-/* Copyright 2020 QMK
+/* Copyright 2022 @ Keychron (https://www.keychron.com)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,6 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#define HAL_USE_I2C TRUE
+#include "stdint.h"
 
-#include_next <halconf.h>
+bool process_record_keychron_ft(uint16_t keycode, keyrecord_t *record);
+void housekeeping_task_keychron_ft(void);

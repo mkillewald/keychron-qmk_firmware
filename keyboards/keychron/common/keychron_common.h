@@ -14,11 +14,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "stdint.h"
+#include "quantum_keycodes.h"
+#include "keychron_ft_common.h"
 #ifdef VIA_ENABLE
 #    include "via.h"
 #endif
-#include "quantum_keycodes.h"
 
 enum custom_keycodes {
 #ifdef VIA_ENABLE
