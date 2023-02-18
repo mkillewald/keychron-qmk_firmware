@@ -2,8 +2,7 @@
 
 ## Features:
 - Fn+Home enters DFU mode for flashing (saves you from removing the space bar) 
-- On macOS, F3 opens Mission Control and F4 opens Launchpad without needing to configure shortcuts in System Preferences
-- RGB lighting turns off when the computer sleeps
+- On macOS, F3 opens Mission Control and F4 opens Launchpad
 - Caps Lock RGB indicator
     - the Caps Lock key will light when Caps Lock is enabled with the following options:
         - #define CAPS_LOCK_INDICATOR_COLOR [color] in config.h to set the backlight color used for the indicator when Caps Lock is enabled (default: red)
