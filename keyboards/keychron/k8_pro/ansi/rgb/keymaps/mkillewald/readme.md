@@ -1,7 +1,6 @@
 ## Keychron K8 Pro RGB ANSI STM32L432 Keymap v1.0.0
 
 ## Features:
-- Fn+Home enters DFU mode for flashing (saves you from removing the space bar) 
 - On macOS, F3 opens Mission Control and F4 opens Launchpad
 - Caps Lock RGB indicator
     - the Caps Lock key will light when Caps Lock is enabled with the following options:
@@ -33,4 +32,3 @@ Please make sure to save any customizations you have made in VIA to a .json file
 
 v1.0.0  February 18, 2023 
 - Carried over all features from my original Q1V1 keymap.
-- Added Fn+Home shortcut for entering DFU Mode. 
