@@ -1,4 +1,4 @@
-## Keychron Q1V2 ANSI STM32L432 ENC11 (with knob) Keymap v2.0.0
+## Keychron K8 Pro RGB ANSI STM32L432 Keymap v1.0.0
 
 ## Features:
 - Fn+Home enters DFU mode for flashing (saves you from removing the space bar) 
@@ -31,6 +31,6 @@ Please make sure to save any customizations you have made in VIA to a .json file
 
 ## Changelog:
 
-v2.0.0  February 15, 2023 
+v1.0.0  February 18, 2023 
 - Carried over all features from my original Q1V1 keymap.
 - Added Fn+Home shortcut for entering DFU Mode. 
