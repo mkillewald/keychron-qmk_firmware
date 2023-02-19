@@ -15,6 +15,7 @@
  */
 
 #include QMK_KEYBOARD_H
+#include "keychron_common.h"
 #include "keymap_user.h"
 #ifdef RGB_MATRIX_ENABLE
 #    include "rgb_matrix_user.h"
@@ -34,27 +35,21 @@ typedef union {
 
 user_config_t user_config;
 
-enum custom_keycodes {
+enum my_keycodes {
 #ifdef VIA_ENABLE
-    KC_MISSION_CONTROL = USER00,
+    KC_LIGHT_TAB_TOGGLE = USER02,
 #else
-    KC_MISSION_CONTROL = SAFE_RANGE,
+    KC_LIGHT_TAB_TOGGLE = SAFE_RANGE,
 #endif
-    KC_LAUNCHPAD,
-    KC_LIGHT_TAB_TOGGLE,
     KC_LIGHT_ALPHAS_TOGGLE,
     KC_FN_LAYER_TRANSPARENT_KEYS_TOGGLE,
     KC_FN_LAYER_COLOR_TOGGLE
 };
 
-#define KC_MCTL KC_MISSION_CONTROL
-#define KC_LPAD KC_LAUNCHPAD
 #define KC_LTTOG KC_LIGHT_TAB_TOGGLE
 #define KC_LATOG KC_LIGHT_ALPHAS_TOGGLE
 #define KC_TKTOG KC_FN_LAYER_TRANSPARENT_KEYS_TOGGLE
 #define KC_FCTOG KC_FN_LAYER_COLOR_TOGGLE
-#define KC_TASK LGUI(KC_TAB)
-#define KC_FLXP LGUI(KC_E)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [MAC_BASE] = LAYOUT_ansi_82(
@@ -67,10 +62,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [MAC_FN] = LAYOUT_ansi_82(
         _______,  KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,     KC_F12,   _______,            RGB_TOG,
-        _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,    _______,  _______,            _______,
+        _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,    _______,  _______,            QK_BOOT,
         RGB_TOG,  RGB_MOD,  RGB_VAI,  RGB_HUI,  RGB_SAI,  RGB_SPI,  _______,  _______,  _______,  _______,  _______,  _______,    _______,  _______,            _______,
-        _______,  RGB_RMOD, RGB_VAD,  RGB_HUD,  RGB_SAD,  RGB_SPD,  _______,  _______,  _______,  _______,  _______,  _______,              _______,            QK_BOOT,
-        _______,            KC_LTTOG, KC_LATOG, KC_TKTOG, KC_FCTOG, _______,  NK_TOGG,  _______,  _______,  _______,  _______,              _______,  _______,
+        _______,  RGB_RMOD, RGB_VAD,  RGB_HUD,  RGB_SAD,  RGB_SPD,  _______,  _______,  _______,  _______,  _______,  _______,              _______,            _______,
+        _______,            KC_LTTOG,  KC_LATOG, KC_TKTOG, KC_FCTOG, _______,  NK_TOGG,  _______,  _______,  _______,  _______,              _______,  _______,
         _______,  _______,  _______,                                _______,                                _______,  _______,    _______,  _______,  _______,  _______),
 
     [WIN_BASE] = LAYOUT_ansi_82(
@@ -83,9 +78,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [WIN_FN] = LAYOUT_ansi_82(
         _______,  KC_BRID,  KC_BRIU,  KC_TASK,  KC_FLXP,  RGB_VAD,  RGB_VAI,  KC_MPRV,  KC_MPLY,  KC_MNXT,  KC_MUTE,  KC_VOLD,    KC_VOLU,  _______,            RGB_TOG,
-        _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,    _______,  _______,            _______,
+        _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,    _______,  _______,            QK_BOOT,
         RGB_TOG,  RGB_MOD,  RGB_VAI,  RGB_HUI,  RGB_SAI,  RGB_SPI,  _______,  _______,  _______,  _______,  _______,  _______,    _______,  _______,            _______,
-        _______,  RGB_RMOD, RGB_VAD,  RGB_HUD,  RGB_SAD,  RGB_SPD,  _______,  _______,  _______,  _______,  _______,  _______,              _______,            QK_BOOT,
+        _______,  RGB_RMOD, RGB_VAD,  RGB_HUD,  RGB_SAD,  RGB_SPD,  _______,  _______,  _______,  _______,  _______,  _______,              _______,            _______,
         _______,            KC_LTTOG, KC_LATOG, KC_TKTOG, KC_FCTOG, _______,  NK_TOGG,  _______,  _______,  _______,  _______,              _______,  _______,
         _______,  _______,  _______,                                _______,                                _______,  _______,    _______,  _______,  _______,  _______),
 };
@@ -100,6 +95,10 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][2] = {
     [WIN_FN]   = { ENCODER_CCW_CW(RGB_VAD, RGB_VAI)}
 };
 #endif // ENCODER_MAP_ENABLE
+
+void housekeeping_task_user(void) {
+    housekeeping_task_keychron();
+}
 
 void matrix_init_user(void) {
 #ifdef RGB_MATRIX_ENABLE
@@ -121,48 +120,45 @@ void eeconfig_init_user(void) {
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    switch (keycode) {
-        case KC_MISSION_CONTROL:
-            if (record->event.pressed) {
-                host_consumer_send(0x29F);
-            } else {
-                host_consumer_send(0);
-            }
-            return false;  // Skip all further processing of this key
-        case KC_LAUNCHPAD:
-            if (record->event.pressed) {
-                host_consumer_send(0x2A0);
-            } else {
-                host_consumer_send(0);
-            }
-            return false;  // Skip all further processing of this key
-        case KC_LIGHT_TAB_TOGGLE:
-            if (record->event.pressed) {
-                user_config.caps_lock_light_tab ^= 1; // bitwise xor to toggle status bit
-                eeconfig_update_user(user_config.raw);
-            } 
-            return false;  // Skip all further processing of this key
-        case KC_LIGHT_ALPHAS_TOGGLE:
-            if (record->event.pressed) {
-                user_config.caps_lock_light_alphas ^= 1;
-                eeconfig_update_user(user_config.raw);
-            }
-            return false;  // Skip all further processing of this key
-        case KC_FN_LAYER_TRANSPARENT_KEYS_TOGGLE:
-            if (record->event.pressed) {
-                user_config.fn_layer_transparent_keys_off ^= 1;
-                eeconfig_update_user(user_config.raw);
-            }
-            return false;  // Skip all further processing of this key
-        case KC_FN_LAYER_COLOR_TOGGLE:
-            if (record->event.pressed) {
-                user_config.fn_layer_color_enable ^= 1;
-                eeconfig_update_user(user_config.raw);
-            }
-            return false;  // Skip all further processing of this key
-        default:
-            return true;  // Process all other keycodes normally
+    if (!process_record_keychron(keycode, record)) {
+        switch (keycode) {
+            case KC_LIGHT_TAB_TOGGLE:
+                if (record->event.pressed) {
+                    user_config.caps_lock_light_tab ^= 1; // bitwise xor to toggle status bit
+                    eeconfig_update_user(user_config.raw);
+                } 
+                return false;  // Skip all further processing of this key
+            case KC_LIGHT_ALPHAS_TOGGLE:
+                if (record->event.pressed) {
+                    user_config.caps_lock_light_alphas ^= 1;
+                    eeconfig_update_user(user_config.raw);
+                }
+                return false;  // Skip all further processing of this key
+            case KC_FN_LAYER_TRANSPARENT_KEYS_TOGGLE:
+                if (record->event.pressed) {
+                    user_config.fn_layer_transparent_keys_off ^= 1;
+                    eeconfig_update_user(user_config.raw);
+                }
+                return false;  // Skip all further processing of this key
+            case KC_FN_LAYER_COLOR_TOGGLE:
+                if (record->event.pressed) {
+                    user_config.fn_layer_color_enable ^= 1;
+                    eeconfig_update_user(user_config.raw);
+                }
+                return false;  // Skip all further processing of this key
+            default:
+                return true;  // Process all other keycodes normally
+        }
+        return false;
     }
+    return true;
+}
+
+bool dip_switch_update_user(uint8_t index, bool active) {
+    if (!dip_switch_update_keychron(index, active)) {
+        return false;
+    }
+    return true;
 }
 
 bool get_caps_lock_light_tab(void) {
