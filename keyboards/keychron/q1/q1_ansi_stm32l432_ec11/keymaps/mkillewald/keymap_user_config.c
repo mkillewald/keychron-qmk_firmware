@@ -32,6 +32,10 @@ void user_config_read(void) {
     user_config.raw = eeconfig_read_user();
 }
 
+void user_config_write(void) {
+    eeconfig_update_user(user_config.raw);
+}
+
 bool user_config_get_caps_lock_light_tab(void) {
     return user_config.caps_lock_light_tab;
 }
@@ -46,4 +50,24 @@ bool user_config_get_fn_layer_transparent_keys_off(void) {
 
 bool user_config_get_fn_layer_color_enable(void) {
     return user_config.fn_layer_color_enable;
+}
+
+void user_config_toggle_caps_lock_light_tab(void) {
+    user_config.caps_lock_light_tab ^= 1; // bitwise xor to toggle status bit
+    user_config_write();
+}
+
+void user_config_toggle_caps_lock_light_alphas(void) {
+    user_config.caps_lock_light_alphas ^= 1;
+    user_config_write();
+}
+
+void user_config_toggle_fn_layer_transparent_keys_off(void) {
+    user_config.fn_layer_transparent_keys_off ^= 1;
+    user_config_write();
+}
+
+void user_config_toggle_fn_layer_color_enable(void) {
+    user_config.fn_layer_color_enable ^= 1;
+    user_config_write();
 }
