@@ -11,7 +11,7 @@
         - Home exits LED test
         - NOTE: Upon exiting, the LED test may overwrite changes you've previously made to LED brightness, hue or saturation
 
-- Fn+PGUP enters DFU mode for flashing (saves you from removing the space bar) 
+- Fn+PGUP enters DFU mode for flashing (saves you from removing the space bar and unplugging cable) 
 
 - On macOS, F3 opens Mission Control and F4 opens Launchpad
 
