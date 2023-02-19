@@ -27,7 +27,12 @@
 } user_config_t;
 
 void user_config_read(void);
+void user_config_write(void);
 bool user_config_get_caps_lock_light_tab(void);
 bool user_config_get_caps_lock_light_alphas(void);
 bool user_config_get_fn_layer_transparent_keys_off(void);
 bool user_config_get_fn_layer_color_enable(void);
+void user_config_toggle_caps_lock_light_tab(void);
+void user_config_toggle_caps_lock_light_alphas(void);
+void user_config_toggle_fn_layer_transparent_keys_off(void);
+void user_config_toggle_fn_layer_color_enable(void);

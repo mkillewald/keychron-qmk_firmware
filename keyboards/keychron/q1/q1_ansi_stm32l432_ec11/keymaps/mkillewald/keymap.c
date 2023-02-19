@@ -40,8 +40,6 @@ enum my_keycodes {
 #define KC_TKTOG KC_FN_LAYER_TRANSPARENT_KEYS_TOGGLE
 #define KC_FCTOG KC_FN_LAYER_COLOR_TOGGLE
 
-extern user_config_t user_config;
-
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [MAC_BASE] = LAYOUT_ansi_82(
         KC_ESC,   KC_BRID,  KC_BRIU,  KC_MCTL,  KC_LPAD,  RGB_VAD,  RGB_VAI,  KC_MPRV,  KC_MPLY,  KC_MNXT,  KC_MUTE,  KC_VOLD,    KC_VOLU,  KC_DEL,             KC_MUTE,
@@ -106,26 +104,22 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         switch (keycode) {
             case KC_LIGHT_TAB_TOGGLE:
                 if (record->event.pressed) {
-                    user_config.caps_lock_light_tab ^= 1; // bitwise xor to toggle status bit
-                    eeconfig_update_user(user_config.raw);
+                    user_config_toggle_caps_lock_light_tab();
                 } 
                 return false;  // Skip all further processing of this key
             case KC_LIGHT_ALPHAS_TOGGLE:
                 if (record->event.pressed) {
-                    user_config.caps_lock_light_alphas ^= 1;
-                    eeconfig_update_user(user_config.raw);
+                    user_config_toggle_caps_lock_light_alphas();
                 }
                 return false;  // Skip all further processing of this key
             case KC_FN_LAYER_TRANSPARENT_KEYS_TOGGLE:
                 if (record->event.pressed) {
-                    user_config.fn_layer_transparent_keys_off ^= 1;
-                    eeconfig_update_user(user_config.raw);
+                    user_config_toggle_fn_layer_transparent_keys_off();
                 }
                 return false;  // Skip all further processing of this key
             case KC_FN_LAYER_COLOR_TOGGLE:
                 if (record->event.pressed) {
-                    user_config.fn_layer_color_enable ^= 1;
-                    eeconfig_update_user(user_config.raw);
+                    user_config_toggle_fn_layer_color_enable();
                 }
                 return false;  // Skip all further processing of this key
             default:
