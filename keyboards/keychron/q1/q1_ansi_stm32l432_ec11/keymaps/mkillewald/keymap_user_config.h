@@ -1,4 +1,4 @@
-/* Copyright 2021 @ Mike Killewald
+/* Copyright 2023 @ Mike Killewald
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -13,12 +13,21 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+ 
+ #pragma once
+ 
+ typedef union {
+  uint32_t raw;
+  struct {
+    bool caps_lock_light_tab :1;
+    bool caps_lock_light_alphas :1;
+    bool fn_layer_transparent_keys_off :1;
+    bool fn_layer_color_enable :1;
+  };
+} user_config_t;
 
-#pragma once
-
-enum layers {
-    MAC_BASE,
-    MAC_FN,
-    WIN_BASE,
-    WIN_FN
-};
+void user_config_read(void);
+bool user_config_get_caps_lock_light_tab(void);
+bool user_config_get_caps_lock_light_alphas(void);
+bool user_config_get_fn_layer_transparent_keys_off(void);
+bool user_config_get_fn_layer_color_enable(void);

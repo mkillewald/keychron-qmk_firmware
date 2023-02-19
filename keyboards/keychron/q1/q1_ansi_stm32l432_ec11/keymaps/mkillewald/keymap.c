@@ -17,23 +17,12 @@
 #include QMK_KEYBOARD_H
 #include "keychron_common.h"
 #include "keymap_user.h"
+#include "keymap_user_config.h"
 #ifdef RGB_MATRIX_ENABLE
 #    include "rgb_matrix_user.h"
 #endif
 
 // clang-format off
-
-typedef union {
-  uint32_t raw;
-  struct {
-    bool caps_lock_light_tab :1;
-    bool caps_lock_light_alphas :1;
-    bool fn_layer_transparent_keys_off :1;
-    bool fn_layer_color_enable :1;
-  };
-} user_config_t;
-
-user_config_t user_config;
 
 enum my_keycodes {
 #ifdef VIA_ENABLE
@@ -50,6 +39,8 @@ enum my_keycodes {
 #define KC_LATOG KC_LIGHT_ALPHAS_TOGGLE
 #define KC_TKTOG KC_FN_LAYER_TRANSPARENT_KEYS_TOGGLE
 #define KC_FCTOG KC_FN_LAYER_COLOR_TOGGLE
+
+extern user_config_t user_config;
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [MAC_BASE] = LAYOUT_ansi_82(
@@ -107,16 +98,7 @@ void matrix_init_user(void) {
 }
 
 void keyboard_post_init_user(void) {
-    user_config.raw = eeconfig_read_user();
-}
-
-void eeconfig_init_user(void) {
-    user_config.raw = 0;
-    user_config.caps_lock_light_tab = false;
-    user_config.caps_lock_light_alphas = false;
-    user_config.fn_layer_transparent_keys_off = true;
-    user_config.fn_layer_color_enable = false;
-    eeconfig_update_user(user_config.raw);
+    user_config_read();
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -159,20 +141,4 @@ bool dip_switch_update_user(uint8_t index, bool active) {
         return false;
     }
     return true;
-}
-
-bool get_caps_lock_light_tab(void) {
-    return user_config.caps_lock_light_tab;
-}
-
-bool get_caps_lock_light_alphas(void) {
-    return user_config.caps_lock_light_alphas;
-}
-
-bool get_fn_layer_transparent_keys_off(void) {
-    return user_config.fn_layer_transparent_keys_off;
-}
-
-bool get_fn_layer_color_enable(void) {
-    return user_config.fn_layer_color_enable;
 }
