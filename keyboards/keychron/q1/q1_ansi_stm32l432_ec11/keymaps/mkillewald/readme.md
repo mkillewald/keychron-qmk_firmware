@@ -1,6 +1,8 @@
 ## Keychron Q1V2 ANSI STM32L432 ENC11 (with knob) Keymap v2.0.1
 
 ## Features:
+- Retains Keychron factory keycodes for Mission Control, Launchpad, Siri, Cortana, Task View, File Explorer, and others. 
+
 - Retains Keychron factory reset (Fn+J+Z) and LED test (Fn+Right+Home)
     - Hold Fn+J+Z for 4 seconds to factory reset (will clear eeprom but will not remove this firmware)
         - All LEDs will flash red to show reset is occurring
@@ -12,8 +14,6 @@
         - NOTE: Upon exiting, the LED test may overwrite changes you've previously made to LED brightness, hue or saturation
 
 - Fn+PGUP enters DFU mode for flashing (saves you from removing the space bar and unplugging cable) 
-
-- On macOS, F3 opens Mission Control and F4 opens Launchpad
 
 - Caps Lock RGB indicator
     - the Caps Lock key will light when Caps Lock is enabled with the following options:
@@ -28,12 +28,10 @@
         - Fn+V will toggle lighting the defined Fn layer keys with the static color set with FN_LAYER_COLOR (default: static color off)
 
 - All custom keycodes can be moved to different keys in VIA by using the ANY key with the following keycodes:
-    - CUSTOM(0) (default: F3) macOS Mission Control
-    - CUSTOM(1) (default: F4) macOS Launchpad
-    - CUSTOM(2) (default: Fn+Z) Caps Lock light Tab toggle
-    - CUSTOM(3) (default: Fn+X) Caps Lock light alphas toggle
-    - CUSTOM(4) (default: Fn+C) Fn layer non-defined keys RGB toggle
-    - CUSTOM(5) (default: Fn+V) Fn layer defined keys static color toggle
+    - CUSTOM(2) (default: Fn+Z) Caps Lock light Tab toggle (aka KC_LTTOG)
+    - CUSTOM(3) (default: Fn+X) Caps Lock light alphas toggle (aka KC_LATOG)
+    - CUSTOM(4) (default: Fn+C) Fn layer non-defined keys RGB toggle (aka KC_TKTOG)
+    - CUSTOM(5) (default: Fn+V) Fn layer defined keys static color toggle (aka KC_FCTOG)
 
 RGB must be toggled on for all indicators to function. If you do not want an RGB mode active but still want the indicators, toggle RGB on and turn the brightness all the way off. The indicators will remain at full brightness.
 
@@ -44,7 +42,7 @@ Please make sure to save any customizations you have made in VIA to a .json file
 ## Changelog:
 
 v2.0.1  February 19, 2023
-- Added Keychron common code for things like facory reset and LED test
+- Added Keychron common code for factory keycodes and things like factory reset and LED test
 
 v2.0.0  February 15, 2023 
 - Carried over all features from my original Q1V1 keymap.
