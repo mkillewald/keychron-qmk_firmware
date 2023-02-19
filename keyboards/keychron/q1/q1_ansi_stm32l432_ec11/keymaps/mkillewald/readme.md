@@ -1,8 +1,20 @@
-## Keychron Q1V2 ANSI STM32L432 ENC11 (with knob) Keymap v2.0.0
+## Keychron Q1V2 ANSI STM32L432 ENC11 (with knob) Keymap v2.0.1
 
 ## Features:
-- Fn+Home enters DFU mode for flashing (saves you from removing the space bar) 
+- Retains Keychron factory reset (Fn+J+Z) and LED test (Fn+Right+Home)
+    - Hold Fn+J+Z for 4 seconds to factory reset (will clear eeprom but will not remove this firmware)
+        - All LEDs will flash red to show reset is occurring
+        - NOTE: User must use VIA to remove KC_LTTOG custom keycode from Fn+Z (make Fn+Z transparent) before doing factory reset. The KC_LTTOG custom keycode will automatically return after factory reset is complete. 
+    - Hold Fn+Right+Home for 4 seconds to enable factory LED test
+        - All LEDs will turn bright white
+        -1 Right arrow will cycle all LEDs between white, red, green, and blue.
+        - Home exits LED test
+        - NOTE: Upon exiting, the LED test may overwrite changes you've previously made to LED brightness, hue or saturation
+
+- Fn+PGUP enters DFU mode for flashing (saves you from removing the space bar) 
+
 - On macOS, F3 opens Mission Control and F4 opens Launchpad
+
 - Caps Lock RGB indicator
     - the Caps Lock key will light when Caps Lock is enabled with the following options:
         - #define CAPS_LOCK_INDICATOR_COLOR [color] in config.h to set the backlight color used for the indicator when Caps Lock is enabled (default: red)
@@ -30,6 +42,9 @@ Please make sure to save any customizations you have made in VIA to a .json file
 #### USE AT YOUR OWN RISK
 
 ## Changelog:
+
+v2.0.1  February 19, 2023
+- Added Keychron common code for things like facory reset and LED test
 
 v2.0.0  February 15, 2023 
 - Carried over all features from my original Q1V1 keymap.
