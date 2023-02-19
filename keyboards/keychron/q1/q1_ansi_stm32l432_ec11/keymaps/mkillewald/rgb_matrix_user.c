@@ -15,6 +15,7 @@
  */
 
 #include QMK_KEYBOARD_H
+#include "keychron_common.h"
 #include "rgb_matrix_user.h"
 #include "keymap_user.h"
 
@@ -36,6 +37,9 @@ bool rgb_matrix_indicators_user(void) {
 }
 
 bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
+    if(!rgb_matrix_indicators_advanced_keychron(led_min, led_max)) {
+        return false;
+    }
     uint8_t current_layer = get_highest_layer(layer_state);
     switch (current_layer) {
         case MAC_BASE:
