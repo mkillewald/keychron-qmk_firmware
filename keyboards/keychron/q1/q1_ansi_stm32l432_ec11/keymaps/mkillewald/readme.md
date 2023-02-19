@@ -9,7 +9,7 @@
         - NOTE: User must use VIA to remove KC_LTTOG custom keycode from Fn+Z (make Fn+Z transparent) before doing factory reset. The KC_LTTOG custom keycode will automatically return after factory reset is complete. 
     - Hold Fn+Right+Home for 4 seconds to enable factory LED test
         - All LEDs will turn bright white
-        -1 Right arrow will cycle all LEDs between white, red, green, and blue.
+        - Right arrow will cycle all LEDs between white, red, green, and blue.
         - Home exits LED test
         - NOTE: Upon exiting, the LED test may overwrite changes you've previously made to LED brightness, hue or saturation
 
