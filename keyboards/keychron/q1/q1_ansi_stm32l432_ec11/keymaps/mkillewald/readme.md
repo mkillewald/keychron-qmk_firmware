@@ -28,13 +28,17 @@
         - Fn+V will toggle lighting the defined Fn layer keys with the static color set with FN_LAYER_COLOR (default: static color off)
 
 - All custom keycodes can be moved to different keys in VIA by using the ANY key with the following keycodes:
-    - CUSTOM(2) (default: Fn+Z) Caps Lock light Tab toggle
+    - CUSTOM(2) = Caps Lock light Tab toggle
+        - default: Fn+Z
         - represented in source code as: KC_LTTOG
-    - CUSTOM(3) (default: Fn+X) Caps Lock light alphas toggle
+    - CUSTOM(3) = Caps Lock light alphas toggle
+        - default: Fn+X
         - represented in source code as: KC_LATOG
-    - CUSTOM(4) (default: Fn+C) Fn layer non-defined keys RGB toggle
+    - CUSTOM(4) = Fn layer non-defined keys RGB toggle
+        - default: Fn+C
         - represented in source code as: KC_TKTOG
-    - CUSTOM(5) (default: Fn+V) Fn layer defined keys static color toggle
+    - CUSTOM(5) = Fn layer defined keys static color toggle
+        - default: Fn+V
         - represented in source code as: KC_FCTOG
 
 RGB must be toggled on for all indicators to function. If you do not want an RGB mode active but still want the indicators, toggle RGB on and turn the brightness all the way off. The indicators will remain at full brightness.
