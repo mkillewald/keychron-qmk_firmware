@@ -26,19 +26,24 @@
 
 enum my_keycodes {
 #ifdef VIA_ENABLE
-    KC_LIGHT_TAB_TOGGLE = USER02,
+    KC_LIGHT_TAB_TOGGLE = USER11,
 #else
     KC_LIGHT_TAB_TOGGLE = SAFE_RANGE,
 #endif
     KC_LIGHT_ALPHAS_TOGGLE,
     KC_FN_LAYER_TRANSPARENT_KEYS_TOGGLE,
-    KC_FN_LAYER_COLOR_TOGGLE
+    KC_FN_LAYER_COLOR_TOGGLE,
+    KC_MACRO_LOCK_MAC,
+    KC_MACRO_SCREEN_SHOT_MAC
 };
+
 
 #define KC_LTTOG KC_LIGHT_TAB_TOGGLE
 #define KC_LATOG KC_LIGHT_ALPHAS_TOGGLE
 #define KC_TKTOG KC_FN_LAYER_TRANSPARENT_KEYS_TOGGLE
 #define KC_FCTOG KC_FN_LAYER_COLOR_TOGGLE
+#define KC_LKMAC KC_MACRO_LOCK_MAC
+#define KC_SSMAC KC_MACRO_SCREEN_SHOT_MAC
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [MAC_BASE] = LAYOUT_ansi_82(
@@ -50,11 +55,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_LCTL,  KC_LOPT,  KC_LCMD,                                KC_SPC,                                 KC_RCMD,  MO(MAC_FN), KC_RCTL,  KC_LEFT,  KC_DOWN,  KC_RGHT),
 
     [MAC_FN] = LAYOUT_ansi_82(
-        _______,  KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,     KC_F12,   _______,            RGB_TOG,
+        KC_LKMAC, KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,     KC_F12,   KC_SSMAC,           RGB_TOG,
         _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,    _______,  _______,            QK_BOOT,
         RGB_TOG,  RGB_MOD,  RGB_VAI,  RGB_HUI,  RGB_SAI,  RGB_SPI,  _______,  _______,  _______,  _______,  _______,  _______,    _______,  _______,            _______,
         _______,  RGB_RMOD, RGB_VAD,  RGB_HUD,  RGB_SAD,  RGB_SPD,  _______,  _______,  _______,  _______,  _______,  _______,              _______,            _______,
-        _______,            KC_LTTOG,  KC_LATOG, KC_TKTOG, KC_FCTOG, _______,  NK_TOGG,  _______,  _______,  _______,  _______,              _______,  _______,
+        _______,            KC_LTTOG, KC_LATOG, KC_TKTOG, KC_FCTOG, _______,  NK_TOGG,  _______,  _______,  _______,  _______,              _______,  _______,
         _______,  _______,  _______,                                _______,                                _______,  _______,    _______,  _______,  _______,  _______),
 
     [WIN_BASE] = LAYOUT_ansi_82(
@@ -100,7 +105,7 @@ void keyboard_post_init_user(void) {
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    if (!process_record_keychron(keycode, record)) {
+    if (process_record_keychron(keycode, record)) {
         switch (keycode) {
             case KC_LIGHT_TAB_TOGGLE:
                 if (record->event.pressed) {
@@ -122,10 +127,19 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                     user_config_toggle_fn_layer_color_enable();
                 }
                 return false;  // Skip all further processing of this key
+            case KC_MACRO_LOCK_MAC:
+                if (record->event.pressed) {
+                    send_string(SS_LGUI(SS_LCTL("q")) SS_DELAY(300) SS_TAP(X_ESC));
+                }
+                return false;  // Skip all further processing of this key
+            case KC_MACRO_SCREEN_SHOT_MAC:
+                if (record->event.pressed) {
+                    send_string(SS_LGUI(SS_LSFT("3")));
+                }
+                return false;  // Skip all further processing of this key
             default:
                 return true;  // Process all other keycodes normally
         }
-        return false;
     }
     return true;
 }
