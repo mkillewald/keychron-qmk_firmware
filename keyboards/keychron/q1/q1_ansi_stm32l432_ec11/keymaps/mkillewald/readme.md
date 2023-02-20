@@ -15,7 +15,11 @@
         - Home exits LED test
         - NOTE: Upon exiting, the LED test may overwrite changes you've previously made to RGB brightness, hue or saturation
 
-- Fn+PGUP enters DFU mode for flashing (saves you from removing the space bar and unplugging cable) 
+- Fn+Esc locks macOS and blanks screen
+
+- Fn+Delete takes full screenshot in macOS (CMD+Shift+3)
+
+- Fn+PgUp enters DFU mode for flashing (saves you from removing the space bar and unplugging cable) 
 
 - Caps Lock RGB indicator
     - the Caps Lock key will light when Caps Lock is enabled with the following options:
@@ -29,23 +33,11 @@
         - Fn+C will toggle turning off RGB for keys with no definition (default: RGB off)
         - Fn+V will toggle lighting the defined Fn layer keys with the static color set with FN_LAYER_COLOR (default: static color off)
 
-- All custom keycodes can be moved to different keys in VIA by using the ANY key with the following keycodes:
-    - CUSTOM(2) = Caps Lock light Tab toggle
-        - default: Fn+Z
-        - represented in source code as: KC_LTTOG
-    - CUSTOM(3) = Caps Lock light alphas toggle
-        - default: Fn+X
-        - represented in source code as: KC_LATOG
-    - CUSTOM(4) = Fn layer non-defined keys RGB toggle
-        - default: Fn+C
-        - represented in source code as: KC_TKTOG
-    - CUSTOM(5) = Fn layer defined keys static color toggle
-        - default: Fn+V
-        - represented in source code as: KC_FCTOG
+- All custom keycodes can be moved to different keys in VIA by loading my custom json file in VIA design tab 
 
 RGB must be toggled on for all indicators to function. If you do not want an RGB mode active but still want the indicators, toggle RGB on and turn the brightness all the way off. The indicators will remain at full brightness.
 
-Please make sure to save any customizations you have made in VIA to a .json file before flashing the firmware. Sometimes it has been necessary to re-apply those changes in VIA after flashing the firmware. If that is the case, you will most likely need to manually add the CUSTOM(2) through CUSTOM(5) keycodes after loading your customizations from the saved .json file. Then re-save a new .json file which will have your previous customizations and the custom keycodes for future use as needed.
+Please make sure to save any customizations you have made in VIA to a .json file before flashing the firmware. Sometimes it has been necessary to re-apply those changes in VIA after flashing the firmware. If that is the case, you will most likely need to manually add the custom keycodes back in.
     
 #### USE AT YOUR OWN RISK
 
