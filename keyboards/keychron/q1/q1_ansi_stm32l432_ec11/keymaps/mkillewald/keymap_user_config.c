@@ -17,6 +17,16 @@
 #include QMK_KEYBOARD_H
 #include "keymap_user_config.h"
 
+typedef union {
+  uint32_t raw;
+  struct {
+    bool caps_lock_light_tab :1;
+    bool caps_lock_light_alphas :1;
+    bool fn_layer_transparent_keys_off :1;
+    bool fn_layer_color_enable :1;
+  };
+} user_config_t;
+
 user_config_t user_config;
 
 void eeconfig_init_user(void) {
