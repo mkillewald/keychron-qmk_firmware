@@ -15,8 +15,10 @@
  */
 
 #include QMK_KEYBOARD_H
+#include "keychron_common.h"
 #include "rgb_matrix_user.h"
 #include "keymap_user.h"
+#include "keymap_user_config.h"
 
 #define RGB_CYBERPINK       0xff, 0x00, 0x4f
 #define RGB_CYBERDARK       0x44, 0x00, 0xff
@@ -50,6 +52,7 @@ bool rgb_matrix_indicators_user(void) {
     switch (current_layer) {
         case MAC_BASE:
         case WIN_BASE:
+            // need way to disable this when LED test is active
             rgb_matrix_set_cyber_colors();
             break;
     }
@@ -57,6 +60,9 @@ bool rgb_matrix_indicators_user(void) {
 }
 
 bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
+    if(!rgb_matrix_indicators_advanced_keychron(led_min, led_max)) {
+        return false;
+    }
     uint8_t current_layer = get_highest_layer(layer_state);
     switch (current_layer) {
         case MAC_BASE:
@@ -70,17 +76,18 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
         case MAC_FN:
         case WIN_FN:
 #ifdef FN_LAYER_COLOR
-            if (get_fn_layer_color_enable()) {
+            if (user_config_get_fn_layer_color_enable()) {
                 rgb_matrix_set_color_by_keycode(led_min, led_max, current_layer, is_not_transparent, FN_LAYER_COLOR);
             }
 #endif
-            if (get_fn_layer_transparent_keys_off()) {
+            if (user_config_get_fn_layer_transparent_keys_off()) {
                 rgb_matrix_set_color_by_keycode(led_min, led_max, current_layer, is_transparent, RGB_OFF);
             }
             break;
     }
     return false;
 }
+
 void rgb_matrix_set_cyber_colors(void) {
     if (is_suspended) { return; }
         
@@ -112,11 +119,11 @@ void rgb_matrix_set_color_by_keycode(uint8_t led_min, uint8_t led_max, uint8_t l
 bool is_caps_lock_indicator(uint16_t keycode) {
     bool indicator = keycode == KC_CAPS;
 
-    if (get_caps_lock_light_tab()) {
+    if (user_config_get_caps_lock_light_tab()) {
         indicator = keycode == KC_TAB || keycode == KC_CAPS;
     }
 
-    if (get_caps_lock_light_alphas()) {
+    if (user_config_get_caps_lock_light_alphas()) {
         return (KC_A <= keycode && keycode <= KC_Z) || indicator;
     } else {
         return indicator;
