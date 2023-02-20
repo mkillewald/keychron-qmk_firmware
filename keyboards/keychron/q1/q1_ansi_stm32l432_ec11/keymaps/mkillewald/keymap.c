@@ -26,7 +26,7 @@
 
 enum my_keycodes {
 #ifdef VIA_ENABLE
-    KC_LIGHT_TAB_TOGGLE = USER02,
+    KC_LIGHT_TAB_TOGGLE = USER11,
 #else
     KC_LIGHT_TAB_TOGGLE = SAFE_RANGE,
 #endif
@@ -100,7 +100,7 @@ void keyboard_post_init_user(void) {
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    if (!process_record_keychron(keycode, record)) {
+    if (process_record_keychron(keycode, record)) {
         switch (keycode) {
             case KC_LIGHT_TAB_TOGGLE:
                 if (record->event.pressed) {
@@ -125,7 +125,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             default:
                 return true;  // Process all other keycodes normally
         }
-        return false;
     }
     return true;
 }
