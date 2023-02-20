@@ -113,6 +113,12 @@ void rgb_matrix_set_cyber_colors(void) {
     for (uint8_t i = 0; i < sizeof(accentkeys)/sizeof(accentkeys[0]); i++) {
         rgb_matrix_set_color(accentkeys[i], RGB_CYBERPINK);                 
     }
+    
+    // WASD
+    /*uint8_t wasdkeys[] = {32, 46, 47 ,48};
+    for (uint8_t i = 0; i < sizeof(wasdkeys)/sizeof(wasdkeys[0]); i++) {
+        rgb_matrix_set_color(wasdkeys[i], RGB_CYBERPINK);                 
+    }*/
 }
 
 void rgb_matrix_set_color_by_keycode(uint8_t led_min, uint8_t led_max, uint8_t layer, bool (*is_keycode)(uint16_t), uint8_t red, uint8_t green, uint8_t blue) {
