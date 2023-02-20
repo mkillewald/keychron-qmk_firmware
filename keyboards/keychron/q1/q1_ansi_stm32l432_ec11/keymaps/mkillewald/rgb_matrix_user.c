@@ -26,6 +26,15 @@
 keypos_t led_index_key_position[RGB_MATRIX_LED_COUNT];
 bool is_suspended = false;
 
+extern enum {
+    LED_TEST_MODE_OFF,
+    LED_TEST_MODE_WHITE,
+    LED_TEST_MODE_RED,
+    LED_TEST_MODE_GREEN,
+    LED_TEST_MODE_BLUE,
+    LED_TEST_MODE_MAX
+}led_test_mode;
+
 void suspend_power_down_user(void) {
     // code will run multiple times while keyboard is suspended
     is_suspended = true;
@@ -52,7 +61,6 @@ bool rgb_matrix_indicators_user(void) {
     switch (current_layer) {
         case MAC_BASE:
         case WIN_BASE:
-            // need way to disable this when LED test is active
             rgb_matrix_set_cyber_colors();
             break;
     }
@@ -89,7 +97,7 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
 }
 
 void rgb_matrix_set_cyber_colors(void) {
-    if (is_suspended) { return; }
+    if (is_suspended || led_test_mode) { return; }
         
     // modifier keys: keys at outside edge of board
     //uint8_t modkeys[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 15, 28, 29, 30, 43, 44, 45, 57, 58, 59, 70, 72, 73, 74, 76, 77, 78};
