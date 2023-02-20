@@ -1,5 +1,5 @@
 ## Keychron Q1V2 ANSI STM32L432 ENC11 (with knob) Keymap v2.0.1
-### This is my custom branch mkillewald_custom which has my personal RGB LED and layout customizations
+### This is my custom branch which has my personal RGB LED and layout customizations
 
 ## Features:
 - Retains Keychron factory keycodes for Mission Control, Launchpad, Siri, Cortana, Task View, File Explorer, and others. 
