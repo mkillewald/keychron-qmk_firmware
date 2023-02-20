@@ -23,9 +23,6 @@
 #define RGB_CYBERPINK       0xff, 0x00, 0x4f
 #define RGB_CYBERDARK       0x44, 0x00, 0xff
 
-keypos_t led_index_key_position[RGB_MATRIX_LED_COUNT];
-bool is_suspended = false;
-
 extern enum {
     LED_TEST_MODE_OFF,
     LED_TEST_MODE_WHITE,
@@ -34,6 +31,9 @@ extern enum {
     LED_TEST_MODE_BLUE,
     LED_TEST_MODE_MAX
 }led_test_mode;
+
+keypos_t led_index_key_position[RGB_MATRIX_LED_COUNT];
+bool is_suspended = false;
 
 void suspend_power_down_user(void) {
     // code will run multiple times while keyboard is suspended
