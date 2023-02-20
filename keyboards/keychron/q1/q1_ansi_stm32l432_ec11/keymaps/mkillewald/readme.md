@@ -33,7 +33,7 @@
         - Fn+C will toggle turning off RGB for keys with no definition (default: RGB off)
         - Fn+V will toggle lighting the defined Fn layer keys with the static color set with FN_LAYER_COLOR (default: static color off)
 
-- All custom keycodes can be moved to different keys in VIA by loading my custom json file in VIA design tab 
+- All custom keycodes can be moved to different keys in VIA by loading my custom json file in the VIA design tab. The custom keycodes will appear in the Custom area (bottom left hand side) of the Configure Tab. 
 
 RGB must be toggled on for all indicators to function. If you do not want an RGB mode active but still want the indicators, toggle RGB on and turn the brightness all the way off. The indicators will remain at full brightness.
 
