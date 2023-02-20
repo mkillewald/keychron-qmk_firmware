@@ -6,12 +6,13 @@
 - Retains Keychron factory reset (Fn+J+Z) and LED test (Fn+Right+Home)
     - Hold Fn+J+Z for 4 seconds to factory reset (will clear eeprom but will not remove this firmware)
         - All LEDs will flash red to show reset is occurring
-        - NOTE: User must use VIA to remove KC_LTTOG custom keycode from Fn+Z (make Fn+Z transparent or KC_Z) before doing factory reset. The KC_LTTOG custom keycode will automatically return after factory reset is complete. 
+        - NOTE: User must use VIA to remove KC_LTTOG custom keycode from Fn+Z (make Fn+Z transparent or KC_Z) before doing factory reset. The KC_LTTOG custom keycode will automatically return after factory reset is complete.
+        
     - Hold Fn+Right+Home for 4 seconds to enable factory LED test
         - All LEDs will turn bright white
         - Right arrow will cycle all LEDs between white, red, green, and blue.
         - Home exits LED test
-        - NOTE: Upon exiting, the LED test may overwrite changes you've previously made to LED brightness, hue or saturation
+        - NOTE: Upon exiting, the LED test may overwrite changes you've previously made to RGB brightness, hue or saturation
 
 - Fn+PGUP enters DFU mode for flashing (saves you from removing the space bar and unplugging cable) 
 
