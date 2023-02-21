@@ -133,12 +133,12 @@
     },
     {
       "name": "Fn Layer Transparent Keys Toggle",
-      "title": "Toggle transparent key lightint on Fn layer",
+      "title": "Toggle transparent key lighting on Fn layer",
       "shortName": "TKTOG"
     },
     {
       "name": "Fn Layer Color Toggle",
-      "title": "Toggle Fn layer Color",
+      "title": "Toggle Fn layer accent color",
       "shortName": "FCTOG"
     }
   ],
