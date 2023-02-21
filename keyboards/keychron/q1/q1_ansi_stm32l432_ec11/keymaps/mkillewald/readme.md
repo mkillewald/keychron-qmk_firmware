@@ -21,6 +21,11 @@
 
 - Fn+PgUp enters DFU mode for flashing (saves you from removing the space bar and unplugging cable) 
 
+- Caps Word enabled ([https://docs.qmk.fm/#/feature_caps_word](https://docs.qmk.fm/#/feature_caps_word))
+    - Activated by double tapping left shift
+    - Left Shift will light when Caps Word is enabled
+    - #define CAPS_WORD_INDICATOR_COLOR [color] in config.h to set the backlight color used for the indicator when Caps Word is enabled (default: red)
+
 - Caps Lock RGB indicator
     - the Caps Lock key will light when Caps Lock is enabled with the following options:
         - #define CAPS_LOCK_INDICATOR_COLOR [color] in config.h to set the backlight color used for the indicator when Caps Lock is enabled (default: red)
@@ -42,6 +47,9 @@ Please make sure to save any customizations you have made in VIA to a .json file
 #### USE AT YOUR OWN RISK
 
 ## Changelog:
+
+v2.0.1  February 21, 2023
+- Added Caps Word with indicator
 
 v2.0.1  February 19, 2023
 - Added Keychron common code for factory keycodes and things like factory reset and LED test
