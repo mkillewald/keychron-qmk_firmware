@@ -150,7 +150,11 @@ bool is_caps_lock_indicator(uint16_t keycode) {
 }
 
 bool is_caps_word_indicator(uint16_t keycode) {
-    return keycode == KC_LSFT;
+    bool indicator = keycode == KC_LSFT;
+#ifdef CAPS_WORD_LIGHT_LOWER_LEFT_CORNER
+    indicator = keycode == KC_LSFT || keycode == KC_LCTL || keycode == KC_LOPT;
+#endif
+    return indicator;
 }
 
 bool is_transparent(uint16_t keycode) { return keycode == KC_TRNS; }
