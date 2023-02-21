@@ -6,7 +6,7 @@
 - Retains Keychron factory reset (Fn+J+Z) and LED test (Fn+Right+Home)
     - Hold Fn+J+Z for 4 seconds to factory reset (will clear eeprom but will not remove this firmware)
         - All LEDs will flash red to show reset is occurring
-        - NOTE: User must use VIA to remove KC_LTTOG custom keycode from Fn+Z (make Fn+Z transparent or KC_Z) before doing factory reset. The KC_LTTOG custom keycode will automatically return after factory reset is complete.
+        - NOTE: User must use VIA to remove LTTOG custom keycode from Fn+Z (make Fn+Z transparent or Z) before doing factory reset. The LTTOG custom keycode will automatically return after factory reset is complete. 
         
     - Hold Fn+Right+Home for 4 seconds to enable factory LED test
         - All LEDs will turn bright white
@@ -14,22 +14,21 @@
         - Home exits LED test
         - NOTE: Upon exiting, the LED test may overwrite changes you've previously made to RGB brightness, hue or saturation
 
-- Fn+PGUP enters DFU mode for flashing (saves you from removing the space bar and unplugging cable) 
+- Fn+PgUp enters DFU mode for flashing (saves you from removing the space bar and unplugging cable) 
 
 - Caps Lock RGB indicator
     - the Caps Lock key will light when Caps Lock is enabled with the following options:
         - #define CAPS_LOCK_INDICATOR_COLOR [color] in config.h to set the backlight color used for the indicator when Caps Lock is enabled (default: red)
-        - Fn+Z will toggle lighting the TAB key when Caps Lock is enabled. This is useful with non backlit keycaps/legends. (default: off)
-        - Fn+X will toggle lighting all the alpha keys when Caps Lock is enabled. (default: off)
+        - Fn+Z (keycode: LTTOG) will toggle lighting the TAB key when Caps Lock is enabled. This is useful with non backlit keycaps/legends. (default: off)
+        - Fn+X (keycode: LATOG) will toggle lighting all the alpha keys when Caps Lock is enabled. (default: off)
 
 - Dynamic Fn layer RGB indicator
     - When the Fn key is held down, any keys defined on the Fn layer in this firmware or in VIA will be highlighted with the following options:
         - #define FN_LAYER_COLOR [color] in config.h to set a static color for defined keys (default: orange)
-        - Fn+C will toggle turning off RGB for keys with no definition (default: RGB off)
-        - Fn+V will toggle lighting the defined Fn layer keys with the static color set with FN_LAYER_COLOR (default: static color off)
+        - Fn+C (keycode: TKTOG) will toggle turning off RGB for keys with no definition (default: RGB off)
+        - Fn+V (keycode: FCTOG) will toggle lighting the defined Fn layer keys with the static color set with FN_LAYER_COLOR (default: static color off)
 
-- All custom keycodes can be moved to different keys in VIA by loading my custom json file in the VIA design tab. The custom keycodes will appear in the Custom area (bottom left hand side) of the Configure Tab.
-
+All custom keycodes can be moved to different keys in VIA by loading my custom json file in the VIA design tab. The custom keycodes will appear in the Custom area (bottom left hand side) of the Configure tab.
 
 RGB must be toggled on for all indicators to function. If you do not want an RGB mode active but still want the indicators, toggle RGB on and turn the brightness all the way off. The indicators will remain at full brightness.
 
