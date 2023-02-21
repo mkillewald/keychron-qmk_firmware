@@ -1,4 +1,4 @@
-## Keychron Q1V2 ANSI STM32L432 ENC11 (with knob) Keymap v2.0.1
+## Keychron Q1V2 ANSI STM32L432 ENC11 (with knob) Keymap v2.0.2
 ### This is my custom branch which has my personal RGB LED and layout customizations
 
 ## Features:
@@ -48,7 +48,7 @@ Please make sure to save any customizations you have made in VIA to a .json file
 
 ## Changelog:
 
-v2.0.1  February 21, 2023
+v2.0.2  February 21, 2023
 - Added Caps Word with indicator
 
 v2.0.1  February 19, 2023
