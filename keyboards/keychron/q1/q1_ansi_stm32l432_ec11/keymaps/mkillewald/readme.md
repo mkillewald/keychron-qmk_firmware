@@ -21,10 +21,10 @@
 
 - Fn+PgUp enters DFU mode for flashing (saves you from removing the space bar and unplugging cable) 
 
-- Caps Word enabled ([https://docs.qmk.fm/#/feature_caps_word](https://docs.qmk.fm/#/feature_caps_word))
+- Caps Word enabled with RGB indicator ([https://docs.qmk.fm/#/feature_caps_word](https://docs.qmk.fm/#/feature_caps_word))
     - Activated by double tapping left shift
     - Left Shift will light when Caps Word is enabled
-    - #define CAPS_WORD_INDICATOR_COLOR [color] in config.h to set the backlight color used for the indicator when Caps Word is enabled (default: red)
+        - #define CAPS_WORD_INDICATOR_COLOR [color] in config.h to set the backlight color used for the indicator when Caps Word is enabled (default: red)
 
 - Caps Lock RGB indicator
     - the Caps Lock key will light when Caps Lock is enabled with the following options:
