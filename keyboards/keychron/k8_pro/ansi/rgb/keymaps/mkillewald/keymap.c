@@ -16,23 +16,14 @@
 
 #include QMK_KEYBOARD_H
 #include "keymap_user.h"
+#include "keymap_user_config.h"
 #ifdef RGB_MATRIX_ENABLE
 #    include "rgb_matrix_user.h"
 #endif
 
-typedef union {
-  uint32_t raw;
-  struct {
-    bool caps_lock_light_tab :1;
-    bool caps_lock_light_alphas :1;
-    bool fn_layer_transparent_keys_off :1;
-    bool fn_layer_color_enable :1;
-  };
-} user_config_t;
+// clang-format off
 
-user_config_t user_config;
-
-enum custom_keycodes {
+enum my_keycodes {
 #ifdef VIA_ENABLE
     KC_MISSION_CONTROL = USER00,
 #else
@@ -45,14 +36,12 @@ enum custom_keycodes {
     KC_FN_LAYER_COLOR_TOGGLE
 };
 
-#define KC_MCTL KC_MISSION_CONTROL
-#define KC_LNPD KC_LAUNCHPAD
+#define KC_MCTL  KC_MISSION_CONTROL
+#define KC_LNPD  KC_LAUNCHPAD
 #define KC_LTTOG KC_LIGHT_TAB_TOGGLE
 #define KC_LATOG KC_LIGHT_ALPHAS_TOGGLE
 #define KC_TKTOG KC_FN_LAYER_TRANSPARENT_KEYS_TOGGLE
 #define KC_FCTOG KC_FN_LAYER_COLOR_TOGGLE
-
-// clang-format off
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [MAC_BASE] = LAYOUT_ansi_87( 
@@ -96,16 +85,7 @@ void matrix_init_user(void) {
 }
 
 void keyboard_post_init_user(void) {
-    user_config.raw = eeconfig_read_user();
-}
-
-void eeconfig_init_user(void) {
-    user_config.raw = 0;
-    user_config.caps_lock_light_tab = false;
-    user_config.caps_lock_light_alphas = false;
-    user_config.fn_layer_transparent_keys_off = true;
-    user_config.fn_layer_color_enable = false;
-    eeconfig_update_user(user_config.raw);
+    user_config_read();
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -126,45 +106,25 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             return false;  // Skip all further processing of this key
         case KC_LIGHT_TAB_TOGGLE:
             if (record->event.pressed) {
-                user_config.caps_lock_light_tab ^= 1; // bitwise xor to toggle status bit
-                eeconfig_update_user(user_config.raw);
+                user_config_toggle_caps_lock_light_tab();
             } 
             return false;  // Skip all further processing of this key
         case KC_LIGHT_ALPHAS_TOGGLE:
             if (record->event.pressed) {
-                user_config.caps_lock_light_alphas ^= 1;
-                eeconfig_update_user(user_config.raw);
+                user_config_toggle_caps_lock_light_alphas();
             }
             return false;  // Skip all further processing of this key
         case KC_FN_LAYER_TRANSPARENT_KEYS_TOGGLE:
             if (record->event.pressed) {
-                user_config.fn_layer_transparent_keys_off ^= 1;
-                eeconfig_update_user(user_config.raw);
+                user_config_toggle_fn_layer_transparent_keys_off();
             }
             return false;  // Skip all further processing of this key
         case KC_FN_LAYER_COLOR_TOGGLE:
             if (record->event.pressed) {
-                user_config.fn_layer_color_enable ^= 1;
-                eeconfig_update_user(user_config.raw);
+                user_config_toggle_fn_layer_color_enable();
             }
             return false;  // Skip all further processing of this key
         default:
             return true;  // Process all other keycodes normally
     }
-}
-
-bool get_caps_lock_light_tab(void) {
-    return user_config.caps_lock_light_tab;
-}
-
-bool get_caps_lock_light_alphas(void) {
-    return user_config.caps_lock_light_alphas;
-}
-
-bool get_fn_layer_transparent_keys_off(void) {
-    return user_config.fn_layer_transparent_keys_off;
-}
-
-bool get_fn_layer_color_enable(void) {
-    return user_config.fn_layer_color_enable;
 }

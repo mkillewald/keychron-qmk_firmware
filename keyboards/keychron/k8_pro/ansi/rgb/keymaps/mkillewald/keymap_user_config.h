@@ -1,4 +1,4 @@
-/* Copyright 2021 @ Mike Killewald
+/* Copyright 2023 @ Mike Killewald
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -13,13 +13,16 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
+ 
 #pragma once
 
-void rgb_matrix_init_user(void);
-void rgb_matrix_set_color_by_keycode(uint8_t led_min, uint8_t led_max, uint8_t layer, bool (*is_keycode)(uint16_t), uint8_t red, uint8_t green, uint8_t blue);
-
-bool is_caps_lock_indicator(uint16_t keycode);
-bool is_transparent(uint16_t keycode);
-bool is_not_transparent(uint16_t keycode);
-
+void user_config_read(void);
+void user_config_write(void);
+bool user_config_get_caps_lock_light_tab(void);
+bool user_config_get_caps_lock_light_alphas(void);
+bool user_config_get_fn_layer_transparent_keys_off(void);
+bool user_config_get_fn_layer_color_enable(void);
+void user_config_toggle_caps_lock_light_tab(void);
+void user_config_toggle_caps_lock_light_alphas(void);
+void user_config_toggle_fn_layer_transparent_keys_off(void);
+void user_config_toggle_fn_layer_color_enable(void);
