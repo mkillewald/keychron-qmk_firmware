@@ -18,9 +18,10 @@
 
 - Caps Word enabled with RGB indicator ([https://docs.qmk.fm/#/feature_caps_word](https://docs.qmk.fm/#/feature_caps_word))
     - Activated by double tapping left Shift
-    - Left Shift will light when Caps Word is enabled
+        - can change activation to tapping both left and right Shift by replacing define DOUBLE_TAP_SHIFT_TURNS_ON_CAPS_WORD with #define BOTH_SHIFTS_TURNS_ON_CAPS_WORD in config.h
+    - Left Shift, left Control and left Option (or left Windows key) will light when Caps Word is enabled
         - #define CAPS_WORD_INDICATOR_COLOR [color] in config.h to set the backlight color used for the indicator when Caps Word is enabled (default: red)
-        - #define CAPS_WORD_LIGHT_LOWER_LEFT_CORNER in config.h for a more noticeable indicator. This will light left Shift, left Control and left Alt/Option 
+        - remove #define CAPS_WORD_LIGHT_LOWER_LEFT_CORNER from config.h if you wish for the indicator to only light left Shift
 
 - Caps Lock RGB indicator
     - the Caps Lock key will light when Caps Lock is enabled with the following options:
