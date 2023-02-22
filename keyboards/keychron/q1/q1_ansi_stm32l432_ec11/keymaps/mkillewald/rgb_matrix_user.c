@@ -52,7 +52,7 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
         return false;
     }
     
-    if (led_test_mode || factory_reset_count) {return false; }
+    if (led_test_mode || factory_reset_count) { return false; }
 
     uint8_t current_layer = get_highest_layer(layer_state);
     switch (current_layer) {
