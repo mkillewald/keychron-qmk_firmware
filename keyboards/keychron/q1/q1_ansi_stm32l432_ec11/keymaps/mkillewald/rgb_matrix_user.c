@@ -20,6 +20,16 @@
 #include "keymap_user.h"
 #include "keymap_user_config.h"
 
+extern uint8_t factory_reset_count;
+extern enum {
+    LED_TEST_MODE_OFF,
+    LED_TEST_MODE_WHITE,
+    LED_TEST_MODE_RED,
+    LED_TEST_MODE_GREEN,
+    LED_TEST_MODE_BLUE,
+    LED_TEST_MODE_MAX
+}led_test_mode;
+
 keypos_t led_index_key_position[RGB_MATRIX_LED_COUNT];
 
 void rgb_matrix_init_user(void) {
@@ -41,6 +51,9 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     if(!rgb_matrix_indicators_advanced_keychron(led_min, led_max)) {
         return false;
     }
+    
+    if (led_test_mode || factory_reset_count) {return false; }
+
     uint8_t current_layer = get_highest_layer(layer_state);
     switch (current_layer) {
         case MAC_BASE:
