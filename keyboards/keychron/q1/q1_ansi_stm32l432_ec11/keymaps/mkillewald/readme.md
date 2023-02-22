@@ -49,6 +49,7 @@ v2.0.2  February 21, 2023
 
 v2.0.1  February 19, 2023
 - Added Keychron common code for factory keycodes and things like factory reset and LED test
+- Moved DFU Mode shortcut to Fn+PgUp
 
 v2.0.0  February 15, 2023 
 - Carried over all features from my original Q1V1 keymap.
