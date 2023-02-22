@@ -1,4 +1,4 @@
-## Keychron Q1V2 ANSI STM32L432 ENC11 (with knob) Keymap v2.0.1
+## Keychron Q1V2 ANSI STM32L432 ENC11 (with knob) Keymap v2.0.2
 
 ## Features:
 - Retains Keychron factory keycodes for Mission Control, Launchpad, Siri, Cortana, Task View, File Explorer, and others. 
@@ -14,7 +14,13 @@
         - Home exits LED test
         - NOTE: Upon exiting, the LED test may overwrite changes you've previously made to RGB brightness, hue or saturation
 
-- Fn+PgUp enters DFU mode for flashing (saves you from removing the space bar and unplugging cable) 
+- Fn+PgUp enters DFU mode for flashing (saves you from removing the space bar and unplugging cable)
+
+- Caps Word enabled with RGB indicator ([https://docs.qmk.fm/#/feature_caps_word](https://docs.qmk.fm/#/feature_caps_word))
+    - Activated by double tapping left Shift
+    - Left Shift will light when Caps Word is enabled
+        - #define CAPS_WORD_INDICATOR_COLOR [color] in config.h to set the backlight color used for the indicator when Caps Word is enabled (default: red)
+        - #define CAPS_WORD_LIGHT_LOWER_LEFT_CORNER in config.h for a more noticeable indicator. This will light left Shift, left Control and left Alt/Option 
 
 - Caps Lock RGB indicator
     - the Caps Lock key will light when Caps Lock is enabled with the following options:
@@ -37,6 +43,9 @@ Please make sure to save any customizations you have made in VIA to a .json file
 #### USE AT YOUR OWN RISK
 
 ## Changelog:
+
+v2.0.2  February 21, 2023
+- Added Caps Word with indicator
 
 v2.0.1  February 19, 2023
 - Added Keychron common code for factory keycodes and things like factory reset and LED test

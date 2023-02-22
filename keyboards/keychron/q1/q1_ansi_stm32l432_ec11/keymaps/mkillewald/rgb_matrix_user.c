@@ -50,6 +50,11 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
                 rgb_matrix_set_color_by_keycode(led_min, led_max, current_layer, is_caps_lock_indicator, CAPS_LOCK_INDICATOR_COLOR);
             }
 #endif
+#ifdef CAPS_WORD_INDICATOR_COLOR
+            if (is_caps_word_on()) {
+                rgb_matrix_set_color_by_keycode(led_min, led_max, current_layer, is_caps_word_indicator, CAPS_WORD_INDICATOR_COLOR); 
+            }
+#endif 
             break;
         case MAC_FN:
         case WIN_FN:
@@ -87,6 +92,14 @@ bool is_caps_lock_indicator(uint16_t keycode) {
     } else {
         return indicator;
     }
+}
+
+bool is_caps_word_indicator(uint16_t keycode) {
+    bool indicator = keycode == KC_LSFT;
+#ifdef CAPS_WORD_LIGHT_LOWER_LEFT_CORNER
+    indicator = keycode == KC_LSFT || keycode == KC_LCTL || keycode == KC_LOPT;
+#endif
+    return indicator;
 }
 
 bool is_transparent(uint16_t keycode) { return keycode == KC_TRNS; }
