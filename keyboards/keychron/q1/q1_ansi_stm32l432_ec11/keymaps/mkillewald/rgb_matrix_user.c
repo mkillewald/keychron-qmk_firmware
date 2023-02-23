@@ -23,6 +23,7 @@
 #define RGB_CYBERPINK       0xff, 0x00, 0x4f
 #define RGB_CYBERDARK       0x44, 0x00, 0xff
 
+extern uint8_t factory_reset_count;
 extern enum {
     LED_TEST_MODE_OFF,
     LED_TEST_MODE_WHITE,
@@ -31,7 +32,6 @@ extern enum {
     LED_TEST_MODE_BLUE,
     LED_TEST_MODE_MAX
 }led_test_mode;
-extern uint8_t factory_reset_count;
 
 keypos_t led_index_key_position[RGB_MATRIX_LED_COUNT];
 bool is_suspended = false;
@@ -107,7 +107,7 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     return false;
 }
 
-void rgb_matrix_set_cyber_colors(void) {        
+void rgb_matrix_set_cyber_colors(void) {
     // modifier keys: keys at outside edge of board
     //uint8_t modkeys[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 15, 28, 29, 30, 43, 44, 45, 57, 58, 59, 70, 72, 73, 74, 76, 77, 78};
     
