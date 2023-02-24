@@ -65,3 +65,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
     return true;
 }
+
+void housekeeping_task_user(void) {
+    housekeeping_task_keychron();
+}
