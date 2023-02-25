@@ -40,6 +40,9 @@ enum my_keycodes {
 #define KC_TKTOG KC_FN_LAYER_TRANSPARENT_KEYS_TOGGLE
 #define KC_FCTOG KC_FN_LAYER_COLOR_TOGGLE
 
+bool bootloader_pressed = false;
+bool do_bootloader = false;
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [MAC_BASE] = LAYOUT_ansi_82(
         KC_ESC,   KC_BRID,  KC_BRIU,  KC_MCTL,  KC_LPAD,  RGB_VAD,  RGB_VAI,  KC_MPRV,  KC_MPLY,  KC_MNXT,  KC_MUTE,  KC_VOLD,    KC_VOLU,  KC_DEL,             KC_MUTE,
@@ -86,6 +89,17 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][2] = {
 #endif // ENCODER_MAP_ENABLE
 
 void housekeeping_task_user(void) {
+    if (do_bootloader) {
+        // bootloader was pressed on previous frame. RGB should now be off,
+        // so we can now call the bootloader.  
+        reset_keyboard(); 
+    } else if (bootloader_pressed) {
+        // User pressed bootloader combo and RGB was disabled earlier in this 
+        // frame. We set a flag here to call the bootloader at end of 
+        // the next frame.  
+        do_bootloader = true;
+    }
+    
     housekeeping_task_keychron();
 }
 
@@ -102,6 +116,16 @@ void keyboard_post_init_user(void) {
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (process_record_keychron(keycode, record)) {
         switch (keycode) {
+            case QK_BOOT:
+#ifdef RGB_MATRIX_ENABLE
+                // We want to turn off LEDs before calling bootloader, so here
+                // we call rgb_matrix_disable_noeeprom() and set a flag because
+                // the LEDs won't be updated until the next frame. 
+                rgb_matrix_disable_noeeprom();
+                bootloader_pressed = true;
+                return false;  // Skip all further processing of this key
+#endif
+                return true;  // Allow further processing for this key
             case KC_LIGHT_TAB_TOGGLE:
                 if (record->event.pressed) {
                     user_config_toggle_caps_lock_light_tab();
