@@ -37,13 +37,15 @@ enum my_keycodes {
     KC_MACRO_SCREEN_SHOT_MAC
 };
 
-
 #define KC_LTTOG KC_LIGHT_TAB_TOGGLE
 #define KC_LATOG KC_LIGHT_ALPHAS_TOGGLE
 #define KC_TKTOG KC_FN_LAYER_TRANSPARENT_KEYS_TOGGLE
 #define KC_FCTOG KC_FN_LAYER_COLOR_TOGGLE
 #define KC_LKMAC KC_MACRO_LOCK_MAC
 #define KC_SSMAC KC_MACRO_SCREEN_SHOT_MAC
+
+bool bootloader_pressed = false;
+bool do_bootloader = false;
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [MAC_BASE] = LAYOUT_ansi_82(
@@ -91,6 +93,18 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][2] = {
 #endif // ENCODER_MAP_ENABLE
 
 void housekeeping_task_user(void) {
+    if (do_bootloader) {
+        // bootloader was pressed on previous frame. RGB should now be off,
+        // so we can call the bootloader.  
+        reset_keyboard(); 
+    } else if (bootloader_pressed) {
+        // User pressed bootloader combo. We will now disable RGB but it won't
+        // take effect until the next frame. We'll set a flag and wait until 
+        // end of next frame to call bootloader. 
+        rgb_matrix_disable_noeeprom();
+        do_bootloader = true;
+    }
+    
     housekeeping_task_keychron();
 }
 
@@ -104,9 +118,15 @@ void keyboard_post_init_user(void) {
     user_config_read();
 }
 
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {    
     if (process_record_keychron(keycode, record)) {
         switch (keycode) {
+            case QK_BOOT:
+#ifdef RGB_MATRIX_ENABLE
+                bootloader_pressed = true;
+                return false;  // Skip all further processing of this key
+#endif
+                return true;  // Allow further processing of this key
             case KC_LIGHT_TAB_TOGGLE:
                 if (record->event.pressed) {
                     user_config_toggle_caps_lock_light_tab();
@@ -136,7 +156,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 if (record->event.pressed) {
                     send_string(SS_LGUI(SS_LSFT("3")));
                 }
-                return false;  // Skip all further processing of this key
+                return false;  // Skip all further processing of this key            
             default:
                 return true;  // Process all other keycodes normally
         }
