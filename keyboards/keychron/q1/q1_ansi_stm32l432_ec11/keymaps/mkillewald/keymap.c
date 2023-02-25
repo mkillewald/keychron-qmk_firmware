@@ -95,13 +95,12 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][2] = {
 void housekeeping_task_user(void) {
     if (do_bootloader) {
         // bootloader was pressed on previous frame. RGB should now be off,
-        // so we can call the bootloader.  
+        // so we can now call the bootloader.  
         reset_keyboard(); 
     } else if (bootloader_pressed) {
-        // User pressed bootloader combo. We will now disable RGB but it won't
-        // take effect until the next frame. We'll set a flag and wait until 
-        // end of next frame to call bootloader. 
-        rgb_matrix_disable_noeeprom();
+        // User pressed bootloader combo and RGB was disabled earlier in this 
+        // frame. We set a flag here to call the bootloader at end of 
+        // the next frame.  
         do_bootloader = true;
     }
     
@@ -123,6 +122,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         switch (keycode) {
             case QK_BOOT:
 #ifdef RGB_MATRIX_ENABLE
+                // Want to turn off LEDs before calling booloader, so here
+                // we call rgb_matrix_disable_noeeprom() and set a flag because
+                // the LEDs won't be updated until the next frame. 
+                rgb_matrix_disable_noeeprom();
                 bootloader_pressed = true;
                 return false;  // Skip all further processing of this key
 #endif
