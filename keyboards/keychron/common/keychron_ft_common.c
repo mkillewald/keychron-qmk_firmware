@@ -14,28 +14,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include QMK_KEYBOARD_H
-
 #include "raw_hid.h"
-
-#define KEY_PRESS_FN (0x1 << 0)
-#define KEY_PRESS_J (0x1 << 1)
-#define KEY_PRESS_Z (0x1 << 2)
-#define KEY_PRESS_RIGHT (0x1 << 3)
-#define KEY_PRESS_HOME (0x1 << 4)
-#define KEY_PRESS_FACTORY_RESET (KEY_PRESS_FN | KEY_PRESS_J | KEY_PRESS_Z)
-#define KEY_PRESS_LED_TEST (KEY_PRESS_FN | KEY_PRESS_RIGHT | KEY_PRESS_HOME)
+#include "keychron_ft_common.h"
 
 // clang-format off
-
 enum {
-    LED_TEST_MODE_OFF,
-    LED_TEST_MODE_WHITE,
-    LED_TEST_MODE_RED,
-    LED_TEST_MODE_GREEN,
-    LED_TEST_MODE_BLUE,
-    LED_TEST_MODE_MAX
-} led_test_mode;
+    OS_SWITCH = 0x01,
+};
 
 enum {
     FACTORY_TEST_CMD_BACKLIGHT = 0x01,
@@ -43,11 +28,6 @@ enum {
     FACTORY_TEST_CMD_JUMP_TO_BL,
     FACTORY_TEST_CMD_EEPROM_CLEAR
 };
-
-enum {
-    OS_SWITCH = 0x01,
-};
-
 // clang-format on
 
 uint16_t            key_press_status    = 0;
@@ -57,44 +37,44 @@ uint8_t             factory_reset_count = 0;
 bool                report_os_sw_state  = false;
 extern matrix_row_t matrix[MATRIX_ROWS];
 
-bool process_record_keychron_ft(uint16_t keycode, keyrecord_t *record) {
+__attribute__((weak)) bool process_record_keychron_ft(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case MO(1):
         case MO(2):
         case MO(3):
         case MO(4):
             if (record->event.pressed) {
-                key_press_status |= KEY_PRESS_FN;
+                key_press_status |= KEY_PRESS_STEP_0;
             } else {
-                key_press_status &= ~KEY_PRESS_FN;
+                key_press_status &= ~KEY_PRESS_STEP_0;
                 timer_3s_buffer = 0;
             }
             return true;
         case KC_J:
             if (record->event.pressed) {
-                key_press_status |= KEY_PRESS_J;
+                key_press_status |= KEY_PRESS_STEP_1;
                 if (key_press_status == KEY_PRESS_FACTORY_RESET) {
                     timer_3s_buffer = sync_timer_read32() == 0 ? 1 : sync_timer_read32();
                 }
             } else {
-                key_press_status &= ~KEY_PRESS_J;
+                key_press_status &= ~KEY_PRESS_STEP_1;
                 timer_3s_buffer = 0;
             }
             return true;
         case KC_Z:
             if (record->event.pressed) {
-                key_press_status |= KEY_PRESS_Z;
+                key_press_status |= KEY_PRESS_STEP_2;
                 if (key_press_status == KEY_PRESS_FACTORY_RESET) {
                     timer_3s_buffer = sync_timer_read32() == 0 ? 1 : sync_timer_read32();
                 }
             } else {
-                key_press_status &= ~KEY_PRESS_Z;
+                key_press_status &= ~KEY_PRESS_STEP_2;
                 timer_3s_buffer = 0;
             }
             return true;
         case KC_RIGHT:
             if (record->event.pressed) {
-                key_press_status |= KEY_PRESS_RIGHT;
+                key_press_status |= KEY_PRESS_STEP_3;
                 if (led_test_mode) {
                     if (++led_test_mode >= LED_TEST_MODE_MAX) {
                         led_test_mode = LED_TEST_MODE_WHITE;
@@ -103,20 +83,20 @@ bool process_record_keychron_ft(uint16_t keycode, keyrecord_t *record) {
                     timer_3s_buffer = sync_timer_read32() == 0 ? 1 : sync_timer_read32();
                 }
             } else {
-                key_press_status &= ~KEY_PRESS_RIGHT;
+                key_press_status &= ~KEY_PRESS_STEP_3;
                 timer_3s_buffer = 0;
             }
             return true;
         case KC_HOME:
             if (record->event.pressed) {
-                key_press_status |= KEY_PRESS_HOME;
+                key_press_status |= KEY_PRESS_STEP_4;
                 if (led_test_mode) {
                     led_test_mode = LED_TEST_MODE_OFF;
                 } else if (key_press_status == KEY_PRESS_LED_TEST) {
                     timer_3s_buffer = sync_timer_read32() == 0 ? 1 : sync_timer_read32();
                 }
             } else {
-                key_press_status &= ~KEY_PRESS_HOME;
+                key_press_status &= ~KEY_PRESS_STEP_4;
                 timer_3s_buffer = 0;
             }
             return true;
@@ -243,11 +223,11 @@ static void system_switch_state_report(uint8_t index, bool active) {
     if (report_os_sw_state) {
         payload[0] = FACTORY_TEST_CMD_OS_SWITCH;
         payload[1] = OS_SWITCH;
-#    if defined(OS_SWITCH_REVERSE)
+#if defined(OS_SWITCH_REVERSE)
         payload[2] = !active;
-#    else
+#else
         payload[2] = active;
-#    endif
+#endif
         data[0] = 0xAB;
         memcpy(&data[1], payload, 3);
         for (uint8_t i = 1; i < RAW_EPSIZE - 3; i++) {
@@ -282,12 +262,14 @@ bool via_command_kb(uint8_t *data, uint8_t length) {
                 timer_3s_buffer = 0;
                 break;
 #endif
+#if defined(DIP_SWITCH_ENABLE)
             case FACTORY_TEST_CMD_OS_SWITCH:
                 report_os_sw_state = data[2];
                 if (report_os_sw_state) {
                     dip_switch_read(true);
                 }
                 break;
+#endif
             case FACTORY_TEST_CMD_JUMP_TO_BL:
                 if (matrix[0] & 0x1 && matrix[MATRIX_ROWS - 1] & (0x1 << (MATRIX_COLS - 1))) {
                     if (memcmp(&data[2], "JumpToBootloader", strlen("JumpToBootloader")) == 0) bootloader_jump();
@@ -306,6 +288,8 @@ bool via_command_kb(uint8_t *data, uint8_t length) {
     return false;
 }
 
+#if defined(MCU) && (MCU == STM32L432)
 void restart_usb_driver(USBDriver *usbp) {
     (void)usbp;
 }
+#endif

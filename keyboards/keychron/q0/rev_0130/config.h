@@ -17,8 +17,10 @@
 #pragma once
 
 /* key matrix pins */
-#define MATRIX_ROW_PINS { B5, B4, B3, A15, A14, A13 }
-#define MATRIX_COL_PINS { A5, A6, A7, B0 }
+#define MATRIX_ROW_PINS \
+    { B5, B4, B3, A15, A14, A13 }
+#define MATRIX_COL_PINS \
+    { A5, A6, A7, B0 }
 
 /* RGB Matrix Driver Configuration */
 #define DRIVER_COUNT 1
@@ -28,7 +30,8 @@
 #define DRIVER_1_LED_TOTAL 21
 #define RGB_MATRIX_LED_COUNT DRIVER_1_LED_TOTAL
 
-#define RGB_MATRIX_CENTER { 56, 16 }
+#define CKLED2001_CURRENT_TUNE \
+    { 0xFF, 0xFF, 0x70, 0xFF, 0xFF, 0x70, 0xFF, 0xFF, 0x70, 0xFF, 0xFF, 0x70 }
 
 /* Enable num-lock LED */
 #define NUM_LOCK_LED_INDEX 4

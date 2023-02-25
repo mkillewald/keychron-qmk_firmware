@@ -15,7 +15,6 @@
  */
 
 #include "quantum_keycodes.h"
-#include "keychron_ft_common.h"
 #ifdef VIA_ENABLE
 #    include "via.h"
 #endif

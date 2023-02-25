@@ -19,11 +19,16 @@
 
 bool     is_siri_active = false;
 uint32_t siri_timer     = 0;
-
-key_combination_t key_comb_list[4] = {{2, {KC_LWIN, KC_TAB}}, {2, {KC_LWIN, KC_E}}, {3, {KC_LSFT, KC_LCMD, KC_4}}, {2, {KC_LWIN, KC_C}}};
+// clang-format off
+key_combination_t key_comb_list[4] = {
+    {2, {KC_LWIN, KC_TAB}},
+    {2, {KC_LWIN, KC_E}},
+    {3, {KC_LSFT, KC_LCMD, KC_4}},
+    {2, {KC_LWIN, KC_C}}
+};
 
 static uint8_t mac_keycode[4] = {KC_LOPT, KC_ROPT, KC_LCMD, KC_RCMD};
-
+//clang-format on
 void housekeeping_task_keychron(void) {
     if (is_siri_active) {
         if (sync_timer_elapsed32(siri_timer) >= 500) {
@@ -32,15 +37,9 @@ void housekeeping_task_keychron(void) {
             is_siri_active = false;
         }
     }
-
-    housekeeping_task_keychron_ft();
 }
 
 bool process_record_keychron(uint16_t keycode, keyrecord_t *record) {
-    if (!process_record_keychron_ft(keycode, record)) {
-        return false;
-    }
-
     switch (keycode) {
         case KC_MISSION_CONTROL:
             if (record->event.pressed) {
@@ -48,14 +47,14 @@ bool process_record_keychron(uint16_t keycode, keyrecord_t *record) {
             } else {
                 host_consumer_send(0);
             }
-            return false; // Skip all further processing of this key
+            return false;  // Skip all further processing of this key
         case KC_LAUNCHPAD:
             if (record->event.pressed) {
                 host_consumer_send(0x2A0);
             } else {
                 host_consumer_send(0);
             }
-            return false; // Skip all further processing of this key
+            return false;  // Skip all further processing of this key
         case KC_LOPTN:
         case KC_ROPTN:
         case KC_LCMMD:
@@ -65,7 +64,7 @@ bool process_record_keychron(uint16_t keycode, keyrecord_t *record) {
             } else {
                 unregister_code(mac_keycode[keycode - KC_LOPTN]);
             }
-            return false; // Skip all further processing of this key
+            return false;  // Skip all further processing of this key
         case KC_SIRI:
             if (record->event.pressed) {
                 if (!is_siri_active) {
@@ -77,7 +76,7 @@ bool process_record_keychron(uint16_t keycode, keyrecord_t *record) {
             } else {
                 // Do something else when release
             }
-            return false; // Skip all further processing of this key
+            return false;  // Skip all further processing of this key
         case KC_TASK:
         case KC_FLXP:
         case KC_SNAP:
@@ -91,8 +90,101 @@ bool process_record_keychron(uint16_t keycode, keyrecord_t *record) {
                     unregister_code(key_comb_list[keycode - KC_TASK].keycode[i]);
                 }
             }
-            return false; // Skip all further processing of this key
+            return false;  // Skip all further processing of this key
         default:
-            return true; // Process all other keycodes normally
+            return true;  // Process all other keycodes normally
     }
 }
+
+#if defined(RGB_MATRIX_ENABLE) && (defined(CAPS_LOCK_LED_INDEX) || defined(NUM_LOCK_LED_INDEX))
+
+#    define CAPS_NUM_LOCK_MAX_BRIGHTNESS 0xFF
+#    ifdef RGB_MATRIX_MAXIMUM_BRIGHTNESS
+#        undef CAPS_NUM_LOCK_MAX_BRIGHTNESS
+#        define CAPS_NUM_LOCK_MAX_BRIGHTNESS RGB_MATRIX_MAXIMUM_BRIGHTNESS
+#    endif
+
+#    define CAPS_NUM_LOCK_VAL_STEP 8
+#    ifdef RGB_MATRIX_VAL_STEP
+#        undef CAPS_NUM_LOCK_VAL_STEP
+#        define CAPS_NUM_LOCK_VAL_STEP RGB_MATRIX_VAL_STEP
+#    endif
+
+extern void rgb_matrix_update_pwm_buffers(void);
+
+static uint8_t light_brightness_get(void) {
+    uint8_t value = rgb_matrix_get_val();
+    if (value < CAPS_NUM_LOCK_VAL_STEP) {
+        value = CAPS_NUM_LOCK_VAL_STEP;
+    } else if (value < (CAPS_NUM_LOCK_MAX_BRIGHTNESS - CAPS_NUM_LOCK_VAL_STEP)) {
+        value += CAPS_NUM_LOCK_VAL_STEP; // one step more than current brightness
+    } else {
+        value = CAPS_NUM_LOCK_MAX_BRIGHTNESS;
+    }
+    return value;
+}
+
+bool rgb_matrix_indicators_kb(void) {
+    if (!rgb_matrix_indicators_user()) {
+        return false;
+    }
+#    if defined(CAPS_LOCK_LED_INDEX)
+    if (host_keyboard_led_state().caps_lock) {
+        uint8_t v = light_brightness_get();
+        rgb_matrix_set_color(CAPS_LOCK_LED_INDEX, v, v, v); // white, with the adjusted brightness
+    }
+#    endif
+#    if defined(NUM_LOCK_LED_INDEX)
+    if (host_keyboard_led_state().num_lock) {
+        uint8_t v = light_brightness_get();
+        rgb_matrix_set_color(NUM_LOCK_LED_INDEX, v, v, v); // white, with the adjusted brightness
+    }
+#    endif
+    return true;
+}
+
+void rgb_matrix_indicators_none_kb(void) {
+    rgb_matrix_indicators_kb();
+    rgb_matrix_update_pwm_buffers();
+}
+
+bool led_update_kb(led_t led_state) {
+    bool res = led_update_user(led_state);
+
+    if (rgb_matrix_is_enabled()
+#    if defined(ENABLE_RGB_MATRIX_RAINDROPS)
+        && (rgb_matrix_get_mode() != RGB_MATRIX_RAINDROPS)
+#    endif
+#    if defined(ENABLE_RGB_MATRIX_JELLYBEAN_RAINDROPS)
+        && (rgb_matrix_get_mode() != RGB_MATRIX_JELLYBEAN_RAINDROPS)
+#    endif
+#    if defined(ENABLE_RGB_MATRIX_PIXEL_RAIN)
+        && (rgb_matrix_get_mode() != RGB_MATRIX_PIXEL_RAIN)
+#    endif
+    ) {
+        return res;
+    }
+
+    if (res) {
+#    if defined(CAPS_LOCK_LED_INDEX)
+        if (led_state.caps_lock) {
+            uint8_t v = light_brightness_get();
+            rgb_matrix_set_color(CAPS_LOCK_LED_INDEX, v, v, v);
+        } else {
+            rgb_matrix_set_color(CAPS_LOCK_LED_INDEX, 0, 0, 0);
+        }
+#    endif
+#    if defined(NUM_LOCK_LED_INDEX)
+        if (led_state.num_lock) {
+            uint8_t v = light_brightness_get();
+            rgb_matrix_set_color(NUM_LOCK_LED_INDEX, v, v, v);
+        } else {
+            rgb_matrix_set_color(NUM_LOCK_LED_INDEX, 0, 0, 0);
+        }
+#    endif
+        rgb_matrix_update_pwm_buffers();
+    }
+    return res;
+}
+
+#endif

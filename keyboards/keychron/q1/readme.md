@@ -1,7 +1,5 @@
 # Keychron Q1
 
-![Keychron Q1](https://cdn.shopify.com/s/files/1/0059/0630/1017/t/5/assets/pf-823ebdc7--1073.jpg)
-
 A customizable 75% keyboard.
 
 * Keyboard Maintainer: [Keychron](https://github.com/keychron)
@@ -10,11 +8,11 @@ A customizable 75% keyboard.
 
 Make example for this keyboard (after setting up your build environment):
 
-  make keychron/q1/ansi:default
+    make keychron/q1/ansi_atmega32u4:default
 
 Flashing example for this keyboard:
 
-  make keychron/q1/ansi:default:flash
+    make keychron/q1/ansi_atmega32u4:default:flash
 
 **Reset Key**: Hold down the key located at *K00*, commonly programmed as *Esc* while plugging in the keyboard.
 
