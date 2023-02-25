@@ -122,7 +122,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         switch (keycode) {
             case QK_BOOT:
 #ifdef RGB_MATRIX_ENABLE
-                // Want to turn off LEDs before calling bootloader, so here
+                // We want to turn off LEDs before calling bootloader, so here
                 // we call rgb_matrix_disable_noeeprom() and set a flag because
                 // the LEDs won't be updated until the next frame. 
                 rgb_matrix_disable_noeeprom();
