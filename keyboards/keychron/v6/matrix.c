@@ -22,11 +22,11 @@ static pin_t col_pins[MATRIX_COLS] = MATRIX_COL_PINS;
 #define ROWS_PER_HAND (MATRIX_ROWS)
 
 /* Pin connected to DS of 74HC595 */
-#define HC595_DS C15
+#define HC595_DS  C15
 /* Pin connected to SH_CP of 74HC595 */
 #define HC595_SHCP A1
 /* Pin connected to ST_CP of 74HC595 */
-#define HC595_STCP A0
+#define HC595_STCP  A0
 
 static inline void setPinOutput_writeLow(pin_t pin) {
     ATOMIC_BLOCK_FORCEON {

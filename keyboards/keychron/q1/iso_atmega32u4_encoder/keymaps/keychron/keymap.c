@@ -1,4 +1,4 @@
-/* Copyright 2021 @ Keychron (https://www.keychron.com)
+/* Copyright 2022 @ Keychron (https://www.keychron.com)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,6 +16,7 @@
 
 #include QMK_KEYBOARD_H
 #include "keychron_common.h"
+#include "keychron_ft_common.h"
 
 // clang-format off
 
@@ -49,7 +50,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB,   KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,     KC_Y,     KC_U,     KC_I,     KC_O,     KC_P,     KC_LBRC,    KC_RBRC,                      KC_PGDN,
         KC_CAPS,  KC_A,     KC_S,     KC_D,     KC_F,     KC_G,     KC_H,     KC_J,     KC_K,     KC_L,     KC_SCLN,  KC_QUOT,    KC_NUHS,  KC_ENT,             KC_HOME,
         KC_LSFT,  KC_NUBS,  KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,     KC_N,     KC_M,     KC_COMM,  KC_DOT,   KC_SLSH,              KC_RSFT,  KC_UP,
-        KC_LCTL,  KC_LGUI,  KC_LALT,                                KC_SPC,                                 KC_RALT,  MO(WIN_FN), KC_RCTL,  KC_LEFT,  KC_DOWN,  KC_RGHT),
+        KC_LCTL,  KC_LWIN,  KC_LALT,                                KC_SPC,                                 KC_RALT,  MO(WIN_FN), KC_RCTL,  KC_LEFT,  KC_DOWN,  KC_RGHT),
 
     [WIN_FN] = LAYOUT_iso_83(
         _______,            KC_BRID,  KC_BRIU,  KC_TASK,  KC_FLXP,  RGB_VAD,  RGB_VAI,  KC_MPRV,  KC_MPLY,  KC_MNXT,  KC_MUTE,    KC_VOLD,  KC_VOLU,  _______,  RGB_TOG,
@@ -60,17 +61,30 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______,  _______,  _______,                                _______,                                _______,  _______,    _______,  _______,  _______,  _______)
 };
 
+// clang-format on
+
 #if defined(ENCODER_MAP_ENABLE)
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][2] = {
-    [MAC_BASE] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
-    [MAC_FN]   = { ENCODER_CCW_CW(RGB_VAD, RGB_VAI) },
-    [WIN_BASE] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
-    [WIN_FN]   = { ENCODER_CCW_CW(RGB_VAD, RGB_VAI) },
+    [MAC_BASE] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU)},
+    [MAC_FN]   = { ENCODER_CCW_CW(RGB_VAD, RGB_VAI)},
+    [WIN_BASE] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU)},
+    [WIN_FN]   = { ENCODER_CCW_CW(RGB_VAD, RGB_VAI)}
 };
-#endif
+#endif // ENCODER_MAP_ENABLE
+
+// clang-format on
+
+void housekeeping_task_user(void) {
+    housekeeping_task_keychron();
+    housekeeping_task_keychron_ft();
+}
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (!process_record_keychron(keycode, record)) {
+        return false;
+    }
+
+    if (!process_record_keychron_ft(keycode, record)) {
         return false;
     }
 

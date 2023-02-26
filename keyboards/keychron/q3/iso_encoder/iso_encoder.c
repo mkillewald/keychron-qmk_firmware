@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "iso_encoder.h"
+#include "quantum.h"
 
 #ifdef RGB_MATRIX_ENABLE
 
@@ -144,7 +144,7 @@ led_config_t g_led_config = {
     {
         // RGB LED Index to Flag
         1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,    1, 1, 1,
-        1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 1, 1, 1,
+        4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 1, 1, 1,
         1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,    1, 1, 1,
         8, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1,
         1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,    1,    1,
@@ -152,4 +152,4 @@ led_config_t g_led_config = {
     }
 };
 
-#endif // RGB_MATRIX_ENABLE
+#endif

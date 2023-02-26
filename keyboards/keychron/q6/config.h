@@ -16,26 +16,26 @@
 
 #pragma once
 
-/* Key matrix size */
-#define MATRIX_ROWS 6
-#define MATRIX_COLS 20
-
 /* COL2ROW or ROW2COL */
 #define DIODE_DIRECTION ROW2COL
-
-/* Set 0 if debouncing isn't needed */
-#define DEBOUNCE 5
 
 /* RGB Matrix Driver Configuration */
 #define DRIVER_COUNT 2
 #define DRIVER_ADDR_1 0b1110111
 #define DRIVER_ADDR_2 0b1110100
 
-#define CKLED2001_CURRENT_TUNE \
-    { 0xA4, 0xA4, 0x52, 0xA4, 0xA4, 0x52, 0xA4, 0xA4, 0x52, 0xA4, 0xA4, 0x52 }
+/* Increase I2C speed to 1000 KHz */
+#define I2C1_TIMINGR_PRESC 0U
+#define I2C1_TIMINGR_SCLDEL 3U
+#define I2C1_TIMINGR_SDADEL 0U
+#define I2C1_TIMINGR_SCLH 15U
+#define I2C1_TIMINGR_SCLL 51U
+
+#define CKLED2001_CURRENT_TUNE { 0xA4, 0xA4, 0x52, 0xA4, 0xA4, 0x52, 0xA4, 0xA4, 0x52, 0xA4, 0xA4, 0x52 }
 
 /* DIP switch */
 #define DIP_SWITCH_MATRIX_GRID  { {5, 4} }
+#define SCAN_COUNT_MAX 100
 
 /* Disable DIP switch in matrix data */
 #define MATRIX_MASKED
@@ -98,3 +98,8 @@
 
 #define RGB_MATRIX_FRAMEBUFFER_EFFECTS
 #define RGB_MATRIX_KEYPRESSES
+
+/* Enable receive custom command from host */
+#define RAW_HID_CMD 0xAB
+
+#define HOLD_ON_OTHER_KEY_PRESS

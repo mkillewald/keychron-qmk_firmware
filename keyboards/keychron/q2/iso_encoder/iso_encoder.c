@@ -1,4 +1,4 @@
-/* Copyright 2021 @ Keychron (https://www.keychron.com)
+/* Copyright 2022 @ Keychron (https://www.keychron.com)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,9 +14,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "iso_encoder.h"
+#include "quantum.h"
 
 #ifdef RGB_MATRIX_ENABLE
+
 const ckled2001_led PROGMEM g_ckled2001_leds[RGB_MATRIX_LED_COUNT] = {
 /* Refer to IS31 manual for these locations
  *   driver
@@ -111,7 +112,7 @@ led_config_t g_led_config = {
     },
     {
         // LED Index to Physical Position
-        {0,0},  {15,0},  {29,0},  {44,0},  {59,0},  {73,0},  {88,0},  {103,0},  {118,0},  {132,0},  {147,0},  {162,0},  {176,0},  {198,0},            {224,0},
+        {0,0},  {15,0},  {29,0},  {44,0},  {59,0},  {73,0},  {88,0},  {103,0},  {118,0},  {132,0},  {147,0},  {162,0},  {176,0},  {198,0},            {224,0},  // {224,-4}
         {4,15}, {22,15}, {37,15}, {51,15}, {66,15}, {81,15}, {95,15}, {110,15}, {125,15}, {140,15}, {154,15}, {169,15}, {184,15},                     {224,15},
         {6,30}, {26,30}, {40,30}, {55,30}, {70,30}, {84,30}, {99,30}, {114,30}, {129,30}, {143,30}, {158,30}, {173,30}, {187,30}, {204,23},           {224,30},
         {2,45}, {18,45}, {33,45}, {48,45}, {62,45}, {77,45}, {92,45}, {106,45}, {121,45}, {136,45}, {151,45}, {165,45},           {185,45}, {209,49},
@@ -121,10 +122,10 @@ led_config_t g_led_config = {
         // RGB LED Index to Flag
         1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1,    1,
         1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,       1,
-        1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1,    1,
+        8, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1,    1,
         1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,    1, 1,
         1, 1, 1,          4,          1, 1, 1, 1, 1, 1
     }
 };
 
-#endif // RGB_MATRIX_ENABLE
+#endif

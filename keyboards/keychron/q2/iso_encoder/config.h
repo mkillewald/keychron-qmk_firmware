@@ -1,4 +1,4 @@
-/* Copyright 2021 @ Keychron (https://www.keychron.com)
+/* Copyright 2022 @ Keychron (https://www.keychron.com)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,8 +21,15 @@
 #define DRIVER_2_LED_TOTAL 34
 #define RGB_MATRIX_LED_COUNT (DRIVER_1_LED_TOTAL + DRIVER_2_LED_TOTAL)
 
-/* Encoder used pins */
-#define ENCODERS_PAD_A { A10 }
-#define ENCODERS_PAD_B { B5 }
-#define ENCODER_RESOLUTION 4
+#define CKLED2001_CURRENT_TUNE \
+    { 0xC8, 0xC8, 0x60, 0xC8, 0xC8, 0x60, 0xC8, 0xC8, 0x60, 0xC8, 0xC8, 0x60 }
+
+/* Encoder Configuration */
+#define ENCODERS_PAD_A \
+    { A10 }
+#define ENCODERS_PAD_B \
+    { B5 }
 #define ENCODER_DEFAULT_POS 0x3
+
+/* Enable caps-lock LED */
+#define CAPS_LOCK_LED_INDEX 29

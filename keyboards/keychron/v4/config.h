@@ -1,4 +1,4 @@
-/* Copyright 2021 @ Keychron (https://www.keychron.com)
+/* Copyright 2 @ Keychron (https://www.keychron.com)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,16 +17,11 @@
 #pragma once
 
 /* key matrix pins */
-#define MATRIX_ROW_PINS \
-    { B4, B3, A15, A14, A13 }
-#define MATRIX_COL_PINS \
-    { C14, C15, A0, A1, A2, A3, A4, A5, A6, A7, B0, B1, A8, A9 }
+#define MATRIX_ROW_PINS { B4, B3, A15, A14, A13 }
+#define MATRIX_COL_PINS { C14, C15, A0, A1, A2, A3, A4, A5, A6, A7, B0, B1, A8, A9 }
 
 /* COL2ROW or ROW2COL */
 #define DIODE_DIRECTION ROW2COL
-
-/* Set 0 if debouncing isn't needed */
-#define DEBOUNCE 5
 
 /* RGB Matrix Driver Configuration */
 #define DRIVER_COUNT 1
@@ -39,19 +34,17 @@
 #define I2C1_TIMINGR_SCLH 15U
 #define I2C1_TIMINGR_SCLL 51U
 
-#define CKLED2001_CURRENT_TUNE \
-    { 0xD0, 0xD0, 0x60, 0xD0, 0xD0, 0x60, 0xD0, 0xD0, 0x60, 0xD0, 0xD0, 0x60 }
+#define CKLED2001_CURRENT_TUNE { 0xD0, 0xD0, 0x60, 0xD0, 0xD0, 0x60, 0xD0, 0xD0, 0x60, 0xD0, 0xD0, 0x60 }
 
 /* DIP switch */
 #define DIP_SWITCH_MATRIX_GRID  { {4,4} }
+#define SCAN_COUNT_MAX 100
 
 /* Disable DIP switch in matrix data */
 #define MATRIX_MASKED
 
 /* turn off effects when suspended */
 #define RGB_DISABLE_WHEN_USB_SUSPENDED
-
-#define DYNAMIC_KEYMAP_LAYER_COUNT 5
 
 /* EEPROM Driver Configuration */
 #define WEAR_LEVELING_LOGICAL_SIZE 2048
@@ -108,3 +101,8 @@
 
 #define RGB_MATRIX_FRAMEBUFFER_EFFECTS
 #define RGB_MATRIX_KEYPRESSES
+
+/* Enable receive custom command from host */
+#define RAW_HID_CMD 0xAB
+
+#define HOLD_ON_OTHER_KEY_PRESS

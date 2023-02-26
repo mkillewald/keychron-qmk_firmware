@@ -1,4 +1,4 @@
-/* Copyright 2021 @ Keychron (https://www.keychron.com)
+/* Copyright 2022 @ Keychron (https://www.keychron.com)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,9 +23,6 @@
 /* COL2ROW or ROW2COL */
 #define DIODE_DIRECTION ROW2COL
 
-/* Set 0 if debouncing isn't needed */
-#define DEBOUNCE 5
-
 /* RGB Matrix Driver Configuration */
 #define DRIVER_COUNT 2
 #define DRIVER_ADDR_1 0b1110111
@@ -40,8 +37,7 @@
 
 /* Scan phase of led driver set as MSKPHASE_9CHANNEL(defined as 0x03 in CKLED2001.h) */
 #define SCAN_PHASE_CHANNEL MSKPHASE_9CHANNEL
-#define CKLED2001_CURRENT_TUNE \
-    { 0xF8, 0xF8, 0x80, 0xF8, 0xF8, 0x80, 0xF8, 0xF8, 0x80, 0xF8, 0xF8, 0x80 }
+#define CKLED2001_CURRENT_TUNE { 0xF8, 0xF8, 0x80, 0xF8, 0xF8, 0x80, 0xF8, 0xF8, 0x80, 0xF8, 0xF8, 0x80 }
 
 /* DIP switch */
 #define DIP_SWITCH_MATRIX_GRID  { {4,4} }
@@ -51,8 +47,6 @@
 
 /* turn off effects when suspended */
 #define RGB_DISABLE_WHEN_USB_SUSPENDED
-
-#define DYNAMIC_KEYMAP_LAYER_COUNT 5
 
 /* EEPROM Driver Configuration */
 #define WEAR_LEVELING_LOGICAL_SIZE 2048
@@ -109,3 +103,8 @@
 
 #define RGB_MATRIX_FRAMEBUFFER_EFFECTS
 #define RGB_MATRIX_KEYPRESSES
+
+/* Enable receive custom command from host */
+#define RAW_HID_CMD 0xAB
+
+#define HOLD_ON_OTHER_KEY_PRESS

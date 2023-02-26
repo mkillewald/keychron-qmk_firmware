@@ -18,8 +18,6 @@
 
 #ifdef RGB_MATRIX_ENABLE
 
-// clang-format off
-
 const ckled2001_led PROGMEM g_ckled2001_leds[RGB_MATRIX_LED_COUNT] = {
 /* Refer to CKLED manual for these locations
  *   driver
@@ -92,4 +90,4 @@ led_config_t g_led_config = {
     }
 };
 
-#endif // RGB_MATRIX_ENABLE
+#endif

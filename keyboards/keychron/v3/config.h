@@ -19,9 +19,6 @@
 /* COL2ROW or ROW2COL */
 #define DIODE_DIRECTION ROW2COL
 
-/* Set 0 if debouncing isn't needed */
-#define DEBOUNCE 5
-
 /* RGB Matrix Driver Configuration */
 #define DRIVER_COUNT 2
 #define DRIVER_ADDR_1 0b1110111
@@ -39,6 +36,8 @@
 
 /* DIP switch */
 #define DIP_SWITCH_MATRIX_GRID  { {5, 4} }
+#define SCAN_COUNT_MAX 100
+#define OS_SWITCH_REVERSE
 
 /* Disable DIP switch in matrix data */
 #define MATRIX_MASKED
@@ -101,3 +100,8 @@
 
 #define RGB_MATRIX_FRAMEBUFFER_EFFECTS
 #define RGB_MATRIX_KEYPRESSES
+
+/* Enable receive custom command from host */
+#define RAW_HID_CMD 0xAB
+
+#define HOLD_ON_OTHER_KEY_PRESS

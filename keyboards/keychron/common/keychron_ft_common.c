@@ -14,8 +14,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "raw_hid.h"
 #include "keychron_ft_common.h"
+#include "raw_hid.h"
 
 // clang-format off
 enum {

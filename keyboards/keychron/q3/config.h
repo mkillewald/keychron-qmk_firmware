@@ -16,15 +16,14 @@
 
 #pragma once
 
-/* key matrix size */
-#define MATRIX_ROWS 6
-#define MATRIX_COLS 16
-
 /* COL2ROW or ROW2COL */
 #define DIODE_DIRECTION ROW2COL
 
 /* Set 0 if debouncing isn't needed */
 #define DEBOUNCE 5
+
+/* Drive high instead of pull high to unselect */
+#define MATRIX_UNSELECT_DRIVE_HIGH
 
 /* RGB Matrix Driver Configuration */
 #define DRIVER_COUNT 2
@@ -36,13 +35,17 @@
 #define I2C1_TIMINGR_SCLDEL 3U
 #define I2C1_TIMINGR_SDADEL 0U
 #define I2C1_TIMINGR_SCLH 15U
-#define I2C1_TIMINGR_SCLL 51U
+#define I2C1_TIMINGR_SCLL 30U
 
 /* Scan phase of led driver set as MSKPHASE_9CHANNEL(defined as 0x03 in CKLED2001.h) */
 #define PHASE_CHANNEL MSKPHASE_9CHANNEL
 
 /* DIP switch */
-#define DIP_SWITCH_MATRIX_GRID  { {5, 4} }
+#define DIP_SWITCH_MATRIX_GRID \
+    {                          \
+        { 5, 4 }               \
+    }
+#define SCAN_COUNT_MAX 100
 
 /* Disable DIP switch in matrix data */
 #define MATRIX_MASKED
@@ -103,5 +106,5 @@
 #define ENABLE_RGB_MATRIX_SOLID_SPLASH
 // #define ENABLE_RGB_MATRIX_SOLID_MULTISPLASH
 
-#define RGB_MATRIX_KEYPRESSES
 #define RGB_MATRIX_FRAMEBUFFER_EFFECTS
+#define RGB_MATRIX_KEYPRESSES
