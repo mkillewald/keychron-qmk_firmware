@@ -20,8 +20,10 @@
 #define DIODE_DIRECTION ROW2COL
 
 /* Key matrix pins */
-#define MATRIX_ROW_PINS { B4, B3, A15, A14, A13 }
-#define MATRIX_COL_PINS { C14, C15, A0, A1, A2, A3, A4, A5, A6, A7, B0, B1, A8, A9, H3 }
+#define MATRIX_ROW_PINS \
+    { B4, B3, A15, A14, A13 }
+#define MATRIX_COL_PINS \
+    { C14, C15, A0, A1, A2, A3, A4, A5, A6, A7, B0, B1, A8, A9, H3 }
 
 /* If PH3 used with a stronger pull resistor then the following definition needs be included */
 // #define MATRIX_UNSELECT_DRIVE_HIGH
@@ -36,14 +38,18 @@
 #define I2C1_TIMINGR_SCLDEL 3U
 #define I2C1_TIMINGR_SDADEL 0U
 #define I2C1_TIMINGR_SCLH 15U
-#define I2C1_TIMINGR_SCLL 51U
+#define I2C1_TIMINGR_SCLL 30U
 
 /* Scan phase of led driver set as MSKPHASE_9CHANNEL(defined as 0x03 in CKLED2001.h) */
 #define PHASE_CHANNEL MSKPHASE_9CHANNEL
-#define CKLED2001_CURRENT_TUNE { 0xC4, 0xC4, 0x60, 0xC4, 0xC4, 0x60, 0xC4, 0xC4, 0x60, 0xC4, 0xC4, 0x60 }
+#define CKLED2001_CURRENT_TUNE \
+    { 0xC4, 0xC4, 0x60, 0xC4, 0xC4, 0x60, 0xC4, 0xC4, 0x60, 0xC4, 0xC4, 0x60 }
 
 /* DIP switch */
-#define DIP_SWITCH_MATRIX_GRID  { {4, 4} }
+#define DIP_SWITCH_MATRIX_GRID \
+    {                          \
+        { 4, 4 }               \
+    }
 #define SCAN_COUNT_MAX 100
 
 /* Disable DIP switch in matrix data */
@@ -107,8 +113,3 @@
 
 #define RGB_MATRIX_FRAMEBUFFER_EFFECTS
 #define RGB_MATRIX_KEYPRESSES
-
-/* Enable receive custom command from host */
-#define RAW_HID_CMD 0xAB
-
-#define HOLD_ON_OTHER_KEY_PRESS

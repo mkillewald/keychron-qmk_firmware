@@ -8,15 +8,11 @@ A customizable 75% split keyboard.
 
 Make example for this keyboard (after setting up your build environment):
 
-```bash
-make keychron/q11/q11_ansi_stm32l432:default
-```
+    make keychron/q11/q11_ansi_stm32l432:default
 
 Flashing example for this keyboard:
 
-```bash
-make keychron/q11/q11_ansi_stm32l432:default:flash
-```
+    make keychron/q11/q11_ansi_stm32l432:default:flash
 
 **Reset Key**: Hold down the key located at *K01*, which programmed as *Esc* while plugging in the keyboard.
 
