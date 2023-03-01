@@ -37,6 +37,14 @@ uint8_t             factory_reset_count = 0;
 bool                report_os_sw_state  = false;
 extern matrix_row_t matrix[MATRIX_ROWS];
 
+#ifdef SPLIT_KEYBOARD
+#    ifdef RGB_MATRIX_ENABLE
+uint8_t led_state        = 0;
+uint8_t light_test_state = 0;
+HSV     hsv;
+#    endif
+#endif
+
 __attribute__((weak)) bool process_record_keychron_ft(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case MO(1):
@@ -123,6 +131,11 @@ static void factory_reset(void) {
         rgb_matrix_enable();
     }
     rgb_matrix_init();
+#    ifdef SPLIT_KEYBOARD
+    led_state = rgb_matrix_get_mode();
+    hsv       = rgb_matrix_get_hsv();
+    rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
+#    endif
 #endif
 }
 
@@ -132,6 +145,9 @@ static void timer_3s_task(void) {
         if (key_press_status == KEY_PRESS_FACTORY_RESET) {
             factory_reset();
         } else if (key_press_status == KEY_PRESS_LED_TEST) {
+#ifdef SPLIT_KEYBOARD
+            rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
+#endif
             led_test_mode = LED_TEST_MODE_WHITE;
 #ifdef LED_MATRIX_ENABLE
             if (!led_matrix_is_enabled()) {
@@ -153,6 +169,10 @@ static void timer_300ms_task(void) {
         if (factory_reset_count++ > 6) {
             timer_300ms_buffer  = 0;
             factory_reset_count = 0;
+#ifdef SPLIT_KEYBOARD
+            rgb_matrix_mode_noeeprom(led_state);
+            rgb_matrix_sethsv_noeeprom(hsv.h, hsv.s, hsv.v);
+#endif
         } else {
             timer_300ms_buffer = sync_timer_read32() == 0 ? 1 : sync_timer_read32();
         }
@@ -173,29 +193,53 @@ bool led_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
 #ifdef RGB_MATRIX_ENABLE
 bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     if (factory_reset_count) {
-        for (uint8_t i = led_min; i <= led_max; i++) {
-            rgb_matrix_set_color(i, factory_reset_count % 2 ? 0 : RGB_RED);
+        if (rgb_matrix_get_mode() == RGB_MATRIX_SOLID_COLOR) {
+            if (factory_reset_count % 2) {
+                rgb_matrix_sethsv_noeeprom(HSV_RED);
+            } else {
+                rgb_matrix_sethsv_noeeprom(HSV_OFF);
+            }
+        } else {
+            for (uint8_t i = led_min; i <= led_max; i++) {
+                rgb_matrix_set_color(i, factory_reset_count % 2 ? 0 : RGB_RED);
+            }
         }
     } else if (led_test_mode) {
         switch (led_test_mode) {
             case LED_TEST_MODE_WHITE:
-                for (uint8_t i = led_min; i <= led_max; i++) {
-                    rgb_matrix_set_color(i, RGB_WHITE);
+                if (rgb_matrix_get_mode() == RGB_MATRIX_SOLID_COLOR) {
+                    rgb_matrix_sethsv_noeeprom(HSV_WHITE);
+                } else {
+                    for (uint8_t i = led_min; i <= led_max; i++) {
+                        rgb_matrix_set_color(i, RGB_WHITE);
+                    }
                 }
                 break;
             case LED_TEST_MODE_RED:
-                for (uint8_t i = led_min; i <= led_max; i++) {
-                    rgb_matrix_set_color(i, RGB_RED);
+                if (rgb_matrix_get_mode() == RGB_MATRIX_SOLID_COLOR) {
+                    rgb_matrix_sethsv_noeeprom(HSV_RED);
+                } else {
+                    for (uint8_t i = led_min; i <= led_max; i++) {
+                        rgb_matrix_set_color(i, RGB_RED);
+                    }
                 }
                 break;
             case LED_TEST_MODE_GREEN:
-                for (uint8_t i = led_min; i <= led_max; i++) {
-                    rgb_matrix_set_color(i, RGB_GREEN);
+                if (rgb_matrix_get_mode() == RGB_MATRIX_SOLID_COLOR) {
+                    rgb_matrix_sethsv_noeeprom(HSV_GREEN);
+                } else {
+                    for (uint8_t i = led_min; i <= led_max; i++) {
+                        rgb_matrix_set_color(i, RGB_GREEN);
+                    }
                 }
                 break;
             case LED_TEST_MODE_BLUE:
-                for (uint8_t i = led_min; i <= led_max; i++) {
-                    rgb_matrix_set_color(i, RGB_BLUE);
+                if (rgb_matrix_get_mode() == RGB_MATRIX_SOLID_COLOR) {
+                    rgb_matrix_sethsv_noeeprom(HSV_BLUE);
+                } else {
+                    for (uint8_t i = led_min; i <= led_max; i++) {
+                        rgb_matrix_set_color(i, RGB_BLUE);
+                    }
                 }
                 break;
             default:
@@ -258,7 +302,23 @@ bool via_command_kb(uint8_t *data, uint8_t length) {
         switch (data[1]) {
 #if defined(RGB_MATRIX_ENABLE)
             case FACTORY_TEST_CMD_BACKLIGHT:
-                led_test_mode   = data[2];
+                led_test_mode = data[2];
+#    if defined(SPLIT_KEYBOARD)
+                if (led_test_mode) {
+                    light_test_state += 1;
+                    if (light_test_state == 1) {
+                        led_state = rgb_matrix_get_mode();
+                        hsv       = rgb_matrix_get_hsv();
+                    }
+                    rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
+                } else {
+                    if (light_test_state) {
+                        light_test_state = 0;
+                        rgb_matrix_mode_noeeprom(led_state);
+                        rgb_matrix_sethsv_noeeprom(hsv.h, hsv.s, hsv.v);
+                    }
+                }
+#    endif
                 timer_3s_buffer = 0;
                 break;
 #endif
@@ -287,9 +347,3 @@ bool via_command_kb(uint8_t *data, uint8_t length) {
     }
     return false;
 }
-
-#if defined(MCU) && (MCU == STM32L432)
-void restart_usb_driver(USBDriver *usbp) {
-    (void)usbp;
-}
-#endif

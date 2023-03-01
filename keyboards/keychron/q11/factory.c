@@ -17,81 +17,77 @@
 #include "keychron_ft_common.h"
 #include "split_util.h"
 
-bool process_record_ft(uint16_t keycode, keyrecord_t *record) {
+static bool skip_next_step = false;
+
+bool process_record_keychron_ft(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case MO(1):
         case MO(2):
         case MO(3):
         case MO(4):
             if (record->event.pressed) {
-                key_press_status |= KEY_PRESS_FN;
+                key_press_status |= KEY_PRESS_STEP_0;
             } else {
-                key_press_status &= ~KEY_PRESS_FN;
+                key_press_status &= ~KEY_PRESS_STEP_0;
                 timer_3s_buffer = 0;
             }
             return true;
-        case KC_STEP_1:
-#if defined(KEYBOARD_keychron_q11_q11_ansi_stm32l432_ec11)
+        case KC_ESC:
             if (is_transport_connected() || !is_keyboard_left()) {
                 return true;
             } else {
                 skip_next_step = true;
             }
-        case KC_STEP_5:
+        case KC_EQL:
             if ((is_transport_connected() || is_keyboard_left()) && !skip_next_step) {
                 return true;
             } else {
                 skip_next_step = true;
             }
-        case KC_STEP_9:
+        case KC_J:
             if (!is_transport_connected() && !skip_next_step) {
                 return true;
             }
             skip_next_step = false;
-#endif // KEYBOARD_keychron_q11_q11_ansi_stm32l432_ec11
             if (record->event.pressed) {
                 key_press_status |= KEY_PRESS_STEP_1;
                 if (key_press_status == KEY_PRESS_FACTORY_RESET) {
-                    timer_3s_buffer = sync_timer_read32();
+                    timer_3s_buffer = sync_timer_read32() == 0 ? 1 : sync_timer_read32();
                 }
             } else {
                 key_press_status &= ~KEY_PRESS_STEP_1;
                 timer_3s_buffer = 0;
             }
             return true;
-        case KC_STEP_2:
-#if defined(KEYBOARD_keychron_q11_q11_ansi_stm32l432_ec11)
+        case KC_6:
             if (is_transport_connected() || !is_keyboard_left()) {
                 return true;
             } else {
                 skip_next_step = true;
             }
-        case KC_STEP_6:
+        case KC_M:
             if ((is_transport_connected() || is_keyboard_left()) && !skip_next_step) {
                 return true;
             } else {
                 skip_next_step = true;
             }
-        case KC_STEP_A:
+        case KC_Z:
             if (!is_transport_connected() && !skip_next_step) {
                 return true;
             }
             skip_next_step = false;
-#endif // KEYBOARD_keychron_q11_q11_ansi_stm32l432_ec11
             if (record->event.pressed) {
                 key_press_status |= KEY_PRESS_STEP_2;
                 if (key_press_status == KEY_PRESS_FACTORY_RESET) {
-                    timer_3s_buffer = sync_timer_read32();
+                    timer_3s_buffer = sync_timer_read32() == 0 ? 1 : sync_timer_read32();
                 }
             } else {
                 key_press_status &= ~KEY_PRESS_STEP_2;
                 timer_3s_buffer = 0;
             }
             return true;
-        case KC_STEP_3:
-#if defined(KEYBOARD_keychron_q11_q11_ansi_stm32l432_ec11)
-        case KC_STEP_7:
-#endif // KEYBOARD_keychron_q11_q11_ansi_stm32l432_ec11
+        case KC_LSFT:
+        case KC_RIGHT:
             if (record->event.pressed) {
                 key_press_status |= KEY_PRESS_STEP_3;
                 if (led_test_mode) {
@@ -99,31 +95,25 @@ bool process_record_ft(uint16_t keycode, keyrecord_t *record) {
                         led_test_mode = LED_TEST_MODE_WHITE;
                     }
                 } else if (key_press_status == KEY_PRESS_LED_TEST) {
-                    timer_3s_buffer = sync_timer_read32();
+                    timer_3s_buffer = sync_timer_read32() == 0 ? 1 : sync_timer_read32();
                 }
             } else {
                 key_press_status &= ~KEY_PRESS_STEP_3;
                 timer_3s_buffer = 0;
             }
             return true;
-        case KC_STEP_4:
-#if defined(KEYBOARD_keychron_q11_q11_ansi_stm32l432_ec11)
-        case KC_STEP_8:
-#endif // KEYBOARD_keychron_q11_q11_ansi_stm32l432_ec11
+        case KC_5:
+        case KC_HOME:
             if (record->event.pressed) {
                 key_press_status |= KEY_PRESS_STEP_4;
                 if (led_test_mode) {
                     led_test_mode = LED_TEST_MODE_OFF;
-#if defined(KEYBOARD_keychron_q11_q11_ansi_stm32l432_ec11) && defined(RGB_MATRIX_ENABLE)
                     rgb_matrix_mode_noeeprom(led_state);
                     rgb_matrix_sethsv_noeeprom(hsv.h, hsv.s, hsv.v);
-#endif
                 } else if (key_press_status == KEY_PRESS_LED_TEST) {
-#if defined(KEYBOARD_keychron_q11_q11_ansi_stm32l432_ec11) && defined(RGB_MATRIX_ENABLE)
-                    led_state = rgb_matrix_get_mode();
-                    hsv       = rgb_matrix_get_hsv();
-#endif
-                    timer_3s_buffer = sync_timer_read32();
+                    led_state       = rgb_matrix_get_mode();
+                    hsv             = rgb_matrix_get_hsv();
+                    timer_3s_buffer = sync_timer_read32() == 0 ? 1 : sync_timer_read32();
                 }
             } else {
                 key_press_status &= ~KEY_PRESS_STEP_4;

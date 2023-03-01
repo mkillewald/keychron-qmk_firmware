@@ -36,6 +36,13 @@ enum {
 
 extern uint16_t key_press_status;
 extern uint32_t timer_3s_buffer;
+#ifdef SPLIT_KEYBOARD
+#    ifdef RGB_MATRIX_ENABLE
+extern uint8_t led_state;
+extern uint8_t light_test_state;
+extern HSV     hsv;
+#    endif
+#endif
 
 void housekeeping_task_keychron_ft(void);
 bool process_record_keychron_ft(uint16_t keycode, keyrecord_t *record);
