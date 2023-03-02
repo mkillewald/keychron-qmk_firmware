@@ -1,4 +1,4 @@
-/* Copyright 2020 QMK
+/* Copyright 2023 @ Keychron (https://www.keychron.com)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,21 +16,38 @@
 
 #pragma once
 
-#include_next <mcuconf.h>
-
-/* Set HCLK to 48 MHz as tradeoff of USB lowest clockand and
- * lower power comsumption for bluetooth. Will use dynamic
- * clock when STM32L4 is supported in ChibiOS */
-#undef STM32_PLLM_VALUE
-#define STM32_PLLM_VALUE 2
-
-#undef STM32_PLLN_VALUE
-#define STM32_PLLN_VALUE 12
-
-#undef STM32_I2C_USE_I2C1
-#define STM32_I2C_USE_I2C1 TRUE
-
-#ifdef KC_BLUETOOTH_ENABLE
-#    undef STM32_SERIAL_USE_USART2
-#    define STM32_SERIAL_USE_USART2 TRUE
+#include "quantum.h"
+#ifdef VIA_ENABLE
+#    include "via.h"
 #endif
+
+#define ___ KC_NO
+
+#ifdef VIA_ENABLE
+#    define USER_START USER00
+#else
+#    define USER_START SAFE_RANGE
+#endif
+
+// clang-format off
+enum {
+    KC_LOPTN = USER_START,
+    KC_ROPTN,
+    KC_LCMMD,
+    KC_RCMMD,
+    KC_MCTL,
+    KC_LNPD,
+    KC_TASK,
+    KC_FILE,
+    KC_SNAP,
+    KC_CTANA,
+    KC_SIRI,
+#ifdef KC_BLUETOOTH_ENABLE
+    BT_HST1,
+    BT_HST2,
+    BT_HST3,
+#endif
+    BAT_LVL,
+    NEW_SAFE_RANGE,
+};
+

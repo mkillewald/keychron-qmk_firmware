@@ -1,4 +1,4 @@
-/* Copyright 2021 @ Keychron (https://www.keychron.com)
+/* Copyright 2022 @ Keychron (https://www.keychron.com)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,17 +17,20 @@
 #pragma once
 
 /* key matrix size */
-#define MATRIX_ROWS 6
-#define MATRIX_COLS 17
+#define MATRIX_ROWS 5
+#define MATRIX_COLS 16
 
 /* Key matrix pins */
 #define MATRIX_ROW_PINS \
-    { B5, B4, B3, A15, A14, A13 }
+    { B4, B3, A15, A14, A13 }
 #define MATRIX_COL_PINS \
-    { B0, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN }
+    { C15, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN }
 
 /* COL2ROW or ROW2COL */
 #define DIODE_DIRECTION ROW2COL
+
+/* Use SPI to drive 74HC595 shift register */
+#define DRIVE_SHRIFT_REGISTER_WITH_SPI
 
 /* Turn off effects when suspended */
 #define RGB_DISABLE_WHEN_USB_SUSPENDED
@@ -41,7 +44,7 @@
     { A8 }
 
 /* Caps lock LED Pin */
-#define LED_CAPS_LOCK_PIN A7
+#define LED_CAPS_LOCK_PIN A0
 #define LED_PIN_ON_STATE 1
 
 #ifdef KC_BLUETOOTH_ENABLE
@@ -60,19 +63,15 @@
 
 #    define HOST_DEVICES_COUNT 3
 
-#    define HOST_LED_PIN_LIST \
-        { H3, H3, H3 }
-#    define HOST_LED_PIN_ON_STATE 1
-
 #    if defined(RGB_MATRIX_ENABLE) || defined(LED_MATRIX_ENABLE)
 
 #        define LED_DRIVER_SHUTDOWN_PIN C14
 
 #        define HOST_LED_MATRIX_LIST \
-            { 17, 18, 19 }
+            { 16, 17, 18 }
 
 #        define BAT_LEVEL_LED_LIST \
-            { 17, 18, 19, 20, 21, 22, 23, 24, 25, 26 }
+            { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }
 
 /* Backlit disable timeout when keyboard is disconnected(unit: second) */
 #        define DISCONNECTED_BACKLIGHT_DISABLE_TIMEOUT 40
