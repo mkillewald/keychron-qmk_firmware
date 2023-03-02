@@ -69,7 +69,7 @@ static uint8_t  factory_reset_ind_state = 0;
 static bool     report_os_sw_state      = false;
 
 void factory_timer_start(void) {
-    factory_reset_timer = sync_timer_read32() | 1;
+    factory_reset_timer = sync_timer_read32() == 0 ? 1 : sync_timer_read32();
 }
 
 static inline void factory_timer_check(void) {
@@ -77,7 +77,7 @@ static inline void factory_timer_check(void) {
         factory_reset_timer = 0;
 
         if (factory_reset_state == KEY_PRESS_FACTORY_RESET) {
-            factory_reset_ind_timer = sync_timer_read32() | 1;
+            factory_reset_ind_timer = sync_timer_read32() == 0 ? 1 : sync_timer_read32();
             factory_reset_ind_state++;
 
             layer_state_t default_layer_tmp = default_layer_state;
@@ -114,7 +114,7 @@ static inline void factory_reset_ind_timer_check(void) {
         if (factory_reset_ind_state++ > 6) {
             factory_reset_ind_timer = factory_reset_ind_state = 0;
         } else {
-            factory_reset_ind_timer = sync_timer_read32() | 1;
+            factory_reset_ind_timer = sync_timer_read32() == 0 ? 1 : sync_timer_read32();
         }
     }
 }
@@ -187,7 +187,7 @@ bool led_matrix_indicators_user(void) {
         led_matrix_set_value_all(factory_reset_ind_state % 2 ? 0 : 255);
     }
 
-    return false;
+    return true;
 }
 #endif
 
@@ -213,7 +213,7 @@ bool rgb_matrix_indicators_user(void) {
         }
     }
 
-    return false;
+    return true;
 }
 #endif
 

@@ -49,7 +49,7 @@
 #    define CONNECTED_BACKLIGHT_OFF_DELAY_TIME 600
 #endif
 
-#ifdef BAT_LOW_LED_PIN
+#if defined(BAT_LOW_LED_PIN) || defined(BAT_LOW_LED_PIN_STATE)
 /* Uint: ms */
 #    ifndef LOW_BAT_LED_BLINK_PERIOD
 #        define LOW_BAT_LED_BLINK_PERIOD 1000
