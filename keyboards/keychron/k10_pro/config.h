@@ -1,4 +1,4 @@
-/* Copyright 2021 @ Keychron (https://www.keychron.com)
+/* Copyright 2023 @ Keychron (https://www.keychron.com)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,18 +18,18 @@
 
 /* key matrix size */
 #define MATRIX_ROWS 6
-#define MATRIX_COLS 17
+#define MATRIX_COLS 21
 
 /* Key matrix pins */
 #define MATRIX_ROW_PINS \
     { B5, B4, B3, A15, A14, A13 }
 #define MATRIX_COL_PINS \
-    { B0, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN }
+    { B0, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN,  NO_PIN, NO_PIN, NO_PIN, NO_PIN }
 
 /* COL2ROW or ROW2COL */
 #define DIODE_DIRECTION ROW2COL
 
-/* Turn off effects when suspended */
+/* turn off effects when suspended */
 #define RGB_DISABLE_WHEN_USB_SUSPENDED
 #define LED_DISABLE_WHEN_USB_SUSPENDED
 
@@ -69,10 +69,10 @@
 #        define LED_DRIVER_SHUTDOWN_PIN C14
 
 #        define HOST_LED_MATRIX_LIST \
-            { 17, 18, 19 }
+            { 21, 22, 23 }
 
 #        define BAT_LEVEL_LED_LIST \
-            { 17, 18, 19, 20, 21, 22, 23, 24, 25, 26 }
+            { 21, 22, 23, 24, 25, 26, 27, 28, 29, 30 }
 
 /* Backlit disable timeout when keyboard is disconnected(unit: second) */
 #        define DISCONNECTED_BACKLIGHT_DISABLE_TIMEOUT 40
@@ -88,14 +88,14 @@
 #    define BLUETOOTH_NKRO_ENABLE
 
 /* Raw hid command for factory test and bluetooth DFU */
-#   define RAW_HID_CMD 0xAA ... 0xAB
+#    define RAW_HID_CMD 0xAA ... 0xAB
 #else
 /* Raw hid command for factory test */
-#   define RAW_HID_CMD 0xAB
+#    define RAW_HID_CMD 0xAB
 #endif
 
 /* Emulated EEPROM configuration */
 #define FEE_DENSITY_BYTES FEE_PAGE_SIZE
-#define DYNAMIC_KEYMAP_EEPROM_MAX_ADDR  2047
+#define DYNAMIC_KEYMAP_EEPROM_MAX_ADDR 2047
 
 //#define NO_PRINT
