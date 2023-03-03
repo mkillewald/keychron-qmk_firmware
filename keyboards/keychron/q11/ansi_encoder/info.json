@@ -10,9 +10,17 @@
     },
     "encoder": {
         "rotary": [
-            {"pin_a": "B0", "pin_b": "B1"},
-            {"pin_a": "C14", "pin_b": "C15"}
+            {"pin_a": "B0", "pin_b": "B1"}
         ]
+    },
+    "split": {
+        "encoder": {
+            "right": {
+                "rotary": [
+                    {"pin_a": "C14", "pin_b": "C15"}
+                ]
+            }
+        }
     },
     "processor": "STM32L432",
     "bootloader": "stm32-dfu",
