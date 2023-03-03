@@ -32,13 +32,17 @@
 #define I2C1_TIMINGR_SCLDEL 3U
 #define I2C1_TIMINGR_SDADEL 0U
 #define I2C1_TIMINGR_SCLH 15U
-#define I2C1_TIMINGR_SCLL 51U
+#define I2C1_TIMINGR_SCLL 30U
 
 /* Limit the maximum brigtness current of colour white to 500mA */
-#define CKLED2001_CURRENT_TUNE { 0xA8, 0xA8, 0x48, 0xA8, 0xA8, 0x48, 0xA8, 0xA8, 0x48, 0xA8, 0xA8, 0x48 }
+#define CKLED2001_CURRENT_TUNE \
+    { 0xA8, 0xA8, 0x48, 0xA8, 0xA8, 0x48, 0xA8, 0xA8, 0x48, 0xA8, 0xA8, 0x48 }
 
 /* DIP switch */
-#define DIP_SWITCH_MATRIX_GRID  { {5, 4} }
+#define DIP_SWITCH_MATRIX_GRID \
+    {                          \
+        { 5, 4 }               \
+    }
 #define SCAN_COUNT_MAX 100
 
 /* Disable DIP switch in matrix data */
@@ -46,6 +50,10 @@
 
 /* turn off effects when suspended */
 #define RGB_DISABLE_WHEN_USB_SUSPENDED
+
+/* EEPROM Driver Configuration */
+#define WEAR_LEVELING_LOGICAL_SIZE 2048
+#define WEAR_LEVELING_BACKING_SIZE (WEAR_LEVELING_LOGICAL_SIZE * 2)
 
 // RGB Matrix Animation modes. Explicitly enabled
 // For full list of effects, see:
@@ -79,16 +87,15 @@
 #define ENABLE_RGB_MATRIX_PIXEL_RAIN
 // #define ENABLE_RGB_MATRIX_PIXEL_FLOW
 // #define ENABLE_RGB_MATRIX_PIXEL_FRACTAL
-// enabled only if RGB_MATRIX_FRAMEBUFFER_EFFECTS is defined
+
 
 #define RGB_MATRIX_FRAMEBUFFER_EFFECTS
-
+// enabled only if RGB_MATRIX_FRAMEBUFFER_EFFECTS is defined
 #define ENABLE_RGB_MATRIX_TYPING_HEATMAP
 #define ENABLE_RGB_MATRIX_DIGITAL_RAIN
-// enabled only of RGB_MATRIX_KEYPRESSES or RGB_MATRIX_KEYRELEASES is defined
 
 #define RGB_MATRIX_KEYPRESSES
-
+// enabled only of RGB_MATRIX_KEYPRESSES or RGB_MATRIX_KEYRELEASES is defined
 #define ENABLE_RGB_MATRIX_SOLID_REACTIVE_SIMPLE
 // #define ENABLE_RGB_MATRIX_SOLID_REACTIVE
 // #define ENABLE_RGB_MATRIX_SOLID_REACTIVE_WIDE
@@ -101,6 +108,3 @@
 // #define ENABLE_RGB_MATRIX_MULTISPLASH
 #define ENABLE_RGB_MATRIX_SOLID_SPLASH
 // #define ENABLE_RGB_MATRIX_SOLID_MULTISPLASH
-
-/* To keep the old default behavior of mod-taps */
-#define HOLD_ON_OTHER_KEY_PRESS

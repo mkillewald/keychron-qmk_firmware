@@ -20,17 +20,10 @@
 #define DIODE_DIRECTION ROW2COL
 
 /* key matrix pins */
-#define MATRIX_ROW_PINS { B4, B3, A15, A14, A13 }
-#define MATRIX_COL_PINS { NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, A2, A3, A4, A5, A6, A7, B0, B1 }
-
-/* Pin connected to DS of 74HC595 */
-#define DATA_PIN_74HC595 C15
-/* Pin connected to SH_CP of 74HC595 */
-#define CLOCK_PIN_74HC595 A1
-/* Pin connected to ST_CP of 74HC595 */
-#define LATCH_PIN_74HC595 A0
-/* Pin used index start of 74HC595 */
-#define PIN_START_74HC595 0
+#define MATRIX_ROW_PINS \
+    { B4, B3, A15, A14, A13 }
+#define MATRIX_COL_PINS \
+    { NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, A2, A3, A4, A5, A6, A7, B0, B1 }
 
 /* RGB Matrix Driver Configuration */
 #define DRIVER_COUNT 2
@@ -46,13 +39,17 @@
 
 /* Scan phase of led driver set as MSKPHASE_9CHANNEL(defined as 0x03 in CKLED2001.h) */
 #define PHASE_CHANNEL MSKPHASE_9CHANNEL
-#define CKLED2001_CURRENT_TUNE { 0xB8, 0xB8, 0x58, 0xB8, 0xB8, 0x58, 0xB8, 0xB8, 0x58, 0xB8, 0xB8, 0x58 }
+#define CKLED2001_CURRENT_TUNE \
+    { 0xB8, 0xB8, 0x58, 0xB8, 0xB8, 0x58, 0xB8, 0xB8, 0x58, 0xB8, 0xB8, 0x58 }
 
 /* Disable DIP switch in matrix data */
 #define MATRIX_MASKED
 
 /* DIP switch */
-#define DIP_SWITCH_MATRIX_GRID  { {4,4} }
+#define DIP_SWITCH_MATRIX_GRID \
+    {                          \
+        { 4, 4 }               \
+    }
 #define SCAN_COUNT_MAX 100
 
 /* Turn off effects when suspended */
@@ -98,9 +95,13 @@
 #define ENABLE_RGB_MATRIX_PIXEL_RAIN
 // #define ENABLE_RGB_MATRIX_PIXEL_FLOW
 // #define ENABLE_RGB_MATRIX_PIXEL_FRACTAL
+
+#define RGB_MATRIX_FRAMEBUFFER_EFFECTS
 // enabled only if RGB_MATRIX_FRAMEBUFFER_EFFECTS is defined
 #define ENABLE_RGB_MATRIX_TYPING_HEATMAP
 #define ENABLE_RGB_MATRIX_DIGITAL_RAIN
+
+#define RGB_MATRIX_KEYPRESSES
 // enabled only of RGB_MATRIX_KEYPRESSES or RGB_MATRIX_KEYRELEASES is defined
 #define ENABLE_RGB_MATRIX_SOLID_REACTIVE_SIMPLE
 // #define ENABLE_RGB_MATRIX_SOLID_REACTIVE
@@ -114,11 +115,3 @@
 // #define ENABLE_RGB_MATRIX_MULTISPLASH
 #define ENABLE_RGB_MATRIX_SOLID_SPLASH
 // #define ENABLE_RGB_MATRIX_SOLID_MULTISPLASH
-
-#define RGB_MATRIX_FRAMEBUFFER_EFFECTS
-#define RGB_MATRIX_KEYPRESSES
-
-/* Enable receive custom command from host */
-#define RAW_HID_CMD 0xAB
-
-#define HOLD_ON_OTHER_KEY_PRESS

@@ -44,10 +44,4 @@
 #define I2C1_TIMINGR_SCLDEL 3U
 #define I2C1_TIMINGR_SDADEL 0U
 #define I2C1_TIMINGR_SCLH 15U
-#define I2C1_TIMINGR_SCLL 51U
-
-/* Enable receive custom command from host */
-#define RAW_HID_CMD 0xAB
-
-/* To keep the old default behavior of mod-taps */
-#define HOLD_ON_OTHER_KEY_PRESS
+#define I2C1_TIMINGR_SCLL 30U

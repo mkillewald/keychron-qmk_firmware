@@ -15,6 +15,6 @@
  */
 
 #define HAL_USE_I2C TRUE
-#define PAL_USE_CALLBACKS TRUE
+#define PAL_USE_CALLBACKS FALSE
 
 #include_next <halconf.h>

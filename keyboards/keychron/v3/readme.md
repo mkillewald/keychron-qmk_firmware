@@ -8,15 +8,11 @@ A customizable 80% keyboard.
 
 Make example for this keyboard (after setting up your build environment):
 
-```base
-make keychron/v3/v3_ansi_stm32l432:default
-```
+    make keychron/v3/ansi:default
 
 Flashing example for this keyboard:
 
-```base
-make keychron/v3/v3_ansi_stm32l432:default:flash
-```
+    make keychron/v3/v3_ansi_stm32l432:default:flash
 
 **Reset Key**: Hold down the key located at *K00*, commonly programmed as *Esc* while plugging in the keyboard.
 

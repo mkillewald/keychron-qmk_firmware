@@ -10,11 +10,11 @@ Q4 Version 1 uses only 2 ICs for CKLED2001 and Q4 Version 2 uses only one IC.
 
 Make example for this keyboard (after setting up your build environment):
 
-    make keychron/q4/q4_rev2_ansi_stm32l432:default
+    make keychron/q4/ansi_v1:default
 
 Flashing example for this keyboard ([after setting up the bootloadHID flashing environment](https://docs.qmk.fm/#/flashing_bootloadhid))
 
-    make keychron/q4/q4_rev2_ansi_stm32l432:default:flash
+    make keychron/q4/ansi_v1:default:flash
 
 **Reset Key**: Hold down the key located at *K00*, commonly programmed as *Esc* while plugging in the keyboard.
 

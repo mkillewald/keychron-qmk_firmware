@@ -25,10 +25,6 @@
     { 0xC8, 0xC8, 0x60, 0xC8, 0xC8, 0x60, 0xC8, 0xC8, 0x60, 0xC8, 0xC8, 0x60 }
 
 /* Encoder Configuration */
-#define ENCODERS_PAD_A \
-    { A10 }
-#define ENCODERS_PAD_B \
-    { B5 }
 #define ENCODER_DEFAULT_POS 0x3
 
 /* Enable caps-lock LED */
