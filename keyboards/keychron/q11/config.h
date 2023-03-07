@@ -41,11 +41,11 @@
 #define SPLIT_HAND_MATRIX_GRID A2, A15
 #define SPLIT_HAND_MATRIX_GRID_LOW_IS_RIGHT
 #define MATRIX_MASKED // actual mask is defined by `matrix_mask` in `q11.c`
-#define SPLIT_WATCHDOG_ENABLE
+// #define SPLIT_WATCHDOG_ENABLE
 // #define EE_HANDS
 // #define MASTER_LEFT
 // #define SPLIT_USB_TIMEOUT 2000
-// #define WAIT_FOR_USB
+#define NO_USB_STARTUP_CHECK
 
 /* RGB Matrix Configuration */
 #define DRIVER_COUNT 1
@@ -61,7 +61,7 @@
 #define I2C1_TIMINGR_SCLDEL 3U
 #define I2C1_TIMINGR_SDADEL 0U
 #define I2C1_TIMINGR_SCLH 15U
-#define I2C1_TIMINGR_SCLL 30U
+#define I2C1_TIMINGR_SCLL 51U
 
 #define CKLED2001_CURRENT_TUNE \
     { 0x80, 0xFF, 0xFF, 0x80, 0xFF, 0xFF, 0x80, 0xFF, 0xFF, 0x80, 0xFF, 0xFF } // 300mA
