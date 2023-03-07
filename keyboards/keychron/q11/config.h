@@ -45,7 +45,7 @@
 // #define EE_HANDS
 // #define MASTER_LEFT
 // #define SPLIT_USB_TIMEOUT 2000
-#define NO_USB_STARTUP_CHECK
+// #define NO_USB_STARTUP_CHECK
 
 /* RGB Matrix Configuration */
 #define DRIVER_COUNT 1

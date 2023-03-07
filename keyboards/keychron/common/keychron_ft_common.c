@@ -347,9 +347,3 @@ bool via_command_kb(uint8_t *data, uint8_t length) {
     }
     return false;
 }
-
-#if MCU == STM32L432
-void restart_usb_driver(USBDriver *usbp) {
-    (void)usbp;
-}
-#endif
