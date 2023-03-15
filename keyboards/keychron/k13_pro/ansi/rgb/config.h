@@ -25,13 +25,6 @@
 #    define DRIVER_2_LED_TOTAL 43
 #    define RGB_MATRIX_LED_COUNT (DRIVER_1_LED_TOTAL + DRIVER_2_LED_TOTAL)
 
-/* Increase I2C speed to 1000 KHz */
-#    define I2C1_TIMINGR_PRESC 0U
-#    define I2C1_TIMINGR_SCLDEL 3U
-#    define I2C1_TIMINGR_SDADEL 0U
-#    define I2C1_TIMINGR_SCLH 15U
-#    define I2C1_TIMINGR_SCLL 30U
-
 /* Set to infinit, which is use in USB mode by default */
 #    define RGB_MATRIX_TIMEOUT RGB_MATRIX_TIMEOUT_INFINITE
 
@@ -41,7 +34,7 @@
 /* Turn off backllit if brightness value is low */
 #    define RGB_MATRIX_BRIGHTNESS_TURN_OFF_VAL 48
 
-#    define LOW_BAT_IND_INDEX 79
+#    define LOW_BAT_IND_INDEX 82
 
 // RGB Matrix Animation modes. Explicitly enabled
 // For full list of effects, see:

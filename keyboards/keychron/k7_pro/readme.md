@@ -1,6 +1,6 @@
 # Keychron K7 Pro
 
-![Keychron K7 Pro](https://cdn.shopify.com/s/files/1/0059/0630/1017/t/5/assets/keychron-k7-pro-camerashot-photo-1-1676860139452.jpg?v=1676860142)
+![Keychron K7 Pro](https://drive.google.com/file/d/1BSy1l3bs-EW-TgPWDY3qpPCSWVV3nqdQ/view?usp=share_link)
 
 A customizable 68 keys TKL low profile switch keyboard.
 

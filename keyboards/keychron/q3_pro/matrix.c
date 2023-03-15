@@ -27,11 +27,9 @@ pin_t col_pins[MATRIX_COLS] = MATRIX_COL_PINS;
 
 extern indicator_config_t indicator_config;
 static uint32_t           power_on_indicator_timer_buffer;
-extern bool bat_low_led_pin_state;
+extern bool               bat_low_led_pin_state;
 
-#ifndef POWER_ON_LED_DURATION
-#    define POWER_ON_LED_DURATION 3000
-#endif
+#define POWER_ON_LED_DURATION 3000
 
 static inline void HC595_delay(uint16_t n) {
     while (n-- > 0) {
@@ -72,7 +70,7 @@ static inline void setPinOutput_writeLow(pin_t pin) {
     }
 }
 
-static inline void setPinInputHigh_atomic(pin_t pin) {
+static inline void setPinInput_high(pin_t pin) {
     ATOMIC_BLOCK_FORCEON {
         setPinInputHigh(pin);
     }
@@ -141,7 +139,11 @@ static void unselect_col(uint8_t col) {
     uint32_t value = 0;
 
     if (pin != NO_PIN) {
-        setPinInputHigh_atomic(pin);
+#ifdef MATRIX_UNSELECT_DRIVE_HIGH
+        setPinOutput_writeHigh(pin);
+#else
+        setPinInput_high(pin);
+#endif
     } else {
         if (power_on_indicator_timer_buffer) {
             if (sync_timer_elapsed32(power_on_indicator_timer_buffer) > POWER_ON_LED_DURATION) {
@@ -202,17 +204,37 @@ static void unselect_col(uint8_t col) {
 }
 
 static void unselect_cols(void) {
-    if (col_pins[0] != NO_PIN) setPinInputHigh_atomic(col_pins[0]);
-    HC595_output(0xFFFFFFFF);
-    power_on_indicator_timer_buffer = sync_timer_read32() | 1;
+    for (uint8_t x = 0; x < MATRIX_COLS; x++) {
+        pin_t pin = col_pins[x];
+        if (pin != NO_PIN) {
+#ifdef MATRIX_UNSELECT_DRIVE_HIGH
+            setPinOutput_writeHigh(pin);
+#else
+            setPinInput_high(pin);
+#endif
+        } else {
+            if (x == 0) {
+                HC595_output(0xFFFFFFFF);
+                power_on_indicator_timer_buffer = sync_timer_read32() | 1;
+            }
+        }
+    }
 }
 
 void select_all_cols(void) {
-    if (col_pins[0] != NO_PIN) setPinOutput_writeLow(col_pins[0]);
-    if (host_keyboard_led_state().caps_lock) {
-        HC595_output(0x00000000 | (2 << 0));
-    } else {
-        HC595_output(0x00000000);
+    for (uint8_t x = 0; x < MATRIX_COLS; x++) {
+        pin_t pin = col_pins[x];
+        if (pin != NO_PIN) {
+            setPinOutput_writeLow(pin);
+        } else {
+            if (x == 0) {
+                if (host_keyboard_led_state().caps_lock) {
+                    HC595_output(0x00000000 | (2 << 0));
+                } else {
+                    HC595_output(0x00000000);
+                }
+            }
+        }
     }
 }
 
@@ -245,11 +267,13 @@ void matrix_init_custom(void) {
     setPinOutput(HC595_DS);
     setPinOutput(HC595_STCP);
     setPinOutput(HC595_SHCP);
+
     for (uint8_t x = 0; x < MATRIX_ROWS; x++) {
         if (row_pins[x] != NO_PIN) {
-            setPinInputHigh_atomic(row_pins[x]);
+            setPinInput_high(row_pins[x]);
         }
     }
+
     unselect_cols();
 }
 

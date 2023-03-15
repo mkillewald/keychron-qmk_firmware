@@ -1,6 +1,6 @@
 # Keychron K4 Pro
 
-![Keychron K4 Pro](https://cdn.shopify.com/s/files/1/0059/0630/1017/t/5/assets/keychron-k4-pro-wireless-custom-mechanical-keyboard1-1672887299925.jpg?v=1672887302)
+![Keychron K4 Pro](https://drive.google.com/file/d/1zkIRtf7GCvkOeq1oT07D9WXIPmoieS8p/view?usp=share_link)
 
 A customizable 100 keys keyboard.
 
