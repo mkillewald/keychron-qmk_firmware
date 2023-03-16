@@ -13,6 +13,11 @@
             {"pin_a": "C14", "pin_b": "A2"}
         ]
     },
+    "encoder": {
+        "rotary": [
+            {"pin_a": "C14", "pin_b": "A2"}
+        ]
+    },
     "processor": "STM32L432",
     "bootloader": "stm32-dfu",
     "layouts": {

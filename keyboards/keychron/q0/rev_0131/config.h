@@ -38,7 +38,3 @@
 
 /* Encoder Configuration */
 #define ENCODER_DEFAULT_POS 0x3
-
-/* Specify (0,1) which programmed as "Fn" key on this keyboard as bootmagic key */
-#define BOOTMAGIC_LITE_ROW 0
-#define BOOTMAGIC_LITE_COLUMN 1

@@ -27,6 +27,9 @@
 #define DRIVER_2_LED_TOTAL 40
 #define RGB_MATRIX_LED_COUNT (DRIVER_1_LED_TOTAL + DRIVER_2_LED_TOTAL)
 
+/* Encoder Configuration */
+#define ENCODER_DEFAULT_POS 0x3
+
 #define CKLED2001_CURRENT_TUNE \
     { 0x9D, 0x9D, 0x44, 0x9D, 0x9D, 0x44, 0x9D, 0x9D, 0x44, 0x9D, 0x9D, 0x44 }
 
