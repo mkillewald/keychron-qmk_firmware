@@ -53,7 +53,7 @@
 
 #    define HOST_DEVICES_COUNT 3
 
-#    if defined(RGB_MATRIX_ENABLE) || defined(LED_MATRIX_ENABLE)
+#    if defined(RGB_MATRIX_ENABLE)
 
 #        define LED_DRIVER_SHUTDOWN_PIN C14
 
@@ -93,3 +93,7 @@
 /* Specifed (0,1) which programmed as "ESC" key on this keyboard as bootmagic key */
 #define BOOTMAGIC_LITE_ROW 0
 #define BOOTMAGIC_LITE_COLUMN 1
+
+/* Factory test keys */
+#define FN_KEY1 MO(1)
+#define FN_KEY2 MO(3)
