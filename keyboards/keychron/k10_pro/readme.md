@@ -1,6 +1,6 @@
 # Keychron K10 Pro
 
-![Keychron K10 Pro](https://cdn.shopify.com/s/files/1/0059/0630/1017/t/5/assets/keychronk10pro1-1675418457918.jpg?v=1675418462)
+![Keychron K10 Pro](https://drive.google.com/file/d/13vC9UEIpxM1wMguPAX05lKisuQfUWtEf/view?usp=share_link)
 
 A customizable 108 keys keyboard.
 

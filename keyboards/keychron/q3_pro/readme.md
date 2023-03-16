@@ -1,18 +1,20 @@
 # Keychron Q3 Pro
 
+![Keychron Q3 Pro]()
+
 A customizable 80% TKL keyboard.
 
 * Keyboard Maintainer: [Keychron](https://github.com/keychron)
-* Hardware Supported: Keychron K2 Pro
-* Hardware Availability: [Keychron K2 Pro QMK/VIA Wireless Mechanical Keyboard](https://www.keychron.com/products/keychron-k2-pro-qmk-via-wireless-mechanical-keyboard)
+* Hardware Supported: Keychron Q3 Pro
+* Hardware Availability: [Keychron Q3 Pro]()
 
 Make example for this keyboard (after setting up your build environment):
 
-    make keychron/q3_pro/encoder/ansi/rgb:default
+    make keychron/q3_pro/ansi_encoder:default
 
 Flashing example for this keyboard:
 
-    make keychron/q3_pro/encoder/ansi/rgb:default:flash
+    make keychron/q3_pro/ansi_encoder:default:flash
 
 **Reset Key**: Connect the USB cable, toggle mode switch to "Off", hold down the *Esc* key or reset button underneath space bar, then toggle then switch to "Cable".
 

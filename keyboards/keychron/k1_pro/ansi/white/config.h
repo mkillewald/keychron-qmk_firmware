@@ -23,13 +23,6 @@
 #    define DRIVER_1_LED_TOTAL 87
 #    define LED_MATRIX_LED_COUNT DRIVER_1_LED_TOTAL
 
-/* Increase I2C speed to 1000 KHz */
-#    define I2C1_TIMINGR_PRESC 0U
-#    define I2C1_TIMINGR_SCLDEL 3U
-#    define I2C1_TIMINGR_SDADEL 0U
-#    define I2C1_TIMINGR_SCLH 15U
-#    define I2C1_TIMINGR_SCLL 30U
-
 /* Set to infinit, which is use in USB mode by default */
 #    define LED_MATRIX_TIMEOUT LED_MATRIX_TIMEOUT_INFINITE
 

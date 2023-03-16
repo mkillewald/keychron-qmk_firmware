@@ -1,6 +1,6 @@
 # Keychron K6 Pro
 
-![Keychron K6 Pro](https://cdn.shopify.com/s/files/1/0059/0630/1017/t/5/assets/keychronk6pr0qmkviawirelesscustommechanicalkeyboard-1659094228146.jpg?v=1659094230)
+![Keychron K6 Pro](https://drive.google.com/file/d/1X1Qk--x6v6I8Ds9umPF1wliTm9Mnd_RH/view?usp=share_link)
 
 A customizable 68 keys TKL keyboard.
 

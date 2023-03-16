@@ -141,6 +141,14 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
     return true;
 }
 
+#ifdef KC_BLUETOOTH_ENABLE
+void encoder0_pad_cb(void *param) {
+    (void)param;
+
+    encoder_insert_state();
+}
+#endif
+
 void keyboard_post_init_kb(void) {
     dip_switch_read(true);
 
@@ -155,6 +163,15 @@ void keyboard_post_init_kb(void) {
 
     ckbt51_init(false);
     bluetooth_init();
+
+    pin_t encoders_pad_a[NUM_ENCODERS] = ENCODERS_PAD_A;
+    pin_t encoders_pad_b[NUM_ENCODERS] = ENCODERS_PAD_B;
+    for (uint8_t i = 0; i < NUM_ENCODERS; i++) {
+        palEnableLineEvent(encoders_pad_a[i], PAL_EVENT_MODE_BOTH_EDGES);
+        palEnableLineEvent(encoders_pad_b[i], PAL_EVENT_MODE_BOTH_EDGES);
+        palSetLineCallback(encoders_pad_a[i], encoder0_pad_cb, NULL);
+        palSetLineCallback(encoders_pad_b[i], encoder0_pad_cb, NULL);
+    }
 #endif
 
     keyboard_post_init_user();
@@ -176,7 +193,8 @@ void matrix_scan_kb(void) {
 #ifdef KC_BLUETOOTH_ENABLE
 static void ckbt51_param_init(void) {
     /* Set bluetooth device name */
-    ckbt51_set_local_name(STR(PRODUCT));
+    // ckbt51_set_local_name(STR(PRODUCT));
+    ckbt51_set_local_name(PRODUCT);
     /* Set bluetooth parameters */
     module_param_t param = {.event_mode             = 0x02,
                             .connected_idle_timeout = 7200,
@@ -201,6 +219,21 @@ void bluetooth_enter_disconnected_kb(uint8_t host_idx) {
         ckbt51_param_init();
         bluetooth_connect();
         firstDisconnect = false;
+    }
+}
+
+void ckbt51_default_ack_handler(uint8_t *data, uint8_t len) {
+    if (data[1] == 0x45) {
+        module_param_t param = {.event_mode             = 0x02,
+                                .connected_idle_timeout = 7200,
+                                .pairing_timeout        = 180,
+                                .pairing_mode           = 0,
+                                .reconnect_timeout      = 5,
+                                .report_rate            = 90,
+                                .vendor_id_source       = 1,
+                                .verndor_id             = 0, // Must be 0x3434
+                                .product_id             = PRODUCT_ID};
+        ckbt51_set_param(&param);
     }
 }
 
@@ -273,3 +306,7 @@ void raw_hid_receive(uint8_t *data, uint8_t length) {
     }
 }
 #endif
+
+void restart_usb_driver(USBDriver *usbp) {
+    (void)usbp;
+}

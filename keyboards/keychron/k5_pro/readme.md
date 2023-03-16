@@ -1,10 +1,12 @@
 # Keychron K5 Pro
 
+![Keychron K5 Pro](https://drive.google.com/file/d/1Sfc0C-Ye0S2wW6eYiaJfluRCJI-b-UKE/view?usp=share_link)
+
 A customizable 100% keyboard.
 
 * Keyboard Maintainer: [Keychron](https://github.com/keychron)
 * Hardware Supported: Keychron K5 Pro
-* Hardware Availability: [Keychron](https://www.keychron.com)
+* Hardware Availability: [Keychron K5 Pro]()
 
 Make example for this keyboard (after setting up your build environment):
 
