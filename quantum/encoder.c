@@ -40,6 +40,7 @@ extern volatile bool isLeftHand;
 
 static pin_t encoders_pad_a[NUM_ENCODERS_MAX_PER_SIDE] = ENCODERS_PAD_A;
 static pin_t encoders_pad_b[NUM_ENCODERS_MAX_PER_SIDE] = ENCODERS_PAD_B;
+static bool  encoder_interrupt_update[NUM_ENCODERS]    = {false};
 
 #ifdef ENCODER_RESOLUTIONS
 static uint8_t encoder_resolutions[NUM_ENCODERS] = ENCODER_RESOLUTIONS;
@@ -56,7 +57,6 @@ static int8_t encoder_LUT[] = {0, -1, 1, 0, 1, 0, 0, -1, -1, 0, 0, 1, 0, 1, -1, 
 
 static uint8_t encoder_state[NUM_ENCODERS]           = {0};
 static int8_t  encoder_pulses[NUM_ENCODERS]          = {0};
-static bool    encoder_interrupt_update[NUM_ENCODERS] = {false};
 
 // encoder counts
 static uint8_t thisCount;
