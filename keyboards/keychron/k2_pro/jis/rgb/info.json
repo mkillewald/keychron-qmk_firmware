@@ -5,7 +5,7 @@
     "maintainer": "lokher",
     "usb": {
     	"vid": "0x3434",
-    	"pid": "0x0223",
+    	"pid": "0x0222",
     	"device_version": "1.0.0"
     },
     "processor": "STM32L432",
