@@ -16,9 +16,6 @@
 
 #pragma once
 
-/* COL2ROW or ROW2COL */
-#define DIODE_DIRECTION ROW2COL
-
 /* RGB Matrix Driver Configuration */
 #define DRIVER_COUNT 2
 #define DRIVER_ADDR_1 0b1110111
@@ -29,7 +26,7 @@
 #define I2C1_TIMINGR_SCLDEL 3U
 #define I2C1_TIMINGR_SDADEL 0U
 #define I2C1_TIMINGR_SCLH 15U
-#define I2C1_TIMINGR_SCLL 30U
+#define I2C1_TIMINGR_SCLL 51U
 
 /* Limit the maximum brigtness current of colour white to 500mA */
 #define CKLED2001_CURRENT_TUNE \
@@ -84,7 +81,6 @@
 #define ENABLE_RGB_MATRIX_PIXEL_RAIN
 // #define ENABLE_RGB_MATRIX_PIXEL_FLOW
 // #define ENABLE_RGB_MATRIX_PIXEL_FRACTAL
-
 
 #define RGB_MATRIX_FRAMEBUFFER_EFFECTS
 // enabled only if RGB_MATRIX_FRAMEBUFFER_EFFECTS is defined
