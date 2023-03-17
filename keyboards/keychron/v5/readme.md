@@ -1,6 +1,6 @@
 # Keychron V5
 
-[Keychron V5](https://imgur.com/PZ2RE2B)
+[Keychron V5](https://i.imgur.com/PZ2RE2B.jpg[/img])
 
 A customizable 96% keyboard.
 
