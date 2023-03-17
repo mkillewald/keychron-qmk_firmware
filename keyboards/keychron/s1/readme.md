@@ -1,10 +1,12 @@
 # Keychron S1
 
+![Keychron S1](https://i.imgur.com/X1GFlYK.jpg[/img])
+
 A customizable 75% keyboard.
 
 * Keyboard Maintainer: [Keychron](https://github.com/keychron)
 * Hardware Supported: Keychron S1
-* Hardware Availability: [Keychron](https://www.keychron.com)
+* Hardware Availability: [Keychron S1 QMK Custom Mechanical Keyboard](https://www.keychron.com/products/keychron-s1-qmk-custom-mechanical-keyboard)
 
 Make example for this keyboard (after setting up your build environment):
 

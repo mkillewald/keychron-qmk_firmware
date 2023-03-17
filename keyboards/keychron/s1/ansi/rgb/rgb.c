@@ -24,9 +24,9 @@ const ckled2001_led PROGMEM g_ckled2001_leds[RGB_MATRIX_LED_COUNT] = {
 /* Refer to CKLED2001 manual for these locations
  *   driver
  *   |  R location
- *   |  |       G location
- *   |  |       |       B location
- *   |  |       |       | */
+ *   |  |     G location
+ *   |  |     |     B location
+ *   |  |     |     | */
     {0, I_1,  G_1,  H_1},  // esc
     {0, I_2,  G_2,  H_2},  // f1
     {0, I_3,  G_3,  H_3},  // f2
@@ -146,7 +146,7 @@ led_config_t g_led_config = {
         1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,    1,
         8, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,    1,    1,
         1,    4, 4, 4, 4, 4, 4, 4, 4, 4, 4,    1, 1, 1,
-        1, 1, 1,          4,          1, 1, 1, 1, 1, 1,
+        1, 1, 1,          4,          1, 4, 1, 1, 1, 1,
     }
 };
 
