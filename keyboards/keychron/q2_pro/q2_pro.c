@@ -142,10 +142,9 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
 }
 
 #ifdef KC_BLUETOOTH_ENABLE
-void encoder0_pad_cb(void *param) {
+static void encoder0_pad_cb(void *param) {
     (void)param;
-
-    encoder_insert_state();
+    encoder_inerrupt_read(0);
 }
 #endif
 
