@@ -16,19 +16,11 @@
 
 #pragma once
 
-/* key matrix pins */
-#define MATRIX_ROW_PINS { B5, B4, B3, A15, A14, A13 }
-#define MATRIX_COL_PINS { C14, C15, A0, A1, A2, A3, A4, A5, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN }
-
-/* Pin connected to DS of 74HC595 */
-#define DATA_PIN_74HC595 A7
-/* Pin connected to SH_CP of 74HC595 */
-#define CLOCK_PIN_74HC595 B1
-/* Pin connected to ST_CP of 74HC595 */
-#define LATCH_PIN_74HC595 B0
-
 /* DIP switch */
-#define DIP_SWITCH_MATRIX_GRID  { {5,4} }
+#define DIP_SWITCH_MATRIX_GRID \
+    {                          \
+        { 5, 4 }               \
+    }
 #define SCAN_COUNT_MAX 100
 
 /* RGB Matrix Driver Configuration */
