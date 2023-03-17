@@ -1,10 +1,12 @@
 # Keychron Q60
 
+[Keychron Q60](https://i.imgur.com/Uxgs4Sr.jpg[/img])
+
 A customizable 60% keyboard.
 
 * Keyboard Maintainer: [Keychron](https://github.com/keychron)
 * Hardware Supported: Keychron Q60
-* Hardware Availability: [Keychron](https://www.keychron.com)
+* Hardware Availability: [Keychron Q60 QMK Custom Mechanical Keyboard](https://www.keychron.com)
 
 Make example for this keyboard (after setting up your build environment):
 
