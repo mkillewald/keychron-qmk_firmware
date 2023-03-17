@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-/* Copyright 2023 @ Keychron (https://www.keychron.com)
-=======
 /* Copyright 2022 @ Keychron (https://www.keychron.com)
->>>>>>> temp
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,7 +14,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-<<<<<<< HEAD
 #include "quantum.h"
 
 #define HC595_DS C15
@@ -27,24 +22,6 @@
 
 static pin_t row_pins[MATRIX_ROWS] = MATRIX_ROW_PINS;
 static pin_t col_pins[MATRIX_COLS] = MATRIX_COL_PINS;
-=======
-#include "matrix.h"
-#include "quantum.h"
-
-// Pin connected to DS of 74HC595
-#define DATA_PIN C15
-// Pin connected to SH_CP of 74HC595
-#define CLOCK_PIN A1
-// Pin connected to ST_CP of 74HC595
-#define LATCH_PIN A0
-
-#ifdef MATRIX_ROW_PINS
-static pin_t row_pins[MATRIX_ROWS] = MATRIX_ROW_PINS;
-#endif // MATRIX_ROW_PINS
-#ifdef MATRIX_COL_PINS
-static pin_t col_pins[MATRIX_COLS] = MATRIX_COL_PINS;
-#endif // MATRIX_COL_PINS
->>>>>>> temp
 
 #define ROWS_PER_HAND (MATRIX_ROWS)
 
@@ -76,7 +53,6 @@ static inline uint8_t readMatrixPin(pin_t pin) {
     }
 }
 
-<<<<<<< HEAD
 static inline void HC595_delay(uint16_t n) {
     while (n-- > 0) {
         asm volatile("nop" ::: "memory");
@@ -116,34 +92,6 @@ static void HC595_output_byte(uint8_t data) {
         HC595_delay(3);
         writePinLow(HC595_STCP);
     }
-=======
-static void shiftOut(uint8_t dataOut) {
-    for (uint8_t i = 0; i < 8; i++) {
-        if (dataOut & 0x1) {
-            setPinOutput_writeHigh(DATA_PIN);
-        } else {
-            setPinOutput_writeLow(DATA_PIN);
-        }
-        dataOut = dataOut >> 1;
-        setPinOutput_writeHigh(CLOCK_PIN);
-        setPinOutput_writeLow(CLOCK_PIN);
-    }
-    setPinOutput_writeHigh(LATCH_PIN);
-    setPinOutput_writeLow(LATCH_PIN);
-}
-
-static void shiftout_single(uint8_t data) {
-    if (data & 0x1) {
-        setPinOutput_writeHigh(DATA_PIN);
-    } else {
-        setPinOutput_writeLow(DATA_PIN);
-    }
-    setPinOutput_writeHigh(CLOCK_PIN);
-    setPinOutput_writeLow(CLOCK_PIN);
-
-    setPinOutput_writeHigh(LATCH_PIN);
-    setPinOutput_writeLow(LATCH_PIN);
->>>>>>> temp
 }
 
 static bool select_col(uint8_t col) {
@@ -154,13 +102,7 @@ static bool select_col(uint8_t col) {
         return true;
     } else {
         if (col == 10) {
-<<<<<<< HEAD
             HC595_output_byte(0x00);
-=======
-            shiftout_single(0x00);
-        } else {
-            shiftout_single(0x01);
->>>>>>> temp
         }
         return true;
     }
