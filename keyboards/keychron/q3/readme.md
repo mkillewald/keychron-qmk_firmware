@@ -1,10 +1,12 @@
 # Keychron Q3
 
+![Keychron Q3](https://i.imgur.com/KjP4nqd.jpg[/img])
+
 A customizable 80% keyboard.
 
 * Keyboard Maintainer: [Keychron](https://github.com/keychron)
 * Hardware Supported: Keychron Q3
-* Hardware Availability: [Keychron](https://www.keychron.com)
+* Hardware Availability: [Keychron Q3 QMK Custom Mechanical Keyboard](https://www.keychron.com/products/keychron-q3-qmk-custom-mechanical-keyboard)
 
 Make example for this keyboard (after setting up your build environment):
 

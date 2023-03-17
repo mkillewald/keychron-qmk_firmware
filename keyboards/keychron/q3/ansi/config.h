@@ -16,12 +16,6 @@
 
 #pragma once
 
-/* key matrix pins */
-#define MATRIX_ROW_PINS \
-    { B5, B4, B3, A15, A14, A13 }
-#define MATRIX_COL_PINS \
-    { C14, C15, A0, A1, A2, A3, A4, A5, A6, A7, B0, B1, A8, A9, A10, H3 }
-
 /* RGB Matrix Configuration */
 #define DRIVER_1_LED_TOTAL 48
 #define DRIVER_2_LED_TOTAL 39
