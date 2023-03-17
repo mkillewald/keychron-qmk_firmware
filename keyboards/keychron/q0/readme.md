@@ -1,12 +1,12 @@
 # Keychron Q0
 
-![Keychron Q0]()
+![Keychron Q0](https://i.imgur.com/cLbEiZ0.jpg[/img])
 
 A customizable number keypad.
 
 * Keyboard Maintainer: [Keychron](https://github.com/keychron)
 * Hardware Supported: Keychron Q0
-* Hardware Availability: [Keychron](https://www.keychron.com)
+* Hardware Availability: [Keychron Q0 QMK Custom Number Pad](https://www.keychron.com/products/keychron-q0-qmk-custom-number-pad)
 
 Make example for this keyboard (after setting up your build environment):
 
