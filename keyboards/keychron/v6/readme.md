@@ -1,6 +1,6 @@
 # Keychron V6
 
-![Keychron V6](https://imgur.com/Os99bIL)
+![Keychron V6](https://i.imgur.com/Os99bIL.jpg[/img])
 
 A customizable 100% keyboard.
 
