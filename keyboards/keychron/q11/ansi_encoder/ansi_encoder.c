@@ -21,12 +21,12 @@
 // clang-format off
 
 const ckled2001_led PROGMEM g_ckled2001_leds[RGB_MATRIX_LED_COUNT] = {
-/* Refer to IS31 manual for these locations
+/* Refer to CKLED2001 manual for these locations
  *   driver
  *   |  R location
- *   |  |       G location
- *   |  |       |       B location
- *   |  |       |       | */
+ *   |  |     G location
+ *   |  |     |     B location
+ *   |  |     |     | */
     {0, A_2,  C_2,  B_2},  // ESC
     {0, A_3,  C_3,  B_3},  // F1
     {0, A_4,  C_4,  B_4},  // F2

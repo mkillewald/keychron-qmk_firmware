@@ -8,6 +8,14 @@
         "pid": "0x01E0",
         "device_version": "1.0.2"
     },
+    "matrix_pins": {
+        "cols": ["A7", "A6", "A5", "A4", "A3", "A2", "A1", "C15", null],
+        "rows": ["A13", "A14", "A15", "B3", "B4", "B5"]
+    },
+    "diode_direction": "ROW2COL",
+    "bootmagic": {
+        "matrix": [0, 1]
+    },
     "encoder": {
         "rotary": [
             {"pin_a": "B0", "pin_b": "B1"}
@@ -19,6 +27,12 @@
                 "rotary": [
                     {"pin_a": "C14", "pin_b": "C15"}
                 ]
+            },
+            "matrix_pins": {
+                "right": {
+                    "cols": ["A8", "A7", "A6", "A5", "A4", "A3", "A2", "A1", "A0"],
+                    "rows": ["B5", "B4", "B3", "A15", "A14", "A13"]
+                }
             }
         }
     },

@@ -16,20 +16,6 @@
 
 #pragma once
 
-/* left side matrix pins */
-#define MATRIX_ROW_PINS \
-    { A13, A14, A15, B3, B4, B5 }
-#define MATRIX_COL_PINS \
-    { A7, A6, A5, A4, A3, A2, A1, C15, NO_PIN }
-/* right side matrix pins */
-#define MATRIX_ROW_PINS_RIGHT \
-    { B5, B4, B3, A15, A14, A13 }
-#define MATRIX_COL_PINS_RIGHT \
-    { A8, A7, A6, A5, A4, A3, A2, A1, A0 }
-
-/* COL2ROW or ROW2COL */
-#define DIODE_DIRECTION ROW2COL
-
 /* Set 0 if debouncing isn't needed */
 #define DEBOUNCE 5
 
@@ -81,10 +67,6 @@
 
 /* Disable RGB lighting when PC is in suspend */
 #define RGB_DISABLE_WHEN_USB_SUSPENDED
-
-/* Specifed (0,1) which programmed "ESC" key on this keyboard as bootmagic key */
-#define BOOTMAGIC_LITE_ROW 0
-#define BOOTMAGIC_LITE_COLUMN 1
 
 // RGB Matrix Animation modes. Explicitly enabled
 // For full list of effects, see:
