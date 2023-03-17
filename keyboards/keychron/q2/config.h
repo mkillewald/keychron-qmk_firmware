@@ -16,28 +16,8 @@
 
 #pragma once
 
-<<<<<<< HEAD
-/* COL2ROW or ROW2COL */
-#define DIODE_DIRECTION ROW2COL
-
-/* key matrix pins */
-#define MATRIX_ROW_PINS \
-    { B4, B3, A15, A14, A13 }
-#define MATRIX_COL_PINS \
-    { C14, C15, A0, A1, A2, A3, A4, A5, A6, A7, B0, B1, A8, A9, H3 }
-
-/* If uses PH3 with a stronger pull resistor then the following definition should be included */
-#define MATRIX_UNSELECT_DRIVE_HIGH
-
-/* Set 0 if debouncing isn't needed */
-#define DEBOUNCE 5
-
-=======
-/* key matrix pins */
-#define MATRIX_ROW_PINS { B4, B3, A15, A14, A13 }
-#define MATRIX_COL_PINS { C14, C15, A0, A1, A2, A3, A4, A5, A6, A7, B0, B1, A8, A9, H3 }
-
-#define MATRIX_UNSELECT_DRIVE_HIGH
+/* If PH3 used with a stronger pull resistor then the following definition needs be included */
+// #define MATRIX_UNSELECT_DRIVE_HIGH
 
 /* DIP switch */
 #define DIP_SWITCH_MATRIX_GRID  { {4, 4} }
@@ -45,7 +25,6 @@
 /* COL2ROW or ROW2COL */
 #define DIODE_DIRECTION ROW2COL
 
->>>>>>> temp
 /* RGB Matrix Driver Configuration */
 #define DRIVER_COUNT 2
 #define DRIVER_ADDR_1 0b1110111
@@ -56,7 +35,7 @@
 #define I2C1_TIMINGR_SCLDEL 3U
 #define I2C1_TIMINGR_SDADEL 0U
 #define I2C1_TIMINGR_SCLH 15U
-#define I2C1_TIMINGR_SCLL 30U
+#define I2C1_TIMINGR_SCLL 51U
 
 /* Scan phase of led driver set as MSKPHASE_9CHANNEL(defined as 0x03 in CKLED2001.h) */
 #define PHASE_CHANNEL MSKPHASE_9CHANNEL
