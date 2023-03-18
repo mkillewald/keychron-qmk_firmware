@@ -23,8 +23,4 @@ OPT_DEFS += -DCORTEX_ENABLE_WFI_IDLE=TRUE
 # custom matrix setup
 CUSTOM_MATRIX = lite
 
-<<<<<<< HEAD
-VPATH ?= keyboards/keychron/common
-=======
->>>>>>> temp
 SRC += matrix.c

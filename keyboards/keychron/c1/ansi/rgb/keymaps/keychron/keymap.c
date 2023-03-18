@@ -15,7 +15,7 @@
  */
 
 #include QMK_KEYBOARD_H
-#include "keychron_common_ft.h"
+#include "keychron_ft_common.h"
 
 // clang-format off
 

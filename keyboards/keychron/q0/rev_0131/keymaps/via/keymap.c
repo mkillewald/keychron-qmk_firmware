@@ -26,8 +26,8 @@ enum layers {
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-    [BASE] = LAYOUT_numpad_6x5(
-        KC_MUTE,   MO(FUNC), KC_ESC,  KC_BSPC,  KC_TAB,
+    [L0] = LAYOUT_numpad_6x5(
+        KC_MUTE,  MO(L1), KC_ESC,  KC_BSPC,  KC_TAB,
         MC_0,   KC_NUM,   KC_PSLS, KC_PAST,  KC_PMNS,
         MC_2,   KC_P7,    KC_P8,   KC_P9,    KC_PPLS,
         MC_3,   KC_P4,    KC_P5,   KC_P6,
