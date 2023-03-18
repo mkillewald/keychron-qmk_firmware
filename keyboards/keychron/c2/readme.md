@@ -1,5 +1,7 @@
 # Keychron C2 Pro
 
+![Keychron C2 Pro](https://i.imgur.com/BQE1tFO.jpg[/img])
+
 A customizable 100% keyboard.
 
 * Keyboard Maintainer: [Keychron](https://github.com/keychron)
@@ -8,15 +10,13 @@ A customizable 100% keyboard.
 
 Make example for this keyboard (after setting up your build environment):
 
-```bash
-make keychron/c2/c2_ansi_rgb_stm32l432:default
-```
+    make keychron/c2/ansi/rgb:default
+    make keychron/c2/ansi/white:default
 
 Flashing example for this keyboard:
 
-```bash
-make keychron/c2/c2_ansi_rgb_stm32l432:flash
-```
+    make keychron/c2/ansi/rgb:default:flash
+    make keychron/c2/ansi/white:default:flash
 
 **Reset Key**: Hold down the key located at *K00*, commonly programmed as *Esc* while plugging in the keyboard.
 
