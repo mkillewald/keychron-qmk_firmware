@@ -10,11 +10,13 @@ A customizable 100% keyboard.
 
 Make example for this keyboard (after setting up your build environment):
 
-    make keychron/c1/c1_ansi_rgb_stm32l432:default
+    make keychron/c1/ansi/rgb:default
+    make keychron/c1/ansi/white:default
 
 Flashing example for this keyboard:
 
-    make keychron/c1/c1_ansi_rgb_stm32l432:flash
+    make keychron/c1/ansi/rgb:default:flash
+    make keychron/c1/ansi/rbg:default:flash
 
 **Reset Key**: Hold down the key located at *K00*, commonly programmed as *Esc* while plugging in the keyboard.
 
