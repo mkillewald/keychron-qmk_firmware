@@ -99,6 +99,9 @@ void dip_switch_read(bool forced) {
     uint32_t dip_switch_mask       = 0;
 
 #ifdef DIP_SWITCH_MATRIX_GRID
+#    ifndef SCAN_COUNT_MAX
+#        define SCAN_COUNT_MAX 500
+#    endif
     bool read_raw = false;
 
     if (scan_count < SCAN_COUNT_MAX) {
