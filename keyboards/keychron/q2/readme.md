@@ -1,32 +1,30 @@
 # Keychron Q2
 
-![Keychron Q2](https://cdn.shopify.com/s/files/1/0059/0630/1017/t/5/assets/keychron-q2-65-custom-mechanical-keyboard-1640601375561.jpg?v=1640601380)
+![Keychron Q2](https://i.imgur.com/9bJ6Moh.jpg[/img])
 
 A customizable 65% keyboard.
 
 * Keyboard Maintainer: [Keychron](https://github.com/keychron)
 * Hardware Supported: Keychron Q2
-* Hardware Availability: [Keychron](https://www.keychron.com)
+* Hardware Availability: [Keychron Q2 QMK Custom Mechanical Keyboard](https://www.keychron.com/products/keychron-q2-qmk-custom-mechanical-keyboard)
 
 Make example for this keyboard (after setting up your build environment):
 
-<<<<<<< HEAD
-```bash
-make keychron/q2/q2_ansi_stm32l432:default
-```
-
-Flashing example for this keyboard ([after setting up the bootloadHID flashing environment](https://docs.qmk.fm/#/flashing_bootloadhid))
-
-```bash
-make keychron/q2/q2_ansi_stm32l432:default:flash
-```
-=======
     make keychron/q2/ansi:default
+    make keychron/q2/ansi_encoder:default
+    make keychron/q2/iso:default
+    make keychron/q2/iso_encoder:default
+    make keychron/q2/jis:default
+    make keychron/q2/jis_encoder:default
 
 Flashing example for this keyboard ([after setting up the bootloadHID flashing environment](https://docs.qmk.fm/#/flashing_bootloadhid))
 
     make keychron/q2/ansi:default:flash
->>>>>>> temp
+    make keychron/q2/ansi_encoder:default:flash
+    make keychron/q2/iso:default:flash
+    make keychron/q2/iso_encoder:default:flash
+    make keychron/q2/jis:default:flash
+    make keychron/q2/jis_encoder:default:flash
 
 **Reset Key**: Hold down the key located at *K00*, commonly programmed as *Esc* while plugging in the keyboard.
 

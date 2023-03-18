@@ -1,22 +1,30 @@
 # Keychron V3
 
+![Keychron V3](https://i.imgur.com/AIrmjVk.jpg[/img])
+
 A customizable 80% keyboard.
 
 * Keyboard Maintainer: [Keychron](https://github.com/keychron)
 * Hardware Supported: Keychron V3
-* Hardware Availability: [Keychron](https://www.keychron.com)
+* Hardware Availability: [Keychron V3 QMK Custom Mechanical Keyboard](https://www.keychron.com/products/keychron-v3-qmk-custom-mechanical-keyboard)
 
 Make example for this keyboard (after setting up your build environment):
 
-```base
-make keychron/v3/v3_ansi_stm32l432:default
-```
+    make keychron/v3/ansi:default
+    make keychron/v3/ansi_encoder:default
+    make keychron/v3/iso:default
+    make keychron/v3/iso_encoder:default
+    make keychron/v3/jis:default
+    make keychron/v3/jis_encoder:default
 
 Flashing example for this keyboard:
 
-```base
-make keychron/v3/v3_ansi_stm32l432:default:flash
-```
+    make keychron/v3/ansi:default:flash
+    make keychron/v3/ansi_encoder:default:flash
+    make keychron/v3/iso:default:flash
+    make keychron/v3/iso_encoder:default:flash
+    make keychron/v3/jis:default:flash
+    make keychron/v3/jis_encoder:default:flash
 
 **Reset Key**: Hold down the key located at *K00*, commonly programmed as *Esc* while plugging in the keyboard.
 

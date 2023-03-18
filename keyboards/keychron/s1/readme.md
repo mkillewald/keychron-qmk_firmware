@@ -1,22 +1,20 @@
 # Keychron S1
 
+![Keychron S1](https://i.imgur.com/X1GFlYK.jpg[/img])
+
 A customizable 75% keyboard.
 
 * Keyboard Maintainer: [Keychron](https://github.com/keychron)
 * Hardware Supported: Keychron S1
-* Hardware Availability: [Keychron](https://www.keychron.com)
+* Hardware Availability: [Keychron S1 QMK Custom Mechanical Keyboard](https://www.keychron.com/products/keychron-s1-qmk-custom-mechanical-keyboard)
 
 Make example for this keyboard (after setting up your build environment):
 
-```bash
-make keychron/s1/s1_ansi_rgb_stm32l432:default
-```
+    make keychron/s1/ansi/rgb:default
 
 Flashing example for this keyboard:
 
-```bash
-make keychron/s1/s1_ansi_rgb_stm32l432:default:flash
-```
+    make keychron/s1/ansi/rgb:default:flash
 
 **Reset Key**: Hold down the key located at *K00*, commonly programmed as *Esc* while plugging in the keyboard.
 

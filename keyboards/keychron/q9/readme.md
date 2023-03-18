@@ -1,5 +1,7 @@
 # Keychron Q9
 
+![Keychron Q9](https://i.imgur.com/G8xJ4TR.jpg[/img])
+
 A customizable 40% keyboard.
 
 * Keyboard Maintainer: [Keychron](https://github.com/keychron)
@@ -8,15 +10,17 @@ A customizable 40% keyboard.
 
 Make example for this keyboard (after setting up your build environment):
 
-```bash
-make keychron/q9/q9_ansi_stm32l432:default
-```
+    make keychron/q9/ansi:default
+    make keychron/q9/ansi_encoder:default
+    make keychron/q9/iso:default
+    make keychron/q9/iso_enocder:default
 
 Flashing example for this keyboard ([after setting up the bootloadHID flashing environment](https://docs.qmk.fm/#/flashing_bootloadhid))
 
-```bash
-make keychron/q9/q9_ansi_stm32l432:default:flash
-```
+    make keychron/q9/ansi:default:flash
+    make keychron/q9/ansi:default:flash
+    make keychron/q9/iso:default:flash
+    make keychron/q9/iso_encoder:default:flash
 
 **Reset Key**: Hold down the key located at *K00*, commonly programmed as *Esc* while plugging in the keyboard.
 

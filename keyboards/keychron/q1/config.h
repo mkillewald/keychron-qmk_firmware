@@ -16,21 +16,8 @@
 
 #pragma once
 
-/* COL2ROW or ROW2COL */
-#define DIODE_DIRECTION ROW2COL
-
-<<<<<<< HEAD
 /* Set 0 if debouncing isn't needed */
 #define DEBOUNCE 5
-=======
-/* RGB Matrix Driver Configuration */
-#define DRIVER_COUNT 2
-#define DRIVER_ADDR_1 0b1010000
-#define DRIVER_ADDR_2 0b1011111
-
-/* DIP switch */
-#define DIP_SWITCH_MATRIX_GRID  { {0,1} }
->>>>>>> temp
 
 /* Disable DIP switch in matrix data */
 #define MATRIX_MASKED
@@ -70,9 +57,13 @@
 #define ENABLE_RGB_MATRIX_PIXEL_RAIN
 // #define ENABLE_RGB_MATRIX_PIXEL_FLOW
 // #define ENABLE_RGB_MATRIX_PIXEL_FRACTAL
+
+#define RGB_MATRIX_FRAMEBUFFER_EFFECTS
 // enabled only if RGB_MATRIX_FRAMEBUFFER_EFFECTS is defined
 #define ENABLE_RGB_MATRIX_TYPING_HEATMAP
 #define ENABLE_RGB_MATRIX_DIGITAL_RAIN
+
+#define RGB_MATRIX_KEYPRESSES
 // enabled only of RGB_MATRIX_KEYPRESSES or RGB_MATRIX_KEYRELEASES is defined
 #define ENABLE_RGB_MATRIX_SOLID_REACTIVE_SIMPLE
 // #define ENABLE_RGB_MATRIX_SOLID_REACTIVE
@@ -86,11 +77,3 @@
 // #define ENABLE_RGB_MATRIX_MULTISPLASH
 #define ENABLE_RGB_MATRIX_SOLID_SPLASH
 // #define ENABLE_RGB_MATRIX_SOLID_MULTISPLASH
-
-#define RGB_MATRIX_FRAMEBUFFER_EFFECTS
-#define RGB_MATRIX_KEYPRESSES
-
-/* Enable receive custom command from host */
-#define RAW_HID_CMD 0xAB
-
-#define HOLD_ON_OTHER_KEY_PRESS

@@ -1,24 +1,15 @@
 # Keychron V10
 
+![Keychron V10](https://i.imgur.com/Dh1WLdD.jpg[/img])
+
 A customizable 75% ergonomic keyboard.
 
 * Keyboard Maintainer: [Keychron](https://github.com/keychron)
 * Hardware Supported: Keychron V10
-* Hardware Availability: [Keychron](https://www.keychron.com)
+* Hardware Availability: [Keychron V10 (Alice Layout) QMK Custom Mechanical Keyboard](https://www.keychron.com/products/keychron-v10-alice-layout-qmk-custom-mechanical-keyboard)
 
 Make example for this keyboard (after setting up your build environment):
 
-<<<<<<< HEAD
-```base
-make keychron/v10/v10_ansi_stm32l432:default
-```
-
-Flashing example for this keyboard:
-
-```base
-make keychron/v10/v10_ansi_stm32l432:default:flash
-```
-=======
     make keychron/v10/ansi_encoder:default
     make keychron/v10/iso_encoder:default
 
@@ -26,7 +17,6 @@ Flashing example for this keyboard:
 
     make keychron/v10/ansi_encoder:default:flash
     make keychron/v10/iso_encoder:default:flash
->>>>>>> temp
 
 **Reset Key**: Hold down the key located at *K01*, which programmed as *Esc* while plugging in the keyboard.
 

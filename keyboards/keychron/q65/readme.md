@@ -1,22 +1,20 @@
 # Keychron Q65
 
+![Keychron Q65](https://i.imgur.com/5Cbb1C5.jpg[/img])
+
 A customizable 65% keyboard.
 
 * Keyboard Maintainer: [Keychron](https://github.com/keychron)
 * Hardware Supported: Keychron Q65
-* Hardware Availability: [Keychron](https://www.keychron.com)
+* Hardware Availability: [KKeychron Q65 QMK Custom Mechanical Keyboardeychron](https://www.keychron.com/products/keychron-q65-qmk-custom-mechanical-keyboard)
 
 Make example for this keyboard (after setting up your build environment):
 
-```bash
-make keychron/q65/q65_ansi_stm32l432:default
-```
+    make keychron/q65/ansi_encoder:default
 
 Flashing example for this keyboard ([after setting up the bootloadHID flashing environment](https://docs.qmk.fm/#/flashing_bootloadhid))
 
-```bash
-make keychron/q65/q65_ansi_stm32l432:default:flash
-```
+    make keychron/q65/ansi_encoder:default:flash
 
 **Reset Key**: Hold down the key located at *K01*, which programmed as *Esc* while plugging in the keyboard.
 

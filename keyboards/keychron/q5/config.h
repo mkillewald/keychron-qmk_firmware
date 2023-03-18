@@ -16,22 +16,6 @@
 
 #pragma once
 
-/* Key matrix pins */
-#define MATRIX_ROW_PINS { B5, B4, B3, A15, A14, A13 }
-#define MATRIX_COL_PINS { A10, A9, A8, B1, B0, A7, A6, A5, A4, A3, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN }
-
-/* Pin connected to DS of 74HC595 */
-#define DATA_PIN_74HC595 C15
-/* Pin connected to SH_CP of 74HC595 */
-#define CLOCK_PIN_74HC595 A1
-/* Pin connected to ST_CP of 74HC595 */
-#define LATCH_PIN_74HC595 A0
-/* Pin used index start of 74HC595 */
-#define PIN_START_74HC595 10
-
-/* COL2ROW or ROW2COL */
-#define DIODE_DIRECTION ROW2COL
-
 /* RGB Matrix Driver Configuration */
 #define DRIVER_COUNT 2
 #define DRIVER_ADDR_1 0b1110111
@@ -44,10 +28,14 @@
 #define I2C1_TIMINGR_SCLH 15U
 #define I2C1_TIMINGR_SCLL 51U
 
-#define CKLED2001_CURRENT_TUNE { 0xB6, 0xB6, 0x56, 0xB6, 0xB6, 0x56, 0xB6, 0xB6, 0x56, 0xB6, 0xB6, 0x56 }
+#define CKLED2001_CURRENT_TUNE \
+    { 0xB6, 0xB6, 0x56, 0xB6, 0xB6, 0x56, 0xB6, 0xB6, 0x56, 0xB6, 0xB6, 0x56 }
 
 /* DIP switch */
-#define DIP_SWITCH_MATRIX_GRID  { {5, 4} }
+#define DIP_SWITCH_MATRIX_GRID \
+    {                          \
+        { 5, 4 }               \
+    }
 #define SCAN_COUNT_MAX 100
 
 /* Disable DIP switch in matrix data */
@@ -92,9 +80,13 @@
 #define ENABLE_RGB_MATRIX_PIXEL_RAIN
 // #define ENABLE_RGB_MATRIX_PIXEL_FLOW
 // #define ENABLE_RGB_MATRIX_PIXEL_FRACTAL
+
+#define RGB_MATRIX_FRAMEBUFFER_EFFECTS
 // enabled only if RGB_MATRIX_FRAMEBUFFER_EFFECTS is defined
 #define ENABLE_RGB_MATRIX_TYPING_HEATMAP
 #define ENABLE_RGB_MATRIX_DIGITAL_RAIN
+
+#define RGB_MATRIX_KEYPRESSES
 // enabled only of RGB_MATRIX_KEYPRESSES or RGB_MATRIX_KEYRELEASES is defined
 #define ENABLE_RGB_MATRIX_SOLID_REACTIVE_SIMPLE
 // #define ENABLE_RGB_MATRIX_SOLID_REACTIVE
@@ -108,11 +100,3 @@
 // #define ENABLE_RGB_MATRIX_MULTISPLASH
 #define ENABLE_RGB_MATRIX_SOLID_SPLASH
 // #define ENABLE_RGB_MATRIX_SOLID_MULTISPLASH
-
-#define RGB_MATRIX_FRAMEBUFFER_EFFECTS
-#define RGB_MATRIX_KEYPRESSES
-
-/* Enable receive custom command from host */
-#define RAW_HID_CMD 0xAB
-
-#define HOLD_ON_OTHER_KEY_PRESS

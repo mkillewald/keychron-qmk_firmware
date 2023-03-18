@@ -1,22 +1,20 @@
 # Keychron V4
 
+![Keychron V4](https://i.imgur.com/I8XYxlb.jpg[/img])
+
 A customizable 60% keyboard.
 
 * Keyboard Maintainer: [Keychron](https://github.com/keychron)
 * Hardware Supported: Keychron V4
-* Hardware Availability: [Keychron](https://www.keychron.com)
+* Hardware Availability: [Keychron V4 QMK Custom Mechanical Keyboard](https://www.keychron.com/products/keychron-v4-qmk-custom-mechanical-keyboard)
 
 Make example for this keyboard (after setting up your build environment):
 
-```base
-make keychron/v4/v4_ansi_stm32l432:default
-```
+    make keychron/v4/ansi:default
 
 Flashing example for this keyboard ([after setting up the bootloadHID flashing environment](https://docs.qmk.fm/#/flashing_bootloadhid))
 
-```base
-make keychron/v4/v4_ansi_stm32l432:default:flash
-```
+    make keychron/v4/ansi:default:flash
 
 **Reset Key**: Hold down the key located at *K00*, commonly programmed as *Esc* while plugging in the keyboard.
 

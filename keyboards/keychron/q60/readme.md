@@ -1,22 +1,20 @@
 # Keychron Q60
 
+[Keychron Q60](https://i.imgur.com/Uxgs4Sr.jpg[/img])
+
 A customizable 60% keyboard.
 
 * Keyboard Maintainer: [Keychron](https://github.com/keychron)
 * Hardware Supported: Keychron Q60
-* Hardware Availability: [Keychron](https://www.keychron.com)
+* Hardware Availability: [Keychron Q60 QMK Custom Mechanical Keyboard](https://www.keychron.com)
 
 Make example for this keyboard (after setting up your build environment):
 
-```bash
-make keychron/q60/q60_ansi_stm32l432:default
-```
+    make keychron/q60/ansi:default
 
 Flashing example for this keyboard ([after setting up the bootloadHID flashing environment](https://docs.qmk.fm/#/flashing_bootloadhid))
 
-```bash
-make keychron/q60/q60_ansi_stm32l432:default:flash
-```
+    make keychron/q60/ansi:default:flash
 
 **Reset Key**: Hold down the key located at *K00*, commonly programmed as *Esc* while plugging in the keyboard.
 

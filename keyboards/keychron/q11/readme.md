@@ -1,22 +1,20 @@
 # Keychron Q11
 
+![Keychron Q11](https://i.imgur.com/fRZPpJN.jpg[/img])
+
 A customizable 75% split keyboard.
 
 * Keyboard Maintainer: [Keychron](https://github.com/keychron)
 * Hardware Supported: Keychron Q11
-* Hardware Availability: [Keychron](https://www.keychron.com)
+* Hardware Availability: [Keychron Q11 QMK Custom Mechanical Keyboard](https://www.keychron.com/products/keychron-q11-qmk-custom-mechanical-keyboard)
 
 Make example for this keyboard (after setting up your build environment):
 
-```bash
-make keychron/q11/q11_ansi_stm32l432:default
-```
+    make keychron/q11/ansi_encoder:default
 
 Flashing example for this keyboard:
 
-```bash
-make keychron/q11/q11_ansi_stm32l432:default:flash
-```
+    make keychron/q11/ansi_encoder:default:flash
 
 **Reset Key**: Hold down the key located at *K01*, which programmed as *Esc* while plugging in the keyboard.
 
