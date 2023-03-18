@@ -21,12 +21,16 @@
 #define DRIVER_2_LED_TOTAL 33
 #define RGB_MATRIX_LED_COUNT (DRIVER_1_LED_TOTAL + DRIVER_2_LED_TOTAL)
 
+<<<<<<< HEAD:keyboards/keychron/v2/v2_ansi_stm32l432_ec11/config.h
 #define CKLED2001_CURRENT_TUNE { 0xCA, 0xCA, 0x60, 0xCA, 0xCA, 0x60, 0xCA, 0xCA, 0x60, 0xCA, 0xCA, 0x60 }
 
 /* Encoder Configuration */
 #define ENCODERS_PAD_A { A10 }
 #define ENCODERS_PAD_B { B5 }
 #define ENCODER_RESOLUTION 4
+=======
+/* Encoder used pins */
+>>>>>>> temp:keyboards/keychron/q2/ansi_encoder/config.h
 #define ENCODER_DEFAULT_POS 0x3
 
 /* Enable caps-lock LED */

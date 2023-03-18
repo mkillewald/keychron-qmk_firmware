@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /* Copyright 2022 @ Keychron(https://www.keychron.com)
+=======
+/* Copyright 2023 @ Keychron(https://www.keychron.com)
+>>>>>>> temp
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,9 +23,12 @@
 /* COL2ROW or ROW2COL */
 #define DIODE_DIRECTION ROW2COL
 
+<<<<<<< HEAD
 /* Set 0 if debouncing isn't needed */
 #define DEBOUNCE 5
 
+=======
+>>>>>>> temp
 /* RGB Matrix Driver Configuration */
 #define DRIVER_COUNT 2
 #define DRIVER_ADDR_1 0b1110111
@@ -102,8 +109,11 @@
 
 #define RGB_MATRIX_FRAMEBUFFER_EFFECTS
 #define RGB_MATRIX_KEYPRESSES
+<<<<<<< HEAD
 
 /* Enable receive custom command from host */
 #define RAW_HID_CMD 0xAB
 
 #define HOLD_ON_OTHER_KEY_PRESS
+=======
+>>>>>>> temp

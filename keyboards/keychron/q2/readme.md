@@ -10,6 +10,7 @@ A customizable 65% keyboard.
 
 Make example for this keyboard (after setting up your build environment):
 
+<<<<<<< HEAD
 ```bash
 make keychron/q2/q2_ansi_stm32l432:default
 ```
@@ -19,6 +20,13 @@ Flashing example for this keyboard ([after setting up the bootloadHID flashing e
 ```bash
 make keychron/q2/q2_ansi_stm32l432:default:flash
 ```
+=======
+    make keychron/q2/ansi:default
+
+Flashing example for this keyboard ([after setting up the bootloadHID flashing environment](https://docs.qmk.fm/#/flashing_bootloadhid))
+
+    make keychron/q2/ansi:default:flash
+>>>>>>> temp
 
 **Reset Key**: Hold down the key located at *K00*, commonly programmed as *Esc* while plugging in the keyboard.
 

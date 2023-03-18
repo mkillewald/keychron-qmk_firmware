@@ -14,6 +14,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+<<<<<<< HEAD
+=======
+#pragma once
+
+>>>>>>> temp
 #include_next <mcuconf.h>
 
 #undef STM32_I2C_USE_I2C1

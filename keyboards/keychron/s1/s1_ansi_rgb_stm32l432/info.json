@@ -10,6 +10,13 @@
     },
     "processor": "STM32L432",
     "bootloader": "stm32-dfu",
+<<<<<<< HEAD:keyboards/keychron/s1/s1_ansi_rgb_stm32l432/info.json
+=======
+    "layout_aliases": {
+        "LAYOUT_ansi_84": "LAYOUT_75_ansi"
+    },
+    "community_layouts": ["75_ansi"],
+>>>>>>> temp:keyboards/keychron/s1/ansi/rgb/info.json
     "layouts": {
         "LAYOUT_75_ansi": {
             "layout": [

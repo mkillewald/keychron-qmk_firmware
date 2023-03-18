@@ -8,6 +8,7 @@ A customizable 96% keyboard.
 
 Make example for this keyboard (after setting up your build environment):
 
+<<<<<<< HEAD
 ```bash
 make keychron/q12/q12_ansi_stm32l432:default
 ```
@@ -17,6 +18,13 @@ Flashing example for this keyboard:
 ```bash
 make keychron/q12/q12_ansi_stm32l432:default:flash
 ```
+=======
+    make keychron/q12/q12_ansi_stm32l432:default
+
+Flashing example for this keyboard:
+
+    make keychron/q12/q12_ansi_stm32l432:default:flash
+>>>>>>> temp
 
 **Reset Key**: Hold down the key located at *K00*, commonly programmed as *Esc* while plugging in the keyboard.
 

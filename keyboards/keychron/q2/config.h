@@ -16,13 +16,6 @@
 
 #pragma once
 
-/* COL2ROW or ROW2COL */
-#define DIODE_DIRECTION ROW2COL
-
-/* key matrix size */
-#define MATRIX_ROWS 5
-#define MATRIX_COLS 15
-
 /* key matrix pins */
 #define MATRIX_ROW_PINS { B4, B3, A15, A14, A13 }
 #define MATRIX_COL_PINS { C14, C15, A0, A1, A2, A3, A4, A5, A6, A7, B0, B1, A8, A9, H3 }
@@ -30,8 +23,11 @@
 /* If uses PH3 with a stronger pull resistor then the following definition should be included */
 #define MATRIX_UNSELECT_DRIVE_HIGH
 
-/* Set 0 if debouncing isn't needed */
-#define DEBOUNCE 5
+/* DIP switch */
+#define DIP_SWITCH_MATRIX_GRID  { {4, 4} }
+
+/* COL2ROW or ROW2COL */
+#define DIODE_DIRECTION ROW2COL
 
 /* RGB Matrix Driver Configuration */
 #define DRIVER_COUNT 2
@@ -111,6 +107,7 @@
 #define ENABLE_RGB_MATRIX_SOLID_SPLASH
 // #define ENABLE_RGB_MATRIX_SOLID_MULTISPLASH
 
+<<<<<<< HEAD
 #define RGB_MATRIX_FRAMEBUFFER_EFFECTS
 #define RGB_MATRIX_KEYPRESSES
 
@@ -118,3 +115,7 @@
 #define RAW_HID_CMD 0xAB
 
 #define HOLD_ON_OTHER_KEY_PRESS
+=======
+#define RGB_MATRIX_KEYPRESSES
+#define RGB_MATRIX_FRAMEBUFFER_EFFECTS
+>>>>>>> temp

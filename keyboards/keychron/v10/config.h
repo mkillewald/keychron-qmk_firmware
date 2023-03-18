@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /* Copyright 2022 @ Keychron(https://www.keychron.com)
+=======
+/* Copyright 2023 @ Keychron(https://www.keychron.com)
+>>>>>>> temp
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -30,9 +34,12 @@
 /* COL2ROW or ROW2COL */
 #define DIODE_DIRECTION ROW2COL
 
+<<<<<<< HEAD
 /* Set 0 if debouncing isn't needed */
 #define DEBOUNCE 5
 
+=======
+>>>>>>> temp
 /* RGB Matrix Driver Configuration */
 #define DRIVER_COUNT 2
 #define DRIVER_ADDR_1 0b1110111
@@ -51,7 +58,10 @@
 
 /* DIP switch */
 #define DIP_SWITCH_MATRIX_GRID  { {5,5} }
+<<<<<<< HEAD
 #define SCAN_COUNT_MAX 100
+=======
+>>>>>>> temp
 
 /* Disable DIP switch in matrix data */
 #define MATRIX_MASKED
@@ -63,10 +73,13 @@
 #define WEAR_LEVELING_LOGICAL_SIZE 2048
 #define WEAR_LEVELING_BACKING_SIZE (WEAR_LEVELING_LOGICAL_SIZE * 2)
 
+<<<<<<< HEAD
 /* Specify (0,1) which programmed as "ESC" key on this keyboard as bootmagic key */
 #define BOOTMAGIC_LITE_ROW 0
 #define BOOTMAGIC_LITE_COLUMN 1
 
+=======
+>>>>>>> temp
 // RGB Matrix Animation modes. Explicitly enabled
 // For full list of effects, see:
 // https://docs.qmk.fm/#/feature_rgb_matrix?id=rgb-matrix-effects
@@ -118,8 +131,11 @@
 
 #define RGB_MATRIX_KEYPRESSES
 #define RGB_MATRIX_FRAMEBUFFER_EFFECTS
+<<<<<<< HEAD
 
 /* Enable receive custom command from host */
 #define RAW_HID_CMD 0xAB
 
 #define HOLD_ON_OTHER_KEY_PRESS
+=======
+>>>>>>> temp

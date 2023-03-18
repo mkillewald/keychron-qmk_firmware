@@ -33,6 +33,9 @@
 #define DRIVER_1_LED_TOTAL 59
 #define DRIVER_2_LED_TOTAL 23
 #define RGB_MATRIX_LED_COUNT (DRIVER_1_LED_TOTAL + DRIVER_2_LED_TOTAL)
+<<<<<<< HEAD:keyboards/keychron/q1/q1_ansi_atmega32u4/config.h
 
 /* Enable caps-lock LED */
 #define CAPS_LOCK_LED_INDEX 45
+=======
+>>>>>>> temp:keyboards/keychron/q1/ansi_encoder/config.h

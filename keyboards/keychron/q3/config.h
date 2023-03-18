@@ -19,12 +19,15 @@
 /* COL2ROW or ROW2COL */
 #define DIODE_DIRECTION ROW2COL
 
+<<<<<<< HEAD
 /* Set 0 if debouncing isn't needed */
 #define DEBOUNCE 5
 
 /* Drive high instead of pull high to unselect */
 #define MATRIX_UNSELECT_DRIVE_HIGH
 
+=======
+>>>>>>> temp
 /* RGB Matrix Driver Configuration */
 #define DRIVER_COUNT 2
 #define DRIVER_ADDR_1 0b1110111

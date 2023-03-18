@@ -24,9 +24,12 @@
 #define CKLED2001_CURRENT_TUNE { 0xBD, 0xBD, 0x5D, 0xBD, 0xBD, 0x5D, 0xBD, 0xBD, 0x5D, 0xBD, 0xBD, 0x5D }
 
 /* Encoder Configuration */
+<<<<<<< HEAD:keyboards/keychron/v2/v2_jis_stm32l432_ec11/config.h
 #define ENCODERS_PAD_A { A10 }
 #define ENCODERS_PAD_B { B5 }
 #define ENCODER_RESOLUTION 4
+=======
+>>>>>>> temp:keyboards/keychron/q8/iso_encoder/config.h
 #define ENCODER_DEFAULT_POS 0x3
 
 /* Enable caps-lock LED */

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /* Copyright 2022 @ Keychron(https://www.keychron.com)
+=======
+/* Copyright 2023 @ Keychron(https://www.keychron.com)
+>>>>>>> temp
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,6 +21,7 @@
 #pragma once
 
 /* Key matrix pins */
+<<<<<<< HEAD
 #define MATRIX_ROW_PINS { B5, B4, B3, A15, A14, A13 }
 #define MATRIX_COL_PINS { A10, A9, A8, B1, B0, A7, A6, A5, A4, A3, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN }
 
@@ -28,13 +33,22 @@
 #define LATCH_PIN_74HC595 A0
 /* Pin used index start of 74HC595 */
 #define PIN_START_74HC595 10
+=======
+#define MATRIX_ROW_PINS \
+    { B5, B4, B3, A15, A14, A13 }
+#define MATRIX_COL_PINS \
+    { A10, A9, A8, B1, B0, A7, A6, A5, A4, A3, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN }
+>>>>>>> temp
 
 /* COL2ROW or ROW2COL */
 #define DIODE_DIRECTION ROW2COL
 
+<<<<<<< HEAD
 /* Set 0 if debouncing isn't needed */
 #define DEBOUNCE 5
 
+=======
+>>>>>>> temp
 /* RGB Matrix Driver Configuration */
 #define DRIVER_COUNT 2
 #define DRIVER_ADDR_1 0b1110111
@@ -47,10 +61,21 @@
 #define I2C1_TIMINGR_SCLH 15U
 #define I2C1_TIMINGR_SCLL 51U
 
+<<<<<<< HEAD
 #define CKLED2001_CURRENT_TUNE { 0xAD, 0xAD, 0x55, 0xAD, 0xAD, 0x55, 0xAD, 0xAD, 0x55, 0xAD, 0xAD, 0x55 }
 
 /* DIP switch */
 #define DIP_SWITCH_MATRIX_GRID  { {5, 4} }
+=======
+#define CKLED2001_CURRENT_TUNE \
+    { 0xAD, 0xAD, 0x55, 0xAD, 0xAD, 0x55, 0xAD, 0xAD, 0x55, 0xAD, 0xAD, 0x55 }
+
+/* DIP switch */
+#define DIP_SWITCH_MATRIX_GRID \
+    {                          \
+        { 5, 4 }               \
+    }
+>>>>>>> temp
 #define SCAN_COUNT_MAX 100
 
 /* Disable DIP switch in matrix data */
@@ -60,8 +85,13 @@
 #define RGB_DISABLE_WHEN_USB_SUSPENDED
 
 /* EEPROM Driver Configuration */
+<<<<<<< HEAD
 #define WEAR_LEVELING_LOGICAL_SIZE 2048
 #define WEAR_LEVELING_BACKING_SIZE (WEAR_LEVELING_LOGICAL_SIZE * 2)
+=======
+// #define WEAR_LEVELING_LOGICAL_SIZE 2048 // default
+// #define WEAR_LEVELING_BACKING_SIZE (WEAR_LEVELING_LOGICAL_SIZE * 2) // default
+>>>>>>> temp
 
 // RGB Matrix Animation modes. Explicitly enabled
 // For full list of effects, see:
@@ -114,8 +144,11 @@
 
 #define RGB_MATRIX_FRAMEBUFFER_EFFECTS
 #define RGB_MATRIX_KEYPRESSES
+<<<<<<< HEAD
 
 /* Enable receive custom command from host */
 #define RAW_HID_CMD 0xAB
 
 #define HOLD_ON_OTHER_KEY_PRESS
+=======
+>>>>>>> temp

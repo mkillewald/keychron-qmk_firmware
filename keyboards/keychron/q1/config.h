@@ -19,8 +19,18 @@
 /* COL2ROW or ROW2COL */
 #define DIODE_DIRECTION ROW2COL
 
+<<<<<<< HEAD
 /* Set 0 if debouncing isn't needed */
 #define DEBOUNCE 5
+=======
+/* RGB Matrix Driver Configuration */
+#define DRIVER_COUNT 2
+#define DRIVER_ADDR_1 0b1010000
+#define DRIVER_ADDR_2 0b1011111
+
+/* DIP switch */
+#define DIP_SWITCH_MATRIX_GRID  { {0,1} }
+>>>>>>> temp
 
 /* Disable DIP switch in matrix data */
 #define MATRIX_MASKED

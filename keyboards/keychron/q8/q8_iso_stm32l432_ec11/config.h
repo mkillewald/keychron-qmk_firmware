@@ -22,9 +22,12 @@
 #define RGB_MATRIX_LED_COUNT (DRIVER_1_LED_TOTAL + DRIVER_2_LED_TOTAL)
 
 /* Encoder Configuration */
+<<<<<<< HEAD:keyboards/keychron/q8/q8_iso_stm32l432_ec11/config.h
 #define ENCODERS_PAD_A { B5 }
 #define ENCODERS_PAD_B { A10 }
 #define ENCODER_RESOLUTION 4
+=======
+>>>>>>> temp:keyboards/keychron/v2/ansi_encoder/config.h
 #define ENCODER_DEFAULT_POS 0x3
 
 /* Enable caps-lock LED */
