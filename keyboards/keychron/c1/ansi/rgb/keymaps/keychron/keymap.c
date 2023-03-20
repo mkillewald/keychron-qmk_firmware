@@ -27,7 +27,7 @@ enum layers{
 };
 
 enum custom_keycodes {
-    KC_LOPTN = QK_KB_2, // TECH DEBT: Starts at QK_KB_2 to maintain ordering with VIA definitions. See #19884. Revert to QK_KB_0 when VIA catches up with QMK.
+    KC_LOPTN = QK_KB_2,
     KC_ROPTN,
     KC_LCMMD,
     KC_RCMMD,
