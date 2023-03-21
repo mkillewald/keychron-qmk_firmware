@@ -14,6 +14,26 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+<<<<<<<< HEAD:keyboards/keychron/q0/q0_stm32l432/config.h
+#pragma once
+
+/* key matrix pins */
+#define MATRIX_ROW_PINS { B5, B4, B3, A15, A14, A13 }
+#define MATRIX_COL_PINS { A5, A6, A7, B0 }
+
+/* RGB Matrix Driver Configuration */
+#define DRIVER_COUNT 1
+#define DRIVER_ADDR_1 0b1110100
+
+/* RGB Matrix Configuration */
+#define DRIVER_1_LED_TOTAL 21
+#define RGB_MATRIX_LED_COUNT DRIVER_1_LED_TOTAL
+
+#define CKLED2001_CURRENT_TUNE { 0xFF, 0xFF, 0x70, 0xFF, 0xFF, 0x70, 0xFF, 0xFF, 0x70, 0xFF, 0xFF, 0x70 }
+
+/* Enable num-lock LED */
+#define NUM_LOCK_LED_INDEX 4
+========
 #include "quantum.h"
 
 #ifdef ENCODER_ENABLE
@@ -29,3 +49,4 @@ bool encoder_update_kb(uint8_t index, bool clockwise) {
     return true;
 }
 #endif
+>>>>>>>> temp:keyboards/pauperboards/brick/brick.c

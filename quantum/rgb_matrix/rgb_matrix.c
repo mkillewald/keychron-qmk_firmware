@@ -281,12 +281,22 @@ void rgb_matrix_test(void) {
     }
 }
 
+__attribute__((weak)) void rgb_matrix_indicators_none_kb(void) {}
+
+__attribute__((weak)) void rgb_matrix_indicators_none_user(void) {}
+
+void rgb_matrix_none_indicators(void) {
+    rgb_matrix_indicators_none_kb();
+    rgb_matrix_indicators_none_user();
+}
+
 static bool rgb_matrix_none(effect_params_t *params) {
     if (!params->init) {
         return false;
     }
 
     rgb_matrix_set_color_all(0, 0, 0);
+    rgb_matrix_none_indicators();
     return false;
 }
 

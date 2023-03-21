@@ -16,6 +16,10 @@
 
 #pragma once
 
+<<<<<<<< HEAD:keyboards/keychron/q11/q11_ansi_stm32l432_ec11/config.h
+/* Enable caps-lock LED */
+#define CAPS_LOCK_LED_INDEX 23
+========
 #include "quantum.h"
 
 #define LAYOUT( \
@@ -24,3 +28,4 @@
 	{ K000, K001, K002,  K003, K004 } \
 }
 // clang-format on
+>>>>>>>> temp:keyboards/hfdkb/ac001/ac001.h

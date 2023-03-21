@@ -25,7 +25,7 @@
 #        ifndef FEE_PAGE_COUNT
 #            define FEE_PAGE_COUNT 2 // How many pages are used
 #        endif
-#    elif defined(STM32F103xE) || defined(STM32F303xC) || defined(STM32F303xE) || defined(STM32F072xB) || defined(STM32F070xB)
+#    elif defined(STM32F103xE) || defined(STM32F303xC) || defined(STM32F303xE) || defined(STM32F072xB) || defined(STM32F070xB) || defined(STM32L432xx)
 #        ifndef FEE_PAGE_SIZE
 #            define FEE_PAGE_SIZE 0x800 // Page size = 2KByte
 #        endif
@@ -47,7 +47,7 @@
 #        define FEE_MCU_FLASH_SIZE 32 // Size in Kb
 #    elif defined(GD32VF103C8)
 #        define FEE_MCU_FLASH_SIZE 64 // Size in Kb
-#    elif defined(STM32F103xB) || defined(STM32F072xB) || defined(STM32F070xB) || defined(GD32VF103CB)
+#    elif defined(STM32F103xB) || defined(STM32F072xB) || defined(STM32F070xB) || defined(STM32L432xx) || defined(GD32VF103CB)
 #        define FEE_MCU_FLASH_SIZE 128 // Size in Kb
 #    elif defined(STM32F303xC) || defined(STM32F401xC)
 #        define FEE_MCU_FLASH_SIZE 256 // Size in Kb
@@ -100,12 +100,23 @@
 #        pragma message STR(FEE_DENSITY_BYTES) " > " STR(FEE_ADDRESS_MAX_SIZE)
 #        error emulated eeprom: FEE_DENSITY_BYTES is greater than FEE_ADDRESS_MAX_SIZE allows
 #    endif
-#    if ((FEE_DENSITY_BYTES) % 2) == 1
-#        error emulated eeprom: FEE_DENSITY_BYTES must be even
+#    if defined(STM32L432xx)
+#        if ((FEE_DENSITY_BYTES) % 8) != 0
+#            error emulated eeprom: FEE_DENSITY_BYTES must be a multiple of 8
+#        endif
+#    else
+#        if ((FEE_DENSITY_BYTES) % 2) == 1
+#            error emulated eeprom: FEE_DENSITY_BYTES must be even
+#        endif
 #    endif
 #else
+#    if defined(STM32L432xx)
+/* Only one page of allocated space used for emulated eeprom, 3 pages for write log */
+#        define FEE_DENSITY_BYTES FEE_PAGE_SIZE
+#    else
 /* Default to half of allocated space used for emulated eeprom, half for write log */
-#    define FEE_DENSITY_BYTES (FEE_PAGE_COUNT * FEE_PAGE_SIZE / 2)
+#       define FEE_DENSITY_BYTES (FEE_PAGE_COUNT * FEE_PAGE_SIZE / 2)
+#    endif
 #endif
 
 /* Size of write log */
@@ -114,8 +125,14 @@
 #        pragma message STR(FEE_DENSITY_BYTES) " + " STR(FEE_WRITE_LOG_BYTES) " > " STR(FEE_DENSITY_MAX_SIZE)
 #        error emulated eeprom: FEE_WRITE_LOG_BYTES exceeds remaining FEE_DENSITY_MAX_SIZE
 #    endif
-#    if ((FEE_WRITE_LOG_BYTES) % 2) == 1
-#        error emulated eeprom: FEE_WRITE_LOG_BYTES must be even
+#    if defined(STM32L432xx)
+#        if ((FEE_WRITE_LOG_BYTES) % 8) != 0
+#            error emulated eeprom: FEE_WRITE_LOG_BYTES must be a multiple of 8
+#        endif
+#    else
+#        if ((FEE_WRITE_LOG_BYTES) % 2) == 1
+#            error emulated eeprom: FEE_WRITE_LOG_BYTES must be even
+#        endif
 #    endif
 #else
 /* Default to use all remaining space */

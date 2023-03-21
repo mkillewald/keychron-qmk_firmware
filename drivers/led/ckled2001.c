@@ -17,6 +17,7 @@
 #include "ckled2001.h"
 #include "i2c_master.h"
 #include "wait.h"
+#include "keyboard.h"
 
 #ifndef CKLED2001_TIMEOUT
 #    define CKLED2001_TIMEOUT 100
@@ -147,6 +148,16 @@ void CKLED2001_init(uint8_t addr) {
 
 void CKLED2001_set_color(int index, uint8_t red, uint8_t green, uint8_t blue) {
     ckled2001_led led;
+#if defined(RGB_MATRIX_ENABLE) && defined(RGB_MATRIX_SPLIT)
+    const uint8_t k_rgb_matrix_split[2] = RGB_MATRIX_SPLIT;
+    if (is_keyboard_left()) {
+        if (index >= k_rgb_matrix_split[0]) {
+            return;
+        }
+    } else if (index < k_rgb_matrix_split[0]) {
+        return;
+    }
+#endif
     if (index >= 0 && index < RGB_MATRIX_LED_COUNT) {
         memcpy_P(&led, (&g_ckled2001_leds[index]), sizeof(led));
 

@@ -222,12 +222,22 @@ void process_led_matrix(uint8_t row, uint8_t col, bool pressed) {
 #endif // defined(LED_MATRIX_FRAMEBUFFER_EFFECTS) && defined(ENABLE_LED_MATRIX_TYPING_HEATMAP)
 }
 
+__attribute__((weak)) void led_matrix_indicators_none_kb(void) {}
+
+__attribute__((weak)) void led_matrix_indicators_none_user(void) {}
+
+void led_matrix_none_indicators(void) {
+    led_matrix_indicators_none_kb();
+    led_matrix_indicators_none_user();
+}
+
 static bool led_matrix_none(effect_params_t *params) {
     if (!params->init) {
         return false;
     }
 
     led_matrix_set_value_all(0);
+    led_matrix_none_indicators();
     return false;
 }
 
