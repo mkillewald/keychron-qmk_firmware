@@ -189,29 +189,29 @@ led_config_t g_led_config = {
 #define ADC_RESOLUTION ADC_CFGR_RES_10BITS
 
 static int16_t analogReadPin_my(pin_t pin) {
-    ADCConfig adcCfg = {};
-    adcsample_t sampleBuffer[ADC_NUM_CHANNELS*ADC_BUFFER_DEPTH];
-    ADCDriver* targetDriver = &ADCD1;
+    ADCConfig          adcCfg = {};
+    adcsample_t        sampleBuffer[ADC_NUM_CHANNELS * ADC_BUFFER_DEPTH];
+    ADCDriver         *targetDriver       = &ADCD1;
     ADCConversionGroup adcConversionGroup = {
-        .circular = FALSE,
+        .circular     = FALSE,
         .num_channels = (uint16_t)(ADC_NUM_CHANNELS),
-        .cfgr = ADC_RESOLUTION,
+        .cfgr         = ADC_RESOLUTION,
     };
 
     palSetLineMode(pin, PAL_MODE_INPUT_ANALOG);
     switch (pin) {
         case B0:
             adcConversionGroup.smpr[2] = ADC_SMPR2_SMP_AN15(ADC_SAMPLING_RATE);
-            adcConversionGroup.sqr[0] = ADC_SQR1_SQ1_N(ADC_CHANNEL_IN15);
-            sampleBuffer[0] = 0;
+            adcConversionGroup.sqr[0]  = ADC_SQR1_SQ1_N(ADC_CHANNEL_IN15);
+            sampleBuffer[0]            = 0;
             break;
         case B1:
             adcConversionGroup.smpr[2] = ADC_SMPR2_SMP_AN16(ADC_SAMPLING_RATE);
-            adcConversionGroup.sqr[0] = ADC_SQR1_SQ1_N(ADC_CHANNEL_IN16);
-            sampleBuffer[0] = 0;
+            adcConversionGroup.sqr[0]  = ADC_SQR1_SQ1_N(ADC_CHANNEL_IN16);
+            sampleBuffer[0]            = 0;
             break;
         default:
-             return 0;
+            return 0;
     }
     adcStart(targetDriver, &adcCfg);
     if (adcConvert(targetDriver, &adcConversionGroup, &sampleBuffer[0], ADC_BUFFER_DEPTH) != MSG_OK) {
@@ -220,6 +220,39 @@ static int16_t analogReadPin_my(pin_t pin) {
 
     return *sampleBuffer;
 }
+
+#if defined(ENCODER_ENABLE) && defined(PAL_USE_CALLBACKS)
+
+void encoder0_pad_cb(void *param) {
+    (void)param;
+
+    encoder_inerrupt_read(0);
+}
+
+void encoder1_pad_cb(void *param) {
+    (void)param;
+
+    encoder_inerrupt_read(1);
+}
+
+void encoder_interrupt_init(void) {
+    pin_t encoders_pad_a[NUM_ENCODERS] = ENCODERS_PAD_A;
+    pin_t encoders_pad_b[NUM_ENCODERS] = ENCODERS_PAD_B;
+    for (uint8_t i = 0; i < NUM_ENCODERS; i++) {
+        palEnableLineEvent(encoders_pad_a[i], PAL_EVENT_MODE_BOTH_EDGES);
+        palEnableLineEvent(encoders_pad_b[i], PAL_EVENT_MODE_BOTH_EDGES);
+    }
+    if (NUM_ENCODERS > 0) {
+        palSetLineCallback(encoders_pad_a[0], encoder0_pad_cb, NULL);
+        palSetLineCallback(encoders_pad_b[0], encoder0_pad_cb, NULL);
+    }
+    if (NUM_ENCODERS > 1) {
+        palSetLineCallback(encoders_pad_a[1], encoder1_pad_cb, NULL);
+        palSetLineCallback(encoders_pad_b[1], encoder1_pad_cb, NULL);
+    }
+}
+
+#endif
 
 void keyboard_post_init_kb(void) {
     if (is_keyboard_left()) {
@@ -231,6 +264,9 @@ void keyboard_post_init_kb(void) {
             setPinInput(A12);
         }
     }
-
+#if defined(ENCODER_ENABLE) && defined(PAL_USE_CALLBACKS)
+    encoder_interrupt_init();
+#endif
+    // allow user keymaps to do custom post_init
     keyboard_post_init_user();
 }

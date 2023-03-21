@@ -61,7 +61,7 @@ static inline void HC595_delay(uint16_t n) {
 
 static void HC595_output(uint16_t data) {
     ATOMIC_BLOCK_FORCEON {
-        for (uint8_t i = 0; i < 10; i++) {
+        for (uint8_t i = 0; i < 8; i++) {
             if (data & 0x1) {
                 writePinHigh(HC595_DS);
             } else {
@@ -78,7 +78,7 @@ static void HC595_output(uint16_t data) {
     }
 }
 
-static void HC595_output_byte(uint8_t data) {
+static void HC595_output_bit(uint8_t data) {
     ATOMIC_BLOCK_FORCEON {
         if (data & 0x1) {
             writePinHigh(HC595_DS);
@@ -102,7 +102,7 @@ static bool select_col(uint8_t col) {
         return true;
     } else {
         if (col == 10) {
-            HC595_output_byte(0x00);
+            HC595_output_bit(0x00);
         }
         return true;
     }
@@ -119,7 +119,7 @@ static void unselect_col(uint8_t col) {
         setPinInputHigh_atomic(pin);
 #endif
     } else {
-        HC595_output_byte(0x01);
+        HC595_output_bit(0x01);
     }
 }
 

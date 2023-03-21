@@ -28,7 +28,7 @@ key_combination_t key_comb_list[4] = {
 };
 
 static uint8_t mac_keycode[4] = {KC_LOPT, KC_ROPT, KC_LCMD, KC_RCMD};
-//clang-format on
+// clang-format on
 void housekeeping_task_keychron(void) {
     if (is_siri_active) {
         if (sync_timer_elapsed32(siri_timer) >= 500) {
@@ -50,7 +50,7 @@ bool process_record_keychron(uint16_t keycode, keyrecord_t *record) {
             } else {
                 unregister_code(mac_keycode[keycode - KC_LOPTN]);
             }
-            return false;  // Skip all further processing of this key
+            return false; // Skip all further processing of this key
         case KC_SIRI:
             if (record->event.pressed) {
                 if (!is_siri_active) {
@@ -62,7 +62,7 @@ bool process_record_keychron(uint16_t keycode, keyrecord_t *record) {
             } else {
                 // Do something else when release
             }
-            return false;  // Skip all further processing of this key
+            return false; // Skip all further processing of this key
         case KC_TASK:
         case KC_FLXP:
         case KC_SNAP:
@@ -76,9 +76,9 @@ bool process_record_keychron(uint16_t keycode, keyrecord_t *record) {
                     unregister_code(key_comb_list[keycode - KC_TASK].keycode[i]);
                 }
             }
-            return false;  // Skip all further processing of this key
+            return false; // Skip all further processing of this key
         default:
-            return true;  // Process all other keycodes normally
+            return true; // Process all other keycodes normally
     }
 }
 
