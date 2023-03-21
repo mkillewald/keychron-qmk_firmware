@@ -17,6 +17,14 @@
 #include "keychron_ft_common.h"
 #include "raw_hid.h"
 
+#ifndef BL_TEST_KEY1
+#    define BL_TEST_KEY1 KC_RIGHT
+#endif
+
+#ifndef BL_TEST_KEY2
+#    define BL_TEST_KEY2 KC_HOME
+#endif
+
 // clang-format off
 enum {
     OS_SWITCH = 0x01,
@@ -47,10 +55,17 @@ HSV     hsv;
 
 __attribute__((weak)) bool process_record_keychron_ft(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case MO(1):
-        case MO(2):
-        case MO(3):
-        case MO(4):
+#if defined(FN_KEY1) || defined(FN_KEY2) || defined(FN_KEY3)
+#    ifdef FN_KEY1
+        case FN_KEY1: /* fall through */
+#    endif
+#    ifdef FN_KEY2
+        case FN_KEY2:
+#    endif
+#    ifdef FN_KEY3
+        case FN_KEY3:
+#    endif
+#endif
             if (record->event.pressed) {
                 key_press_status |= KEY_PRESS_STEP_0;
             } else {
@@ -80,7 +95,7 @@ __attribute__((weak)) bool process_record_keychron_ft(uint16_t keycode, keyrecor
                 timer_3s_buffer = 0;
             }
             return true;
-        case KC_RIGHT:
+        case BL_TEST_KEY1:
             if (record->event.pressed) {
                 key_press_status |= KEY_PRESS_STEP_3;
                 if (led_test_mode) {
@@ -95,7 +110,7 @@ __attribute__((weak)) bool process_record_keychron_ft(uint16_t keycode, keyrecor
                 timer_3s_buffer = 0;
             }
             return true;
-        case KC_HOME:
+        case BL_TEST_KEY2:
             if (record->event.pressed) {
                 key_press_status |= KEY_PRESS_STEP_4;
                 if (led_test_mode) {
