@@ -277,12 +277,3 @@ void encoder_update_raw(uint8_t *slave_state) {
     if (changed) last_encoder_activity_trigger();
 }
 #endif
-
-void encoder_insert_state(void) {
-    for (uint8_t i = 0; i < thisCount; i++) {
-        encoder_state[i] <<= 2;
-        encoder_state[i] |= (readPin(encoders_pad_a[i]) << 0) | (readPin(encoders_pad_b[i]) << 1);
-        encoder_pulses[i] += encoder_LUT[encoder_state[i] & 0xF];
-        encoder_external_update[i] = true;
-    }
-}
