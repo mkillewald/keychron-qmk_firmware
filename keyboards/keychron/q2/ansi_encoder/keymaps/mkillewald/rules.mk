@@ -3,6 +3,3 @@ ENCODER_MAP_ENABLE = yes
 
 SRC += keymap_user_config.c
 
-VPATH += keyboards/keychron/common
-SRC += keychron_common.c
-SRC += keychron_ft_common.c

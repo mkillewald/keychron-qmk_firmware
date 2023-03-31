@@ -13,22 +13,11 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
- 
+
 #pragma once
 
 void user_config_read(void);
 void user_config_write(void);
 
-char user_config_c1_r(void);
-char user_config_c1_g(void);
-char user_config_c1_b(void);
-
-char user_config_c2_r(void);
-char user_config_c2_g(void);
-char user_config_c2_b(void);
-
-char user_config_c3_r(void);
-char user_config_c3_g(void);
-char user_config_c3_b(void);
-
-void user_config_set_c1(char r, char g, char b);
+uint8_t user_config_get_data(void);
+void user_config_set_data(uint8_t data);

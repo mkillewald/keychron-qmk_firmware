@@ -13,38 +13,14 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
- 
+
 #include QMK_KEYBOARD_H
 #include "keymap_user_config.h"
 
-typedef struct {
-    char c1_r;
-    char c1_g;
-    char c1_b;
-    
-    char c2_r;
-    char c2_g;
-    char c2_b;
-    
-    char c3_r;
-    char c3_g;
-    char c3_b;
-} user_config_t;
-
-user_config_t user_config;
+uint8_t user_config;
 
 void eeconfig_init_user(void) {
-    user_config.c1_r = 0x44;  // purple
-    user_config.c1_g = 0x00;
-    user_config.c1_b = 0xff;
-    
-    user_config.c2_r = 0xff;  // pink
-    user_config.c2_g = 0x00;
-    user_config.c2_b = 0x4f;
- 
-    user_config.c3_r = 0x00;  // green
-    user_config.c3_g = 0xff;
-    user_config.c3_b = 0x00;
+    user_config = 255;
     eeconfig_update_user_datablock(&user_config);
 }
 
@@ -56,21 +32,8 @@ void user_config_write(void) {
     eeconfig_update_user_datablock(&user_config);
 }
 
-char user_config_c1_r(void) { return user_config.c1_r; }
-char user_config_c1_g(void) { return user_config.c1_g; }
-char user_config_c1_b(void) { return user_config.c1_b; }
-
-char user_config_c2_r(void) { return user_config.c2_r; }
-char user_config_c2_g(void) { return user_config.c2_g; }
-char user_config_c2_b(void) { return user_config.c2_b; }
-
-char user_config_c3_r(void) { return user_config.c3_r; }
-char user_config_c3_g(void) { return user_config.c3_g; }
-char user_config_c3_b(void) { return user_config.c3_b; }
-
-void user_config_set_c1(char r, char g, char b) {
-    user_config.c1_r = r;
-    user_config.c1_g = g;
-    user_config.c1_b = b;
+uint8_t user_config_get_data(void) { return user_config; }
+void user_config_set_data(uint8_t data) {
+    user_config = data;
     user_config_write();
 }
