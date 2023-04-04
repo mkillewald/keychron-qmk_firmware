@@ -1,6 +1,6 @@
 # Keychron V7
 
-![Keychron V7](https://i.imgur.com/5VLYOaX.jpg[/img])
+![Keychron V7](https://i.imgur.com/5VLYOaX.jpg)
 
 A customizable 70% keyboard.
 

@@ -27,6 +27,7 @@
 #define I2C1_TIMINGR_SCLH 15U
 #define I2C1_TIMINGR_SCLL 30U
 
+/* Set LED driver current */
 #define CKLED2001_CURRENT_TUNE \
     { 0xD0, 0xD0, 0x60, 0xD0, 0xD0, 0x60, 0xD0, 0xD0, 0x60, 0xD0, 0xD0, 0x60 }
 
@@ -101,4 +102,5 @@
 // #define ENABLE_RGB_MATRIX_SOLID_MULTISPLASH
 
 /* Factory test keys */
-#define FN_KEY1 MO(4)
+#define FN_KEY1 MO(2)
+#define FN_KEY2 MO(3)

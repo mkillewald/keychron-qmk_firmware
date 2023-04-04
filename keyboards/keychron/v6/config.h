@@ -28,7 +28,7 @@
 #define I2C1_TIMINGR_SCLH 15U
 #define I2C1_TIMINGR_SCLL 51U
 
-/* Limit the maximum brigtness current of colour white to 500mA */
+/* Set LED driver current */
 #define CKLED2001_CURRENT_TUNE \
     { 0xA8, 0xA8, 0x48, 0xA8, 0xA8, 0x48, 0xA8, 0xA8, 0x48, 0xA8, 0xA8, 0x48 }
 
