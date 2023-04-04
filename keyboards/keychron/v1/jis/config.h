@@ -26,8 +26,5 @@
 #define DRIVER_2_LED_TOTAL 40
 #define RGB_MATRIX_LED_COUNT (DRIVER_1_LED_TOTAL + DRIVER_2_LED_TOTAL)
 
-#define CKLED2001_CURRENT_TUNE \
-    { 0xA0, 0xA0, 0x4D, 0xA0, 0xA0, 0x4D, 0xA0, 0xA0, 0x4D, 0xA0, 0xA0, 0x4D }
-
 /* Enable caps-lock LED */
 #define CAPS_LOCK_LED_INDEX 45
