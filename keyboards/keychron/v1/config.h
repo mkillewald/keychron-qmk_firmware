@@ -111,6 +111,3 @@
 #define HC595_STCP B0
 #define HC595_SHCP B1
 #define HC595_DS A7
-
-#define SHIFT_COL_START 8
-#define SHIFT_COL_END MATRIX_COLS

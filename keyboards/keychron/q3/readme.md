@@ -1,6 +1,6 @@
 # Keychron Q3
 
-![Keychron Q3](https://i.imgur.com/KjP4nqd.jpg[/img])
+![Keychron Q3](https://i.imgur.com/KjP4nqd.jpg)
 
 A customizable 80% keyboard.
 
