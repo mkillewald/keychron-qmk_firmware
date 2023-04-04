@@ -1,6 +1,6 @@
 # Keychron V2
 
-![Keychron V2](https://i.imgur.com/mEZWo30.jpg[/img])
+![Keychron V2](https://i.imgur.com/mEZWo30.jpg)
 
 A customizable 65% keyboard.
 
