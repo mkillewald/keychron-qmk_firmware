@@ -104,3 +104,10 @@
 /* Factory test keys */
 #define FN_KEY1 MO(1)
 #define FN_KEY2 MO(3)
+
+#define HC595_DS C15
+#define HC595_SHCP A1
+#define HC595_STCP A0
+
+#define SHIFT_COL_START 10
+#define SHIFT_COL_END MATRIX_COLS
