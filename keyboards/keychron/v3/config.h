@@ -16,6 +16,9 @@
 
 #pragma once
 
+/* If PH3 used with a stronger pull resistor then the following definition needs be included */
+// #define MATRIX_UNSELECT_DRIVE_HIGH
+
 /* RGB Matrix Driver Configuration */
 #define DRIVER_COUNT 2
 #define DRIVER_ADDR_1 0b1110111
@@ -30,6 +33,9 @@
 
 /* Scan phase of led driver set as MSKPHASE_9CHANNEL(defined as 0x03 in CKLED2001.h) */
 #define PHASE_CHANNEL MSKPHASE_9CHANNEL
+/* Set LED driver current */
+#define CKLED2001_CURRENT_TUNE \
+    { 0x98, 0x98, 0x44, 0x98, 0x98, 0x44, 0x98, 0x98, 0x44, 0x98, 0x98, 0x44 }
 
 /* DIP switch */
 #define DIP_SWITCH_MATRIX_GRID \
@@ -105,3 +111,10 @@
 /* Factory test keys */
 #define FN_KEY1 MO(1)
 #define FN_KEY2 MO(3)
+
+#define HC595_STCP B0
+#define HC595_SHCP B1
+#define HC595_DS A7
+
+#define SHIFT_COL_START 8
+#define SHIFT_COL_END MATRIX_COLS

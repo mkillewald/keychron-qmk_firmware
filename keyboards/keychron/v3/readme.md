@@ -1,6 +1,6 @@
 # Keychron V3
 
-![Keychron V3](https://i.imgur.com/AIrmjVk.jpg[/img])
+![Keychron V3](https://i.imgur.com/AIrmjVk.jpg)
 
 A customizable 80% keyboard.
 

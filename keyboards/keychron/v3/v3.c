@@ -44,7 +44,3 @@ bool dip_switch_update_kb(uint8_t index, bool active) {
     return true;
 }
 #endif
-
-void restart_usb_driver(USBDriver *usbp) {
-    (void)usbp;
-}
