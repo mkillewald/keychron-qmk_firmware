@@ -8,6 +8,20 @@
         "pid": "0x0123",
         "device_version": "1.0.5"
     },
+    "features": {
+        "bootmagic": true,
+        "command": false,
+        "console": false,
+        "dip_switch": true,
+        "encoder": true,
+        "extrakey": true,
+        "mousekey": true,
+        "nkro": true,
+        "rgb_matrix": true
+    },
+    "rgb_matrix": {
+        "driver": "CKLED2001"
+    },
     "matrix_pins": {
         "cols": ["C14", "C15", "A0", "A1", "A2", "A3", "A4", "A5", null, null, null, null, null, null, null, null],
         "rows": ["B5", "B4", "B3", "A15", "A14", "A13"]

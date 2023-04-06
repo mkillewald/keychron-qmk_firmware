@@ -1,6 +1,6 @@
 # Keychron Q4
 
-![Keychron Q4](https://i.imgur.com/daIVjVG.jpg[/img])
+![Keychron Q4](https://i.imgur.com/daIVjVG.jpg)
 
 A customizable 60% keyboard.
 

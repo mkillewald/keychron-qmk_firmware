@@ -1,6 +1,6 @@
 # Keychron Q7
 
-![Keychron Q7](https://i.imgur.com/dMnFpx0.jpg[/img])
+![Keychron Q7](https://i.imgur.com/dMnFpx0.jpg)
 
 A customizable 70% keyboard.
 
