@@ -24,8 +24,5 @@
 #define DRIVER_1_LED_TOTAL 21
 #define RGB_MATRIX_LED_COUNT DRIVER_1_LED_TOTAL
 
-#define CKLED2001_CURRENT_TUNE \
-    { 0xFF, 0xFF, 0x70, 0xFF, 0xFF, 0x70, 0xFF, 0xFF, 0x70, 0xFF, 0xFF, 0x70 }
-
 /* Enable num-lock LED */
 #define NUM_LOCK_LED_INDEX 4

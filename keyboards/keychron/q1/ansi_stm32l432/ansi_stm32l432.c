@@ -156,7 +156,3 @@ led_config_t g_led_config = {
 };
 
 #endif
-
-void restart_usb_driver(USBDriver *usbp) {
-    (void)usbp;
-}

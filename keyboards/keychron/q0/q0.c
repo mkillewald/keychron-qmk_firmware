@@ -15,7 +15,3 @@
  */
 
 #include "quantum.h"
-
-void restart_usb_driver(USBDriver *usbp) {
-    (void)usbp;
-}
