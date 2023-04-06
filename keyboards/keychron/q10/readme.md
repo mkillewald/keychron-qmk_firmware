@@ -1,6 +1,6 @@
 # Keychron Q10
 
-![Keychron Q10](https://i.imgur.com/QhqPOQQ.jpg[/img])
+![Keychron Q10](https://i.imgur.com/QhqPOQQ.jpg)
 
 A customizable 75% ergonomic keyboard.
 

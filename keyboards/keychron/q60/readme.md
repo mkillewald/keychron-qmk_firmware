@@ -1,6 +1,6 @@
 # Keychron Q60
 
-[Keychron Q60](https://i.imgur.com/Uxgs4Sr.jpg[/img])
+[Keychron Q60](https://i.imgur.com/Uxgs4Sr.jpg)
 
 A customizable 60% keyboard.
 

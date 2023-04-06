@@ -1,6 +1,6 @@
 # Keychron Q8
 
-![Keychron Q8](https://i.imgur.com/FQnOwRr.jpg[/img])
+![Keychron Q8](https://i.imgur.com/FQnOwRr.jpg)
 
 A customizable 65% Alice layout keyboard.
 

@@ -216,7 +216,7 @@ static void encoder_pad_cb(void *param) {
     encoder_inerrupt_read((uint32_t)param & 0XFF);
 }
 
-void keyboard_post_init_kb(void) {
+void keyboard_post_init_keychron(void) {
     pin_t encoders_pad_a[NUM_ENCODERS] = ENCODERS_PAD_A;
     pin_t encoders_pad_b[NUM_ENCODERS] = ENCODERS_PAD_B;
     for (uint32_t i = 0; i < NUM_ENCODERS; i++) {
@@ -225,7 +225,5 @@ void keyboard_post_init_kb(void) {
         palSetLineCallback(encoders_pad_a[i], encoder_pad_cb, (void *)i);
         palSetLineCallback(encoders_pad_b[i], encoder_pad_cb, (void *)i);
     }
-
-    keyboard_post_init_user();
 }
 #endif

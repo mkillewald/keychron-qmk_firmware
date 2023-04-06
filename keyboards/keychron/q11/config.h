@@ -38,8 +38,6 @@
 #define DRIVER_ADDR_1 0b1110100
 #define DRIVER_1_LED_TOTAL 89
 #define RGB_MATRIX_LED_COUNT DRIVER_1_LED_TOTAL
-#define RGB_MATRIX_SPLIT \
-    { 42, 47 }
 #define SPLIT_TRANSPORT_MIRROR
 
 /* Increase I2C speed to 1000 KHz */
@@ -49,6 +47,7 @@
 #define I2C1_TIMINGR_SCLH 15U
 #define I2C1_TIMINGR_SCLL 51U
 
+/* Set LED driver current */
 #define CKLED2001_CURRENT_TUNE \
     { 0x80, 0xFF, 0xFF, 0x80, 0xFF, 0xFF, 0x80, 0xFF, 0xFF, 0x80, 0xFF, 0xFF } // 300mA
 
@@ -57,7 +56,6 @@
 #define WEAR_LEVELING_BACKING_SIZE (WEAR_LEVELING_LOGICAL_SIZE * 2)
 
 /* Split Keyboard specific options. */
-#define USE_SERIAL
 #define SERIAL_USART_TX_PIN A9 // USART TX pin
 // #define SERIAL_USART_FULL_DUPLEX // Enable full duplex operation mode.
 // #define SERIAL_USART_RX_PIN A10  // USART RX pin
