@@ -1,6 +1,6 @@
 # Keychron Q2
 
-![Keychron Q2](https://i.imgur.com/9bJ6Moh.jpg[/img])
+![Keychron Q2](https://i.imgur.com/9bJ6Moh.jpg)
 
 A customizable 65% keyboard.
 
