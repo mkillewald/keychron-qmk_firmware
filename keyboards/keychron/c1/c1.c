@@ -96,14 +96,31 @@ bool led_update_kb(led_t led_state) {
         } else if ((!led_state.caps_lock) && (default_layer_state == (1 << 2))) {
             rgb_matrix_set_color(CAPS_MAC_WIN_LOCK_LED_INDEX, 255, 0, 0);
         }
-#    endif // CAPS_LOCK_LED_INDEX
+#    endif
         rgb_matrix_update_pwm_buffers();
     }
 
     return res;
 }
 
-#endif // CAPS_MAC_WIN_LOCK_LED_INDEX
+void housekeeping_task_kb(void) {
+#    if defined(RGB_MATRIX_ENABLE) && defined(CAPS_MAC_WIN_LOCK_LED_INDEX)
+    if (!rgb_matrix_is_enabled()) {
+        if ((host_keyboard_led_state().caps_lock) && (default_layer_state == (1 << 0))) {
+            rgb_matrix_set_color(CAPS_MAC_WIN_LOCK_LED_INDEX, 0, 255, 255);
+        } else if ((!host_keyboard_led_state().caps_lock) && (default_layer_state == (1 << 0))) {
+            rgb_matrix_set_color(CAPS_MAC_WIN_LOCK_LED_INDEX, 0, 0, 255);
+        } else if ((host_keyboard_led_state().caps_lock) && (default_layer_state == (1 << 2))) {
+            rgb_matrix_set_color(CAPS_MAC_WIN_LOCK_LED_INDEX, 255, 255, 0);
+        } else if ((!host_keyboard_led_state().caps_lock) && (default_layer_state == (1 << 2))) {
+            rgb_matrix_set_color(CAPS_MAC_WIN_LOCK_LED_INDEX, 255, 0, 0);
+        }
+        rgb_matrix_update_pwm_buffers();
+    }
+#    endif
+}
+
+#endif
 
 #if defined(LED_MATRIX_ENABLE) && defined(CAPS_LOCK_LED_INDEX) && defined(MAC_LOCK_LED_INDEX) && defined(WIN_LOCK_LED_INDEX)
 
@@ -160,11 +177,36 @@ bool led_update_kb(led_t led_state) {
             led_matrix_set_value(MAC_LOCK_LED_INDEX, 0);
             led_matrix_set_value(WIN_LOCK_LED_INDEX, 255);
         }
-#    endif
         led_matrix_update_pwm_buffers();
+#    endif
     }
 
     return res;
 }
 
-#endif // LED_MATRIX_ENABLE
+void housekeeping_task_kb(void) {
+#    if defined(LED_MATRIX_ENABLE) && defined(CAPS_LOCK_LED_INDEX) && defined(MAC_LOCK_LED_INDEX) && defined(WIN_LOCK_LED_INDEX)
+    if (!led_matrix_is_enabled()) {
+        if ((host_keyboard_led_state().caps_lock) && (default_layer_state == (1 << 0))) {
+            led_matrix_set_value(CAPS_LOCK_LED_INDEX, 255);
+            led_matrix_set_value(MAC_LOCK_LED_INDEX, 255);
+            led_matrix_set_value(WIN_LOCK_LED_INDEX, 0);
+        } else if ((!host_keyboard_led_state().caps_lock) && (default_layer_state == (1 << 0))) {
+            led_matrix_set_value(CAPS_LOCK_LED_INDEX, 0);
+            led_matrix_set_value(MAC_LOCK_LED_INDEX, 255);
+            led_matrix_set_value(WIN_LOCK_LED_INDEX, 0);
+        } else if ((host_keyboard_led_state().caps_lock) && (default_layer_state == (1 << 2))) {
+            led_matrix_set_value(CAPS_LOCK_LED_INDEX, 255);
+            led_matrix_set_value(MAC_LOCK_LED_INDEX, 0);
+            led_matrix_set_value(WIN_LOCK_LED_INDEX, 255);
+        } else if ((!host_keyboard_led_state().caps_lock) && (default_layer_state == (1 << 2))) {
+            led_matrix_set_value(CAPS_LOCK_LED_INDEX, 0);
+            led_matrix_set_value(MAC_LOCK_LED_INDEX, 0);
+            led_matrix_set_value(WIN_LOCK_LED_INDEX, 255);
+        }
+        led_matrix_update_pwm_buffers();
+    }
+#    endif
+}
+
+#endif

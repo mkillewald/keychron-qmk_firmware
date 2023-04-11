@@ -35,7 +35,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         MC_5,   KC_P0,             KC_PDOT),
 
     [L1] = LAYOUT_numpad_6x5(
-        RGB_TOG,   _______,  KC_MUTE, KC_VOLD,  KC_VOLU,
+        RGB_TOG,_______,  KC_MUTE, KC_VOLD,  KC_VOLU,
         MC_1,   RGB_MOD,  RGB_VAI, RGB_HUI,  KC_DEL,
         MC_2,   RGB_RMOD, RGB_VAD, RGB_HUD,  _______,
         MC_3,   RGB_SAI,  RGB_SPI, KC_MPRV,

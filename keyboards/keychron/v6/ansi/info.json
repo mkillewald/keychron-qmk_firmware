@@ -8,6 +8,20 @@
         "pid": "0x0360",
         "device_version": "1.0.3"
     },
+    "features": {
+        "bootmagic": true,
+        "command": false,
+        "console": false,
+        "dip_switch": true,
+        "encoder": false,
+        "extrakey": true,
+        "mousekey": true,
+        "nkro": true,
+        "rgb_matrix": true
+    },
+    "rgb_matrix": {
+        "driver": "CKLED2001"
+    },
     "matrix_pins": {
         "cols": ["A10", "A9", "A8", "B1", "B0", "A7", "A6", "A5", "A4", "A3", "A2", null, null, null, null, null, null, null, null, "C14"],
         "rows": ["B5", "B4", "B3", "A15", "A14", "A13"]

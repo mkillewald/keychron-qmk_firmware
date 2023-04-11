@@ -15,6 +15,7 @@
  */
 
 #include QMK_KEYBOARD_H
+#include "keychron_common.h"
 #include "keychron_ft_common.h"
 
 // clang-format off
@@ -25,40 +26,6 @@ enum layers{
     WIN_BASE,
     WIN_FN
 };
-
-enum custom_keycodes {
-    KC_LOPTN = QK_KB_2,
-    KC_ROPTN,
-    KC_LCMMD,
-    KC_RCMMD,
-    KC_SIRI,
-    KC_TASK_VIEW,
-    KC_FILE_EXPLORER,
-    KC_SCREEN_SHOT,
-    KC_CORTANA
-};
-
-#define KC_TASK KC_TASK_VIEW
-#define KC_FLXP KC_FILE_EXPLORER
-#define KC_SNAP KC_SCREEN_SHOT
-#define KC_CRTA KC_CORTANA
-
-typedef struct PACKED {
-    uint8_t len;
-    uint8_t keycode[3];
-} key_combination_t;
-
-bool     is_siri_active = false;
-uint32_t siri_timer     = 0;
-// clang-format off
-key_combination_t key_comb_list[4] = {
-    {2, {KC_LWIN, KC_TAB}},
-    {2, {KC_LWIN, KC_E}},
-    {3, {KC_LSFT, KC_LCMD, KC_4}},
-    {2, {KC_LWIN, KC_C}}
-};
-
-static uint8_t mac_keycode[4] = {KC_LOPT, KC_ROPT, KC_LCMD, KC_RCMD};
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [MAC_BASE] = LAYOUT_ansi_87(
@@ -96,90 +63,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 // clang-format on
 
-#if defined(LED_MATRIX_ENABLE) && defined(CAPS_LOCK_LED_INDEX) && defined(MAC_LOCK_LED_INDEX) && defined(WIN_LOCK_LED_INDEX)
-extern void led_matrix_update_pwm_buffers(void);
-#endif // LED_MATRIX_ENABLE
-
 void housekeeping_task_user(void) {
-    if (is_siri_active) {
-        if (sync_timer_elapsed32(siri_timer) >= 500) {
-            unregister_code(KC_LCMD);
-            unregister_code(KC_SPACE);
-            is_siri_active = false;
-        }
-    }
-
-#if defined(LED_MATRIX_ENABLE) && defined(CAPS_LOCK_LED_INDEX) && defined(MAC_LOCK_LED_INDEX) && defined(WIN_LOCK_LED_INDEX)
-    if (!led_matrix_is_enabled()) {
-        if ((host_keyboard_led_state().caps_lock) && (default_layer_state == (1 << 0))) {
-            led_matrix_set_value(CAPS_LOCK_LED_INDEX, 255);
-            led_matrix_set_value(MAC_LOCK_LED_INDEX, 255);
-            led_matrix_set_value(WIN_LOCK_LED_INDEX, 0);
-        } else if ((!host_keyboard_led_state().caps_lock) && (default_layer_state == (1 << 0))) {
-            led_matrix_set_value(CAPS_LOCK_LED_INDEX, 0);
-            led_matrix_set_value(MAC_LOCK_LED_INDEX, 255);
-            led_matrix_set_value(WIN_LOCK_LED_INDEX, 0);
-        } else if ((host_keyboard_led_state().caps_lock) && (default_layer_state == (1 << 2))) {
-            led_matrix_set_value(CAPS_LOCK_LED_INDEX, 255);
-            led_matrix_set_value(MAC_LOCK_LED_INDEX, 0);
-            led_matrix_set_value(WIN_LOCK_LED_INDEX, 255);
-        } else if ((!host_keyboard_led_state().caps_lock) && (default_layer_state == (1 << 2))) {
-            led_matrix_set_value(CAPS_LOCK_LED_INDEX, 0);
-            led_matrix_set_value(MAC_LOCK_LED_INDEX, 0);
-            led_matrix_set_value(WIN_LOCK_LED_INDEX, 255);
-        }
-        led_matrix_update_pwm_buffers();
-    }
-#endif // LED_MATRIX_ENABLE
+    housekeeping_task_keychron();
+    housekeeping_task_keychron_ft();
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    if (!process_record_keychron(keycode, record)) {
+        return false;
+    }
     if (!process_record_keychron_ft(keycode, record)) {
         return false;
     }
 
     return true;
-}
-
-bool process_record_keychron(uint16_t keycode, keyrecord_t *record) {
-    switch (keycode) {
-        case KC_LOPTN:
-        case KC_ROPTN:
-        case KC_LCMMD:
-        case KC_RCMMD:
-            if (record->event.pressed) {
-                register_code(mac_keycode[keycode - KC_LOPTN]);
-            } else {
-                unregister_code(mac_keycode[keycode - KC_LOPTN]);
-            }
-            return false; // Skip all further processing of this key
-        case KC_SIRI:
-            if (record->event.pressed) {
-                if (!is_siri_active) {
-                    is_siri_active = true;
-                    register_code(KC_LCMD);
-                    register_code(KC_SPACE);
-                }
-                siri_timer = sync_timer_read32();
-            } else {
-                // Do something else when release
-            }
-            return false; // Skip all further processing of this key
-        case KC_TASK:
-        case KC_FLXP:
-        case KC_SNAP:
-        case KC_CRTA:
-            if (record->event.pressed) {
-                for (uint8_t i = 0; i < key_comb_list[keycode - KC_TASK].len; i++) {
-                    register_code(key_comb_list[keycode - KC_TASK].keycode[i]);
-                }
-            } else {
-                for (uint8_t i = 0; i < key_comb_list[keycode - KC_TASK].len; i++) {
-                    unregister_code(key_comb_list[keycode - KC_TASK].keycode[i]);
-                }
-            }
-            return false; // Skip all further processing of this key
-        default:
-            return true; // Process all other keycodes normally
-    }
 }

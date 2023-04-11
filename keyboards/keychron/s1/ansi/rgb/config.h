@@ -26,6 +26,7 @@
 
 /* Scan phase of led driver set as MSKPHASE_9CHANNEL(defined as 0x03 in CKLED2001.h) */
 #define PHASE_CHANNEL MSKPHASE_9CHANNEL
+/* Set LED driver current */
 #define CKLED2001_CURRENT_TUNE \
     { 0xA0, 0xA0, 0x48, 0xA0, 0xA0, 0x48, 0xA0, 0xA0, 0x48, 0xA0, 0xA0, 0x48 }
 

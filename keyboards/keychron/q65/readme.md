@@ -1,6 +1,6 @@
 # Keychron Q65
 
-![Keychron Q65](https://i.imgur.com/5Cbb1C5.jpg[/img])
+![Keychron Q65](https://i.imgur.com/5Cbb1C5.jpg)
 
 A customizable 65% keyboard.
 

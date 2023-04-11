@@ -20,6 +20,8 @@
 #define DRIVER_COUNT 2
 #define DRIVER_ADDR_1 0b1110111
 #define DRIVER_ADDR_2 0b1110100
+
+/* Set LED driver current */
 #define CKLED2001_CURRENT_TUNE \
     { 0xAA, 0xAA, 0x56, 0xAA, 0xAA, 0x56, 0xAA, 0xAA, 0x56, 0xAA, 0xAA, 0x56 }
 
@@ -29,8 +31,8 @@
 #define RGB_MATRIX_LED_COUNT (DRIVER_1_LED_TOTAL + DRIVER_2_LED_TOTAL)
 
 /* Enable indicator LED*/
-#define NUM_LOCK_LED_INDEX 16
-#define CAPS_LOCK_LED_INDEX 17
+#define NUM_LOCK_INDEX 16
+#define CAPS_LOCK_INDEX 17
 #define MAC_OS_LED_INDEX 18
 #define WIN_OS_LED_INDEX 19
 

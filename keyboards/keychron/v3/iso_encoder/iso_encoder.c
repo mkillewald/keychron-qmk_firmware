@@ -148,47 +148,8 @@ led_config_t g_led_config = {
         1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,    1, 1, 1,
         8, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1,
         1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,    1,    1,
-        1, 1, 1,          4,          1, 1, 1, 1, 1, 1, 1,
+        1, 1, 1,          4,          1, 1, 4, 1, 1, 1, 1,
     }
 };
-
-#endif
-
-#if defined(ENCODER_ENABLE) && defined(PAL_USE_CALLBACKS)
-
-void encoder0_pad_cb(void *param) {
-    (void)param;
-
-    encoder_inerrupt_read(0);
-}
-
-void encoder1_pad_cb(void *param) {
-    (void)param;
-
-    encoder_inerrupt_read(1);
-}
-
-void encoder_interrupt_init(void) {
-    pin_t encoders_pad_a[NUM_ENCODERS] = ENCODERS_PAD_A;
-    pin_t encoders_pad_b[NUM_ENCODERS] = ENCODERS_PAD_B;
-    for (uint8_t i = 0; i < NUM_ENCODERS; i++) {
-        palEnableLineEvent(encoders_pad_a[i], PAL_EVENT_MODE_BOTH_EDGES);
-        palEnableLineEvent(encoders_pad_b[i], PAL_EVENT_MODE_BOTH_EDGES);
-    }
-    if (NUM_ENCODERS > 0) {
-        palSetLineCallback(encoders_pad_a[0], encoder0_pad_cb, NULL);
-        palSetLineCallback(encoders_pad_b[0], encoder0_pad_cb, NULL);
-    }
-    if (NUM_ENCODERS > 1) {
-        palSetLineCallback(encoders_pad_a[1], encoder1_pad_cb, NULL);
-        palSetLineCallback(encoders_pad_b[1], encoder1_pad_cb, NULL);
-    }
-}
-
-void keyboard_post_init_kb(void) {
-    encoder_interrupt_init();
-    // allow user keymaps to do custom post_init
-    keyboard_post_init_user();
-}
 
 #endif

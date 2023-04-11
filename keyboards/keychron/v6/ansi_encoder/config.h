@@ -29,3 +29,6 @@
 
 /* Enable NUM_LOCK_LED_INDEX */
 #define NUM_LOCK_LED_INDEX 37
+
+#define SHIFT_COL_START 10
+#define SHIFT_COL_END 19

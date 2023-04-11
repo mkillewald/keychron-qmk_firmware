@@ -1,6 +1,6 @@
 # Keychron Q5
 
-![Keychron Q5](https://i.imgur.com/hgBjdtT.jpg[/img])
+![Keychron Q5](https://i.imgur.com/hgBjdtT.jpg)
 
 A customizable 96% keyboard.
 

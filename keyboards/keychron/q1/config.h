@@ -81,3 +81,7 @@
 /* Factory test keys */
 #define FN_KEY1 MO(1)
 #define FN_KEY2 MO(3)
+
+#define HC595_STCP B0
+#define HC595_SHCP B1
+#define HC595_DS A7

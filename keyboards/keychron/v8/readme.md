@@ -1,6 +1,6 @@
 # Keychron V8
 
-![Keychron V8](https://i.imgur.com/mi33yKA.jpg[/img])
+![Keychron V8](https://i.imgur.com/mi33yKA.jpg)
 
 A customizable 65% and ergonomic keyboard.
 

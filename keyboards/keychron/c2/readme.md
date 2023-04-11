@@ -1,6 +1,6 @@
 # Keychron C2 Pro
 
-![Keychron C2 Pro](https://i.imgur.com/BQE1tFO.jpg[/img])
+![Keychron C2 Pro](https://i.imgur.com/BQE1tFO.jpg)
 
 A customizable 100% keyboard.
 

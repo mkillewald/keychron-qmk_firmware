@@ -72,8 +72,6 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][2] = {
 };
 #endif // ENCODER_MAP_ENABLE
 
-// clang-format on
-
 void housekeeping_task_user(void) {
     housekeeping_task_keychron();
     housekeeping_task_keychron_ft();

@@ -19,15 +19,18 @@
 /* RGB Matrix Driver Configuration */
 #define DRIVER_COUNT 1
 #define DRIVER_ADDR_1 0b1110100
-#define CKLED2001_CURRENT_TUNE { 0xA0, 0xA0, 0xA0, 0xA0, 0xA0, 0xA0, 0xA0, 0xA0, 0xA0, 0xA0, 0xA0, 0xA0 }
+
+/* Set LED driver current */
+#define CKLED2001_CURRENT_TUNE \
+    { 0xA0, 0xA0, 0xA0, 0xA0, 0xA0, 0xA0, 0xA0, 0xA0, 0xA0, 0xA0, 0xA0, 0xA0 }
 
 /* RGB Matrix Configuration */
 #define DRIVER_1_LED_TOTAL 108
 #define LED_MATRIX_LED_COUNT DRIVER_1_LED_TOTAL
 
 /* Enable indicator LED*/
-#define NUM_LOCK_LED_INDEX 16
-#define CAPS_LOCK_LED_INDEX 17
+#define NUM_LOCK_INDEX 16
+#define CAPS_LOCK_INDEX 17
 #define MAC_OS_LED_INDEX 18
 #define WIN_OS_LED_INDEX 19
 
