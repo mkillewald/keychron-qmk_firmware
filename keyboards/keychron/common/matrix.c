@@ -24,18 +24,15 @@
 #endif
 
 #if defined(SHIFT_COL_START) && defined(SHIFT_COL_END)
-#    if ((SHIFT_COL_END - SHIFT_COL_START) > 8)
-#        define SIZE_T uint16_t
-#        define CLEAR_VAL 0x0000
-#        define SET_VAL 0xFFFF
-#    elif ((SHIFT_COL_END - SHIFT_COL_START) > 16)
+#    if ((SHIFT_COL_END - SHIFT_COL_START) > 16)
 #        define SIZE_T uint32_t
-#        define CLEAR_VAL 0x00000000
-#        define SET_VAL 0xFFFFFFFF
+#        define UNSELECT_ALL_COL 0xFFFFFFFF
+#    elif ((SHIFT_COL_END - SHIFT_COL_START) > 8)
+#        define SIZE_T uint16_t
+#        define UNSELECT_ALL_COL 0xFFFF
 #    else
 #        define SIZE_T uint8_t
-#        define CLEAR_VAL 0x00
-#        define SET_VAL 0xFF
+#        define UNSELECT_ALL_COL 0xFF
 #    endif
 #endif
 
@@ -76,11 +73,11 @@ static inline void HC595_delay(uint8_t n) {
     }
 }
 
-static void HC595_output(SIZE_T data, bool bit_flag) {
+static void HC595_output(SIZE_T data, uint8_t bit) {
     uint8_t n = 1;
 
     ATOMIC_BLOCK_FORCEON {
-        for (uint8_t i = 0; i <= (SHIFT_COL_END - SHIFT_COL_START); i++) {
+        for (uint8_t i = 0; i < (SHIFT_COL_END - SHIFT_COL_START + 1); i++) {
             if (data & 0x1) {
                 writePinHigh(HC595_DS);
             } else {
@@ -90,7 +87,7 @@ static void HC595_output(SIZE_T data, bool bit_flag) {
             HC595_delay(n);
             writePinLow(HC595_SHCP);
             HC595_delay(n);
-            if (bit_flag) {
+            if (bit) {
                 break;
             } else {
                 data = data >> 1;
@@ -111,7 +108,7 @@ static bool select_col(uint8_t col) {
         return true;
     } else {
         if (col == SHIFT_COL_START) {
-            HC595_output(0x00, true);
+            HC595_output(0x00, 1);
         }
         return true;
     }
@@ -128,7 +125,7 @@ static void unselect_col(uint8_t col) {
         setPinInput_high(pin);
 #endif
     } else {
-        HC595_output(0x01, true);
+        HC595_output(0x01, 1);
     }
 }
 
@@ -142,7 +139,7 @@ static void unselect_cols(void) {
             setPinInput_high(pin);
 #endif
         } else {
-            if (x == SHIFT_COL_START) HC595_output(SET_VAL, false);
+            if (x == SHIFT_COL_START) HC595_output(UNSELECT_ALL_COL, 0);
         }
     }
 }

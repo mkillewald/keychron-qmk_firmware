@@ -1,6 +1,6 @@
 # Keychron C1 Pro
 
-![Keychron C1 Pro](https://i.imgur.com/Svdm4lp.jpg[/img])
+![Keychron C1 Pro](https://i.imgur.com/Svdm4lp.jpg)
 
 A customizable 100% keyboard.
 

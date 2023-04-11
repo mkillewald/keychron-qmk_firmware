@@ -61,26 +61,3 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______,            _______,  _______,  _______,  _______,  _______,  NK_TOGG,  _______,  _______,  _______,  _______,              _______,            _______,
         _______,  _______,  _______,                                _______,                                _______,  _______,  _______,    _______,  _______,  _______,  _______),
 };
-
-#if defined(RGB_MATRIX_ENABLE)
-extern void rgb_matrix_update_pwm_buffers(void);
-#endif // RGB_MATRIX_ENABLE
-
-void housekeeping_task_user(void) {
-#if defined(RGB_MATRIX_ENABLE)
-    if (!rgb_matrix_is_enabled()) {
-#    if defined(CAPS_SYSTEM_LOCK_LED_INDEX)
-        if ((host_keyboard_led_state().caps_lock) && (default_layer_state == (1 << 0))) {
-            rgb_matrix_set_color(CAPS_SYSTEM_LOCK_LED_INDEX, 0, 255, 255);
-        } else if ((!host_keyboard_led_state().caps_lock) && (default_layer_state == (1 << 0))) {
-            rgb_matrix_set_color(CAPS_SYSTEM_LOCK_LED_INDEX, 0, 0, 255);
-        } else if ((host_keyboard_led_state().caps_lock) && (default_layer_state == (1 << 2))) {
-            rgb_matrix_set_color(CAPS_SYSTEM_LOCK_LED_INDEX, 255, 255, 0);
-        } else if ((!host_keyboard_led_state().caps_lock) && (default_layer_state == (1 << 2))) {
-            rgb_matrix_set_color(CAPS_SYSTEM_LOCK_LED_INDEX, 255, 0, 0);
-        }
-#    endif // SYSTEM_LED_INDEX
-        rgb_matrix_update_pwm_buffers();
-    }
-#endif // RGB_MATRIX_ENABLE
-}

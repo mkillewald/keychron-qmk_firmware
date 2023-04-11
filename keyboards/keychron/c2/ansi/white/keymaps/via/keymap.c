@@ -59,25 +59,3 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______,            _______,  _______,  _______,  _______,  _______,  NK_TOGG,  _______,  _______,  _______,  _______,              _______,            _______,            _______,  _______,  _______,  _______,
         _______,  _______,  _______,                                _______,                                _______,  _______,  _______,    _______,  _______,  _______,  _______,  _______,            _______),
 };
-
-#if defined(LED_MATRIX_ENABLE) && defined(MAC_OS_LED_INDEX) && defined(WIN_OS_LED_INDEX)
-
-extern void led_matrix_update_pwm_buffers(void);
-
-void housekeeping_task_user(void) {
-    if (!led_matrix_is_enabled()) {
-        if (default_layer_state == (1 << 0)) {
-            led_matrix_set_value(MAC_OS_LED_INDEX, 255);
-        } else {
-            led_matrix_set_value(MAC_OS_LED_INDEX, 0);
-        }
-        if (default_layer_state == (1 << 2)) {
-            led_matrix_set_value(WIN_OS_LED_INDEX, 255);
-        } else {
-            led_matrix_set_value(WIN_OS_LED_INDEX, 0);
-        }
-        led_matrix_update_pwm_buffers();
-    }
-}
-
-#endif

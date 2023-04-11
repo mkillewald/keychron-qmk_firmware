@@ -52,7 +52,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_CAPS,  KC_A,     KC_S,     KC_D,     KC_F,     KC_G,     KC_H,     KC_J,     KC_K,     KC_L,     KC_SCLN,  KC_QUOT,              KC_ENT,                                 KC_P4,    KC_P5,    KC_P6,
         KC_LSFT,            KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,     KC_N,     KC_M,     KC_COMM,  KC_DOT,   KC_SLSH,              KC_RSFT,            KC_UP,              KC_P1,    KC_P2,    KC_P3,    KC_PENT,
         KC_LCTL,  KC_LWIN,  KC_LALT,                                KC_SPC,                                 KC_RALT,  KC_RWIN,  MO(WIN_FN), KC_RCTL,  KC_LEFT,  KC_DOWN,  KC_RGHT,  KC_P0,              KC_PDOT),
-        
+
     [WIN_FN] = LAYOUT_ansi_104(
         _______,            KC_BRID,  KC_BRIU,  KC_TASK,  KC_FLXP,  BL_DOWN,   BL_UP,   KC_MPRV,  KC_MPLY,  KC_MNXT,  KC_MUTE,  KC_VOLD,    KC_VOLU,  _______,  _______,  BL_TOGG,
         _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,    _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,
@@ -61,25 +61,3 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______,            _______,  _______,  _______,  _______,  _______,  NK_TOGG,  _______,  _______,  _______,  _______,              _______,            _______,            _______,  _______,  _______,  _______,
         _______,  _______,  _______,                                _______,                                _______,  _______,  _______,    _______,  _______,  _______,  _______,  _______,            _______),
 };
-
-#if defined(LED_MATRIX_ENABLE) && defined(MAC_OS_LED_INDEX) && defined(WIN_OS_LED_INDEX)
-
-extern void led_matrix_update_pwm_buffers(void);
-
-void housekeeping_task_user(void) {
-    if (!led_matrix_is_enabled()) {
-        if (default_layer_state == (1 << 0)) {
-            led_matrix_set_value(MAC_OS_LED_INDEX, 255);
-        } else {
-            led_matrix_set_value(MAC_OS_LED_INDEX, 0);
-        }
-        if (default_layer_state == (1 << 2)) {
-            led_matrix_set_value(WIN_OS_LED_INDEX, 255);
-        } else {
-            led_matrix_set_value(WIN_OS_LED_INDEX, 0);
-        }
-        led_matrix_update_pwm_buffers();
-    }
-}
-
-#endif
