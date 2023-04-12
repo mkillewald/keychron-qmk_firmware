@@ -32,7 +32,11 @@ enum my_bootloader_state {
 } bootloader_state;
 
 enum my_keycodes {
-    KC_LIGHT_TAB_TOGGLE = QK_USER_0,
+#ifdef VIA_ENABLE
+    KC_LIGHT_TAB_TOGGLE = USER11,
+#else
+    KC_LIGHT_TAB_TOGGLE = SAFE_RANGE,
+#endif
     KC_LIGHT_ALPHAS_TOGGLE,
     KC_FN_LAYER_TRANSPARENT_KEYS_TOGGLE,
     KC_FN_LAYER_COLOR_TOGGLE,
