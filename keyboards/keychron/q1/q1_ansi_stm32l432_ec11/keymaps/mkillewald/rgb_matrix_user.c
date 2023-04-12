@@ -67,9 +67,9 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
             break;
         case MAC_FN:
         case WIN_FN:
-#ifdef FN_LAYER_COLOR
+#ifdef FN1_LAYER_COLOR
             if (user_config_get_fn_layer_color_enable()) {
-                rgb_matrix_set_color_by_keycode(led_min, led_max, current_layer, is_not_transparent, FN_LAYER_COLOR);
+                rgb_matrix_set_color_by_keycode(led_min, led_max, current_layer, is_not_transparent, FN1_LAYER_COLOR);
             }
 #endif
             if (user_config_get_fn_layer_transparent_keys_off()) {
