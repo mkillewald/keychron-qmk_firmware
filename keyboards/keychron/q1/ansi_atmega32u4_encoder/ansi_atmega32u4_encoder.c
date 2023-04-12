@@ -15,6 +15,8 @@
  */
 
 #include "quantum.h"
+#include <avr/interrupt.h>
+#include <avr/io.h>
 
 const matrix_row_t matrix_mask[] = {
     0b111111111111101,
@@ -151,8 +153,25 @@ led_config_t g_led_config = {
         1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,    1,
         8, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,    1,    1,
         1,    4, 4, 4, 4, 4, 4, 4, 4, 4, 4,    1, 1,
-        1, 1, 1,          4,          1, 1, 1, 1, 1, 1,
+        1, 1, 1,          4,          1, 4, 1, 1, 1, 1,
     }
 };
+
+#endif
+
+#ifdef ENCODER_ENABLE
+
+void keyboard_post_init_kb(void) {
+    PCMSK0 |= (1 << 7);
+    PCICR |= (1 << PCIE0);
+    sei();
+
+    // allow user keymaps to do custom post_init
+    keyboard_post_init_user();
+}
+
+ISR(PCINT0_vect) {
+    encoder_inerrupt_read(0);
+}
 
 #endif

@@ -15,11 +15,13 @@
  */
 
 #include "quantum.h"
+#include "keychron_common.h"
 
 // Mask out handedness diode to prevent it
 // from keeping the keyboard awake
 // - just mirroring `KC_NO` in the `LAYOUT`
 //   macro to keep it simple
+// clang-format off
 const matrix_row_t matrix_mask[] = {
     0b011111111,
     0b011111111,
@@ -47,6 +49,59 @@ bool dip_switch_update_kb(uint8_t index, bool active) {
 }
 #endif
 
-void restart_usb_driver(USBDriver *usbp) {
-    (void)usbp;
+#define ADC_BUFFER_DEPTH 1
+#define ADC_NUM_CHANNELS 1
+#define ADC_SAMPLING_RATE ADC_SMPR_SMP_12P5
+#define ADC_RESOLUTION ADC_CFGR_RES_10BITS
+
+static int16_t analogReadPin_my(pin_t pin) {
+    ADCConfig          adcCfg = {};
+    adcsample_t        sampleBuffer[ADC_NUM_CHANNELS * ADC_BUFFER_DEPTH];
+    ADCDriver         *targetDriver       = &ADCD1;
+    ADCConversionGroup adcConversionGroup = {
+        .circular     = FALSE,
+        .num_channels = (uint16_t)(ADC_NUM_CHANNELS),
+        .cfgr         = ADC_RESOLUTION,
+    };
+
+    palSetLineMode(pin, PAL_MODE_INPUT_ANALOG);
+    switch (pin) {
+        case B0:
+            adcConversionGroup.smpr[2] = ADC_SMPR2_SMP_AN15(ADC_SAMPLING_RATE);
+            adcConversionGroup.sqr[0]  = ADC_SQR1_SQ1_N(ADC_CHANNEL_IN15);
+            sampleBuffer[0]            = 0;
+            break;
+        case B1:
+            adcConversionGroup.smpr[2] = ADC_SMPR2_SMP_AN16(ADC_SAMPLING_RATE);
+            adcConversionGroup.sqr[0]  = ADC_SQR1_SQ1_N(ADC_CHANNEL_IN16);
+            sampleBuffer[0]            = 0;
+            break;
+        default:
+            return 0;
+    }
+    adcStart(targetDriver, &adcCfg);
+    if (adcConvert(targetDriver, &adcConversionGroup, &sampleBuffer[0], ADC_BUFFER_DEPTH) != MSG_OK) {
+        return 0;
+    }
+
+    return *sampleBuffer;
+}
+
+void keyboard_post_init_kb(void) {
+#if defined(ENCODER_ENABLE) && defined(PAL_USE_CALLBACKS)
+    keyboard_post_init_keychron();
+#endif
+
+    if (is_keyboard_left()) {
+        setPinOutput(A0);
+        writePinHigh(A0);
+    } else {
+        if ((analogReadPin_my(B0) > 1000) || (analogReadPin_my(B1) > 1000)) {
+            setPinInput(A11);
+            setPinInput(A12);
+        }
+    }
+
+    // allow user keymaps to do custom post_init
+    keyboard_post_init_user();
 }

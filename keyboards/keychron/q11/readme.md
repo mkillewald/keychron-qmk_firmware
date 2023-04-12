@@ -1,10 +1,12 @@
 # Keychron Q11
 
+![Keychron Q11](https://i.imgur.com/fRZPpJN.jpg)
+
 A customizable 75% split keyboard.
 
 * Keyboard Maintainer: [Keychron](https://github.com/keychron)
 * Hardware Supported: Keychron Q11
-* Hardware Availability: [Keychron](https://www.keychron.com)
+* Hardware Availability: [Keychron Q11 QMK Custom Mechanical Keyboard](https://www.keychron.com/products/keychron-q11-qmk-custom-mechanical-keyboard)
 
 Make example for this keyboard (after setting up your build environment):
 

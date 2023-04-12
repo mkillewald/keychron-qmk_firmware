@@ -16,14 +16,8 @@
 
 #pragma once
 
-/* COL2ROW or ROW2COL */
-#define DIODE_DIRECTION ROW2COL
-
-/* Set 0 if debouncing isn't needed */
-#define DEBOUNCE 5
-
-/* Drive high instead of pull high to unselect */
-#define MATRIX_UNSELECT_DRIVE_HIGH
+/* If PH3 used with a stronger pull resistor then the following definition needs be included */
+// #define MATRIX_UNSELECT_DRIVE_HIGH
 
 /* RGB Matrix Driver Configuration */
 #define DRIVER_COUNT 2
@@ -35,10 +29,13 @@
 #define I2C1_TIMINGR_SCLDEL 3U
 #define I2C1_TIMINGR_SDADEL 0U
 #define I2C1_TIMINGR_SCLH 15U
-#define I2C1_TIMINGR_SCLL 30U
+#define I2C1_TIMINGR_SCLL 51U
 
 /* Scan phase of led driver set as MSKPHASE_9CHANNEL(defined as 0x03 in CKLED2001.h) */
 #define PHASE_CHANNEL MSKPHASE_9CHANNEL
+/* Set LED driver current */
+#define CKLED2001_CURRENT_TUNE \
+    { 0x98, 0x98, 0x44, 0x98, 0x98, 0x44, 0x98, 0x98, 0x44, 0x98, 0x98, 0x44 }
 
 /* DIP switch */
 #define DIP_SWITCH_MATRIX_GRID \
@@ -89,9 +86,13 @@
 #define ENABLE_RGB_MATRIX_PIXEL_RAIN
 // #define ENABLE_RGB_MATRIX_PIXEL_FLOW
 // #define ENABLE_RGB_MATRIX_PIXEL_FRACTAL
+
+#define RGB_MATRIX_FRAMEBUFFER_EFFECTS
 // enabled only if RGB_MATRIX_FRAMEBUFFER_EFFECTS is defined
 #define ENABLE_RGB_MATRIX_TYPING_HEATMAP
 #define ENABLE_RGB_MATRIX_DIGITAL_RAIN
+
+#define RGB_MATRIX_KEYPRESSES
 // enabled only of RGB_MATRIX_KEYPRESSES or RGB_MATRIX_KEYRELEASES is defined
 #define ENABLE_RGB_MATRIX_SOLID_REACTIVE_SIMPLE
 // #define ENABLE_RGB_MATRIX_SOLID_REACTIVE
@@ -106,5 +107,10 @@
 #define ENABLE_RGB_MATRIX_SOLID_SPLASH
 // #define ENABLE_RGB_MATRIX_SOLID_MULTISPLASH
 
-#define RGB_MATRIX_FRAMEBUFFER_EFFECTS
-#define RGB_MATRIX_KEYPRESSES
+/* Factory test keys */
+#define FN_KEY1 MO(1)
+#define FN_KEY2 MO(3)
+
+#define HC595_STCP B0
+#define HC595_SHCP B1
+#define HC595_DS A7

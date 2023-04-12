@@ -18,10 +18,13 @@
 
 bool process_record_keychron_ft(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case MO(1):
-        case MO(2):
-        case MO(3):
-        case MO(4):
+#if defined(FN_KEY1) || defined(FN_KEY2)
+#    ifdef FN_KEY1
+        case FN_KEY1: /* fall through */
+#    endif
+#    ifdef FN_KEY2
+        case FN_KEY2:
+#    endif
             if (record->event.pressed) {
                 key_press_status |= KEY_PRESS_STEP_0;
             } else {
@@ -29,6 +32,7 @@ bool process_record_keychron_ft(uint16_t keycode, keyrecord_t *record) {
                 timer_3s_buffer = 0;
             }
             return true;
+#endif
         case RGB_SAD:
             if (record->event.pressed) {
                 key_press_status |= KEY_PRESS_STEP_1;

@@ -28,7 +28,7 @@ key_combination_t key_comb_list[4] = {
 };
 
 static uint8_t mac_keycode[4] = {KC_LOPT, KC_ROPT, KC_LCMD, KC_RCMD};
-//clang-format on
+// clang-format on
 void housekeeping_task_keychron(void) {
     if (is_siri_active) {
         if (sync_timer_elapsed32(siri_timer) >= 500) {
@@ -41,20 +41,20 @@ void housekeeping_task_keychron(void) {
 
 bool process_record_keychron(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case KC_MISSION_CONTROL:
+        case QK_KB_0:
             if (record->event.pressed) {
-                host_consumer_send(0x29F);
+                register_code(KC_MISSION_CONTROL);
             } else {
-                host_consumer_send(0);
+                unregister_code(KC_MISSION_CONTROL);
             }
-            return false;  // Skip all further processing of this key
-        case KC_LAUNCHPAD:
+            return false; // Skip all further processing of this key
+        case QK_KB_1:
             if (record->event.pressed) {
-                host_consumer_send(0x2A0);
+                register_code(KC_LAUNCHPAD);
             } else {
-                host_consumer_send(0);
+                unregister_code(KC_LAUNCHPAD);
             }
-            return false;  // Skip all further processing of this key
+            return false; // Skip all further processing of this key
         case KC_LOPTN:
         case KC_ROPTN:
         case KC_LCMMD:
@@ -64,7 +64,7 @@ bool process_record_keychron(uint16_t keycode, keyrecord_t *record) {
             } else {
                 unregister_code(mac_keycode[keycode - KC_LOPTN]);
             }
-            return false;  // Skip all further processing of this key
+            return false; // Skip all further processing of this key
         case KC_SIRI:
             if (record->event.pressed) {
                 if (!is_siri_active) {
@@ -76,7 +76,7 @@ bool process_record_keychron(uint16_t keycode, keyrecord_t *record) {
             } else {
                 // Do something else when release
             }
-            return false;  // Skip all further processing of this key
+            return false; // Skip all further processing of this key
         case KC_TASK:
         case KC_FLXP:
         case KC_SNAP:
@@ -90,9 +90,9 @@ bool process_record_keychron(uint16_t keycode, keyrecord_t *record) {
                     unregister_code(key_comb_list[keycode - KC_TASK].keycode[i]);
                 }
             }
-            return false;  // Skip all further processing of this key
+            return false; // Skip all further processing of this key
         default:
-            return true;  // Process all other keycodes normally
+            return true; // Process all other keycodes normally
     }
 }
 
@@ -187,4 +187,43 @@ bool led_update_kb(led_t led_state) {
     return res;
 }
 
+#endif
+
+#ifdef ENCODER_ENABLE
+bool encoder_update_kb(uint8_t index, bool clockwise) {
+    if (!encoder_update_user(index, clockwise)) {
+        return false; /* Don't process further events if user function exists and returns false */
+    }
+    if (index == 0) { /* First encoder */
+        if (clockwise) {
+            tap_code_delay(KC_VOLU, 10);
+        } else {
+            tap_code_delay(KC_VOLD, 10);
+        }
+    } else if (index == 1) { /* Second encoder */
+        if (clockwise) {
+            tap_code_delay(KC_VOLU, 10);
+        } else {
+            tap_code_delay(KC_VOLD, 10);
+        }
+    }
+    return true;
+}
+#endif
+
+#if defined(ENCODER_ENABLE) && defined(PAL_USE_CALLBACKS)
+static void encoder_pad_cb(void *param) {
+    encoder_inerrupt_read((uint32_t)param & 0XFF);
+}
+
+void keyboard_post_init_keychron(void) {
+    pin_t encoders_pad_a[NUM_ENCODERS] = ENCODERS_PAD_A;
+    pin_t encoders_pad_b[NUM_ENCODERS] = ENCODERS_PAD_B;
+    for (uint32_t i = 0; i < NUM_ENCODERS; i++) {
+        palEnableLineEvent(encoders_pad_a[i], PAL_EVENT_MODE_BOTH_EDGES);
+        palEnableLineEvent(encoders_pad_b[i], PAL_EVENT_MODE_BOTH_EDGES);
+        palSetLineCallback(encoders_pad_a[i], encoder_pad_cb, (void *)i);
+        palSetLineCallback(encoders_pad_b[i], encoder_pad_cb, (void *)i);
+    }
+}
 #endif

@@ -1,18 +1,22 @@
 # Keychron Q12
 
+![Keychron Q12](https://i.imgur.com/MiuqHFj.jpg)
+
 A customizable 96% keyboard.
 
 * Keyboard Maintainer: [Keychron](https://github.com/keychron)
 * Hardware Supported: Keychron Q12
-* Hardware Availability: [Keychron](https://www.keychron.com)
+* Hardware Availability: [Keychron Q12 QMK Custom Mechanical Keyboard](https://www.keychron.com/products/keychron-q12-qmk-custom-mechanical-keyboard)
 
 Make example for this keyboard (after setting up your build environment):
 
-    make keychron/q12/q12_ansi_stm32l432:default
+    make keychron/q12/ansi_encoder:default
+    make keychron/q12/iso_encoder:default
 
 Flashing example for this keyboard:
 
-    make keychron/q12/q12_ansi_stm32l432:default:flash
+    make keychron/q12/ansi_encoder:default:flash
+    make keychron/q12/iso_encoder:default:flash
 
 **Reset Key**: Hold down the key located at *K00*, commonly programmed as *Esc* while plugging in the keyboard.
 

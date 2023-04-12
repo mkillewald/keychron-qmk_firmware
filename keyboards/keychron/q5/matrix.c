@@ -16,9 +16,7 @@
 
 #include "quantum.h"
 
-#define HC595_STCP A0
-#define HC595_SHCP A1
-#define HC595_DS C15
+
 
 pin_t row_pins[MATRIX_ROWS] = MATRIX_ROW_PINS;
 pin_t col_pins[MATRIX_COLS] = MATRIX_COL_PINS;
@@ -78,7 +76,7 @@ static void HC595_output(uint8_t data) {
     }
 }
 
-static void HC595_output_byte(uint8_t data) {
+static void HC595_output_bit(uint8_t data) {
     ATOMIC_BLOCK_FORCEON {
         if (data & 0x1) {
             writePinHigh(HC595_DS);
@@ -102,24 +100,11 @@ static bool select_col(uint8_t col) {
         return true;
     } else {
         if (col == 10) {
-            HC595_output_byte(0x00);
+            HC595_output_bit(0x00);
         }
         return true;
     }
     return false;
-}
-
-void select_all_cols(void) {
-    for (uint8_t x = 0; x < MATRIX_COLS; x++) {
-        pin_t pin = col_pins[x];
-
-        if (pin != NO_PIN) {
-            setPinOutput_writeLow(pin);
-        } else {
-            if (x == 10)
-                HC595_output(0x00);
-        }
-    }
 }
 
 static void unselect_col(uint8_t col) {
@@ -132,7 +117,7 @@ static void unselect_col(uint8_t col) {
         setPinInputHigh_atomic(pin);
 #endif
     } else {
-        HC595_output_byte(0x01);
+        HC595_output_bit(0x01);
     }
 }
 

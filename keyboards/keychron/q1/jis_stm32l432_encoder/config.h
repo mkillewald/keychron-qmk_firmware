@@ -16,12 +16,6 @@
 
 #pragma once
 
-/* key matrix pins */
-#define MATRIX_ROW_PINS \
-    { B5, B4, B3, A15, A14, A13 }
-#define MATRIX_COL_PINS \
-    { C14, C15, A0, A1, A2, A3, A4, A5, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN }
-
 /* DIP switch */
 #define DIP_SWITCH_MATRIX_GRID \
     {                          \
@@ -39,7 +33,7 @@
 #define I2C1_TIMINGR_SCLDEL 3U
 #define I2C1_TIMINGR_SDADEL 0U
 #define I2C1_TIMINGR_SCLH 15U
-#define I2C1_TIMINGR_SCLL 30U
+#define I2C1_TIMINGR_SCLL 51U
 
 /* RGB Matrix Configuration */
 #define DRIVER_1_LED_TOTAL 46
@@ -48,15 +42,11 @@
 
 /* Scan phase of led driver set as MSKPHASE_9CHANNEL(defined as 0x03 in CKLED2001.h) */
 #define PHASE_CHANNEL MSKPHASE_9CHANNEL
-
+/* Set LED driver current */
 #define CKLED2001_CURRENT_TUNE \
     { 0xA0, 0xA0, 0x4D, 0xA0, 0xA0, 0x4D, 0xA0, 0xA0, 0x4D, 0xA0, 0xA0, 0x4D }
 
 /* Encoder Configuration */
-#define ENCODERS_PAD_A \
-    { A10 }
-#define ENCODERS_PAD_B \
-    { A8 }
 #define ENCODER_DEFAULT_POS 0x3
 
 /* EEPROM Driver Configuration */

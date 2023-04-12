@@ -14,19 +14,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "quantum_keycodes.h"
+#pragma once
+
+#include "stdint.h"
 #ifdef VIA_ENABLE
 #    include "via.h"
 #endif
 
 enum custom_keycodes {
-#ifdef VIA_ENABLE
-    KC_MISSION_CONTROL = USER00,
-#else
-    KC_MISSION_CONTROL = SAFE_RANGE,
-#endif
-    KC_LAUNCHPAD,
-    KC_LOPTN,
+    KC_LOPTN = QK_KB_2,
     KC_ROPTN,
     KC_LCMMD,
     KC_RCMMD,
@@ -37,8 +33,6 @@ enum custom_keycodes {
     KC_CORTANA
 };
 
-#define KC_MCTL KC_MISSION_CONTROL
-#define KC_LPAD KC_LAUNCHPAD
 #define KC_TASK KC_TASK_VIEW
 #define KC_FLXP KC_FILE_EXPLORER
 #define KC_SNAP KC_SCREEN_SHOT
@@ -51,3 +45,4 @@ typedef struct PACKED {
 
 void housekeeping_task_keychron(void);
 bool process_record_keychron(uint16_t keycode, keyrecord_t *record);
+void keyboard_post_init_keychron(void);

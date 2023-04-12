@@ -25,7 +25,6 @@ const matrix_row_t matrix_mask[] = {
 };
 
 #ifdef DIP_SWITCH_ENABLE
-
 bool dip_switch_update_kb(uint8_t index, bool active) {
     if (!dip_switch_update_user(index, active)) { return false;}
     if (index == 0) {
@@ -33,5 +32,15 @@ bool dip_switch_update_kb(uint8_t index, bool active) {
     }
     return true;
 }
+#endif
 
-#endif // DIP_SWITCH_ENABLE
+#if defined(ENCODER_ENABLE) && defined(PAL_USE_CALLBACKS)
+
+void keyboard_post_init_kb(void) {
+    keyboard_post_init_keychron();
+
+    // allow user keymaps to do custom post_init
+    keyboard_post_init_user();
+}
+
+#endif
