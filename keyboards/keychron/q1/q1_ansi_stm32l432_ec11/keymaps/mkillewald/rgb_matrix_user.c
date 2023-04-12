@@ -31,6 +31,17 @@ extern enum {
 }led_test_mode;
 
 keypos_t led_index_key_position[RGB_MATRIX_LED_COUNT];
+bool is_suspended = false;
+
+void suspend_power_down_user(void) {
+    // code will run multiple times while keyboard is suspended
+    is_suspended = true;
+}
+
+void suspend_wakeup_init_user(void) {
+    // code will run on keyboard wakeup
+    is_suspended = false;
+}
 
 void rgb_matrix_init_user(void) {
     for (uint8_t row = 0; row < MATRIX_ROWS; row++) {
@@ -41,6 +52,19 @@ void rgb_matrix_init_user(void) {
             }
         }
     }
+}
+
+bool rgb_matrix_indicators_user(void) {
+    if (is_suspended || led_test_mode  || factory_reset_count) { return false; }
+        
+    uint8_t current_layer = get_highest_layer(layer_state);
+    switch (current_layer) {
+        case MAC_BASE:
+        case WIN_BASE:
+            rgb_matrix_set_cyber_colors();
+            break;
+    }
+    return false;
 }
 
 bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
@@ -78,6 +102,29 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
             break;
     }
     return false;
+}
+
+void rgb_matrix_set_cyber_colors(void) {
+    // modifier keys: keys at outside edge of board
+    //uint8_t modkeys[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 15, 28, 29, 30, 43, 44, 45, 57, 58, 59, 70, 72, 73, 74, 76, 77, 78};
+    
+    //modifier keys: keys at top and right side of board
+    uint8_t modkeys[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 29, 44, 58};
+    for (uint8_t i = 0; i < sizeof(modkeys)/sizeof(modkeys[0]); i++) {
+        rgb_matrix_set_color(modkeys[i], RGB_CYBERDARK);
+    }           
+    
+    // accent keys: Esc, arrow keys
+    uint8_t accentkeys[] = {0, 71, 79, 80, 81};
+    for (uint8_t i = 0; i < sizeof(accentkeys)/sizeof(accentkeys[0]); i++) {
+        rgb_matrix_set_color(accentkeys[i], RGB_CYBERPINK);                 
+    }
+    
+    // WASD
+    /*uint8_t wasdkeys[] = {32, 46, 47 ,48};
+    for (uint8_t i = 0; i < sizeof(wasdkeys)/sizeof(wasdkeys[0]); i++) {
+        rgb_matrix_set_color(wasdkeys[i], RGB_CYBERPINK);                 
+    }*/
 }
 
 void rgb_matrix_set_color_by_keycode(uint8_t led_min, uint8_t led_max, uint8_t layer, bool (*is_keycode)(uint16_t), uint8_t red, uint8_t green, uint8_t blue) {

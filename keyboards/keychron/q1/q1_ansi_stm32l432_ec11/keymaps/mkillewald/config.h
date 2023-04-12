@@ -55,3 +55,6 @@
 // Shift when enabled.
 #define CAPS_WORD_LIGHT_LOWER_LEFT_CORNER
 
+// Setup my custom colors
+#define RGB_CYBERPINK       0xff, 0x00, 0x4f
+#define RGB_CYBERDARK       0x44, 0x00, 0xff
