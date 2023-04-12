@@ -109,11 +109,11 @@ All custom keycodes can be moved to different keys in VIA by using the following
 - CUSTOM(14) = KC_FCTOG (default: Fn2+V) Fn layer Color Toggle
 - CUSTOM(15) = KC_LBMAC (default Mac Only: Fn1+Q) Lock and Blank Mac
 
-## Keychron Fatory Reset and LED Test
+## Keychron Factory Reset and LED Test
 
 - Hold Fn+J+Z for 4 seconds to factory reset (will clear eeprom but will not remove this firmware)
     - All LEDs will flash red to show reset is occurring
-    - NOTE: User must use VIA to remove LTTOG custom keycode from Fn+Z (make Fn+Z transparent or Z) before doing factory reset. The LTTOG custom keycode will automatically return after factory reset is complete. 
+    - NOTE: User must use VIA to remove KC_LTTOG custom keycode from Fn+Z (make Fn+Z transparent or Z) before doing factory reset. The KC_LTTOG custom keycode will automatically return after factory reset is complete. 
 
 - Hold Fn+Right+Home for 4 seconds to enable factory LED test
     - All LEDs will turn bright white
