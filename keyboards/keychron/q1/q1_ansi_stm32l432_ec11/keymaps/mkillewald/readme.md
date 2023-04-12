@@ -36,7 +36,7 @@ Default options (these defaults will be applied whenever the eeprom is cleared):
     #define DEFAULT_ENABLE_MAC_BASE          1            // 1 = enable, 0 = disable
     #define DEFAULT_ENABLE_WIN_BASE          1            // 1 = enable, 0 = disable
     #define DEFAULT_HUE_WIN_BASE             80           // HSV green hue (Win Base layer)
-    #define RGB_MATRIX_DEFAULT_HUE           200          // HSV teal hue  (Mac Base layer)
+    #define RGB_MATRIX_DEFAULT_HUE           125          // HSV teal hue  (Mac Base layer)
     #define RGB_MATRIX_DEFAULT_SAT           255          // Both Win/Mac Base layers
     #define RGB_MATRIX_DEFAULT_VAL           255          // Both Win/Mac Base layers
     #define RGB_MATRIX_DEFAULT_SPD           127          // Both Win/Mac Base layers
@@ -60,7 +60,7 @@ Caps Lock RGB indicator option:
 Dynamic Fn Layer RGB indicator options:
 
 ```
-    #define FN1_LAYER_COLOR RGB_YELLOW
+    #define FN1_LAYER_COLOR RGB_ORANGE
 ```
 
 Caps Word options:
