@@ -17,67 +17,154 @@
 #include QMK_KEYBOARD_H
 #include "keymap_user_config.h"
 
-typedef union {
-  uint32_t raw;
-  struct {
-    bool caps_lock_light_tab :1;
-    bool caps_lock_light_alphas :1;
-    bool fn_layer_transparent_keys_off :1;
-    bool fn_layer_color_enable :1;
-  };
+typedef struct {
+    uint8_t caps_lock_light_tab;
+    uint8_t caps_lock_light_alphas;
+    uint8_t fn_layer_transparent_keys_off;
+    uint8_t fn_layer_color_enable;
+    uint8_t enable_mac_base;
+    uint8_t enable_win_base;
+    uint8_t mode_win_base;
+    uint8_t spd_win_base;
+    HSV hsv_win_base;
+    HSV hsv_mac_fn1;
+    HSV hsv_win_fn1;
+    HSV hsv_fn2;
 } user_config_t;
 
 user_config_t user_config;
 
 void eeconfig_init_user(void) {
-    user_config.raw = 0;
-    user_config.caps_lock_light_tab = false;
-    user_config.caps_lock_light_alphas = false;
-    user_config.fn_layer_transparent_keys_off = true;
-    user_config.fn_layer_color_enable = false;
-    eeconfig_update_user(user_config.raw);
+    user_config.caps_lock_light_tab = DEFAULT_CAPS_LOCK_LIGHT_TAB;
+    user_config.caps_lock_light_alphas = DEFAULT_CAPS_LOCK_LIGHT_ALPHA;
+    user_config.fn_layer_transparent_keys_off = DEFAULT_FN_LAYER_TRANSPARENT_OFF;
+    user_config.fn_layer_color_enable = DEFAULT_FN_LAYER_SHOW_COLOR;
+    user_config.enable_mac_base = DEFAULT_ENABLE_MAC_BASE;
+    user_config.enable_win_base = DEFAULT_ENABLE_WIN_BASE;
+    user_config.mode_win_base = RGB_MATRIX_DEFAULT_MODE;
+    user_config.spd_win_base = RGB_MATRIX_DEFAULT_SPD;
+    user_config.hsv_win_base.h = DEFAULT_HUE_WIN_BASE;
+    user_config.hsv_win_base.s = RGB_MATRIX_DEFAULT_SAT;
+    user_config.hsv_win_base.v = RGB_MATRIX_DEFAULT_VAL;
+    user_config_write_eeprom();
 }
 
-void user_config_read(void) {
-    user_config.raw = eeconfig_read_user();
+void user_config_read_eeprom(void) {
+    eeconfig_read_user_datablock(&user_config);
 }
 
-void user_config_write(void) {
-    eeconfig_update_user(user_config.raw);
+void user_config_write_eeprom(void) {
+    eeconfig_update_user_datablock(&user_config);
 }
 
-bool user_config_get_caps_lock_light_tab(void) {
+// getters
+
+uint8_t user_config_get_caps_lock_light_tab(void) {
     return user_config.caps_lock_light_tab;
 }
 
-bool user_config_get_caps_lock_light_alphas(void) {
+uint8_t  user_config_get_caps_lock_light_alphas(void) {
     return user_config.caps_lock_light_alphas;
 }
 
-bool user_config_get_fn_layer_transparent_keys_off(void) {
+uint8_t  user_config_get_fn_layer_transparent_keys_off(void) {
     return user_config.fn_layer_transparent_keys_off;
 }
 
-bool user_config_get_fn_layer_color_enable(void) {
+uint8_t  user_config_get_fn_layer_color_enable(void) {
     return user_config.fn_layer_color_enable;
 }
 
+uint8_t user_config_get_enable_mac_base(void) {
+    return user_config.enable_mac_base;
+}
+
+uint8_t user_config_get_enable_win_base(void) {
+    return user_config.enable_win_base;
+}
+
+uint8_t user_config_get_mode_win_base(void) {
+    return user_config.mode_win_base;
+}
+
+uint8_t user_config_get_spd_win_base(void) {
+    return user_config.spd_win_base;
+}
+
+HSV user_config_get_hsv_win_base(void) {
+    return user_config.hsv_win_base;
+}
+
+HSV user_config_get_hsv_mac_fn1(void) {
+    return user_config.hsv_mac_fn1;
+}
+
+HSV user_config_get_hsv_win_fn1(void) {
+    return user_config.hsv_win_fn1;
+}
+
+HSV user_config_get_hsv_fn2(void) {
+    return user_config.hsv_fn2;
+}
+
+// setters
+
 void user_config_toggle_caps_lock_light_tab(void) {
     user_config.caps_lock_light_tab ^= 1; // bitwise xor to toggle status bit
-    user_config_write();
+    user_config_write_eeprom();
 }
 
 void user_config_toggle_caps_lock_light_alphas(void) {
     user_config.caps_lock_light_alphas ^= 1;
-    user_config_write();
+    user_config_write_eeprom();
 }
 
 void user_config_toggle_fn_layer_transparent_keys_off(void) {
     user_config.fn_layer_transparent_keys_off ^= 1;
-    user_config_write();
+    user_config_write_eeprom();
 }
 
 void user_config_toggle_fn_layer_color_enable(void) {
     user_config.fn_layer_color_enable ^= 1;
-    user_config_write();
+    user_config_write_eeprom();
+}
+
+void user_config_toggle_enable_mac_base(void) {
+    user_config.enable_mac_base ^= 1;
+    user_config_write_eeprom();
+}
+
+void user_config_toggle_enable_win_base(void) {
+    user_config.enable_win_base ^= 1;
+    user_config_write_eeprom();
+}
+
+void user_config_set_mode_win_base(uint8_t mode) {
+    user_config.mode_win_base = mode;
+    user_config_write_eeprom();
+}
+
+void user_config_set_spd_win_base(uint8_t spd) {
+    user_config.spd_win_base = spd;
+    user_config_write_eeprom();
+}
+
+void user_config_set_hsv_win_base(HSV hsv) {
+    user_config.hsv_win_base = hsv;
+    user_config_write_eeprom();
+}
+
+void user_config_set_hsv_mac_fn1(HSV hsv) {
+    user_config.hsv_mac_fn1 = hsv;
+    user_config_write_eeprom();
+}
+
+void user_config_set_hsv_win_fn1(HSV hsv) {
+    user_config.hsv_win_fn1 = hsv;
+    user_config_write_eeprom();
+}
+
+void user_config_set_hsv_fn2(HSV hsv) {
+    user_config.hsv_fn2 = hsv;
+    user_config_write_eeprom();
 }
