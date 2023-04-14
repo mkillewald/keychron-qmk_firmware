@@ -30,8 +30,11 @@ extern enum {
     LED_TEST_MODE_MAX
 }led_test_mode;
 
+static bool is_suspended = false;
+extern bool win_mode;
+
 keypos_t led_index_key_position[RGB_MATRIX_LED_COUNT];
-bool is_suspended = false;
+
 
 void suspend_power_down_user(void) {
     // code will run multiple times while keyboard is suspended
@@ -55,7 +58,11 @@ void rgb_matrix_init_user(void) {
 }
 
 bool rgb_matrix_indicators_user(void) {
-    if (is_suspended || led_test_mode  || factory_reset_count) { return false; }
+    if (is_suspended || led_test_mode || factory_reset_count
+        || (!win_mode && !user_config_get_enable_mac_base())
+        || (win_mode && !user_config_get_enable_win_base())) {
+        return false;
+    }
 
     uint8_t current_layer = get_highest_layer(layer_state);
     switch (current_layer) {

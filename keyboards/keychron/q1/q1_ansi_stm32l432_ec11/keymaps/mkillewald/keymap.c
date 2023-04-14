@@ -49,7 +49,7 @@ enum my_keycodes {
 #define KC_FCTOG KC_FN_LAYER_COLOR_TOGGLE
 #define KC_LBMAC KC_LOCK_BLANK_MAC
 
-static bool win_mode;
+bool win_mode;
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [MAC_BASE] = LAYOUT_ansi_82(
