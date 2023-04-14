@@ -12,6 +12,8 @@
 - Autocorrect is enabled. ([https://docs.qmk.fm/#/feature_autocorrect](https://docs.qmk.fm/#/feature_autocorrect))
     - Uses getreuer's 400 entry autocorrect dictionary.   
     [https://github.com/getreuer/qmk-keymap/blob/main/features/autocorrection_dict_extra.txt](https://github.com/getreuer/qmk-keymap/blob/main/features/autocorrection_dict_extra.txt)
+    
+- Custom Cyber Colors for accent keys. Can be toggled on and off with Fn+B (KC_CYTOG).
 
 - Caps Word enabled with RGB indicator. ([https://docs.qmk.fm/#/feature_caps_word](https://docs.qmk.fm/#/feature_caps_word))
 
@@ -29,6 +31,7 @@
 Default options (these defaults will be applied whenever the eeprom is cleared):
 
 ```
+    #define DEFAULT_CYBER_COLORS_ENABLE      1            // 1 = enable, 0 = disable
     #define DEFAULT_CAPS_LOCK_LIGHT_TAB      0            // 1 = enable, 0 = disable
     #define DEFAULT_CAPS_LOCK_LIGHT_ALPHA    1            // 1 = enable, 0 = disable
     #define DEFAULT_FN_LAYER_TRANSPARENT_OFF 0            // 1 = enable, 0 = disable
@@ -49,6 +52,13 @@ Autocorrect option:
     // Autocorrect is on at start up. If you want Autocorrect to be off at startup,
     // un-comment the following line
     //#define AUTOCORRECT_OFF_AT_STARTUP
+```
+
+Custom Cyber Colors (for accent keys):
+
+```
+    #define RGB_CYBER_ACCENT 0xff, 0x00, 0x4f  // RGB pink
+    #define RGB_CYBER_MOD    0x44, 0x00, 0xff  // RGB purple
 ```
 
 Caps Lock RGB indicator option:
@@ -92,6 +102,8 @@ Caps Word options:
     - toggle turning off RGB for keys with no definition 
 - Fn+V (KC_FCTOG) Fn layer Color Toggle (default: static color on)
     - toggle lighting the defined Fn layer keys with the static color set with FN1_LAYER_COLOR
+- Fn+B (KC_CYTOG) Cyber Colors Toggle (default: cyber colors on)
+    - toggle lighting accent keys with the colors set with RGB_CYBER_ACCENT and RGB_CYBER_MOD
 
 - Mac mode only
     - Fn+Esc (KC_LBMAC) will lock and sleep display
@@ -107,6 +119,7 @@ All custom keycodes can be moved to different keys in VIA by using the following
 - CUSTOM(13) = KC_TKTOG (default: Fn+C) Fn layer Trasnparent Key Off Toggle
 - CUSTOM(14) = KC_FCTOG (default: Fn+V) Fn layer Color Toggle
 - CUSTOM(15) = KC_LBMAC (default Mac Only: Fn+Esc) Lock and Blank Mac
+- CUSTOM(16) = KC_CYTOG (defualt: Fn+B) Cyber Colors Toggle
 
 ## Keychron Factory Reset and LED Test
 

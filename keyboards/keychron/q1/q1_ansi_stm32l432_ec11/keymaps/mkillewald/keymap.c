@@ -40,7 +40,8 @@ enum my_keycodes {
     KC_LIGHT_ALPHAS_TOGGLE,
     KC_FN_LAYER_TRANSPARENT_KEYS_TOGGLE,
     KC_FN_LAYER_COLOR_TOGGLE,
-    KC_LOCK_BLANK_MAC
+    KC_LOCK_BLANK_MAC,
+    KC_CYBER_COLORS_TOGGLE
 };
 
 #define KC_LTTOG KC_LIGHT_TAB_TOGGLE
@@ -48,6 +49,7 @@ enum my_keycodes {
 #define KC_TKTOG KC_FN_LAYER_TRANSPARENT_KEYS_TOGGLE
 #define KC_FCTOG KC_FN_LAYER_COLOR_TOGGLE
 #define KC_LBMAC KC_LOCK_BLANK_MAC
+#define KC_CYTOG KC_CYBER_COLORS_TOGGLE
 
 bool win_mode;
 
@@ -65,7 +67,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,    _______,    _______,  _______,  QK_BOOT,            _______,
         RGB_TOG,  RGB_MOD,  RGB_VAI,  RGB_HUI,  RGB_SAI,  RGB_SPI,  _______,  _______,  _______,  _______,    _______,    _______,  _______,  _______,            _______,
         _______,  RGB_RMOD, RGB_VAD,  RGB_HUD,  RGB_SAD,  RGB_SPD,  _______,  _______,  _______,  _______,    _______,    _______,            _______,            _______,
-        AC_TOGG,            KC_LTTOG,  KC_LATOG, KC_TKTOG, KC_FCTOG, _______,  NK_TOGG,  _______, LCAG(KC_W), LCAG(KC_D), _______,            _______,  _______,
+        AC_TOGG,            KC_LTTOG, KC_LATOG, KC_TKTOG, KC_FCTOG, KC_CYTOG,  NK_TOGG,  _______, LCAG(KC_W), LCAG(KC_D), _______,            _______,  _______,
         _______,  _______,  _______,                                _______,                                  _______,    _______,  _______,  _______,  _______,  _______),
 
     [WIN_BASE] = LAYOUT_ansi_82(
@@ -81,7 +83,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,    _______,  QK_BOOT,            _______,
         RGB_TOG,  RGB_MOD,  RGB_VAI,  RGB_HUI,  RGB_SAI,  RGB_SPI,  _______,  _______,  _______,  _______,  _______,  _______,    _______,  _______,            _______,
         _______,  RGB_RMOD, RGB_VAD,  RGB_HUD,  RGB_SAD,  RGB_SPD,  _______,  _______,  _______,  _______,  _______,  _______,              _______,            _______,
-        AC_TOGG,            KC_LTTOG, KC_LATOG, KC_TKTOG, KC_FCTOG, _______,  NK_TOGG,  _______,  _______,  _______,  _______,              _______,  _______,
+        AC_TOGG,            KC_LTTOG, KC_LATOG, KC_TKTOG, KC_FCTOG, KC_CYTOG,  NK_TOGG,  _______,  _______,  _______,  _______,              _______,  _______,
         _______,  _______,  _______,                                _______,                                _______,  _______,    _______,  _______,  _______,  _______),
 };
 
@@ -323,6 +325,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             case KC_LOCK_BLANK_MAC:
                 if (record->event.pressed) {
                     send_string(SS_LCTL(SS_LGUI("q")) SS_DELAY(225) SS_TAP(X_ESC));
+                }
+                return false;  // Skip all further processing of this key
+            case KC_CYBER_COLORS_TOGGLE:
+                if (record->event.pressed) {
+                    user_config_toggle_cyber_colors_enable();
                 }
                 return false;  // Skip all further processing of this key
             default:

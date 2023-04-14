@@ -68,7 +68,9 @@ bool rgb_matrix_indicators_user(void) {
     switch (current_layer) {
         case MAC_BASE:
         case WIN_BASE:
-            rgb_matrix_set_cyber_colors();
+            if (user_config_get_cyber_colors_enable()) {
+                rgb_matrix_set_cyber_colors();
+            }
             break;
     }
     return false;
@@ -118,13 +120,13 @@ void rgb_matrix_set_cyber_colors(void) {
     //modifier keys: keys at top and right side of board
     uint8_t modkeys[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 29, 44, 58};
     for (uint8_t i = 0; i < sizeof(modkeys)/sizeof(modkeys[0]); i++) {
-        rgb_matrix_set_color(modkeys[i], RGB_CYBERDARK);
+        rgb_matrix_set_color(modkeys[i], RGB_CYBER_MOD);
     }
 
     // accent keys: Esc, arrow keys
     uint8_t accentkeys[] = {0, 71, 79, 80, 81};
     for (uint8_t i = 0; i < sizeof(accentkeys)/sizeof(accentkeys[0]); i++) {
-        rgb_matrix_set_color(accentkeys[i], RGB_CYBERPINK);
+        rgb_matrix_set_color(accentkeys[i], RGB_CYBER_ACCENT);
     }
 
     // WASD

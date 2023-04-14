@@ -16,9 +16,10 @@
 
 #pragma once
 
-#define EECONFIG_USER_DATA_SIZE 20  // size of eeprom data, do not change.
+#define EECONFIG_USER_DATA_SIZE 21  // size of eeprom data, do not change.
 
 // default options applied when eeprom is cleared
+#define DEFAULT_CYBER_COLORS_ENABLE      1            // 1 = enable, 0 = disable
 #define DEFAULT_CAPS_LOCK_LIGHT_TAB      0            // 1 = enable, 0 = disable
 #define DEFAULT_CAPS_LOCK_LIGHT_ALPHA    1            // 1 = enable, 0 = disable
 #define DEFAULT_FN_LAYER_TRANSPARENT_OFF 0            // 1 = enable, 0 = disable
@@ -35,6 +36,10 @@
 // Autocorrect is on at start up. If you want Autocorrect to be off at startup,
 // un-comment the following line
 //#define AUTOCORRECT_OFF_AT_STARTUP
+
+// Setup custom cyber colors
+#define RGB_CYBER_ACCENT 0xff, 0x00, 0x4f  // RGB pink
+#define RGB_CYBER_MOD    0x44, 0x00, 0xff  // RGB purple
 
 // Caps Lock RGB indicator color
 #define CAPS_LOCK_INDICATOR_COLOR RGB_RED
@@ -55,6 +60,3 @@
 // Shift when enabled.
 #define CAPS_WORD_LIGHT_LOWER_LEFT_CORNER
 
-// Setup my custom colors
-#define RGB_CYBERPINK       0xff, 0x00, 0x4f
-#define RGB_CYBERDARK       0x44, 0x00, 0xff
