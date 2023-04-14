@@ -38,8 +38,8 @@
 //#define AUTOCORRECT_OFF_AT_STARTUP
 
 // Setup custom cyber colors
-#define RGB_CYBER_ACCENT 0xff, 0x00, 0x4f  // RGB pink
-#define RGB_CYBER_MOD    0x44, 0x00, 0xff  // RGB purple
+#define RGB_CYBER_ACCENT 0xff, 0x00, 0x4f  // RGB pink (Esc and cursor keys)
+#define RGB_CYBER_MOD    0x44, 0x00, 0xff  // RGB purple (top row function keys and right vertical cluster)
 
 // Caps Lock RGB indicator color
 #define CAPS_LOCK_INDICATOR_COLOR RGB_RED
