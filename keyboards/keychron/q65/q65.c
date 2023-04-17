@@ -15,6 +15,7 @@
  */
 
 #include "quantum.h"
+#include "keychron_common.h"
 
 const matrix_row_t matrix_mask[] = {
     0b1111111111111111,
