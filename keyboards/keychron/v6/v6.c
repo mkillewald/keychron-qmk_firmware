@@ -15,6 +15,7 @@
  */
 
 #include "quantum.h"
+#include "keychron_common.h"
 
 // clang-format off
 const matrix_row_t matrix_mask[] = {
