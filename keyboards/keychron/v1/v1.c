@@ -38,6 +38,7 @@ bool dip_switch_update_kb(uint8_t index, bool active) {
 #endif
 
 #if defined(ENCODER_ENABLE) && defined(PAL_USE_CALLBACKS)
+#include "keychron_common.h"
 
 void keyboard_post_init_kb(void) {
     keyboard_post_init_keychron();
