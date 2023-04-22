@@ -17,6 +17,11 @@
 #include "keychron_ft_common.h"
 #include "raw_hid.h"
 
+#ifndef NKRO
+#    include <string.h>
+#    define RAW_EPSIZE 32
+#endif
+
 #ifndef BL_TEST_KEY1
 #    define BL_TEST_KEY1 KC_RIGHT
 #endif

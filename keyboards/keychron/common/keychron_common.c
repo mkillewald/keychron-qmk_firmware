@@ -189,34 +189,12 @@ bool led_update_kb(led_t led_state) {
 
 #endif
 
-#ifdef ENCODER_ENABLE
-bool encoder_update_kb(uint8_t index, bool clockwise) {
-    if (!encoder_update_user(index, clockwise)) {
-        return false; /* Don't process further events if user function exists and returns false */
-    }
-    if (index == 0) { /* First encoder */
-        if (clockwise) {
-            tap_code_delay(KC_VOLU, 10);
-        } else {
-            tap_code_delay(KC_VOLD, 10);
-        }
-    } else if (index == 1) { /* Second encoder */
-        if (clockwise) {
-            tap_code_delay(KC_VOLU, 10);
-        } else {
-            tap_code_delay(KC_VOLD, 10);
-        }
-    }
-    return true;
-}
-#endif
-
 #if defined(ENCODER_ENABLE) && defined(PAL_USE_CALLBACKS)
 static void encoder_pad_cb(void *param) {
     encoder_inerrupt_read((uint32_t)param & 0XFF);
 }
 
-void keyboard_post_init_keychron(void) {
+void keyboard_post_init_kb(void) {
     pin_t encoders_pad_a[NUM_ENCODERS] = ENCODERS_PAD_A;
     pin_t encoders_pad_b[NUM_ENCODERS] = ENCODERS_PAD_B;
     for (uint32_t i = 0; i < NUM_ENCODERS; i++) {
