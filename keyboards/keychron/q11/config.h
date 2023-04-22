@@ -16,12 +16,8 @@
 
 #pragma once
 
-/* Set 0 if debouncing isn't needed */
-#define DEBOUNCE 5
-
 // Connects each switch in the dip switch to the GPIO pin of the MCU
-#define DIP_SWITCH_PINS \
-    { A8 }
+#define DIP_SWITCH_PINS { A8 }
 
 /* handedness */
 #define SPLIT_HAND_MATRIX_GRID A2, A15
@@ -36,7 +32,7 @@
 /* RGB Matrix Configuration */
 #define DRIVER_COUNT 1
 #define DRIVER_ADDR_1 0b1110100
-#define DRIVER_1_LED_TOTAL 89
+#define DRIVER_1_LED_TOTAL 90
 #define RGB_MATRIX_LED_COUNT DRIVER_1_LED_TOTAL
 #define SPLIT_TRANSPORT_MIRROR
 

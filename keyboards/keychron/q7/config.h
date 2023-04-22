@@ -35,10 +35,7 @@
     { 0xF8, 0xF8, 0x80, 0xF8, 0xF8, 0x80, 0xF8, 0xF8, 0x80, 0xF8, 0xF8, 0x80 }
 
 /* DIP switch */
-#define DIP_SWITCH_MATRIX_GRID \
-    {                          \
-        { 4, 4 }               \
-    }
+#define DIP_SWITCH_MATRIX_GRID { { 4, 4 } }
 
 /* Disable DIP switch in matrix data */
 #define MATRIX_MASKED

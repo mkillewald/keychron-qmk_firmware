@@ -16,9 +16,6 @@
 
 #pragma once
 
-/* Set 0 if debouncing isn't needed */
-#define DEBOUNCE 5
-
 /* Set LED driver current */
 #define CKLED2001_CURRENT_TUNE \
     { 0xFF, 0xFF, 0x70, 0xFF, 0xFF, 0x70, 0xFF, 0xFF, 0x70, 0xFF, 0xFF, 0x70 }

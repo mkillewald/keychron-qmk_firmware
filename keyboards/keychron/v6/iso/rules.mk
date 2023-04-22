@@ -1,5 +1,6 @@
 # Build Options
-RGB_MATRIX_DRIVER = CKLED2001
+#   change yes to no to disable.
+#
 EEPROM_DRIVER = wear_leveling
 WEAR_LEVELING_DRIVER = embedded_flash
 

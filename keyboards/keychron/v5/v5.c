@@ -15,7 +15,6 @@
  */
 
 #include "quantum.h"
-#include "keychron_common.h"
 
 const matrix_row_t matrix_mask[] = {
     0b111111111111111111,
@@ -36,15 +35,4 @@ bool dip_switch_update_kb(uint8_t index, bool active) {
     }
     return true;
 }
-#endif
-
-#if defined(ENCODER_ENABLE) && defined(PAL_USE_CALLBACKS)
-
-void keyboard_post_init_kb(void) {
-    keyboard_post_init_keychron();
-
-    // allow user keymaps to do custom post_init
-    keyboard_post_init_user();
-}
-
 #endif

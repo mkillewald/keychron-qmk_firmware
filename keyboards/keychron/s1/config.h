@@ -20,10 +20,7 @@
 #define MATRIX_MASKED
 
 /* DIP switch */
-#define DIP_SWITCH_MATRIX_GRID \
-    {                          \
-        { 5, 4 }               \
-    }
+#define DIP_SWITCH_MATRIX_GRID { { 5, 4 } }
 #define SCAN_COUNT_MAX 100
 
 /* EEPROM Driver Configuration */

@@ -29,7 +29,7 @@
     "diode_direction": "ROW2COL",
     "encoder": {
         "rotary": [
-            {"pin_a": "A3", "pin_b": "A8"}
+            {"pin_a": "A3", "pin_b": "A4"}
         ]
     },
     "bootmagic": {

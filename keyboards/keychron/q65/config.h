@@ -37,10 +37,7 @@
 #define MATRIX_MASKED
 
 /* DIP switch */
-#define DIP_SWITCH_MATRIX_GRID \
-    {                          \
-        { 4, 4 }               \
-    }
+#define DIP_SWITCH_MATRIX_GRID { { 4, 4 } }
 #define SCAN_COUNT_MAX 100
 
 /* Turn off effects when suspended */

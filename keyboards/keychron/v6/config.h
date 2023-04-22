@@ -33,10 +33,7 @@
     { 0xA8, 0xA8, 0x48, 0xA8, 0xA8, 0x48, 0xA8, 0xA8, 0x48, 0xA8, 0xA8, 0x48 }
 
 /* DIP switch */
-#define DIP_SWITCH_MATRIX_GRID \
-    {                          \
-        { 5, 4 }               \
-    }
+#define DIP_SWITCH_MATRIX_GRID { { 5, 4 } }
 #define SCAN_COUNT_MAX 100
 
 /* Disable DIP switch in matrix data */
