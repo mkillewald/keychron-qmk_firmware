@@ -20,8 +20,7 @@
 #define DEBOUNCE 5
 
 // Connects each switch in the dip switch to the GPIO pin of the MCU
-#define DIP_SWITCH_PINS \
-    { A8 }
+#define DIP_SWITCH_PINS { A8 }
 
 /* handedness */
 #define SPLIT_HAND_MATRIX_GRID A2, A15

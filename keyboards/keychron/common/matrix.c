@@ -18,9 +18,9 @@
 
 #ifndef SHIFT_COL_START
 #    define SHIFT_COL_START 8
-#    ifndef SHIFT_COL_END
-#        define SHIFT_COL_END 15
-#    endif
+#endif
+#ifndef SHIFT_COL_END
+#    define SHIFT_COL_END 15
 #endif
 
 #if defined(SHIFT_COL_START) && defined(SHIFT_COL_END)

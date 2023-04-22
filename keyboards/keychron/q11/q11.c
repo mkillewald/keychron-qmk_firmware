@@ -15,7 +15,6 @@
  */
 
 #include "quantum.h"
-#include "keychron_common.h"
 
 // Mask out handedness diode to prevent it
 // from keeping the keyboard awake
@@ -87,11 +86,24 @@ static int16_t analogReadPin_my(pin_t pin) {
     return *sampleBuffer;
 }
 
-void keyboard_post_init_kb(void) {
 #if defined(ENCODER_ENABLE) && defined(PAL_USE_CALLBACKS)
-    keyboard_post_init_keychron();
+static void encoder_pad_cb(void *param) {
+    encoder_inerrupt_read((uint32_t)param & 0XFF);
+}
 #endif
 
+void keyboard_post_init_kb(void) {
+#if defined(ENCODER_ENABLE) && defined(PAL_USE_CALLBACKS)
+
+    pin_t encoders_pad_a[NUM_ENCODERS] = ENCODERS_PAD_A;
+    pin_t encoders_pad_b[NUM_ENCODERS] = ENCODERS_PAD_B;
+    for (uint32_t i = 0; i < NUM_ENCODERS; i++) {
+        palEnableLineEvent(encoders_pad_a[i], PAL_EVENT_MODE_BOTH_EDGES);
+        palEnableLineEvent(encoders_pad_b[i], PAL_EVENT_MODE_BOTH_EDGES);
+        palSetLineCallback(encoders_pad_a[i], encoder_pad_cb, (void *)i);
+        palSetLineCallback(encoders_pad_b[i], encoder_pad_cb, (void *)i);
+    }
+#endif
     if (is_keyboard_left()) {
         setPinOutput(A0);
         writePinHigh(A0);
