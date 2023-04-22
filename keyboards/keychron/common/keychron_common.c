@@ -194,7 +194,7 @@ static void encoder_pad_cb(void *param) {
     encoder_inerrupt_read((uint32_t)param & 0XFF);
 }
 
-void keyboard_post_init_kb(void) {
+__attribute__((weak)) void keyboard_post_init_kb(void) {
     pin_t encoders_pad_a[NUM_ENCODERS] = ENCODERS_PAD_A;
     pin_t encoders_pad_b[NUM_ENCODERS] = ENCODERS_PAD_B;
     for (uint32_t i = 0; i < NUM_ENCODERS; i++) {

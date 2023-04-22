@@ -65,11 +65,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, _______,  _______,  _______,                   _______,                   _______, _______,  _______,  _______,  _______, _______, _______)
 };
 
-// clang-format on
-
 #if defined(ENCODER_MAP_ENABLE)
-const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][2] = {[MAC_BASE] = {ENCODER_CCW_CW(KC_VOLD, KC_VOLU)}, [WIN_BASE] = {ENCODER_CCW_CW(KC_VOLD, KC_VOLU)}, [MAC_FN1] = {ENCODER_CCW_CW(RGB_VAD, RGB_VAI)}, [WIN_FN1] = {ENCODER_CCW_CW(RGB_VAD, RGB_VAI)}, [_FN2] = {ENCODER_CCW_CW(_______, _______)}};
+const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][2] = {
+    [MAC_BASE] = {ENCODER_CCW_CW(KC_VOLD, KC_VOLU)},
+    [WIN_BASE] = {ENCODER_CCW_CW(KC_VOLD, KC_VOLU)},
+    [MAC_FN1]  = {ENCODER_CCW_CW(RGB_VAD, RGB_VAI)},
+    [WIN_FN1]  = {ENCODER_CCW_CW(RGB_VAD, RGB_VAI)},
+    [_FN2]     = {ENCODER_CCW_CW(_______, _______)}
+};
 #endif // ENCODER_MAP_ENABLE
+
+// clang-format on
 
 void housekeeping_task_user(void) {
     housekeeping_task_keychron();
