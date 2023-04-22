@@ -17,10 +17,7 @@
 #pragma once
 
 /* DIP switch */
-#define DIP_SWITCH_MATRIX_GRID \
-    {                          \
-        { 0, 1 }               \
-    }
+#define DIP_SWITCH_MATRIX_GRID { { 0, 1 } }
 #define SCAN_COUNT_MAX 100
 
 /* RGB Matrix Driver Configuration */

@@ -13,7 +13,7 @@
         "command": false,
         "console": false,
         "dip_switch": true,
-        "encoder": false,
+        "encoder": true,
         "extrakey": true,
         "mousekey": true,
         "nkro": true,

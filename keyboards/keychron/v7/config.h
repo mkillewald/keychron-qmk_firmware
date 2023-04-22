@@ -35,10 +35,7 @@
     { 0xFC, 0xFC, 0x70, 0xFC, 0xFC, 0x70, 0xFC, 0xFC, 0x70, 0xFC, 0xFC, 0x70 } // v7 iso
 
 /* DIP switch */
-#define DIP_SWITCH_MATRIX_GRID \
-    {                          \
-        { 4, 4 }               \
-    }
+#define DIP_SWITCH_MATRIX_GRID { { 4, 4 } }
 #define SCAN_COUNT_MAX 100
 
 /* Disable DIP switch in matrix data */

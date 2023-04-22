@@ -16,9 +16,6 @@
 
 #pragma once
 
-/* Set 0 if debouncing isn't needed */
-#define DEBOUNCE 5
-
 // Connects each switch in the dip switch to the GPIO pin of the MCU
 #define DIP_SWITCH_PINS { A8 }
 
