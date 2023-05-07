@@ -15,9 +15,8 @@
  */
 
 #include QMK_KEYBOARD_H
-#include "keychron_common.h"
-#include "keychron_ft_forked.h"
 #include "mkillewald.h"
+#include "keychron_common.h"
 #include "eeprom_user_config.h"
 #include "rgb_matrix_user.h"
 #include "layers.h"
@@ -77,7 +76,6 @@ void housekeeping_task_user(void) {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (!process_record_keychron(keycode, record)) { return false; }
-    if (!process_record_keychron_ft(keycode, record)) { return false; }
     if (!process_record_mkillewald(keycode, record)) { return false; }
     return true;
 }

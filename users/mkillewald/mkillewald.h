@@ -19,6 +19,35 @@
 
 #include "quantum.h"
 
+// Begin chunk copied from keychron_ft.h
+#define KEY_PRESS_STEP_0 (0x1 << 0)
+#define KEY_PRESS_STEP_1 (0x1 << 1)
+#define KEY_PRESS_STEP_2 (0x1 << 2)
+#define KEY_PRESS_STEP_3 (0x1 << 3)
+#define KEY_PRESS_STEP_4 (0x1 << 4)
+#define KEY_PRESS_FACTORY_RESET (KEY_PRESS_STEP_0 | KEY_PRESS_STEP_1 | KEY_PRESS_STEP_2)
+#define KEY_PRESS_LED_TEST (KEY_PRESS_STEP_0 | KEY_PRESS_STEP_3 | KEY_PRESS_STEP_4)
+
+enum {
+    LED_TEST_MODE_OFF,
+    LED_TEST_MODE_WHITE,
+    LED_TEST_MODE_RED,
+    LED_TEST_MODE_GREEN,
+    LED_TEST_MODE_BLUE,
+    LED_TEST_MODE_MAX
+} led_test_mode;
+
+extern uint16_t key_press_status;
+extern uint32_t timer_3s_buffer;
+#ifdef SPLIT_KEYBOARD
+#    ifdef RGB_MATRIX_ENABLE
+extern uint8_t led_state;
+extern uint8_t light_test_state;
+extern HSV     hsv;
+#    endif
+#endif
+// End chunk copied from keychron_ft.h
+
 enum my_bootloader_state {
     BOOTLOADER_INACTIVE,
     BOOTLOADER_PRESSED,
@@ -45,4 +74,5 @@ enum my_keycodes {
 void housekeeping_task_mkillewald(void);
 bool process_record_mkillewald(uint16_t keycode, keyrecord_t *record);
 
+void housekeeping_task_keychron_ft(void);
 #endif

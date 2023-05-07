@@ -15,8 +15,8 @@
  */
 
 #include QMK_KEYBOARD_H
+#include "mkillewald.h"
 #include "keychron_common.h"
-#include "keychron_ft_forked.h"
 #include "rgb_matrix_user.h"
 #include "eeprom_user_config.h"
 #include "layers.h"
@@ -69,9 +69,63 @@ bool rgb_matrix_indicators_advanced_keymap(uint8_t led_min, uint8_t led_max) {
 }
 
 bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
-    if (!rgb_matrix_indicators_advanced_keychron(led_min, led_max)) {
-        return false;
+    // Begin chunk copied from keychron_ft.c
+    if (factory_reset_count) {
+        if (rgb_matrix_get_mode() == RGB_MATRIX_SOLID_COLOR) {
+            if (factory_reset_count % 2) {
+                rgb_matrix_sethsv_noeeprom(HSV_RED);
+            } else {
+                rgb_matrix_sethsv_noeeprom(HSV_OFF);
+            }
+        } else {
+            for (uint8_t i = led_min; i <= led_max; i++) {
+                rgb_matrix_set_color(i, factory_reset_count % 2 ? 0 : RGB_RED);
+            }
+        }
+    } else if (led_test_mode) {
+        switch (led_test_mode) {
+            case LED_TEST_MODE_WHITE:
+                if (rgb_matrix_get_mode() == RGB_MATRIX_SOLID_COLOR) {
+                    rgb_matrix_sethsv_noeeprom(HSV_WHITE);
+                } else {
+                    for (uint8_t i = led_min; i <= led_max; i++) {
+                        rgb_matrix_set_color(i, RGB_WHITE);
+                    }
+                }
+                break;
+            case LED_TEST_MODE_RED:
+                if (rgb_matrix_get_mode() == RGB_MATRIX_SOLID_COLOR) {
+                    rgb_matrix_sethsv_noeeprom(HSV_RED);
+                } else {
+                    for (uint8_t i = led_min; i <= led_max; i++) {
+                        rgb_matrix_set_color(i, RGB_RED);
+                    }
+                }
+                break;
+            case LED_TEST_MODE_GREEN:
+                if (rgb_matrix_get_mode() == RGB_MATRIX_SOLID_COLOR) {
+                    rgb_matrix_sethsv_noeeprom(HSV_GREEN);
+                } else {
+                    for (uint8_t i = led_min; i <= led_max; i++) {
+                        rgb_matrix_set_color(i, RGB_GREEN);
+                    }
+                }
+                break;
+            case LED_TEST_MODE_BLUE:
+                if (rgb_matrix_get_mode() == RGB_MATRIX_SOLID_COLOR) {
+                    rgb_matrix_sethsv_noeeprom(HSV_BLUE);
+                } else {
+                    for (uint8_t i = led_min; i <= led_max; i++) {
+                        rgb_matrix_set_color(i, RGB_BLUE);
+                    }
+                }
+                break;
+            default:
+                break;
+        }
     }
+    // End chunk copied from keychron_ft.c
+    
     
     uint8_t current_layer = get_highest_layer(layer_state);
     switch (current_layer) {

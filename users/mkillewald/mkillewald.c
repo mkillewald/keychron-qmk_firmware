@@ -19,6 +19,35 @@
 #include "rgb_matrix_user.h"
 #include "layers.h"
 
+// Begin chunk copied from keychron_ft.c
+#ifndef BL_TEST_KEY1
+#    define BL_TEST_KEY1 KC_RIGHT
+#endif
+
+#ifndef BL_TEST_KEY2
+#    define BL_TEST_KEY2 KC_HOME
+#endif
+
+enum {
+    FACTORY_TEST_CMD_BACKLIGHT = 0x01,
+    FACTORY_TEST_CMD_JUMP_TO_BL,
+    FACTORY_TEST_CMD_EEPROM_CLEAR
+};
+
+uint16_t            key_press_status    = 0;
+uint32_t            timer_3s_buffer     = 0;
+uint32_t            timer_300ms_buffer  = 0;
+uint8_t             factory_reset_count = 0;
+
+#ifdef SPLIT_KEYBOARD
+#    ifdef RGB_MATRIX_ENABLE
+uint8_t led_state        = 0;
+uint8_t light_test_state = 0;
+HSV     hsv;
+#    endif
+#endif
+// End chunk copied from keychron_ft.c
+
 bool win_mode;
 bool is_suspended;
 
@@ -144,6 +173,76 @@ void housekeeping_task_mkillewald(void) {
 
 bool process_record_mkillewald(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
+        // Begin Keychron fatory reset
+        #if defined(FN_KEY1) || defined(FN_KEY2)
+#    ifdef FN_KEY1
+        case FN_KEY1: /* fall through */
+#    endif
+#    ifdef FN_KEY2
+        case FN_KEY2:
+#    endif
+            if (record->event.pressed) {
+                key_press_status |= KEY_PRESS_STEP_0;
+            } else {
+                key_press_status &= ~KEY_PRESS_STEP_0;
+                timer_3s_buffer = 0;
+            }
+            return true;
+#endif
+        case KC_J:
+            if (record->event.pressed) {
+                key_press_status |= KEY_PRESS_STEP_1;
+                if (key_press_status == KEY_PRESS_FACTORY_RESET) {
+                    timer_3s_buffer = sync_timer_read32() == 0 ? 1 : sync_timer_read32();
+                }
+            } else {
+                key_press_status &= ~KEY_PRESS_STEP_1;
+                timer_3s_buffer = 0;
+            }
+            return true;
+        case KC_LTTOG:
+        case KC_Z:
+            if (record->event.pressed) {
+                key_press_status |= KEY_PRESS_STEP_2;
+                if (key_press_status == KEY_PRESS_FACTORY_RESET) {
+                    timer_3s_buffer = sync_timer_read32() == 0 ? 1 : sync_timer_read32();
+                }
+            } else {
+                key_press_status &= ~KEY_PRESS_STEP_2;
+                timer_3s_buffer = 0;
+            }
+            return true;
+        // End Keychron factory reset 
+        // Begin Keychron factory LED test
+        case BL_TEST_KEY1:
+            if (record->event.pressed) {
+                key_press_status |= KEY_PRESS_STEP_3;
+                if (led_test_mode) {
+                    if (++led_test_mode >= LED_TEST_MODE_MAX) {
+                        led_test_mode = LED_TEST_MODE_WHITE;
+                    }
+                } else if (key_press_status == KEY_PRESS_LED_TEST) {
+                    timer_3s_buffer = sync_timer_read32() == 0 ? 1 : sync_timer_read32();
+                }
+            } else {
+                key_press_status &= ~KEY_PRESS_STEP_3;
+                timer_3s_buffer = 0;
+            }
+            return true;
+        case BL_TEST_KEY2:
+            if (record->event.pressed) {
+                key_press_status |= KEY_PRESS_STEP_4;
+                if (led_test_mode) {
+                    led_test_mode = LED_TEST_MODE_OFF;
+                } else if (key_press_status == KEY_PRESS_LED_TEST) {
+                    timer_3s_buffer = sync_timer_read32() == 0 ? 1 : sync_timer_read32();
+                }
+            } else {
+                key_press_status &= ~KEY_PRESS_STEP_4;
+                timer_3s_buffer = 0;
+            }
+            return true;
+        // End Keychron factory LED test
         case QK_BOOT:
             // We want to turn off LEDs before calling bootloader, so here
             // we call rgb_matrix_disable_noeeprom() and set a flag because
@@ -295,5 +394,84 @@ bool process_record_mkillewald(uint16_t keycode, keyrecord_t *record) {
                 return false;  // Skip all further processing of this key
         default:
             return true;  // Process all other keycodes normally
+    }
+}
+
+// function copied from keychron_ft.c
+static void factory_reset(void) {
+    timer_300ms_buffer = sync_timer_read32() == 0 ? 1 : sync_timer_read32();
+    factory_reset_count++;
+    layer_state_t default_layer = default_layer_state;
+    eeconfig_init();
+    default_layer_set(default_layer);
+    led_test_mode = LED_TEST_MODE_OFF;
+#ifdef LED_MATRIX_ENABLE
+    if (!led_matrix_is_enabled()) {
+        led_matrix_enable();
+    }
+    led_matrix_init();
+#endif
+#ifdef RGB_MATRIX_ENABLE
+    if (!rgb_matrix_is_enabled()) {
+        rgb_matrix_enable();
+    }
+    rgb_matrix_init();
+#    ifdef SPLIT_KEYBOARD
+    led_state = rgb_matrix_get_mode();
+    hsv       = rgb_matrix_get_hsv();
+    rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
+#    endif
+#endif
+}
+
+// function copied from keychron_ft.c
+static void timer_3s_task(void) {
+    if (sync_timer_elapsed32(timer_3s_buffer) > 3000) {
+        timer_3s_buffer = 0;
+        if (key_press_status == KEY_PRESS_FACTORY_RESET) {
+            factory_reset();
+        } else if (key_press_status == KEY_PRESS_LED_TEST) {
+#ifdef SPLIT_KEYBOARD
+            rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
+#endif
+            led_test_mode = LED_TEST_MODE_WHITE;
+#ifdef LED_MATRIX_ENABLE
+            if (!led_matrix_is_enabled()) {
+                led_matrix_enable();
+            }
+#endif
+#ifdef RGB_MATRIX_ENABLE
+            if (!rgb_matrix_is_enabled()) {
+                rgb_matrix_enable();
+            }
+#endif
+        }
+        key_press_status = 0;
+    }
+}
+
+// function copied from keychron_ft.c
+static void timer_300ms_task(void) {
+    if (sync_timer_elapsed32(timer_300ms_buffer) > 300) {
+        if (factory_reset_count++ > 6) {
+            timer_300ms_buffer  = 0;
+            factory_reset_count = 0;
+#ifdef SPLIT_KEYBOARD
+            rgb_matrix_mode_noeeprom(led_state);
+            rgb_matrix_sethsv_noeeprom(hsv.h, hsv.s, hsv.v);
+#endif
+        } else {
+            timer_300ms_buffer = sync_timer_read32() == 0 ? 1 : sync_timer_read32();
+        }
+    }
+}
+
+// function copied from keychron_ft.c
+void housekeeping_task_keychron_ft(void) {
+    if (timer_3s_buffer) {
+        timer_3s_task();
+    }
+    if (timer_300ms_buffer) {
+        timer_300ms_task();
     }
 }
