@@ -19,7 +19,28 @@
 #include "rgb_matrix_user.h"
 #include "layers.h"
 
-static bool win_mode;
+bool win_mode;
+bool is_suspended;
+
+__attribute__ ((weak))
+void suspend_power_down_keymap(void) {
+  return;
+}
+
+void suspend_power_down_user(void) {
+    // code will run multiple times while keyboard is suspended
+    is_suspended = true;
+}
+
+__attribute__ ((weak))
+void suspend_wakeup_init_keymap(void) {
+  return;
+}
+
+void suspend_wakeup_init_user(void) {
+    // code will run on keyboard wakeup
+    is_suspended = false;
+}
 
 __attribute__ ((weak))
 bool dip_switch_update_keymap(uint8_t index, bool active) {
@@ -267,6 +288,11 @@ bool process_record_mkillewald(uint16_t keycode, keyrecord_t *record) {
                 send_string(SS_LCTL(SS_LGUI("q")) SS_DELAY(225) SS_TAP(X_ESC));
             }
             return false;  // Skip all further processing of this key
+        case KC_CYBER_COLORS_TOGGLE:
+                if (record->event.pressed) {
+                    user_config_toggle_cyber_colors_enable();
+                }
+                return false;  // Skip all further processing of this key
         default:
             return true;  // Process all other keycodes normally
     }

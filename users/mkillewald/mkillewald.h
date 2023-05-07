@@ -31,7 +31,8 @@ enum my_keycodes {
     KC_LIGHT_ALPHAS_TOGGLE,
     KC_FN_LAYER_TRANSPARENT_KEYS_TOGGLE,
     KC_FN_LAYER_COLOR_TOGGLE,
-    KC_LOCK_BLANK_MAC
+    KC_LOCK_BLANK_MAC,
+    KC_CYBER_COLORS_TOGGLE
 };
 
 #define KC_LTTOG KC_LIGHT_TAB_TOGGLE
@@ -39,6 +40,7 @@ enum my_keycodes {
 #define KC_TKTOG KC_FN_LAYER_TRANSPARENT_KEYS_TOGGLE
 #define KC_FCTOG KC_FN_LAYER_COLOR_TOGGLE
 #define KC_LBMAC KC_LOCK_BLANK_MAC
+#define KC_CYTOG KC_CYBER_COLORS_TOGGLE
 
 void housekeeping_task_mkillewald(void);
 bool process_record_mkillewald(uint16_t keycode, keyrecord_t *record);
