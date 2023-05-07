@@ -173,8 +173,8 @@ void housekeeping_task_mkillewald(void) {
 
 bool process_record_mkillewald(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        // Begin Keychron fatory reset
-        #if defined(FN_KEY1) || defined(FN_KEY2)
+    // Begin Keychron factory reset and LED test
+#if defined(FN_KEY1) || defined(FN_KEY2)
 #    ifdef FN_KEY1
         case FN_KEY1: /* fall through */
 #    endif
@@ -200,7 +200,6 @@ bool process_record_mkillewald(uint16_t keycode, keyrecord_t *record) {
                 timer_3s_buffer = 0;
             }
             return true;
-        case KC_LTTOG:
         case KC_Z:
             if (record->event.pressed) {
                 key_press_status |= KEY_PRESS_STEP_2;
@@ -212,8 +211,6 @@ bool process_record_mkillewald(uint16_t keycode, keyrecord_t *record) {
                 timer_3s_buffer = 0;
             }
             return true;
-        // End Keychron factory reset 
-        // Begin Keychron factory LED test
         case BL_TEST_KEY1:
             if (record->event.pressed) {
                 key_press_status |= KEY_PRESS_STEP_3;
@@ -242,7 +239,7 @@ bool process_record_mkillewald(uint16_t keycode, keyrecord_t *record) {
                 timer_3s_buffer = 0;
             }
             return true;
-        // End Keychron factory LED test
+    // End Keychron factory reset and LED test
         case QK_BOOT:
             // We want to turn off LEDs before calling bootloader, so here
             // we call rgb_matrix_disable_noeeprom() and set a flag because
@@ -363,8 +360,17 @@ bool process_record_mkillewald(uint16_t keycode, keyrecord_t *record) {
                 return true; // Allow further processing of this key
             }
         case KC_LIGHT_TAB_TOGGLE:
-            if (record->event.pressed) {
-                user_config_toggle_caps_lock_light_tab();
+           if (record->event.pressed) {
+                // special case to allow keychron factory reset with Fn+J+Z
+                key_press_status |= KEY_PRESS_STEP_2;
+                if (key_press_status == KEY_PRESS_FACTORY_RESET) {
+                    timer_3s_buffer = sync_timer_read32() == 0 ? 1 : sync_timer_read32();
+                } else {
+                    user_config_toggle_caps_lock_light_tab();
+                }
+            } else {
+                key_press_status &= ~KEY_PRESS_STEP_2;
+                timer_3s_buffer = 0;
             }
             return false;  // Skip all further processing of this key
         case KC_LIGHT_ALPHAS_TOGGLE:
