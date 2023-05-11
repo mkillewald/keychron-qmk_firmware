@@ -43,7 +43,7 @@
 #define CAPS_LOCK_INDICATOR_COLOR RGB_RED
 
 // Dynamic Fn Layer RGB indicator options
-#define FN1_LAYER_COLOR RGB_ORANGE
+#define FN1_LAYER_COLOR 0xFE, 0x23, 0x00  // Orange
 
 // Caps Word RGB indicator color
 #define CAPS_WORD_INDICATOR_COLOR RGB_RED
