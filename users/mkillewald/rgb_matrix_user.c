@@ -158,7 +158,7 @@ void rgb_matrix_set_cyber_colors(void) {
     //uint8_t modkeys[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 15, 28, 29, 30, 43, 44, 45, 57, 58, 59, 70, 72, 73, 74, 76, 77, 78};
 
     //modifier keys: keys at top and right side of board
-    uint8_t modkeys[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 29, 44, 58};
+    uint8_t modkeys[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 29, 44, 58};
     for (uint8_t i = 0; i < sizeof(modkeys)/sizeof(modkeys[0]); i++) {
         rgb_matrix_set_color(modkeys[i], RGB_CYBER_MOD);
     }
